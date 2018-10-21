@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 import InicioView from '@/views/Inicio'
+import CarteleraView from '@/views/Cartelera'
+
 import ActividadesView from '@/views/Actividades'
 import ActividadView from '@/views/Actividad'
 import CategoriasView from '@/views/Categorias'
@@ -17,6 +18,12 @@ export default new Router({
       name: 'Inicio',
       component: InicioView
     },
+    {
+      path: '/cartelera',
+      name: 'Cartelera',
+      component: CarteleraView
+    },
+
     {
       path: '/actividades',
       name: 'Actividades',

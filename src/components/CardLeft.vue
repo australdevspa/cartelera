@@ -1,7 +1,7 @@
 <template>
   <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover" uk-grid>
-      <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
-          <img :src="actividad.RutaImg" alt="" class="img-tamaño-1"
+      <div class="uk-card-media-left uk-cover-container">
+          <img :src="actividad.attachments[0].guid" alt="" class="img-tamaño-1"
             style="
               max-width: none;
               position: absolute;
@@ -12,8 +12,8 @@
           <canvas width="600" height="300"></canvas>
       </div>
       <div>
-          <div class="uk-card-body uk-text-left">
-            <div class="uk-card-badge-left uk-label" :style="{ background: actividad.color_area + '!important' }">
+          <div class="uk-card-body uk-text-right">
+            <div class="uk-card-badge uk-label" :style="{ background: actividad.area_color + '!important' }">
               {{ actividad.area }}
             </div>
 
@@ -22,25 +22,25 @@
                 <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
                 <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
               </div>
-              <h3 class="uk-card-title sinmar"> {{ actividad.actividad }}</h3>
+              <h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>
             </div>
 
             <div class="visible-movil oculto-movil">
               <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-expand">
+                  <h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>
+                </div>
                 <div class="uk-width-auto">
                   <div class="date">
                     <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
                     <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
                   </div>
                 </div>
-                <div class="uk-width-expand">
-                  <h3 class="uk-card-title sinmar"> {{ actividad.actividad }}</h3>
-                </div>
               </div>
             </div>  
           
             <p class="uk-text-small uk-text-muted">
-              Publicado: {{actividad.fechaLAnzamiento}}.
+              Publicado: {{actividad.creado_el}}.
             </p>
           </div>
       </div>
@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: 'ActividadCardRight',
+  name: 'CardLeft',
   props: {
     actividad: {
       type: Object,
@@ -60,11 +60,8 @@ export default {
 </script>
 
 <style scoped>
-.uk-card-badge-left {
-    position: absolute;
-    top: 30px;
-    left: 30px; 
-    z-index: 1;
+.mar-top {
+  margin-top: 40px !important;
 }
 .date {
 	display: block;

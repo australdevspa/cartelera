@@ -35,8 +35,8 @@
               v-for="(item, index) in busquedaCategoria"
               :key="index"
               @click.prevent="goToActividad(item)">
-                <actividad-card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></actividad-card-right>
-                <actividad-card-left v-else :actividad="item" class="cursor"></actividad-card-left>
+                <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
+                <card-left v-else :actividad="item" class="cursor"></card-left>
               </div>
             </div>
 
@@ -56,9 +56,9 @@
 </template>
 
 <script>
-import ActividadCard from '@/components/ActividadCard'
-import ActividadCardRight from '@/components/ActividadCardRight'
-import ActividadCardLeft from '@/components/ActividadCardLeft'
+//import ActividadCard from '@/components/ActividadCard'
+import CardRight from '@/components/CardRight'
+import CardLeft from '@/components/CardLeft'
 import _ from 'lodash'
 export default {
   name: 'CategoriasView',
@@ -113,9 +113,9 @@ export default {
     }
   },
   components: {
-    ActividadCard,
-    ActividadCardRight,
-    ActividadCardLeft
+    //ActividadCard,
+    CardRight,
+    CardLeft
   }
 }
 </script>

@@ -3,6 +3,134 @@ import moment from 'moment';
 moment.locale('es')
 
 const API_URL = 'https://www.culturapuertomontt.cl/inicio/wp-json/cartelera/v1'
+
+function setParametros(x){
+    if(x.attachments == null){
+        x.attachments = '[{"guid" : "https://cdn.gbposters.com/media/catalog/product/cache/1/image/737x938/9df78eab33525d08d6e5fb8d27136e95/p/o/pokemon-charmander-face-collector-print-1.23.jpg"}]'
+        
+        var attachments = x.attachments
+        var json_attachments = JSON.parse(attachments);
+        x.attachments = json_attachments
+
+        x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
+        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
+        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
+        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
+    }else{
+        var attachments = x.attachments
+        var json_attachments = JSON.parse(attachments);
+        x.attachments = json_attachments
+
+        x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
+        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
+        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
+        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
+    }
+}
+
+function getCarousel(){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        var x = 0
+        var y = []
+        while(x < 5){
+            setParametros(response.data[x])
+            y.push(response.data[x])
+            x++
+        }
+        return y;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+function getCategorias(){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        var flags = []
+        var categorias = []
+        for(var i = 0; i < response.data.length; i++){
+            if(flags[response.data[i].area]) continue
+            flags[response.data[i].area] = true
+
+            categorias.push(
+                {
+                    area: response.data[i].area, 
+                    color: response.data[i].area_color, 
+                    ocurrence : nro_ocurrencias(response.data[i].area)
+                }
+            )
+
+            function nro_ocurrencias(value){
+                var nro = 0
+                for(var i = 0; i < response.data.length; i++){
+                    if(response.data[i].area === value)
+                        nro+=1 
+                }
+                return nro
+            }
+        }
+        return categorias;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+function getTotal(){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        return Object.keys(response.data).length
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+function getCartelera(inicio, fin){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        var x = inicio
+        while(x < fin){
+            setParametros(response.data[x])
+            x++
+        }
+        return response.data.slice(inicio, fin)
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+//Object.keys(response.data).length
+/*function getCartelera(){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        var x = 0
+        var y = []
+        while(x < 10){
+            
+            /*if(response.data[x].attachments.length <= 0){
+                response.data[x].attachments.push({guid: 'https://cdn.gbposters.com/media/catalog/product/cache/1/image/737x938/9df78eab33525d08d6e5fb8d27136e95/p/o/pokemon-charmander-face-collector-print-1.23.jpg'})
+            }
+            response.data[x].fecha_inicio_formato = moment(response.data[x].fecha_ini).format('DD/MM/YYYY')
+            response.data[x].fecha_inicio_formato_day = moment(response.data[x].fecha_ini).format('DD')
+            response.data[x].fecha_inicio_formato_month = moment(response.data[x].fecha_ini).format('MMMM')
+            response.data[x].fecha_inicio_formato_year = moment(response.data[x].fecha_ini).format('YYYY')
+            *///y.push(this.setParametros(response, x))
+   /*         y.push(response.data[x])
+            x++
+        }
+        return y;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}*/
+
+
+
 //const API_URL = 'http://localhost/api-ccpm/public/index.php/api'
 
 function horasDias(horas){
@@ -117,7 +245,45 @@ function getBusquedaActividades(texto, limite, inicio){
     })
 }
 
-function getCategorias(){
+/*function getCarousel(){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        var x = 0
+        var y = []
+        while(x < 5){
+            /*if(response.data[x].attachments == null){
+                response.data[x].attachments = '[{"guid" : "https://cdn.gbposters.com/media/catalog/product/cache/1/image/737x938/9df78eab33525d08d6e5fb8d27136e95/p/o/pokemon-charmander-face-collector-print-1.23.jpg"}]'
+                
+                var attachments = response.data[x].attachments
+                var json_attachments = JSON.parse(attachments);
+                response.data[x].attachments = json_attachments
+
+                response.data[x].fecha_inicio_formato = moment(response.data[x].fecha_ini).format('DD/MM/YYYY')
+                response.data[x].fecha_inicio_formato_day = moment(response.data[x].fecha_ini).format('DD')
+                response.data[x].fecha_inicio_formato_month = moment(response.data[x].fecha_ini).format('MMMM')
+                response.data[x].fecha_inicio_formato_year = moment(response.data[x].fecha_ini).format('YYYY')
+            }else{
+                var attachments = response.data[x].attachments
+                var json_attachments = JSON.parse(attachments);
+                response.data[x].attachments = json_attachments
+
+                response.data[x].fecha_inicio_formato = moment(response.data[x].fecha_ini).format('DD/MM/YYYY')
+                response.data[x].fecha_inicio_formato_day = moment(response.data[x].fecha_ini).format('DD')
+                response.data[x].fecha_inicio_formato_month = moment(response.data[x].fecha_ini).format('MMMM')
+                response.data[x].fecha_inicio_formato_year = moment(response.data[x].fecha_ini).format('YYYY')
+            }*/
+  //          y.push(setParametros(response.data[x]))
+            //y.push(response.data[x])
+    /*        x++
+        }
+        return y;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+/*function getCategorias(){
     return axios.get(`${API_URL}/categorias`)
     .then(function (response) {
         return response.data;
@@ -125,7 +291,7 @@ function getCategorias(){
     .catch(function (error) {
         return 'An error occured..' + error;
     })
-}
+}*/
 
 function getBusquedaCategoria(texto, limite, inicio){
     return axios.get(`${API_URL}/busquedaCategoria/texto=`+texto+`&limit=`+limite+`&offset=`+inicio)
@@ -168,10 +334,16 @@ function getActividades(){
     })
 }
 
+
+
 export {
+    getCarousel,
+    getCategorias,
+    getTotal,
+    getCartelera,
+
     getProximasActividades,
     getSegmentoActividades,
     getBusquedaActividades,
-    getCategorias,
     getBusquedaCategoria
 }

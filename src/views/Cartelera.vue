@@ -3,6 +3,20 @@
     <div class="uk-section uk-section-muted">
       <div class="uk-container uk-container-center uk-text-center">
         <form class="uk-form-stacked">
+          <!-- falta el spinner y el href filtrando por categoria y mas diseño -->
+          <div class="uk-margin">
+            <div class="uk-text-center">
+              <ul class="grid">
+                <li v-for="(item, index) in categorias"
+                  :key="index">
+                    <a href="" class="uk-button uk-button-primary tm-button" :style="{ background: item.color + '!important' }">
+                      {{ item.area }} <span class="uk-badge badge-background" :style="{ color: item.color + '!important' }">{{ item.ocurrence }}</span>
+                    </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- falta el implementar -->
           <div class="uk-margin">
             <label class="uk-form-label uk-text-large" for="form-stacked-text">Encuentra tu actividad preferida:</label>
             <div class="uk-form-controls">
@@ -16,10 +30,7 @@
           </div>
         </form>
 
-        <div v-if="this.contadorActividades === 0">
-          <div uk-spinner="ratio: 4" class="uk-position-center uk-overlay"></div>
-        </div>
-        
+        <!-- listo, falta redireccionar a la actividad -->
         <div v-if="filter === ''">
           <p class="uk-text-small uk-text-muted uk-text-left">{{totalActividades}} actividades encontradas.</p>
           <div class="pad-top">
@@ -34,7 +45,9 @@
             </div>
 
             <div class="pad-top">
-              <button class="uk-button uk-button-secondary" id="more" @click.prevent="mostrarMasActividades">Cargar más actividades</button>
+              <div v-if="actividadesBoton">
+                <button class="uk-button uk-button-secondary" @click.prevent="masActividades">Cargar más actividades</button>
+              </div>
             </div>
           </div>
         </div>
@@ -78,16 +91,31 @@ import CardLeft from '@/components/CardLeft'
 import _ from 'lodash'
 
 export default {
-  name: 'ActividadesView',
+  name: 'CarteleraView',
+  components: {
+    CardRight,
+    CardLeft
+  },
   data() {
     return {
-      filter: '',
-      display: 'none'
+      filter: ''
     }
   },
   created () {
-    if(this.contadorActividades === 0){
-      this.$store.dispatch('loadActividades');
+    this.$store.dispatch('loadCategorias')
+    this.$store.dispatch('loadTotal')
+    if(this.actividadesInicio === 0){
+      this.$store.dispatch('loadCartelera');
+      /*.then(response => {
+          if(this.$store.state.carteleraFin === this.$store.state.carteleraInicio){
+            this.EstadoBoton = false
+          }else{
+            this.EstadoBoton = true
+          }
+        })
+        .catch(error => {
+          this.EstadoBoton = false
+        })*/
     }
   },
   watch: {
@@ -97,15 +125,33 @@ export default {
   },
   computed:
   {
-    actividades() {
-      return this.$store.state.actividades;
+    categorias() {
+      return this.$store.state.categorias;
     },
     totalActividades() {
-      return this.$store.state.totalActividades;
+      return this.$store.state.carteleraTotal;
     },
-    contadorActividades() {
-      return this.$store.state.contadorActividades;
+    actividades() {
+      return this.$store.state.cartelera;
     },
+    actividadesInicio() {
+      return this.$store.state.carteleraInicio;
+    },
+    actividadesFin() {
+      return this.$store.state.carteleraFin;
+    },
+    actividadesBoton() {
+      return this.$store.state.carteleraBoton;
+    },
+
+
+    /*totalActividades() {
+      return this.$store.state.carteleraTotal;
+    },*/
+    /*contadorActividades() {
+      return this.$store.state.carteleraContador;
+    },*/
+
     busqueda() {
       return this.$store.state.busqueda;
     },
@@ -114,7 +160,7 @@ export default {
     },
     contadorBusqueda() {
       return this.$store.state.contadorBusqueda;
-    },
+    }
   },
   methods: {
     getBusqueda: _.debounce(
@@ -126,12 +172,21 @@ export default {
         }
       },
     ),
-    prevenirEnter: function(e){
+    prevenirEnter: function(e){ },
+    masActividades () {
+      this.$store.dispatch('loadCartelera')
+        /*.then(response => {
+          if(this.$store.state.carteleraFin === this.$store.state.carteleraInicio){
+            this.EstadoBoton = false
+          }else{
+            this.EstadoBoton = true
+          }
+        })
+        .catch(error => {
+          this.EstadoBoton = false
+        })*/
     },
-    mostrarMasActividades () {
-      document.getElementById("more").disabled = true;
-      this.$store.dispatch('loadActividades');
-    },
+
     mostrarMasActividadesBusqueda () {
       document.getElementById("moreBusqueda").disabled = true;
       this.$store.dispatch('loadMasBusquedaActividades', this.filter);
@@ -145,11 +200,6 @@ export default {
         name: 'Actividad'
       })
     }
-  },
-  components: {
-    //ActividadCard,
-    CardRight,
-    CardLeft
   }
 }
 </script>
@@ -160,5 +210,19 @@ export default {
 }
 .cursor {
     cursor:pointer;
+}
+.grid li {
+  display: inline-block;
+  padding: 5px 5px;
+}
+.tm-button {
+  border-radius: 500px; 
+  font-weight: bold;
+  font-size: 150%;
+}
+.badge-background {
+  background: white !important;
+  font-weight: bold;
+  font-size: 100%;
 }
 </style>

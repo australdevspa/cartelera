@@ -1,6 +1,7 @@
 <template>
   <section>
     <div class="uk-section uk-section-muted">
+
       <div class="uk-container uk-container-center uk-text-center">
         <form class="uk-form-stacked ">
           <div class="uk-margin">
@@ -18,7 +19,7 @@
 
               <div class="validation-notice">
                 <div v-if="validating">
-                  Verificando Código QR...
+                  Verificando el Código QR...
                 </div>
 
                 <div v-else-if="isValid" class="text-success">
@@ -28,13 +29,15 @@
                 <div v-else class="text-danger">
                   Código QR inválido.
                 </div>
-                
               </div>
+
             </div>
             <LoadingIndicator v-show="loading" />
           </QrcodeReader>
         </div>
-      
+
+        
+
       </div>
     </div>
   </section>
@@ -45,6 +48,7 @@ import { QrcodeReader } from 'vue-qrcode-reader'
 import InitHandler from '@/mixins/InitHandler'
 
 export default {
+  name: 'VisitaGuiadaView',
   components: { QrcodeReader },
   mixins: [ InitHandler ],
   data () {
@@ -116,12 +120,6 @@ export default {
 .validation-notice {
   font-weight: bold;
   font-size: 1.4rem;
-}
-.decode-result {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-style: italic;
 }
 .pad-top {
   margin-top: 30px !important;

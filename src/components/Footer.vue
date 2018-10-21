@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'FooterPartial'
+  name: 'Footer'
 }
 </script>
 

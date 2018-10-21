@@ -1,6 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { getProximasActividades, getSegmentoActividades, getBusquedaActividades, getCategorias, getBusquedaCategoria } from '@/services/api'
+import {    
+    getCarousel,
+    getCategorias, 
+    getTotal,
+    getCartelera,
+
+    getProximasActividades, 
+    getSegmentoActividades, 
+    getBusquedaActividades, 
+    getBusquedaCategoria
+} from '@/services/api'
 
 Vue.use(Vuex);
 
@@ -10,15 +20,29 @@ const state = {
     contadorActividades: 0,
     limiteActividades: 10,
     totalActividades: 0,
+    
     busqueda: [],
     contadorBusqueda: 0,
     limiteBusqueda: 10,
     totalBusqueda: 0,
-    categorias: [],
+    //categorias: [],
     busquedaCategoria: [],
     contadorBusquedaCategoria: 0,
     limiteBusquedaCategoria: 10,
-    totalBusquedaCategoria: 0
+    totalBusquedaCategoria: 0,
+
+    //state correspondiente a la vista de Inicio
+    carousel: [],
+    //state correspondientes a la vista de la Cartelera
+    categorias: [],
+
+    carteleraTotal: 0,
+    cartelera: [],
+    carteleraInicio: 0,
+    carteleraFin: 0,
+    carteleraLimite: 10,
+    carteleraBoton: false
+
 };
 
 const getters = {
@@ -57,10 +81,10 @@ const actions = {
     loadBusquedaReset(context) {
         context.commit('updateBusquedaReset')
     },
-    loadCategorias(context) {
+    /*loadCategorias(context) {
         return getCategorias()
             .then(categorias => context.commit('updateCategorias', categorias));
-    },
+    },*/
     loadBusquedaCategoria(context, select) {
         return getBusquedaCategoria(select, state.limiteBusquedaCategoria, 0)
             .then(busquedaCategoria => context.commit('updateBusquedaCategoria', busquedaCategoria))
@@ -75,6 +99,33 @@ const actions = {
     loadBusquedaCategoriaReset(context) {
         context.commit('updateBusquedaCategoriaReset')
     },
+
+    //actions correspondiente a la vista de Inicio
+    loadCarousel(context) {
+        return getCarousel()
+            .then(carousel => context.commit('updateCarousel', carousel));
+    },
+    //actions correspondiente a la vista de la Cartelera
+    loadCategorias(context) {
+        return getCategorias()
+            .then(categorias => context.commit('updateCategorias', categorias));
+    },
+    async loadTotal ({ commit }) {
+        commit('updateTotal', await getTotal())
+    },
+    async loadCartelera ({ dispatch, commit }) {
+        await dispatch('loadTotal') // wait for `loadTotal` to finish
+        if(state.carteleraInicio == 0){
+            if(state.carteleraLimite > state.carteleraTotal){
+                state.carteleraFin = state.carteleraTotal;
+                //state.carteraBoton = false;
+            }else{
+                state.carteleraFin = state.carteleraLimite;
+                //state.carteraBoton = true;
+            }
+        }
+        commit('updateCartelera', await getCartelera(state.carteleraInicio, state.carteleraFin))
+    }
 };
 
 const mutations = {
@@ -110,9 +161,9 @@ const mutations = {
         state.limiteBusqueda = 10
         state.totalBusqueda = 0
     },
-    updateCategorias(state, categorias) {
+    /*updateCategorias(state, categorias) {
         state.categorias = categorias;
-    },
+    },*/
     updateBusquedaCategoria(state, busquedaCategoria) {
         state.totalBusquedaCategoria = busquedaCategoria.total;
         state.busquedaCategoria = busquedaCategoria.resultados;
@@ -129,6 +180,61 @@ const mutations = {
         state.contadorBusquedaCategoria = 0
         state.limiteBusquedaCategoria = 10
         state.totalBusquedaCategoria = 0
+    },
+
+    //mutations correspondiente a la vista de Inicio
+    updateCarousel(state, carousel) {
+        state.carousel = carousel;
+    },
+    //mutations correspondiente a la vista de la Cartelera
+    updateCategorias(state, categorias) {
+        state.categorias = categorias;
+    },
+    updateTotal(state, carteleraTotal) {
+        state.carteleraTotal = carteleraTotal;
+    },
+    updateCartelera(state, cartelera) {
+        if(state.carteleraInicio === 0){
+            state.cartelera = cartelera;
+            // Inicio y Fin iguales se desabilita boton
+            if(state.carteleraFin === state.carteleraTotal){
+                state.carteleraInicio = state.carteleraFin;
+                state.carteleraBoton = false;
+            }else{
+                // Fin igual al total de elementos
+                if(state.carteleraFin + state.carteleraLimite > state.carteleraTotal){
+                    state.carteleraFin = state.carteleraTotal;
+                    state.carteleraInicio = state.carteleraInicio + state.carteleraLimite;
+                    state.carteleraBoton = true;
+                }else{
+                    // Inicio y Fin diferentes
+                    state.carteleraFin = state.carteleraFin + state.carteleraLimite;
+                    state.carteleraInicio = state.carteleraInicio + state.carteleraLimite;
+                    state.carteleraBoton = true;
+                }
+            }
+        }else{
+            cartelera.forEach(function (value, key) {
+                state.cartelera.push(value);
+            });
+            // Inicio y Fin iguales se desabilita boton
+            if(state.carteleraFin === state.carteleraTotal){
+                state.carteleraInicio = state.carteleraFin;
+                state.carteleraBoton = false;
+            }else{
+                // Fin igual al total de elementos
+                if(state.carteleraFin + state.carteleraLimite > state.carteleraTotal){
+                    state.carteleraFin = state.carteleraTotal;
+                    state.carteleraInicio = state.carteleraInicio + state.carteleraLimite;
+                    state.carteleraBoton = true;
+                }else{
+                    // Inicio y Fin diferentes
+                    state.carteleraFin = state.carteleraFin + state.carteleraLimite;
+                    state.carteleraInicio = state.carteleraInicio + state.carteleraLimite;
+                    state.carteleraBoton = true;
+                }
+            }
+        }
     }
 }
 

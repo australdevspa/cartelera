@@ -1,18 +1,14 @@
 <template>
   <div class="loading-indicator">
-    Cargando...
+    <div uk-spinner="ratio: 3"></div>
   </div>
 </template>
 
-<style lang="css">
+<style scoped>
 .loading-indicator {
   position: absolute;
   top: 50%;
   left: 50%;
-
-  font-weight: bold;
-  font-size: 2rem;
-
   transform: translate(-50%, -50%)
 }
 </style>
