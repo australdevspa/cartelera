@@ -103,12 +103,12 @@ function getCartelera(inicio, fin){
     })
 }
 
-function getxcategoria(inicio, fin){
+function getxcategoria(inicio, fin, area){
     return axios.get(`${API_URL}/cartelera-ccpm`)
     .then(function (response) {
         var categoria = []
         for (var i = 0; i < response.data.length ; i++) {
-            if (response.data[i].area === "Cine") {
+            if (response.data[i].area === area) {
                 categoria.push(response.data[i]);
             }
         }

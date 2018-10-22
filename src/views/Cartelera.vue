@@ -14,7 +14,7 @@
                 </li>
                 <li v-for="(item, index) in categorias"
                   :key="index">
-                    <a href="" @click.prevent="cargarCategoria" class="uk-button uk-button-primary tm-button" :style="{ background: item.color + '!important' }">
+                    <a href="" @click.prevent="cargarCategoria(item.area)" class="uk-button uk-button-primary tm-button" :style="{ background: item.color + '!important' }">
                       {{ item.area }} <span class="uk-badge badge-background" :style="{ color: item.color + '!important' }">{{ item.ocurrence }}</span>
                     </a>
                 </li>
@@ -39,7 +39,7 @@
         <div v-if="estado === false">
 
           <div v-if="filter === ''">
-            <p class="uk-text-small uk-text-muted uk-text-left">{{totalActividades}} actividades encontradas.</p>
+            <p class="uk-text-small uk-text-muted uk-text-left">{{actividadesTotal}} actividades encontradas.</p>
             <div class="pad-top">
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
@@ -105,7 +105,7 @@
 
               <div class="pad-top">
                 <div v-if="xcategoriaBoton">
-                  <button class="uk-button uk-button-secondary" @click.prevent="cargarCategoria">Cargar más actividades</button>
+                  <button class="uk-button uk-button-secondary" @click.prevent="masActividadesxCategoria">Cargar más actividades</button>
                 </div>
               </div>
             </div>
@@ -131,14 +131,15 @@ export default {
   },
   data() {
     return {
-      filter: ''
+      filter: '',
+      area: ''
     }
   },
   created () {
     this.$store.dispatch('loadCategorias')
     this.$store.dispatch('loadTotal')
 
-    this.$store.dispatch('loadxCategoriaTotal')
+    //this.$store.dispatch('loadxCategoriaTotal')
 
     if(this.actividadesInicio === 0){
       this.$store.dispatch('loadCartelera');
@@ -158,7 +159,7 @@ export default {
     estado() {
       return this.$store.state.estado;
     },
-    totalActividades() {
+    actividadesTotal() {
       return this.$store.state.carteleraTotal;
     },
     actividades() {
@@ -190,12 +191,6 @@ export default {
       return this.$store.state.xcategoriaBoton;
     },
 
-    /*totalActividades() {
-      return this.$store.state.carteleraTotal;
-    },*/
-    /*contadorActividades() {
-      return this.$store.state.carteleraContador;
-    },*/
 
     busqueda() {
       return this.$store.state.busqueda;
@@ -213,13 +208,16 @@ export default {
       this.$store.dispatch('loadCartelera')
     },
     cargarCartelera () {
+      this.$store.dispatch('loadCarteleraReset');
       this.$store.dispatch('loadCartelera')
     },
     masActividadesxCategoria () {
-      this.$store.dispatch('loadxCategoria')
+      this.$store.dispatch('loadxCategoria', this.area)
     },
-    cargarCategoria () {
-      this.$store.dispatch('loadxCategoria')
+    cargarCategoria (x) {
+      this.area = x
+      this.$store.dispatch('loadxCategoriaReset');
+      this.$store.dispatch('loadxCategoria', x)
     },
 
     getBusqueda: _.debounce(

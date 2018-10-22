@@ -33,6 +33,9 @@ const state = {
     limiteBusquedaCategoria: 10,
     totalBusquedaCategoria: 0,
 
+
+
+
     //state correspondiente a la vista de Inicio
     carousel: [],
     //state correspondientes a la vista de la Cartelera
@@ -47,9 +50,8 @@ const state = {
     carteleraLimite: 10,
     carteleraBoton: false,
 
-    xcategoria: [],
     xcategoriaTotal: 0,
-    xcategoriaCartelera: [],
+    xcategoria: [],
     xcategoriaInicio: 0,
     xcategoriaFin: 0,
     xcategoriaLimite: 2,
@@ -138,14 +140,13 @@ const actions = {
         }
         commit('updateCartelera', await getCartelera(state.carteleraInicio, state.carteleraFin))
     },
-    /*loadxCategoria(context) {
-        return getxcategoria()
-            .then(xcategoria => context.commit('updatexCategoria', xcategoria));
-    },*/
+    loadCarteleraReset(context) {
+        context.commit('updateCarteleraReset')
+    },
     async loadxCategoriaTotal ({ commit }) {
         commit('updatexCategoriaTotal', await getxcategoriaTotal())
     },
-    async loadxCategoria ({ dispatch, commit }) {
+    async loadxCategoria ({ dispatch, commit }, x) {
         await dispatch('loadxCategoriaTotal') // wait for `loadTotal` to finish
         if(state.xcategoriaInicio == 0){
             if(state.xcategoriaLimite > state.xcategoriaTotal){
@@ -154,9 +155,11 @@ const actions = {
                 state.xcategoriaFin = state.xcategoriaLimite;
             }
         }
-        commit('updatexCategoria', await getxcategoria(state.xcategoriaInicio, state.xcategoriaFin))
+        commit('updatexCategoria', await getxcategoria(state.xcategoriaInicio, state.xcategoriaFin, x))
     },
-
+    loadxCategoriaReset(context) {
+        context.commit('updatexCategoriaReset')
+    },
 };
 
 const mutations = {
@@ -213,6 +216,8 @@ const mutations = {
         state.totalBusquedaCategoria = 0
     },
 
+
+
     //mutations correspondiente a la vista de Inicio
     updateCarousel(state, carousel) {
         state.carousel = carousel;
@@ -268,6 +273,14 @@ const mutations = {
             }
         }
     },
+    updateCarteleraReset(state) {
+        state.carteleraTotal = 0
+        state.cartelera = []
+        state.carteleraInicio = 0
+        state.carteleraFin = 0
+        //state.carteleraLimite = 10
+        state.carteleraBoton = false
+    },
     updatexCategoriaTotal(state, xcategoriaTotal) {
         state.xcategoriaTotal = xcategoriaTotal;
     },
@@ -315,9 +328,14 @@ const mutations = {
             }
         }
     },
-   /* updatexCategoria(state, xcategoria) {
-        state.xcategoria = xcategoria;
-    },*/
+    updatexCategoriaReset(state) {
+        state.xcategoriaTotal = 0
+        state.xcategoria = []
+        state.xcategoriaInicio = 0
+        state.xcategoriaFin = 0
+        //xcategoriaLimite: 2,
+        state.xcategoriaBoton = false
+    },
 }
 
 const store = new Vuex.Store({
