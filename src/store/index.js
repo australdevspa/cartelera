@@ -5,6 +5,8 @@ import {
     getCategorias, 
     getTotal,
     getCartelera,
+    getxcategoria,
+    getxcategoriaTotal,
 
     getProximasActividades, 
     getSegmentoActividades, 
@@ -20,7 +22,7 @@ const state = {
     contadorActividades: 0,
     limiteActividades: 10,
     totalActividades: 0,
-    
+
     busqueda: [],
     contadorBusqueda: 0,
     limiteBusqueda: 10,
@@ -36,12 +38,22 @@ const state = {
     //state correspondientes a la vista de la Cartelera
     categorias: [],
 
+    estado: false,
+
     carteleraTotal: 0,
     cartelera: [],
     carteleraInicio: 0,
     carteleraFin: 0,
     carteleraLimite: 10,
-    carteleraBoton: false
+    carteleraBoton: false,
+
+    xcategoria: [],
+    xcategoriaTotal: 0,
+    xcategoriaCartelera: [],
+    xcategoriaInicio: 0,
+    xcategoriaFin: 0,
+    xcategoriaLimite: 2,
+    xcategoriaBoton: false,
 
 };
 
@@ -100,6 +112,8 @@ const actions = {
         context.commit('updateBusquedaCategoriaReset')
     },
 
+
+
     //actions correspondiente a la vista de Inicio
     loadCarousel(context) {
         return getCarousel()
@@ -118,14 +132,31 @@ const actions = {
         if(state.carteleraInicio == 0){
             if(state.carteleraLimite > state.carteleraTotal){
                 state.carteleraFin = state.carteleraTotal;
-                //state.carteraBoton = false;
             }else{
                 state.carteleraFin = state.carteleraLimite;
-                //state.carteraBoton = true;
             }
         }
         commit('updateCartelera', await getCartelera(state.carteleraInicio, state.carteleraFin))
-    }
+    },
+    /*loadxCategoria(context) {
+        return getxcategoria()
+            .then(xcategoria => context.commit('updatexCategoria', xcategoria));
+    },*/
+    async loadxCategoriaTotal ({ commit }) {
+        commit('updatexCategoriaTotal', await getxcategoriaTotal())
+    },
+    async loadxCategoria ({ dispatch, commit }) {
+        await dispatch('loadxCategoriaTotal') // wait for `loadTotal` to finish
+        if(state.xcategoriaInicio == 0){
+            if(state.xcategoriaLimite > state.xcategoriaTotal){
+                state.xcategoriaFin = state.xcategoriaTotal;
+            }else{
+                state.xcategoriaFin = state.xcategoriaLimite;
+            }
+        }
+        commit('updatexCategoria', await getxcategoria(state.xcategoriaInicio, state.xcategoriaFin))
+    },
+
 };
 
 const mutations = {
@@ -194,6 +225,7 @@ const mutations = {
         state.carteleraTotal = carteleraTotal;
     },
     updateCartelera(state, cartelera) {
+        state.estado = false;
         if(state.carteleraInicio === 0){
             state.cartelera = cartelera;
             // Inicio y Fin iguales se desabilita boton
@@ -235,7 +267,57 @@ const mutations = {
                 }
             }
         }
-    }
+    },
+    updatexCategoriaTotal(state, xcategoriaTotal) {
+        state.xcategoriaTotal = xcategoriaTotal;
+    },
+    updatexCategoria(state, xcategoria) {
+        state.estado = true;
+        if(state.xcategoriaInicio === 0){
+            state.xcategoria = xcategoria;
+            // Inicio y Fin iguales se desabilita boton
+            if(state.xcategoriaFin === state.xcategoriaTotal){
+                state.xcategoriaInicio = state.xcategoriaFin;
+                state.xcategoriaBoton = false;
+            }else{
+                // Fin igual al total de elementos
+                if(state.xcategoriaFin + state.xcategoriaLimite > state.xcategoriaTotal){
+                    state.xcategoriaFin = state.xcategoriaTotal;
+                    state.xcategoriaInicio = state.xcategoriaInicio + state.xcategoriaLimite;
+                    state.xcategoriaBoton = true;
+                }else{
+                    // Inicio y Fin diferentes
+                    state.xcategoriaFin = state.xcategoriaFin + state.xcategoriaLimite;
+                    state.xcategoriaInicio = state.xcategoriaInicio + state.xcategoriaLimite;
+                    state.xcategoriaBoton = true;
+                }
+            }
+        }else{
+            xcategoria.forEach(function (value, key) {
+                state.xcategoria.push(value);
+            });
+            // Inicio y Fin iguales se desabilita boton
+            if(state.xcategoriaFin === state.xcategoriaTotal){
+                state.xcategoriaInicio = state.xcategoriaFin;
+                state.xcategoriaBoton = false;
+            }else{
+                // Fin igual al total de elementos
+                if(state.xcategoriaFin + state.xcategoriaLimite > state.xcategoriaTotal){
+                    state.xcategoriaFin = state.xcategoriaTotal;
+                    state.xcategoriaInicio = state.xcategoriaInicio + state.xcategoriaLimite;
+                    state.xcategoriaBoton = true;
+                }else{
+                    // Inicio y Fin diferentes
+                    state.xcategoriaFin = state.xcategoriaFin + state.xcategoriaLimite;
+                    state.xcategoriaInicio = state.xcategoriaInicio + state.xcategoriaLimite;
+                    state.xcategoriaBoton = true;
+                }
+            }
+        }
+    },
+   /* updatexCategoria(state, xcategoria) {
+        state.xcategoria = xcategoria;
+    },*/
 }
 
 const store = new Vuex.Store({

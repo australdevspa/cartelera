@@ -103,6 +103,44 @@ function getCartelera(inicio, fin){
     })
 }
 
+function getxcategoria(inicio, fin){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        var categoria = []
+        for (var i = 0; i < response.data.length ; i++) {
+            if (response.data[i].area === "Cine") {
+                categoria.push(response.data[i]);
+            }
+        }
+        var x = inicio
+        while(x < fin){
+            setParametros(categoria[x])
+            x++
+        }
+        return categoria.slice(inicio, fin)
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+function getxcategoriaTotal(){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        var categoria = []
+        for (var i = 0; i < response.data.length ; i++) {
+            if (response.data[i].area === "Cine") {
+                categoria.push(response.data[i]);
+            }
+        }
+        return Object.keys(categoria).length
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+
 //Object.keys(response.data).length
 /*function getCartelera(){
     return axios.get(`${API_URL}/cartelera-ccpm`)
@@ -341,6 +379,8 @@ export {
     getCategorias,
     getTotal,
     getCartelera,
+    getxcategoria,
+    getxcategoriaTotal,
 
     getProximasActividades,
     getSegmentoActividades,
