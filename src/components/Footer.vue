@@ -38,7 +38,7 @@ export default {
   }
 }
 .a-footer:link {
-  color: #999 !important;
+  color: #999 !important; /*#999 -> white*/
   text-decoration:none;
 }
 .a-footer:visited {

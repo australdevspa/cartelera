@@ -139,6 +139,7 @@ export default {
     this.$store.dispatch('loadCategorias')
     this.$store.dispatch('loadTotal')
 
+this.$store.dispatch('loadTest')
     //this.$store.dispatch('loadxCategoriaTotal')
 
     if(this.actividadesInicio === 0){
@@ -155,6 +156,12 @@ export default {
     categorias() {
       return this.$store.state.categorias;
     },
+
+
+    test() {
+      return this.$store.state.test;
+    },
+
 
     estado() {
       return this.$store.state.estado;
@@ -209,6 +216,7 @@ export default {
     prevenirEnter: function(e){ },
     masActividades () {
       this.$store.dispatch('loadCartelera')
+      this.$store.dispatch('loadTest1')
     },
     cargarCartelera () {
       this.$store.dispatch('loadCarteleraReset');

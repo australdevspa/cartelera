@@ -11,7 +11,9 @@ import {
     getProximasActividades, 
     getSegmentoActividades, 
     getBusquedaActividades, 
-    getBusquedaCategoria
+    getBusquedaCategoria,
+
+    getCartelerax
 } from '@/services/api'
 
 Vue.use(Vuex);
@@ -43,6 +45,13 @@ const state = {
 
     estado: false,
 
+    acarteleraTotal: 0,
+    acartelera: [],
+    acarteleraInicio: 0,
+    acarteleraFin: 0,
+    acarteleraLimite: 10,
+    acarteleraBoton: false,
+
     carteleraTotal: 0,
     cartelera: [],
     carteleraInicio: 0,
@@ -54,9 +63,11 @@ const state = {
     xcategoria: [],
     xcategoriaInicio: 0,
     xcategoriaFin: 0,
-    xcategoriaLimite: 2,
+    xcategoriaLimite: 10,
     xcategoriaBoton: false,
     xcategoriaArea: '',
+
+    test: [],
 
 };
 
@@ -65,6 +76,14 @@ const getters = {
 };
 
 const actions = {
+    loadTest(context) {
+        return getCartelerax(0, 5)
+            .then(test => context.commit('updateTest', test))
+    },
+    loadTest1(context) {
+        return getCartelerax(5, 10)
+            .then(test => context.commit('updateTest', test))
+    },
     loadProximasActividades(context) {
         return getProximasActividades()
             .then(proximasActividades => context.commit('updateProximasActividades', proximasActividades))
@@ -167,6 +186,20 @@ const actions = {
 };
 
 const mutations = {
+    updateTest(state, test) {
+        
+        if(state.carteleraInicio === 0){
+            state.test = test;
+            // Inicio y Fin iguales se desabilita boton
+  
+        }else{
+            test.forEach(function (value, key) {
+                state.test[0].resultado.push(value);
+            });
+            // Inicio y Fin iguales se desabilita boton
+ 
+        }
+    },
     updateProximasActividades(state, proximasActividades) {
         state.proximasActividades = proximasActividades;
     },

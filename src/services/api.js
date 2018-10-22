@@ -4,9 +4,11 @@ moment.locale('es')
 
 const API_URL = 'https://www.culturapuertomontt.cl/inicio/wp-json/cartelera/v1'
 
+//Asignacion y modificacion de parametros a los objetos de la api
+
 function setParametros(x){
     if(x.attachments == null){
-        x.attachments = '[{"guid" : "https://cdn.gbposters.com/media/catalog/product/cache/1/image/737x938/9df78eab33525d08d6e5fb8d27136e95/p/o/pokemon-charmander-face-collector-print-1.23.jpg"}]'
+        x.attachments = '[{"guid" : "https://www.audiovisualstudio.es/wp-content/uploads/2016/08/alquiler-de-equipos-para-eventos-ganar-dinero.jpg"}]'
         
         var attachments = x.attachments
         var json_attachments = JSON.parse(attachments);
@@ -28,6 +30,8 @@ function setParametros(x){
     }
 }
 
+//metodo correspondiente a la vista de Inicio
+
 function getCarousel(){
     return axios.get(`${API_URL}/cartelera-ccpm`)
     .then(function (response) {
@@ -44,6 +48,8 @@ function getCarousel(){
         return 'An error occured..' + error;
     })
 }
+
+//metodos correspondientes a la vista de la Cartelera
 
 function getCategorias(){
     return axios.get(`${API_URL}/cartelera-ccpm`)
@@ -97,6 +103,38 @@ function getCartelera(inicio, fin){
             x++
         }
         return response.data.slice(inicio, fin)
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+
+function getCartelerax(inicio, fin){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        if(inicio == 0){
+            var final = []
+            var x = inicio
+            while(x < fin){
+                setParametros(response.data[x])
+                x++
+            }
+            final.push(
+                {
+                    resultado: response.data.slice(inicio, fin),
+                    total: Object.keys(response.data).length
+                }
+            )
+            return final
+        }else{
+            var x = inicio
+            while(x < fin){
+                setParametros(response.data[x])
+                x++
+            }
+            return response.data.slice(inicio, fin)
+        }
     })
     .catch(function (error) {
         return 'An error occured..' + error;
@@ -385,5 +423,6 @@ export {
     getProximasActividades,
     getSegmentoActividades,
     getBusquedaActividades,
-    getBusquedaCategoria
+    getBusquedaCategoria,
+    getCartelerax
 }
