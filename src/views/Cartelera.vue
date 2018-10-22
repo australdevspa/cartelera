@@ -132,7 +132,7 @@ export default {
   data() {
     return {
       filter: '',
-      area: ''
+      //area: ''
     }
   },
   created () {
@@ -190,6 +190,9 @@ export default {
     xcategoriaBoton() {
       return this.$store.state.xcategoriaBoton;
     },
+    xcategoriaArea() {
+      return this.$store.state.xcategoriaArea;
+    },
 
 
     busqueda() {
@@ -209,13 +212,15 @@ export default {
     },
     cargarCartelera () {
       this.$store.dispatch('loadCarteleraReset');
+      this.$store.dispatch('loadxCategoriaReset');
       this.$store.dispatch('loadCartelera')
     },
     masActividadesxCategoria () {
-      this.$store.dispatch('loadxCategoria', this.area)
+      this.$store.dispatch('loadxCategoria', this.xcategoriaArea)
     },
     cargarCategoria (x) {
-      this.area = x
+      this.$store.dispatch('loadxCategoriaArea', x);
+      this.$store.dispatch('loadCarteleraReset');
       this.$store.dispatch('loadxCategoriaReset');
       this.$store.dispatch('loadxCategoria', x)
     },

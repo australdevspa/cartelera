@@ -56,6 +56,7 @@ const state = {
     xcategoriaFin: 0,
     xcategoriaLimite: 2,
     xcategoriaBoton: false,
+    xcategoriaArea: '',
 
 };
 
@@ -143,8 +144,11 @@ const actions = {
     loadCarteleraReset(context) {
         context.commit('updateCarteleraReset')
     },
+    loadxCategoriaArea(context, x) {
+        context.commit('updatexCategoriaArea', x)
+    },
     async loadxCategoriaTotal ({ commit }) {
-        commit('updatexCategoriaTotal', await getxcategoriaTotal())
+        commit('updatexCategoriaTotal', await getxcategoriaTotal(state.xcategoriaArea))
     },
     async loadxCategoria ({ dispatch, commit }, x) {
         await dispatch('loadxCategoriaTotal') // wait for `loadTotal` to finish
@@ -280,6 +284,9 @@ const mutations = {
         state.carteleraFin = 0
         //state.carteleraLimite = 10
         state.carteleraBoton = false
+    },
+    updatexCategoriaArea(state, xcategoriaArea) {
+        state.xcategoriaArea = xcategoriaArea;
     },
     updatexCategoriaTotal(state, xcategoriaTotal) {
         state.xcategoriaTotal = xcategoriaTotal;
