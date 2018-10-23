@@ -141,6 +141,7 @@ function getCartelerax(inicio, fin){
     })
 }
 
+
 function getxcategoria(inicio, fin, area){
     return axios.get(`${API_URL}/cartelera-ccpm`)
     .then(function (response) {
@@ -424,5 +425,6 @@ export {
     getSegmentoActividades,
     getBusquedaActividades,
     getBusquedaCategoria,
+
     getCartelerax
 }

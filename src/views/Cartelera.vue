@@ -3,7 +3,7 @@
     <div class="uk-section uk-section-muted">
       <div class="uk-container uk-container-center uk-text-center">
         <form class="uk-form-stacked">
-          <!-- falta el spinner y el href filtrando por categoria y mas diseño -->
+          <!-- falta el spinner -->
           <div class="uk-margin">
             <div class="uk-text-center">
               <ul class="grid">

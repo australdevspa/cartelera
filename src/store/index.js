@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {    
     getCarousel,
+    
     getCategorias, 
     getTotal,
     getCartelera,
