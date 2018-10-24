@@ -8,13 +8,13 @@
             <div class="uk-text-center">
               <ul class="grid">
                 <li>
-                  <a href="" @click.prevent="cargarCartelera" class="uk-button uk-button-primary tm-button all-button">
+                  <a href="" @click.prevent="showCartelera" class="uk-button uk-button-primary tm-button all-button">
                     All
                   </a>
                 </li>
                 <li v-for="(item, index) in categorias"
                   :key="index">
-                    <a href="" @click.prevent="cargarCategoria(item.area)" class="uk-button uk-button-primary tm-button" :style="{ background: item.color + '!important' }">
+                    <a href="" @click.prevent="showPorCategoria(item.area)" class="uk-button uk-button-primary tm-button" :style="{ background: item.color + '!important' }">
                       {{ item.area }} <span class="uk-badge badge-background" :style="{ color: item.color + '!important' }">{{ item.ocurrence }}</span>
                     </a>
                 </li>
@@ -39,11 +39,11 @@
         <div v-if="estado === false">
 
           <div v-if="filter === ''">
-            <p class="uk-text-small uk-text-muted uk-text-left">{{actividadesTotal}} actividades encontradas.</p>
+            <p class="uk-text-small uk-text-muted uk-text-left">{{cartelera[0].total}} actividades encontradas.</p>
             <div class="pad-top">
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
-                v-for="(item, index) in actividades"
+                v-for="(item, index) in cartelera[0].resultado"
                 :key="index"
                 @click.prevent="goToActividad(item)">
                   <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
@@ -52,50 +52,27 @@
               </div>
 
               <div class="pad-top">
-                <div v-if="actividadesBoton">
-                  <button class="uk-button uk-button-secondary" @click.prevent="masActividades">Cargar más actividades</button>
+                <div v-if="cartelera_boton">
+                  <button class="uk-button uk-button-secondary" @click.prevent="cargarCartelera">Cargar más actividades</button>
                 </div>
               </div>
             </div>
           </div>
 
           <div v-else>
-            <div v-if="totalBusqueda == 0">
-              <p class="uk-text-small uk-text-muted uk-text-left">No se encontraron actividades.</p>
-            </div>
-            <div v-else-if="totalBusqueda == 1">
-              <p class="uk-text-small uk-text-muted uk-text-left">{{totalBusqueda}} actividad encontrada.</p>
-            </div>
-            <div v-else>
-              <p class="uk-text-small uk-text-muted uk-text-left">{{totalBusqueda}} actividades encontradas.</p>
-            </div>
 
-            <div class="pad-top">
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1-2@m"
-                v-for="(item, index) in busqueda"
-                :key="index"
-                @click.prevent="goToActividad(item)">
-                  <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
-                  <card-left v-else :actividad="item" class="cursor"></card-left>
-                </div>
-              </div>
-
-              <div class="pad-top" v-if="contadorBusqueda < totalBusqueda">
-                <button class="uk-button uk-button-secondary" id="moreBusqueda" @click.prevent="mostrarMasActividadesBusqueda">Cargar más actividades</button>
-              </div>
-            </div>
           </div>
 
         </div>
+
         <div v-else-if="estado === true">
 
           <div v-if="filter === ''">
-            <p class="uk-text-small uk-text-muted uk-text-left">{{totalxcategoriaActividades}} actividades encontradas.</p>
+            <p class="uk-text-small uk-text-muted uk-text-left">{{por_categoria[0].total}} actividades encontradas.</p>
             <div class="pad-top">
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
-                v-for="(item, index) in xcategoria"
+                v-for="(item, index) in por_categoria[0].resultado"
                 :key="index"
                 @click.prevent="goToActividad(item)">
                   <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
@@ -104,14 +81,15 @@
               </div>
 
               <div class="pad-top">
-                <div v-if="xcategoriaBoton">
-                  <button class="uk-button uk-button-secondary" @click.prevent="masActividadesxCategoria">Cargar más actividades</button>
+                <div v-if="por_categoria_boton">
+                  <button class="uk-button uk-button-secondary" @click.prevent="cargarPorCategoria(por_categoria[0].area)">Cargar más actividades</button>
                 </div>
               </div>
             </div>
           </div>
 
         </div>
+
 
       </div>
     </div>
@@ -131,19 +109,13 @@ export default {
   },
   data() {
     return {
-      filter: '',
-      //area: ''
+      filter: ''
     }
   },
   created () {
     this.$store.dispatch('loadCategorias')
-    this.$store.dispatch('loadTotal')
-
-this.$store.dispatch('loadTest')
-    //this.$store.dispatch('loadxCategoriaTotal')
-
-    if(this.actividadesInicio === 0){
-      this.$store.dispatch('loadCartelera');
+    if(this.cartelera_inicio === 0){
+      this.$store.dispatch('loadCartelera')
     }
   },
   watch: {
@@ -156,52 +128,38 @@ this.$store.dispatch('loadTest')
     categorias() {
       return this.$store.state.categorias;
     },
-
-
-    test() {
-      return this.$store.state.test;
-    },
-
-
     estado() {
       return this.$store.state.estado;
     },
-    actividadesTotal() {
-      return this.$store.state.carteleraTotal;
-    },
-    actividades() {
+
+    cartelera() {
       return this.$store.state.cartelera;
     },
-    actividadesInicio() {
-      return this.$store.state.carteleraInicio;
+    cartelera_inicio() {
+      return this.$store.state.cartelera_inicio;
     },
-    actividadesFin() {
-      return this.$store.state.carteleraFin;
+    cartelera_tamaño() {
+      return this.$store.state.cartelera_tamaño;
     },
-    actividadesBoton() {
-      return this.$store.state.carteleraBoton;
+    cartelera_boton() {
+      return this.$store.state.cartelera_boton;
     },
 
-    totalxcategoriaActividades() {
-      return this.$store.state.xcategoriaTotal;
+    por_categoria() {
+      return this.$store.state.por_categoria;
     },
-    xcategoria() {
-      return this.$store.state.xcategoria;
+    por_categoria_inicio() {
+      return this.$store.state.por_categoria_inicio;
     },
-    xcategoriaInicio() {
-      return this.$store.state.xcategoriaInicio;
+    por_categoria_tamaño() {
+      return this.$store.state.por_categoria_tamaño;
     },
-    xcategoriaFin() {
-      return this.$store.state.xcategoriaFin;
-    },
-    xcategoriaBoton() {
-      return this.$store.state.xcategoriaBoton;
-    },
-    xcategoriaArea() {
-      return this.$store.state.xcategoriaArea;
+    por_categoria_boton() {
+      return this.$store.state.por_categoria_boton;
     },
 
 
+  /* 
     busqueda() {
       return this.$store.state.busqueda;
     },
@@ -210,29 +168,30 @@ this.$store.dispatch('loadTest')
     },
     contadorBusqueda() {
       return this.$store.state.contadorBusqueda;
-    }
+    }*/
   },
   methods: {
     prevenirEnter: function(e){ },
-    masActividades () {
-      this.$store.dispatch('loadCartelera')
-      this.$store.dispatch('loadTest1')
+    showCartelera () {
+      this.$store.dispatch('loadEstadoFalse')
     },
     cargarCartelera () {
-      this.$store.dispatch('loadCarteleraReset');
-      this.$store.dispatch('loadxCategoriaReset');
       this.$store.dispatch('loadCartelera')
     },
-    masActividadesxCategoria () {
-      this.$store.dispatch('loadxCategoria', this.xcategoriaArea)
-    },
-    cargarCategoria (x) {
-      this.$store.dispatch('loadxCategoriaArea', x);
-      this.$store.dispatch('loadCarteleraReset');
-      this.$store.dispatch('loadxCategoriaReset');
-      this.$store.dispatch('loadxCategoria', x)
-    },
 
+    showPorCategoria (x) {
+      if(Object.keys(this.por_categoria).length === 0){
+        this.$store.dispatch('loadPorCategoria', x)
+      }else if(this.por_categoria[0].area === x){
+        this.$store.dispatch('loadEstadoTrue')
+      }else{
+        this.$store.dispatch('loadResetPorCategoria')
+        this.$store.dispatch('loadPorCategoria', x)
+      }
+    },
+    cargarPorCategoria (x) {
+      this.$store.dispatch('loadPorCategoria', x)
+    },
     getBusqueda: _.debounce(
       function () {
         if (this.filter !== '') {

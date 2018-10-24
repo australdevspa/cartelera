@@ -2,30 +2,32 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {    
     getCarousel,
-    
-    getCategorias, 
-    getTotal,
+    getCategorias,
     getCartelera,
-    getxcategoria,
-    getxcategoriaTotal,
-
-    getProximasActividades, 
-    getSegmentoActividades, 
-    getBusquedaActividades, 
-    getBusquedaCategoria,
-
-    getCartelerax
+    getPorCategoria
 } from '@/services/api'
 
 Vue.use(Vuex);
 
 const state = {
-    proximasActividades: [],
-    actividades: [],
-    contadorActividades: 0,
-    limiteActividades: 10,
-    totalActividades: 0,
+    //state correspondiente a la vista de Inicio
+    carousel: [],
+    //state correspondientes a la vista de la Cartelera
+    categorias: [],
 
+    estado: false,
+
+    cartelera: [],
+    cartelera_inicio: 0,
+    cartelera_tamaño: 10,
+    cartelera_boton: false,
+
+    por_categoria: [],
+    por_categoria_inicio: 0,
+    por_categoria_tamaño: 10,
+    por_categoria_boton: false,
+
+    /*
     busqueda: [],
     contadorBusqueda: 0,
     limiteBusqueda: 10,
@@ -34,42 +36,7 @@ const state = {
     busquedaCategoria: [],
     contadorBusquedaCategoria: 0,
     limiteBusquedaCategoria: 10,
-    totalBusquedaCategoria: 0,
-
-
-
-
-    //state correspondiente a la vista de Inicio
-    carousel: [],
-    //state correspondientes a la vista de la Cartelera
-    categorias: [],
-
-    estado: false,
-
-    acarteleraTotal: 0,
-    acartelera: [],
-    acarteleraInicio: 0,
-    acarteleraFin: 0,
-    acarteleraLimite: 10,
-    acarteleraBoton: false,
-
-    carteleraTotal: 0,
-    cartelera: [],
-    carteleraInicio: 0,
-    carteleraFin: 0,
-    carteleraLimite: 10,
-    carteleraBoton: false,
-
-    xcategoriaTotal: 0,
-    xcategoria: [],
-    xcategoriaInicio: 0,
-    xcategoriaFin: 0,
-    xcategoriaLimite: 10,
-    xcategoriaBoton: false,
-    xcategoriaArea: '',
-
-    test: [],
-
+    totalBusquedaCategoria: 0,*/
 };
 
 const getters = {
@@ -77,28 +44,40 @@ const getters = {
 };
 
 const actions = {
-    loadTest(context) {
-        return getCartelerax(0, 5)
-            .then(test => context.commit('updateTest', test))
+    //actions correspondiente a la vista de Inicio
+    loadCarousel(context) {
+        return getCarousel()
+            .then(carousel => context.commit('updateCarousel', carousel));
     },
-    loadTest1(context) {
-        return getCartelerax(5, 10)
-            .then(test => context.commit('updateTest', test))
+    //actions correspondiente a la vista de la Cartelera
+    loadCategorias(context) {
+        return getCategorias()
+            .then(categorias => context.commit('updateCategorias', categorias));
     },
-    loadProximasActividades(context) {
-        return getProximasActividades()
-            .then(proximasActividades => context.commit('updateProximasActividades', proximasActividades))
-            .then(function() {
-                document.querySelector('.uk-spinner').style.display = 'none';
-            });
+
+    loadEstadoFalse(context) {
+        context.commit('updateEstadoFalse')
     },
-    loadActividades(context) {
-        return getSegmentoActividades(state.limiteActividades, state.contadorActividades)
-            .then(actividades => context.commit('updateActividades', actividades))
-            .then(function() {
-                document.getElementById("more").disabled = false;
-            });
+    
+    loadEstadoTrue(context) {
+        context.commit('updateEstadoTrue')
     },
+
+    loadCartelera(context) {
+        return getCartelera(state.cartelera_inicio, state.cartelera_tamaño)
+            .then(cartelera => context.commit('updateCartelera', cartelera));
+    },
+
+    loadPorCategoria(context, area) {
+        return getPorCategoria(state.por_categoria_inicio, state.por_categoria_tamaño, area)
+            .then(por_categoria => context.commit('updatePorCategoria', por_categoria));
+    },
+
+    loadResetPorCategoria(context) {
+        context.commit('updateResetPorCategoria')
+    },
+
+/*
     loadBusquedaActividades(context, filter) {
         return getBusquedaActividades(filter, state.limiteBusqueda, 0)
             .then(busqueda => context.commit('updateBusquedaActividades', busqueda))
@@ -120,7 +99,7 @@ const actions = {
         return getCategorias()
             .then(categorias => context.commit('updateCategorias', categorias));
     },*/
-    loadBusquedaCategoria(context, select) {
+    /*loadBusquedaCategoria(context, select) {
         return getBusquedaCategoria(select, state.limiteBusquedaCategoria, 0)
             .then(busquedaCategoria => context.commit('updateBusquedaCategoria', busquedaCategoria))
     },
@@ -133,20 +112,61 @@ const actions = {
     },
     loadBusquedaCategoriaReset(context) {
         context.commit('updateBusquedaCategoriaReset')
+    },*/
+
+
+
+
+
+   /* loadCartelera(context) {
+        if(state.cartelera_inicio == 0){
+            if(state.cartelera_limite > state.cartelera_total){
+                state.cartelera_fin = state.cartelera_total;
+            }else{
+                state.cartelera_fin = state.cartelera_limite;
+            }
+        }
+        return getCartelera(0, 7)
+            .then(cartelera => context.commit('updatenomas', cartelera));
+    },
+
+
+    load(context) {
+        return getCartelera(0, 5)
+            .then(hola => context.commit('updateTest', hola))
     },
 
 
 
-    //actions correspondiente a la vista de Inicio
-    loadCarousel(context) {
-        return getCarousel()
-            .then(carousel => context.commit('updateCarousel', carousel));
+
+
+
+
+    loadCartelerax ({ dispatch, commit }) {
+        //await dispatch('loadTotal') // wait for `loadTotal` to finish
+        if(state.acartelera_inicio == 0){
+            if(state.acartelera_limite > state.acartelera_total){
+                state.acartelera_fin = state.acartelera_total;
+            }else{
+                state.acartelera_fin = state.acartelera_limite;
+            }
+        }
+        commit('updateCartelerax', getCartelera(state.acartelera_inicio, state.acartelera_fin))
     },
-    //actions correspondiente a la vista de la Cartelera
-    loadCategorias(context) {
-        return getCategorias()
-            .then(categorias => context.commit('updateCategorias', categorias));
+    loadTest(context) {
+        return getCartelera(0, 5)
+            .then(test => context.commit('updateTest', test))
     },
+    loadTest1(context) {
+        return getCartelera(5, 10)
+            .then(test => context.commit('updateTest', test))
+    },
+
+    loadhola(context) {
+        return getCartelera(0, 5)
+            .then(hola => context.commit('updateTesthola', hola))
+    },
+
     async loadTotal ({ commit }) {
         commit('updateTotal', await getTotal())
     },
@@ -159,7 +179,7 @@ const actions = {
                 state.carteleraFin = state.carteleraLimite;
             }
         }
-        commit('updateCartelera', await getCartelera(state.carteleraInicio, state.carteleraFin))
+        commit('updateCarteleravieja', await getCarteleravieja(state.carteleraInicio, state.carteleraFin))
     },
     loadCarteleraReset(context) {
         context.commit('updateCarteleraReset')
@@ -183,27 +203,89 @@ const actions = {
     },
     loadxCategoriaReset(context) {
         context.commit('updatexCategoriaReset')
-    },
+    },*/
 };
 
 const mutations = {
-    updateTest(state, test) {
-        
-        if(state.carteleraInicio === 0){
-            state.test = test;
-            // Inicio y Fin iguales se desabilita boton
-  
+    //mutations correspondiente a la vista de Inicio
+    updateCarousel(state, carousel) {
+        state.carousel = carousel;
+    },
+    //mutations correspondiente a la vista de la Cartelera
+    updateCategorias(state, categorias) {
+        state.categorias = categorias;
+    },
+
+    updateEstadoFalse(state) {
+        state.estado = false;
+    },
+
+    updateEstadoTrue(state) {
+        state.estado = true;
+    },
+
+    updateCartelera(state, cartelera) {
+        state.estado = false;
+        if(state.cartelera_inicio === 0){
+            state.cartelera = cartelera;
+            // la suma del inicio y el tamaño, supera al total desabilita boton
+            if(state.cartelera_tamaño >= state.cartelera[0].total){
+                state.cartelera_inicio = state.cartelera[0].total;
+                state.cartelera_boton = false;
+            }else{
+                state.cartelera_inicio = state.cartelera_inicio + state.cartelera_tamaño;
+                state.cartelera_boton = true;
+            }
         }else{
-            test.forEach(function (value, key) {
-                state.test[0].resultado.push(value);
+            cartelera.forEach(function (value, key) {
+                state.cartelera[0].resultado.push(value);
             });
-            // Inicio y Fin iguales se desabilita boton
- 
+            // la suma del inicio y el tamaño, supera al total desabilita boton
+            if(state.cartelera_inicio + state.cartelera_tamaño >= state.cartelera[0].total){
+                state.cartelera_inicio = state.cartelera[0].total;
+                state.cartelera_boton = false;
+            }else{
+                state.cartelera_inicio = state.cartelera_inicio + state.cartelera_tamaño;
+                state.cartelera_boton = true;
+            }
         }
     },
-    updateProximasActividades(state, proximasActividades) {
-        state.proximasActividades = proximasActividades;
+
+    updatePorCategoria(state, por_categoria) {
+        state.estado = true;
+        //state.por_categoria_area = por_categoria[0].area;
+        if(state.por_categoria_inicio === 0){
+            state.por_categoria = por_categoria;
+            // la suma del inicio y el tamaño, supera al total desabilita boton
+            if(state.por_categoria_tamaño >= state.por_categoria[0].total){
+                state.por_categoria_inicio = state.por_categoria[0].total;
+                state.por_categoria_boton = false;
+            }else{
+                state.por_categoria_inicio = state.por_categoria_inicio + state.por_categoria_tamaño;
+                state.por_categoria_boton = true;
+            }
+        }else{
+            por_categoria.forEach(function (value, key) {
+                state.por_categoria[0].resultado.push(value);
+            });
+            // la suma del inicio y el tamaño, supera al total desabilita boton
+            if(state.por_categoria_inicio + state.por_categoria_tamaño >= state.por_categoria[0].total){
+                state.por_categoria_inicio = state.por_categoria[0].total;
+                state.por_categoria_boton = false;
+            }else{
+                state.por_categoria_inicio = state.por_categoria_inicio + state.por_categoria_tamaño;
+                state.por_categoria_boton = true;
+            }
+        }
     },
+
+    updateResetPorCategoria(state) {
+        state.por_categoria = []
+        state.por_categoria_inicio = 0
+        state.por_categoria_boton = false
+    },
+
+/*
     updateActividades(state, actividades) {
         state.totalActividades = actividades.total;
         if(state.contadorActividades === 0){
@@ -236,7 +318,7 @@ const mutations = {
     /*updateCategorias(state, categorias) {
         state.categorias = categorias;
     },*/
-    updateBusquedaCategoria(state, busquedaCategoria) {
+    /*updateBusquedaCategoria(state, busquedaCategoria) {
         state.totalBusquedaCategoria = busquedaCategoria.total;
         state.busquedaCategoria = busquedaCategoria.resultados;
         state.contadorBusquedaCategoria = 10;
@@ -253,130 +335,7 @@ const mutations = {
         state.limiteBusquedaCategoria = 10
         state.totalBusquedaCategoria = 0
     },
-
-
-
-    //mutations correspondiente a la vista de Inicio
-    updateCarousel(state, carousel) {
-        state.carousel = carousel;
-    },
-    //mutations correspondiente a la vista de la Cartelera
-    updateCategorias(state, categorias) {
-        state.categorias = categorias;
-    },
-    updateTotal(state, carteleraTotal) {
-        state.carteleraTotal = carteleraTotal;
-    },
-    updateCartelera(state, cartelera) {
-        state.estado = false;
-        if(state.carteleraInicio === 0){
-            state.cartelera = cartelera;
-            // Inicio y Fin iguales se desabilita boton
-            if(state.carteleraFin === state.carteleraTotal){
-                state.carteleraInicio = state.carteleraFin;
-                state.carteleraBoton = false;
-            }else{
-                // Fin igual al total de elementos
-                if(state.carteleraFin + state.carteleraLimite > state.carteleraTotal){
-                    state.carteleraFin = state.carteleraTotal;
-                    state.carteleraInicio = state.carteleraInicio + state.carteleraLimite;
-                    state.carteleraBoton = true;
-                }else{
-                    // Inicio y Fin diferentes
-                    state.carteleraFin = state.carteleraFin + state.carteleraLimite;
-                    state.carteleraInicio = state.carteleraInicio + state.carteleraLimite;
-                    state.carteleraBoton = true;
-                }
-            }
-        }else{
-            cartelera.forEach(function (value, key) {
-                state.cartelera.push(value);
-            });
-            // Inicio y Fin iguales se desabilita boton
-            if(state.carteleraFin === state.carteleraTotal){
-                state.carteleraInicio = state.carteleraFin;
-                state.carteleraBoton = false;
-            }else{
-                // Fin igual al total de elementos
-                if(state.carteleraFin + state.carteleraLimite > state.carteleraTotal){
-                    state.carteleraFin = state.carteleraTotal;
-                    state.carteleraInicio = state.carteleraInicio + state.carteleraLimite;
-                    state.carteleraBoton = true;
-                }else{
-                    // Inicio y Fin diferentes
-                    state.carteleraFin = state.carteleraFin + state.carteleraLimite;
-                    state.carteleraInicio = state.carteleraInicio + state.carteleraLimite;
-                    state.carteleraBoton = true;
-                }
-            }
-        }
-    },
-    updateCarteleraReset(state) {
-        state.carteleraTotal = 0
-        state.cartelera = []
-        state.carteleraInicio = 0
-        state.carteleraFin = 0
-        //state.carteleraLimite = 10
-        state.carteleraBoton = false
-    },
-    updatexCategoriaArea(state, xcategoriaArea) {
-        state.xcategoriaArea = xcategoriaArea;
-    },
-    updatexCategoriaTotal(state, xcategoriaTotal) {
-        state.xcategoriaTotal = xcategoriaTotal;
-    },
-    updatexCategoria(state, xcategoria) {
-        state.estado = true;
-        if(state.xcategoriaInicio === 0){
-            state.xcategoria = xcategoria;
-            // Inicio y Fin iguales se desabilita boton
-            if(state.xcategoriaFin === state.xcategoriaTotal){
-                state.xcategoriaInicio = state.xcategoriaFin;
-                state.xcategoriaBoton = false;
-            }else{
-                // Fin igual al total de elementos
-                if(state.xcategoriaFin + state.xcategoriaLimite > state.xcategoriaTotal){
-                    state.xcategoriaFin = state.xcategoriaTotal;
-                    state.xcategoriaInicio = state.xcategoriaInicio + state.xcategoriaLimite;
-                    state.xcategoriaBoton = true;
-                }else{
-                    // Inicio y Fin diferentes
-                    state.xcategoriaFin = state.xcategoriaFin + state.xcategoriaLimite;
-                    state.xcategoriaInicio = state.xcategoriaInicio + state.xcategoriaLimite;
-                    state.xcategoriaBoton = true;
-                }
-            }
-        }else{
-            xcategoria.forEach(function (value, key) {
-                state.xcategoria.push(value);
-            });
-            // Inicio y Fin iguales se desabilita boton
-            if(state.xcategoriaFin === state.xcategoriaTotal){
-                state.xcategoriaInicio = state.xcategoriaFin;
-                state.xcategoriaBoton = false;
-            }else{
-                // Fin igual al total de elementos
-                if(state.xcategoriaFin + state.xcategoriaLimite > state.xcategoriaTotal){
-                    state.xcategoriaFin = state.xcategoriaTotal;
-                    state.xcategoriaInicio = state.xcategoriaInicio + state.xcategoriaLimite;
-                    state.xcategoriaBoton = true;
-                }else{
-                    // Inicio y Fin diferentes
-                    state.xcategoriaFin = state.xcategoriaFin + state.xcategoriaLimite;
-                    state.xcategoriaInicio = state.xcategoriaInicio + state.xcategoriaLimite;
-                    state.xcategoriaBoton = true;
-                }
-            }
-        }
-    },
-    updatexCategoriaReset(state) {
-        state.xcategoriaTotal = 0
-        state.xcategoria = []
-        state.xcategoriaInicio = 0
-        state.xcategoriaFin = 0
-        //xcategoriaLimite: 2,
-        state.xcategoriaBoton = false
-    },
+*/
 }
 
 const store = new Vuex.Store({
