@@ -3,8 +3,15 @@
     <div class="uk-section uk-section-muted">
       <div class="uk-container uk-container-center uk-text-center">
         <form class="uk-form-stacked">
-          <!-- falta el spinner -->
-          <div class="uk-margin">
+
+          <div v-if="loading_categoria">
+            <div class="pad-bottom-categoria uk-section-muted">
+              <div uk-spinner="ratio: 4" class="uk-position-center uk-overlay" />
+            </div>
+          </div>
+
+          <!-- categorias -->
+          <div v-else class="uk-margin">
             <div class="uk-text-center">
               <ul class="grid">
                 <li>
@@ -21,78 +28,88 @@
               </ul>
             </div>
           </div>
-          <!-- falta el implementar -->
-          <div class="uk-margin">
-            <label class="uk-form-label uk-text-large" for="form-stacked-text">Encuentra tu actividad preferida:</label>
-            <div class="uk-form-controls">
-              <input class="uk-input" 
-                id="form-stacked-text" 
-                type="text" 
-                v-model="filter"
-                placeholder="Introduce el nombre de tu actividad"
-                v-on:keydown.enter.prevent='prevenirEnter'>
-            </div>
-          </div>
         </form>
 
-        <!-- listo, falta redireccionar a la actividad -->
-        <div v-if="estado === false">
+        <div v-if="loading_cartelera">
+          <div class="pad-bottom-cartelera uk-section-muted">
+            <div uk-spinner="ratio: 4"/>
+          </div>
+        </div>
 
-          <div v-if="filter === ''">
-            <p class="uk-text-small uk-text-muted uk-text-left">{{cartelera[0].total}} actividades encontradas.</p>
-            <div class="pad-top">
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1-2@m"
-                v-for="(item, index) in cartelera[0].resultado"
-                :key="index"
-                >
-                  <router-link :to="{name: 'Evento', params: { id: item.slug, evento: item } }">ejem</router-link>
-
-    
-                  <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
-                  <card-left v-else :actividad="item" class="cursor"></card-left>
-                </div>
+        <div v-else>
+          <form class="uk-form-stacked">
+                      <!-- falta el implementar -->
+            <div class="uk-margin">
+              <label class="uk-form-label uk-text-large" for="form-stacked-text">Encuentra tu actividad preferida:</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" 
+                  id="form-stacked-text" 
+                  type="text" 
+                  v-model="filter"
+                  placeholder="Introduce el nombre de tu actividad"
+                  v-on:keydown.enter.prevent='prevenirEnter'>
               </div>
+            </div>
+          </form>
 
+            <!-- listo, falta redireccionar a la actividad -->
+          <div v-if="estado === false">
+
+            <div v-if="filter === ''">
+              <p class="uk-text-small uk-text-muted uk-text-left">{{cartelera[0].total}} actividades encontradas.</p>
               <div class="pad-top">
-                <div v-if="cartelera_boton">
-                  <button class="uk-button uk-button-secondary" @click.prevent="cargarCartelera">Cargar más actividades</button>
+                <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                  <div class="uk-width-1-2@m"
+                  v-for="(item, index) in cartelera[0].resultado"
+                  :key="index"
+                  >
+                    <router-link :to="{name: 'Evento', params: { id: item.slug, evento: item } }">ejem</router-link>
+
+      
+                    <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
+                    <card-left v-else :actividad="item" class="cursor"></card-left>
+                  </div>
+                </div>
+
+                <div class="pad-top">
+                  <div v-if="cartelera_boton">
+                    <button class="uk-button uk-button-secondary" @click.prevent="cargarCartelera">Cargar más actividades</button>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div v-else>
+
+            </div>
+
           </div>
 
-          <div v-else>
+          <div v-else-if="estado === true">
 
-          </div>
-
-        </div>
-
-        <div v-else-if="estado === true">
-
-          <div v-if="filter === ''">
-            <p class="uk-text-small uk-text-muted uk-text-left">{{por_categoria[0].total}} actividades encontradas.</p>
-            <div class="pad-top">
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1-2@m"
-                v-for="(item, index) in por_categoria[0].resultado"
-                :key="index"
-                @click.prevent="goToActividad(item)">
-                  <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
-                  <card-left v-else :actividad="item" class="cursor"></card-left>
-                </div>
-              </div>
-
+            <div v-if="filter === ''">
+              <p class="uk-text-small uk-text-muted uk-text-left">{{por_categoria[0].total}} actividades encontradas.</p>
               <div class="pad-top">
-                <div v-if="por_categoria_boton">
-                  <button class="uk-button uk-button-secondary" @click.prevent="cargarPorCategoria(por_categoria[0].area)">Cargar más actividades</button>
+                <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                  <div class="uk-width-1-2@m"
+                  v-for="(item, index) in por_categoria[0].resultado"
+                  :key="index"
+                  @click.prevent="goToActividad(item)">
+                    <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
+                    <card-left v-else :actividad="item" class="cursor"></card-left>
+                  </div>
+                </div>
+
+                <div class="pad-top">
+                  <div v-if="por_categoria_boton">
+                    <button class="uk-button uk-button-secondary" @click.prevent="cargarPorCategoria(por_categoria[0].area)">Cargar más actividades</button>
+                  </div>
                 </div>
               </div>
             </div>
+
           </div>
-
         </div>
-
 
       </div>
     </div>
@@ -112,13 +129,31 @@ export default {
   },
   data() {
     return {
+      loading_categoria: false,
+      loading_cartelera: false,
       filter: ''
     }
   },
   created () {
-    this.$store.dispatch('loadCategorias')
+    if(this.categorias.length === 0){
+      this.loading_categoria = true
+      this.$store.dispatch('loadCategorias')
+            .then(response => {
+            this.loading_categoria = false
+        })
+        .catch(error => {
+            this.loading_categoria = true
+        })
+    }
     if(this.cartelera_inicio === 0){
+      this.loading_cartelera = true
       this.$store.dispatch('loadCartelera')
+            .then(response => {
+            this.loading_cartelera = false
+        })
+        .catch(error => {
+            this.loading_cartelera = true
+        })
     }
   },
   watch: {
@@ -243,5 +278,11 @@ export default {
 }
 .all-button {
   background: black !important;
+}
+.pad-bottom-categoria {
+  padding-bottom: 10px;
+}
+.pad-bottom-cartelera {
+  padding-bottom: 500px;
 }
 </style>
