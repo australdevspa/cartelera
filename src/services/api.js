@@ -213,25 +213,27 @@ function getPorCategoria(inicio, tamaño, area){
 
 //metodo correspondiente a la vista de Evento
 
-/*function getEvento(id){
+function getEvento(id){
     return axios.get(`${API_URL}/cartelera-ccpm`)
     .then(function (response) {
         var evento = []
         for (var i = 0; i < response.data.length ; i++) {
-            if (response.data[i].id === id) {
+            if (response.data[i].slug === id) {
+                setParametros(response.data[i])
                 evento.push(response.data[i]);
+                return evento;
             }
         }
     })
     .catch(function (error) {
         return 'An error occured..' + error;
     })
-}*/
+}
 
 export {
     getCarousel,
     getCategorias,
     getCartelera,
-    getPorCategoria
-    //getEvento
+    getPorCategoria,
+    getEvento
 }

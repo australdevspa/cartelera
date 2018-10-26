@@ -4,8 +4,8 @@ import {
     getCarousel,
     getCategorias,
     getCartelera,
-    getPorCategoria
-    //getEvento
+    getPorCategoria,
+    getEvento
 } from '@/services/api'
 
 Vue.use(Vuex);
@@ -29,7 +29,7 @@ const state = {
     por_categoria_boton: false,
 
     //state correspondiente a la vista Evento
-    //evento: []
+    evento: []
 };
 
 const getters = {
@@ -71,10 +71,10 @@ const actions = {
     },
 
     //actions correspondiente a la vista Evento
-    /*loadEvento(context, slug) {
+    loadEvento(context, slug) {
         return getEvento(slug)
             .then(evento => context.commit('updateEvento', evento));
-    },*/
+    },
 
 };
 
@@ -158,9 +158,9 @@ const mutations = {
     },
     
     //mutations correspondiente a la vista Evento
-    /*updateEvento(state, evento) {
+    updateEvento(state, evento) {
         state.evento = evento;
-    },*/
+    },
 
 }
 

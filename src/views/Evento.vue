@@ -31,17 +31,17 @@ export default {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
   created () {
-    //this.$store.dispatch('loadEvento', this.$route.params.id);
+    this.$store.dispatch('loadEvento', this.$route.params.id);
     //this.evento = this.$route.params.id
   },
   computed:
   {
-    /*actividad() {
-      return this.$store.state.evento;
-    },*/
     evento() {
+      return this.$store.state.evento[0];
+    },
+    /*evento() {
         return this.$route.params.evento
-    }
+    }*/
   }
 }
 </script>
