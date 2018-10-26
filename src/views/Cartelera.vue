@@ -45,7 +45,11 @@
                 <div class="uk-width-1-2@m"
                 v-for="(item, index) in cartelera[0].resultado"
                 :key="index"
-                @click.prevent="goToActividad(item)">
+                >
+                <router-link :to="{name: 'Evento', params: { id: item.id, evento: item } }">ejem</router-link>
+
+
+    
                   <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
                   <card-left v-else :actividad="item" class="cursor"></card-left>
                 </div>

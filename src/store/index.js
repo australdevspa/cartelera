@@ -5,6 +5,7 @@ import {
     getCategorias,
     getCartelera,
     getPorCategoria
+    //getEvento
 } from '@/services/api'
 
 Vue.use(Vuex);
@@ -27,16 +28,8 @@ const state = {
     por_categoria_tamaño: 10,
     por_categoria_boton: false,
 
-    /*
-    busqueda: [],
-    contadorBusqueda: 0,
-    limiteBusqueda: 10,
-    totalBusqueda: 0,
-    //categorias: [],
-    busquedaCategoria: [],
-    contadorBusquedaCategoria: 0,
-    limiteBusquedaCategoria: 10,
-    totalBusquedaCategoria: 0,*/
+    //state correspondiente a la vista Evento
+    //evento: []
 };
 
 const getters = {
@@ -77,133 +70,12 @@ const actions = {
         context.commit('updateResetPorCategoria')
     },
 
-/*
-    loadBusquedaActividades(context, filter) {
-        return getBusquedaActividades(filter, state.limiteBusqueda, 0)
-            .then(busqueda => context.commit('updateBusquedaActividades', busqueda))
-            .then(function() {
-                document.getElementById("moreBusqueda").disabled = false;
-            });
-    },
-    loadMasBusquedaActividades(context, filter) {
-        return getBusquedaActividades(filter, state.limiteBusqueda, state.contadorBusqueda)
-            .then(busqueda => context.commit('updateMasBusqueda', busqueda))
-            .then(function() {
-                document.getElementById("moreBusqueda").disabled = false;
-            });
-    },
-    loadBusquedaReset(context) {
-        context.commit('updateBusquedaReset')
-    },
-    /*loadCategorias(context) {
-        return getCategorias()
-            .then(categorias => context.commit('updateCategorias', categorias));
-    },*/
-    /*loadBusquedaCategoria(context, select) {
-        return getBusquedaCategoria(select, state.limiteBusquedaCategoria, 0)
-            .then(busquedaCategoria => context.commit('updateBusquedaCategoria', busquedaCategoria))
-    },
-    loadMasBusquedaCategoria(context, select) {
-        return getBusquedaCategoria(select, state.limiteBusquedaCategoria, state.contadorBusquedaCategoria)
-            .then(busquedaCategoria => context.commit('updateMasBusquedaCategoria', busquedaCategoria))
-            .then(function() {
-                document.getElementById("moreCategoria").disabled = false;
-            });
-    },
-    loadBusquedaCategoriaReset(context) {
-        context.commit('updateBusquedaCategoriaReset')
+    //actions correspondiente a la vista Evento
+    /*loadEvento(context, slug) {
+        return getEvento(slug)
+            .then(evento => context.commit('updateEvento', evento));
     },*/
 
-
-
-
-
-   /* loadCartelera(context) {
-        if(state.cartelera_inicio == 0){
-            if(state.cartelera_limite > state.cartelera_total){
-                state.cartelera_fin = state.cartelera_total;
-            }else{
-                state.cartelera_fin = state.cartelera_limite;
-            }
-        }
-        return getCartelera(0, 7)
-            .then(cartelera => context.commit('updatenomas', cartelera));
-    },
-
-
-    load(context) {
-        return getCartelera(0, 5)
-            .then(hola => context.commit('updateTest', hola))
-    },
-
-
-
-
-
-
-
-    loadCartelerax ({ dispatch, commit }) {
-        //await dispatch('loadTotal') // wait for `loadTotal` to finish
-        if(state.acartelera_inicio == 0){
-            if(state.acartelera_limite > state.acartelera_total){
-                state.acartelera_fin = state.acartelera_total;
-            }else{
-                state.acartelera_fin = state.acartelera_limite;
-            }
-        }
-        commit('updateCartelerax', getCartelera(state.acartelera_inicio, state.acartelera_fin))
-    },
-    loadTest(context) {
-        return getCartelera(0, 5)
-            .then(test => context.commit('updateTest', test))
-    },
-    loadTest1(context) {
-        return getCartelera(5, 10)
-            .then(test => context.commit('updateTest', test))
-    },
-
-    loadhola(context) {
-        return getCartelera(0, 5)
-            .then(hola => context.commit('updateTesthola', hola))
-    },
-
-    async loadTotal ({ commit }) {
-        commit('updateTotal', await getTotal())
-    },
-    async loadCartelera ({ dispatch, commit }) {
-        await dispatch('loadTotal') // wait for `loadTotal` to finish
-        if(state.carteleraInicio == 0){
-            if(state.carteleraLimite > state.carteleraTotal){
-                state.carteleraFin = state.carteleraTotal;
-            }else{
-                state.carteleraFin = state.carteleraLimite;
-            }
-        }
-        commit('updateCarteleravieja', await getCarteleravieja(state.carteleraInicio, state.carteleraFin))
-    },
-    loadCarteleraReset(context) {
-        context.commit('updateCarteleraReset')
-    },
-    loadxCategoriaArea(context, x) {
-        context.commit('updatexCategoriaArea', x)
-    },
-    async loadxCategoriaTotal ({ commit }) {
-        commit('updatexCategoriaTotal', await getxcategoriaTotal(state.xcategoriaArea))
-    },
-    async loadxCategoria ({ dispatch, commit }, x) {
-        await dispatch('loadxCategoriaTotal') // wait for `loadTotal` to finish
-        if(state.xcategoriaInicio == 0){
-            if(state.xcategoriaLimite > state.xcategoriaTotal){
-                state.xcategoriaFin = state.xcategoriaTotal;
-            }else{
-                state.xcategoriaFin = state.xcategoriaLimite;
-            }
-        }
-        commit('updatexCategoria', await getxcategoria(state.xcategoriaInicio, state.xcategoriaFin, x))
-    },
-    loadxCategoriaReset(context) {
-        context.commit('updatexCategoriaReset')
-    },*/
 };
 
 const mutations = {
@@ -284,58 +156,12 @@ const mutations = {
         state.por_categoria_inicio = 0
         state.por_categoria_boton = false
     },
-
-/*
-    updateActividades(state, actividades) {
-        state.totalActividades = actividades.total;
-        if(state.contadorActividades === 0){
-            state.actividades = actividades.resultados;
-            state.contadorActividades = state.contadorActividades + 10;
-        }else{
-            actividades.resultados.forEach(function (value, key) {
-                state.actividades.push(value);
-            });
-            state.contadorActividades = state.contadorActividades + 10;
-        }
-    },
-    updateBusquedaActividades(state, busqueda) {
-        state.totalBusqueda = busqueda.total;
-        state.busqueda = busqueda.resultados;
-        state.contadorBusqueda = 10;
-    },
-    updateMasBusqueda(state, busqueda) {
-        busqueda.resultados.forEach(function (value, key) {
-            state.busqueda.push(value);
-        });
-        state.contadorBusqueda = state.contadorBusqueda + 10;
-    },
-    updateBusquedaReset(state) {
-        state.busqueda = []
-        state.contadorBusqueda = 0
-        state.limiteBusqueda = 10
-        state.totalBusqueda = 0
-    },
-    /*updateCategorias(state, categorias) {
-        state.categorias = categorias;
+    
+    //mutations correspondiente a la vista Evento
+    /*updateEvento(state, evento) {
+        state.evento = evento;
     },*/
-    /*updateBusquedaCategoria(state, busquedaCategoria) {
-        state.totalBusquedaCategoria = busquedaCategoria.total;
-        state.busquedaCategoria = busquedaCategoria.resultados;
-        state.contadorBusquedaCategoria = 10;
-    },
-    updateMasBusquedaCategoria(state, busquedaCategoria) {
-        busquedaCategoria.resultados.forEach(function (value, key) {
-            state.busquedaCategoria.push(value);
-        });
-        state.contadorBusquedaCategoria = state.contadorBusquedaCategoria + 10;
-    },
-    updateBusquedaCategoriaReset(state) {
-        state.busquedaCategoria = []
-        state.contadorBusquedaCategoria = 0
-        state.limiteBusquedaCategoria = 10
-        state.totalBusquedaCategoria = 0
-    },
-*/
+
 }
 
 const store = new Vuex.Store({
