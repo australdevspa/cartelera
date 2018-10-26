@@ -46,9 +46,8 @@
                 v-for="(item, index) in cartelera[0].resultado"
                 :key="index"
                 >
-                <router-link :to="{name: 'Evento', params: { id: item.slug, evento: item } }">ejem</router-link>
+                  <router-link :to="{name: 'Evento', params: { id: item.slug, evento: item } }">ejem</router-link>
 
-<router-link v-bind:to="'/cartelera/' + item.slug"><h2>{{ item.id }} hola</h2></router-link>
     
                   <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
                   <card-left v-else :actividad="item" class="cursor"></card-left>
@@ -161,7 +160,6 @@ export default {
     por_categoria_boton() {
       return this.$store.state.por_categoria_boton;
     },
-
 
   /* 
     busqueda() {
