@@ -5,6 +5,7 @@ import {
     getCategorias,
     getCartelera,
     getPorCategoria,
+    getBusqueda,
     getEvento
 } from '@/services/api'
 
@@ -27,6 +28,8 @@ const state = {
     por_categoria_inicio: 0,
     por_categoria_tamaño: 10,
     por_categoria_boton: false,
+
+    busqueda: [],
 
     //state correspondiente a la vista Evento
     evento: []
@@ -68,6 +71,15 @@ const actions = {
 
     loadResetPorCategoria(context) {
         context.commit('updateResetPorCategoria')
+    },
+
+    loadBusqueda(context, texto) {
+        return getBusqueda(texto)
+            .then(busqueda => context.commit('updateBusqueda', busqueda));
+    },
+
+    loadResetBusqueda(context) {
+        context.commit('updateResetBusqueda')
     },
 
     //actions correspondiente a la vista Evento
@@ -157,6 +169,14 @@ const mutations = {
         state.por_categoria_boton = false
     },
     
+    updateBusqueda(state, busqueda) {
+        state.busqueda = busqueda;
+    },
+
+    updateResetBusqueda(state) {
+        state.busqueda = [];
+    },
+
     //mutations correspondiente a la vista Evento
     updateEvento(state, evento) {
         state.evento = evento;

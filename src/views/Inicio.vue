@@ -7,7 +7,14 @@
       <ul class="uk-slideshow-items">
         <li v-for="(item, index) in actividades"
           :key="index">
-          <img :src="item.attachments[0].guid" alt="" uk-cover>
+          <img :src="item.attachments[0].guid" alt="" uk-cover
+          style="
+              max-width: none;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              -webkit-transform: translate(-50%,-50%);
+              transform: translate(-50%,-50%);">
           <div class="uk-overlay uk-overlay-primary uk-position-right uk-text-center uk-transition-slide-right uk-width-medium">
             <h1 >{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</h1>
             <h3 class="uk-margin-remove">{{item.nombre}}</h3>

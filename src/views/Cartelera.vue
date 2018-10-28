@@ -30,6 +30,7 @@
           </div>
         </form>
 
+        <!-- cartelera -->
         <div v-if="loading_cartelera">
           <div class="pad-bottom-cartelera uk-section-muted">
             <div uk-spinner="ratio: 4"/>
@@ -38,7 +39,6 @@
 
         <div v-else>
           <form class="uk-form-stacked">
-                      <!-- falta el implementar -->
             <div class="uk-margin">
               <label class="uk-form-label uk-text-large" for="form-stacked-text">Encuentra tu actividad preferida:</label>
               <div class="uk-form-controls">
@@ -52,7 +52,6 @@
             </div>
           </form>
 
-            <!-- listo, falta redireccionar a la actividad -->
           <div v-if="estado === false">
 
             <div v-if="filter === ''">
@@ -77,7 +76,25 @@
             </div>
 
             <div v-else>
-
+              <p class="uk-text-small uk-text-muted uk-text-left">{{busqueda[0].total}} actividades encontradas.</p>
+              <div class="pad-top">
+                <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                  <div class="uk-width-1-2@m"
+                  v-for="(item, index) in busqueda[0].resultado"
+                  :key="index"
+                  @click.prevent="goToActividad(item)">
+                    <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
+                    <card-left v-else :actividad="item" class="cursor"></card-left>
+                  </div>
+                </div>
+                <!-- 
+                <div class="pad-top">
+                  <div v-if="cartelera_boton">
+                    <button class="uk-button uk-button-secondary" @click.prevent="cargarCartelera">Cargar más actividades</button>
+                  </div>
+                </div>
+                -->
+              </div>
             </div>
 
           </div>
@@ -193,16 +210,9 @@ export default {
       return this.$store.state.por_categoria_boton;
     },
 
-  /* 
     busqueda() {
       return this.$store.state.busqueda;
-    },
-    totalBusqueda() {
-      return this.$store.state.totalBusqueda;
-    },
-    contadorBusqueda() {
-      return this.$store.state.contadorBusqueda;
-    }*/
+    }
   },
   methods: {
     prevenirEnter: function(e){ },
@@ -213,6 +223,7 @@ export default {
       this.$store.dispatch('loadCartelera')
     },
     showPorCategoria (x) {
+      this.filter = ''
       if(Object.keys(this.por_categoria).length === 0){
         this.$store.dispatch('loadPorCategoria', x)
       }else if(this.por_categoria[0].area === x){
@@ -225,16 +236,16 @@ export default {
     cargarPorCategoria (x) {
       this.$store.dispatch('loadPorCategoria', x)
     },
-
     getBusqueda: _.debounce(
       function () {
         if (this.filter !== '') {
-          this.$store.dispatch('loadBusquedaActividades', this.filter);
+          this.$store.dispatch('loadBusqueda', this.filter)
         }else{
-          this.$store.dispatch('loadBusquedaReset');
+          this.$store.dispatch('loadResetBusqueda');
         }
       },
     ),
+
     mostrarMasActividadesBusqueda () {
       document.getElementById("moreBusqueda").disabled = true;
       this.$store.dispatch('loadMasBusquedaActividades', this.filter);

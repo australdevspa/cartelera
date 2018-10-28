@@ -211,6 +211,33 @@ function getPorCategoria(inicio, tamaño, area){
     })
 }
 
+function getBusqueda(texto){
+    return axios.get(`${API_URL}/cartelera-ccpm`)
+    .then(function (response) {
+        var resultado = []
+        var final = []
+        
+        if(texto.length > 3){
+            for (var i = 0; i < response.data.length ; i++) {
+                if (response.data[i].nombre.toLowerCase().search(texto) !== -1) {
+                    setParametros(response.data[i])
+                    resultado.push(response.data[i]);
+                }
+            }
+        }
+        final.push(
+            {
+                resultado: resultado,
+                total: Object.keys(resultado).length
+            }
+        )
+        return final;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
 //metodo correspondiente a la vista de Evento
 
 function getEvento(id){
@@ -235,5 +262,6 @@ export {
     getCategorias,
     getCartelera,
     getPorCategoria,
+    getBusqueda,
     getEvento
 }
