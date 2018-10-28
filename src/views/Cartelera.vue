@@ -6,7 +6,7 @@
 
           <div v-if="loading_categoria">
             <div class="pad-bottom-categoria uk-section-muted">
-              <div uk-spinner="ratio: 4" class="uk-position-center uk-overlay" />
+              <div uk-spinner="ratio: 4"/>
             </div>
           </div>
 
@@ -62,10 +62,7 @@
                   <div class="uk-width-1-2@m"
                   v-for="(item, index) in cartelera[0].resultado"
                   :key="index"
-                  >
-                    <router-link :to="{name: 'Evento', params: { id: item.slug, evento: item } }">ejem</router-link>
-
-      
+                  @click.prevent="goToActividad(item)">
                     <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
                     <card-left v-else :actividad="item" class="cursor"></card-left>
                   </div>
@@ -215,7 +212,6 @@ export default {
     cargarCartelera () {
       this.$store.dispatch('loadCartelera')
     },
-
     showPorCategoria (x) {
       if(Object.keys(this.por_categoria).length === 0){
         this.$store.dispatch('loadPorCategoria', x)
@@ -229,6 +225,7 @@ export default {
     cargarPorCategoria (x) {
       this.$store.dispatch('loadPorCategoria', x)
     },
+
     getBusqueda: _.debounce(
       function () {
         if (this.filter !== '') {
@@ -242,13 +239,14 @@ export default {
       document.getElementById("moreBusqueda").disabled = true;
       this.$store.dispatch('loadMasBusquedaActividades', this.filter);
     },
+
     goToActividad (actividad) {
       this.$router.push({
         params: {
-          id: actividad.id,
-          actividad: actividad
+          id: actividad.slug,
+          evento: actividad
         },
-        name: 'Actividad'
+        name: 'Evento'
       })
     }
   }
