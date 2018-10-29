@@ -40,7 +40,8 @@
             </div>  
           
             <p class="uk-text-small uk-text-muted">
-              Publicado: {{actividad.creado_el}}.
+              {{actividad.cuanto_falta}} <br>
+              Publicado el: {{actividad.fecha_publicacion}}.
             </p>
           </div>
       </div>

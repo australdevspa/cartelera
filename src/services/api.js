@@ -18,6 +18,10 @@ function setParametros(x){
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
+
+        x.cuanto_falta = cuantoFalta(x.fecha_ini)
+        x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
+
     }else{
         var attachments = x.attachments
         var json_attachments = JSON.parse(attachments);
@@ -27,6 +31,9 @@ function setParametros(x){
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
+
+        x.cuanto_falta = cuantoFalta(x.fecha_ini)
+        x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
     }
 }
 
@@ -255,6 +262,22 @@ function getEvento(id){
     .catch(function (error) {
         return 'An error occured..' + error;
     })
+}
+
+// funciones momentjs
+
+function cuantoFalta(fecha_evento) {
+    var fecha_actual = moment.utc();
+    var fecha_del_evento = moment.utc(fecha_evento);
+    var diferencia = fecha_del_evento.diff(fecha_actual, 'days');
+
+    if(diferencia == 0){
+        return 'El evento se realiza hoy.'
+    }else if(diferencia == 1){
+        return 'Falta '+ diferencia +' día para el evento.'
+    }else{
+        return 'Faltan '+ diferencia +' días para el evento.'
+    }
 }
 
 export {

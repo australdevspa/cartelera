@@ -16,9 +16,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="uk-card-body uk-text-center">
-                    <p>{{ evento.contenido }}</p>
-                </div>
+                <div class="uk-card-body uk-text-center" v-html= evento.contenido></div>
                 <div class="uk-card-body uk-text-center">
                     <img :src="evento.attachments[0].guid"/>
                 </div>
