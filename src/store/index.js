@@ -6,7 +6,9 @@ import {
     getCartelera,
     getPorCategoria,
     getBusqueda,
-    getEvento
+    getEvento,
+    existeSlug,
+    getExposicion
 } from '@/services/api'
 
 Vue.use(Vuex);
@@ -32,7 +34,11 @@ const state = {
     busqueda: [],
 
     //state correspondiente a la vista Evento
-    evento: []
+    evento: [],
+
+    //state correspondiente a la vista de la Visita Guiada
+    existe_slug: false,
+    expo: []
 };
 
 const getters = {
@@ -86,6 +92,21 @@ const actions = {
     loadEvento(context, slug) {
         return getEvento(slug)
             .then(evento => context.commit('updateEvento', evento));
+    },
+
+    //actions correspondiente a la vista de la Visita Guiada
+    loadExisteSlug(context, slug) {
+        return existeSlug(slug)
+            .then(existe_slug => context.commit('updateExisteSlug', existe_slug));
+    },
+
+    loadResetExisteSlug(context) {
+        context.commit('updateResetExisteSlug')
+    },
+
+    loadExpo(context, slug) {
+        return getExposicion(slug)
+            .then(expo => context.commit('updateExpo', expo));
     },
 
 };
@@ -180,6 +201,19 @@ const mutations = {
     //mutations correspondiente a la vista Evento
     updateEvento(state, evento) {
         state.evento = evento;
+    },
+
+    //mutations correspondiente a la vista de la Visita Guiada
+    updateExisteSlug(state, existe_slug) {
+        state.existe_slug = existe_slug;
+    },
+
+    updateResetExisteSlug(state) {
+        state.existe_slug = false;
+    },
+
+    updateExpo(state, expo) {
+        state.expo = expo;
     },
 
 }

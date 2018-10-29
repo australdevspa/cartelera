@@ -17,17 +17,19 @@
             @init="onInit">
             <div v-show="paused" class="validation-layer">
 
+              <!-- <div class="decoded-content">{{ content }}</div> --> 
+
               <div class="validation-notice">
                 <div v-if="validating">
-                  Verificando el Código QR...
+                  Buscando actividad ...
                 </div>
 
                 <div v-else-if="isValid" class="text-success">
-                  Código QR válido.
-                </div>
+                  <!-- Código QR válido. -->
+                </div> 
 
                 <div v-else class="text-danger">
-                  Código QR inválido.
+                  No existe una actividad asosciada a este código QR en la aplicación.
                 </div>
               </div>
 
@@ -59,6 +61,12 @@ export default {
       content: null
     }
   },
+  computed:
+  {
+    existe_el_slug() {
+      return this.$store.state.existe_slug;
+    },
+  },
   methods: {
     async onDecode (content) {
       this.content = content
@@ -76,7 +84,7 @@ export default {
         </div>
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-            <a class="uk-button uk-button-primary" href="`+this.content+`">Acceder</a>
+            <a class="uk-button uk-button-primary" href="/exposicion/`+this.content+`">Acceder</a>
         </div>`)
       }
       this.validating = false
@@ -91,9 +99,12 @@ export default {
       this.paused = false
     },
     validate (content) {
+       this.$store.dispatch('loadExisteSlug', content)
       return new Promise(resolve => {
         window.setTimeout(() => { // pretend it's taking really long
-          if (content.startsWith('https://')) {
+          if (this.existe_el_slug === true){
+          //if (content.startsWith('https')) {
+            this.$store.dispatch('loadResetExisteSlug')
             resolve(true)
           } else {
             resolve(false)
