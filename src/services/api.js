@@ -307,6 +307,8 @@ function getExposicion(slug){
         var expo = []
         for (var i = 0; i < response.data.length ; i++) {
             if (response.data[i].slug === slug) {
+                response.data[i].fecha_inicio_formato = moment(response.data[i].fecha_ini).format('DD/MM/YYYY')
+                response.data[i].fecha_publicacion = moment(response.data[i].creado_el).format('DD/MM/YYYY')
                 expo.push(response.data[i]);
             }
         }
