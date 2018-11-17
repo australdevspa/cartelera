@@ -1,13 +1,10 @@
 <template>
   <section class="principal uk-section-muted">
-    <div v-if="loading">
-      <div uk-spinner="ratio: 4" class="uk-position-center uk-overlay" />
-    </div>
     <div class="uk-position-relative uk-visible-toggle uk-light visible-note oculto-note" uk-slideshow="animation: fade; autoplay: true">
       <ul class="uk-slideshow-items">
         <li v-for="(item, index) in actividades"
           :key="index">
-          <img :src="item.attachments[0].guid" alt="" uk-cover
+          <img :src="item.thumbnail" alt="" uk-cover
           style="
               max-width: none;
               position: absolute;
@@ -30,7 +27,7 @@
       <ul class="uk-slideshow-items">
         <li v-for="(item, index) in actividades"
           :key="index">
-          <img :src="item.attachments[0].guid" alt="" uk-cover>
+          <img :src="item.thumbnail" alt="" uk-cover>
           <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
             <h1 >{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</h1>
             <h3 class="uk-margin-remove">{{item.nombre}}</h3>
@@ -47,21 +44,6 @@
 <script>
 export default {
   name: 'InicioView',
-  data() {
-    return {
-      loading: false
-    }
-  },
-  created () {
-    this.loading = true
-    this.$store.dispatch('loadCarousel')
-      .then(response => {
-        this.loading = false
-      })
-      .catch(error => {
-        this.loading = true
-      })
-  },
   computed:
   {
     actividades() {

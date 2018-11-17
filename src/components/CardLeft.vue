@@ -1,7 +1,7 @@
 <template>
   <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover" uk-grid>
       <div class="uk-card-media-left uk-cover-container">
-          <img :src="actividad.attachments[0].guid" alt="" class="img-tamaño-1"
+          <img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
             style="
               max-width: none;
               position: absolute;
