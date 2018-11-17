@@ -105,6 +105,26 @@ function cuantoFalta(fecha_evento) {
     }
 }
 
+//metodo correspondiente a la vista de Evento
+
+function getEvento(id){
+    return axios.get(`${API_URL}/actividades`)
+    .then(function (response) {
+        var evento = []
+        for (var i = 0; i < response.data.length ; i++) {
+            if (response.data[i].slug === id) {
+                setParametros(response.data[i])
+                evento.push(response.data[i]);
+                return evento;
+            }
+        }
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
 export {
-    getDataCartelera
+    getDataCartelera,
+    getEvento
 }

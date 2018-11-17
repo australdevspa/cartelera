@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {   
-    getDataCartelera
+    getDataCartelera,
+    getEvento
 } from '@/services/cartelera_api'
 import {
     existeSlug,

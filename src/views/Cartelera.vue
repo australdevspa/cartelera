@@ -103,6 +103,28 @@
               </div>
             </div>
           </div>
+
+          <div v-else>
+            <p class="uk-text-small uk-text-muted uk-text-left">{{filtered_porcategoria_total}} actividades encontradas.</p>
+            <div class="pad-top">
+              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                <div class="uk-width-1-2@m"
+                v-for="(item, index) in filtered_busqueda_porcategoria"
+                :key="index"
+                @click.prevent="goToActividad(item)">
+                  <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
+                  <card-left v-else :actividad="item" class="cursor"></card-left>
+                </div>
+              </div>
+              
+              <div class="pad-top">
+                <div v-if="porcategoria_boton_filtered">
+                  <button class="uk-button uk-button-secondary" @click.prevent="cargarPorCategoriaBusqueda">Cargar más actividades</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
         </div>
 
       </div>
@@ -126,7 +148,10 @@ export default {
       filter: '',
       limit: 10,
       filtered_total: 0,
-      cartelera_boton_filtered: false
+      cartelera_boton_filtered: false,
+      limit_porcategoria: 10,
+      filtered_porcategoria_total: 0,
+      porcategoria_boton_filtered: false
     }
   },
   computed:
@@ -182,20 +207,35 @@ export default {
         this.cartelera_boton_filtered = false
       }
       return filteredPokemon.slice(0, this.limit)
+    },
+    filtered_busqueda_porcategoria() {
+      if(this.filter === ''){
+        this.limit_porcategoria = 10
+      }
+      const filteredPokemon = (this.filter === '') ? this.$store.state.data_cartelera.categorias[this.por_categoria[0].area].eventos : this.$store.state.data_cartelera.categorias[this.por_categoria[0].area].eventos.filter(item => {
+        const itemName = item.nombre.toLowerCase()
+        return itemName.includes(this.filter.toLowerCase())
+      })
+      this.filtered_porcategoria_total =  Object.keys(filteredPokemon).length;
+      if(this.limit_porcategoria < this.filtered_porcategoria_total){
+        this.porcategoria_boton_filtered = true
+      }else{
+        this.porcategoria_boton_filtered = false
+      }
+      return filteredPokemon.slice(0, this.limit_porcategoria)
     }
   },
   methods: {
     prevenirEnter: function(e){ },
     showCartelera () {
+      this.filter = ''
       this.$store.dispatch('loadEstadoFalse')
-      this.limit = 10
     },
     cargarCartelera () {
       this.$store.dispatch('loadCartelera')
     },
     showPorCategoria (x) {
       this.filter = ''
-      this.limit = 10
       this.$store.dispatch('loadPorCategoria', x)
     },
     cargarPorCategoria (x) {
@@ -203,6 +243,9 @@ export default {
     },
     cargarCarteleraBusqueda () {
       this.limit += this.limit
+    },
+    cargarPorCategoriaBusqueda () {
+      this.limit_porcategoria += this.limit_porcategoria
     },
     goToActividad (actividad) {
       this.$router.push({
