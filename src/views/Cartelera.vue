@@ -9,7 +9,7 @@
               <ul class="grid">
                 <li>
                   <a href="" @click.prevent="showCartelera" class="uk-button uk-button-primary tm-button all-button">
-                    All
+                    Todas
                   </a>
                 </li>
                 <li v-for="(item, index) in categorias"

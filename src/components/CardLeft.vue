@@ -13,7 +13,7 @@
       </div>
       <div>
           <div class="uk-card-body uk-text-right">
-            <div class="uk-card-badge uk-label" :style="{ background: actividad.area_color + '!important' }">
+            <div class="uk-card-badge uk-label" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
               {{ actividad.area }}
             </div>
 
@@ -38,11 +38,13 @@
                 </div>
               </div>
             </div>  
-          
-            <p class="uk-text-small uk-text-muted">
-              {{actividad.cuanto_falta}} <br>
-              Publicado el: {{actividad.fecha_publicacion}}.
-            </p>
+
+            <div class="uk-label" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+               <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
+            </div>
+            <!--<p class="uk-text-small uk-text-muted">
+              Publicado el: {{actividad.fecha_publicacion}}
+            </p>-->
           </div>
       </div>
   </div>

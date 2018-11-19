@@ -97,11 +97,11 @@ function cuantoFalta(fecha_evento) {
     var diferencia = fecha_del_evento.diff(fecha_actual, 'days');
 
     if(diferencia == 0){
-        return 'El evento se realiza hoy.'
+        return 'Hoy'
     }else if(diferencia == 1){
-        return 'Falta '+ diferencia +' día para el evento.'
+        return 'Falta '+ diferencia +' día'
     }else{
-        return 'Faltan '+ diferencia +' días para el evento.'
+        return 'Faltan '+ diferencia +' días'
     }
 }
 
