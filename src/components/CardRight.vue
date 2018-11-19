@@ -34,7 +34,7 @@
                   </div>
                 </div>
                 <div class="uk-width-expand">
-                  <h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>
+                  <h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>
                 </div>
               </div>
             </div>  
@@ -168,5 +168,8 @@ export default {
   .img-tamaño-1 {
     height: 600px !important;
   }
+}
+.font-tamaño {
+  font-size: 1.25rem !important;
 }
 </style>

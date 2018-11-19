@@ -16,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="uk-card-body uk-text-center" v-html= evento.contenido></div>
+                <div class="uk-card-body uk-text-center video" v-html= evento.contenido></div>
                 <div class="uk-card-body uk-text-center">
                     <img :src="evento.attachments[0].guid"/>
                 </div>
@@ -81,5 +81,9 @@ export default {
 }
 .pad-bottom {
   padding-bottom: 500px;
+}
+.video >>> iframe {
+  max-width: 100% !important;
+  max-height: 100% !important;
 }
 </style>

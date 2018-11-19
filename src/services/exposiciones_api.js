@@ -40,7 +40,6 @@ function getExposicion(slug){
     })
 }
 
-
 export {
     existeSlug,
     getExposicion
