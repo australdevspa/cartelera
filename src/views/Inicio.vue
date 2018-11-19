@@ -4,14 +4,7 @@
       <ul class="uk-slideshow-items">
         <li v-for="(item, index) in actividades"
           :key="index">
-          <img :src="item.thumbnail" alt="" uk-cover
-          style="
-              max-width: none !important;
-              position: absolute !important;
-              left: 50% !important;
-              top: 50% !important;
-              -webkit-transform: translate(-50%,-50%) !important;
-              transform: translate(-50%,-50%) !important;">
+          <img :src="item.thumbnail" alt="" uk-cover>
           <div class="uk-overlay uk-overlay-primary uk-position-right uk-text-center uk-transition-slide-right uk-width-medium">
             <h1 >{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</h1>
             <h3 class="uk-margin-remove">{{item.nombre}}</h3>
@@ -27,14 +20,7 @@
       <ul class="uk-slideshow-items">
         <li v-for="(item, index) in actividades"
           :key="index">
-          <img :src="item.thumbnail" alt="" uk-cover
-          style="
-              max-width: none !important;
-              position: absolute !important;
-              left: 50% !important;
-              top: 50% !important;
-              -webkit-transform: translate(-50%,-50%) !important;
-              transform: translate(-50%,-50%) !important;">
+          <img :src="item.thumbnail" alt="" uk-cover>
           <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
             <h1 >{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</h1>
             <h3 class="uk-margin-remove">{{item.nombre}}</h3>
@@ -81,5 +67,13 @@ export default {
     display: none;
     visibility: hidden;
   }
+}
+img {
+  max-width: none !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  -webkit-transform: translate(-50%,-50%) !important;
+  transform: translate(-50%,-50%) !important;
 }
 </style>
