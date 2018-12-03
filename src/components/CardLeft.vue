@@ -38,9 +38,10 @@
                 </div>
               </div>
             </div>  
-
-            <div class="uk-label" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-               <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
+            <div class="mar-badge">
+              <div class="uk-label" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
+              </div>
             </div>
             <!--<p class="uk-text-small uk-text-muted">
               Publicado el: {{actividad.fecha_publicacion}}
@@ -170,5 +171,8 @@ export default {
 }
 .font-tamaño {
   font-size: 1.25rem !important;
+}
+.mar-badge {
+  margin-top: 20px !important;
 }
 </style>

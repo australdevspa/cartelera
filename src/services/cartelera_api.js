@@ -15,6 +15,12 @@ function getDataCartelera(){
         for(var i = 0; i < response.data.length; i++){
             if(flags[response.data[i].area]) continue
             flags[response.data[i].area] = true
+
+            //si es que no posee ningun color asignado, le entregamos uno por defecto
+            if(response.data[i].area_color == null){
+                response.data[i].area_color = "#1e87f0"
+            }
+
             categorias[response.data[i].area] = {
                                                     area: response.data[i].area, 
                                                     color: response.data[i].area_color, 
@@ -88,10 +94,13 @@ function setParametros(x){
         x.cuanto_falta = cuantoFalta(x.fecha_ini)
         x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
     }
+    if(x.area_color == null){
+        x.area_color = "#1e87f0"
+    }
 }
 
 // funciones momentjs
-function cuantoFalta(fecha_evento) {
+/*function cuantoFalta(fecha_evento) {
     var fecha_actual = moment.utc();
     var fecha_del_evento = moment.utc(fecha_evento);
     var diferencia = fecha_del_evento.diff(fecha_actual, 'days');
@@ -103,6 +112,23 @@ function cuantoFalta(fecha_evento) {
     }else{
         return 'Faltan '+ diferencia +' días'
     }
+}*/
+
+function cuantoFalta(fecha_evento) {
+    //var now = moment(new Date()); //todays date
+    //var fecha_actual = moment.utc();
+    var fecha_del_evento = moment.utc(fecha_evento);
+    //var diferencia = fecha_del_evento.diff(fecha_actual, 'days');
+
+    return fecha_del_evento.fromNow()
+
+    /*if(diferencia == 0){
+        return 'Hoy'
+    }else if(diferencia == 1){
+        return 'Falta '+ diferencia +' día'
+    }else{
+        return 'Faltan '+ diferencia +' días'
+    }*/
 }
 
 //metodo correspondiente a la vista de Evento

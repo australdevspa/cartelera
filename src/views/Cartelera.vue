@@ -151,7 +151,8 @@ export default {
       cartelera_boton_filtered: false,
       limit_porcategoria: 10,
       filtered_porcategoria_total: 0,
-      porcategoria_boton_filtered: false
+      porcategoria_boton_filtered: false,
+      //activeBtn:''
     }
   },
   computed:
@@ -284,4 +285,8 @@ export default {
 .all-button {
   background: black !important;
 }
+/*
+.active{
+  background-color:red;
+}*/
 </style>

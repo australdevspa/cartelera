@@ -18,7 +18,7 @@
                 </div>
                 <div class="uk-card-body uk-text-center video" v-html= evento.contenido></div>
                 <div class="uk-card-body uk-text-center">
-                    <img :src="evento.attachments[0].guid"/>
+                    <img :src="evento.thumbnail"/>
                 </div>
                 <div class="uk-card-footer">
                     <p class="uk-text-meta uk-margin-remove-top">Lugar: {{ evento.lugar }}.</p>
