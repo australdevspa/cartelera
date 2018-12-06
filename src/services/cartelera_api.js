@@ -82,20 +82,91 @@ function setParametros(x){
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
 
-        x.cuanto_falta = cuantoFalta(x.fecha_ini)
         x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
 
+        x.horario = horario(x.fecha_ini, x.fecha_fin)
+
+        x.entrada = precio(x.valor);
+
+        x.trozo = acortar(x.nombre);
+        x.trozo_card = acortarCard(x.nombre);
+
+        x.cuanto_falta = cuantoFalta(x.diff)
+        //x.cuanto_falta = cuantoFalta(x.fecha_ini)
     }else{
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
 
-        x.cuanto_falta = cuantoFalta(x.fecha_ini)
         x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
+
+        x.horario = horario(x.fecha_ini, x.fecha_fin)
+
+        x.entrada = precio(x.valor);
+
+        x.trozo = acortar(x.nombre);
+        x.trozo_card = acortarCard(x.nombre);
+        
+        x.cuanto_falta = cuantoFalta(x.diff)
+        //x.cuanto_falta = cuantoFalta(x.fecha_ini)
     }
     if(x.area_color == null){
         x.area_color = "#1e87f0"
+    }
+}
+
+function horario(inicio, fin) {
+    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
+    var fecha_fin = moment(fin).format('DD/MM/YYYY')
+    if(fecha_inicio == fecha_fin){
+        var hora_inicio = moment(inicio).format('HH:mm')
+        //var hora_fin = moment(fin).format('HH:mm')
+
+        return hora_inicio + " hrs";
+    }else{
+        return "horario indefinido";
+    }
+}
+
+function precio(valor) {
+    if(valor == "0.-"){
+        return "Gratis";
+    }else{
+        return "$" + valor;
+    }
+}
+
+function acortar(titulo) {
+    if(titulo.length > 33){
+        var extracto = titulo.substring(0, 33);
+        var n = extracto.lastIndexOf(" ");
+        var nuevoExtracto = titulo.substring(0, n);
+        return nuevoExtracto + " ...";
+    }else{
+        return titulo;
+    }
+}
+
+function acortarCard(titulo) {
+    if(titulo.length > 53){
+        var extracto = titulo.substring(0, 53);
+        var n = extracto.lastIndexOf(" ");
+        var nuevoExtracto = titulo.substring(0, n);
+        return nuevoExtracto + " ...";
+    }else{
+        return titulo;
+    }
+}
+
+// funciones momentjs
+function cuantoFalta(diferencia) {
+    if(diferencia == 0){
+        return 'Hoy'
+    }else if(diferencia == 1){
+        return 'En '+ diferencia +' día'
+    }else{
+        return 'En '+ diferencia +' días'
     }
 }
 
@@ -108,13 +179,13 @@ function setParametros(x){
     if(diferencia == 0){
         return 'Hoy'
     }else if(diferencia == 1){
-        return 'Falta '+ diferencia +' día'
+        return 'En '+ diferencia +' día'
     }else{
-        return 'Faltan '+ diferencia +' días'
+        return 'En '+ diferencia +' días'
     }
 }*/
 
-function cuantoFalta(fecha_evento) {
+/*function cuantoFalta(fecha_evento) {
     //var now = moment(new Date()); //todays date
     //var fecha_actual = moment.utc();
     var fecha_del_evento = moment.utc(fecha_evento);
@@ -129,7 +200,7 @@ function cuantoFalta(fecha_evento) {
     }else{
         return 'Faltan '+ diferencia +' días'
     }*/
-}
+//}
 
 //metodo correspondiente a la vista de Evento
 

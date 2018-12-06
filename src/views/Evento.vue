@@ -12,7 +12,17 @@
                     <div class="uk-grid-small uk-flex-middle" uk-grid>
                         <div class="uk-width-expand">
                             <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.nombre }}</h3>
-                            <p class="uk-text-meta uk-margin-remove-top">Publicado: {{ evento.creado_el }} / Fecha inicio: {{ evento.fecha_inicio_formato }}.</p>
+                            <ul uk-accordion="multiple: true">
+                                <li>
+                                    <a class="uk-accordion-title" href="#">Más Detalles</a>
+                                    <div class="uk-accordion-content">
+                                        <p class="uk-text-meta mar-p">Fecha: {{ evento.fecha_inicio_formato }}.</p>
+                                        <p class="uk-text-meta mar-p">Horario: {{ evento.horario }}.</p>
+                                        <p class="uk-text-meta mar-p">Precio: {{ evento.entrada }}.</p>
+                                        <p class="uk-text-meta mar-p">Lugar: {{ evento.lugar }}.</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -20,9 +30,9 @@
                 <div class="uk-card-body uk-text-center">
                     <img :src="evento.thumbnail"/>
                 </div>
-                <div class="uk-card-footer">
+                <!--<div class="uk-card-footer">
                     <p class="uk-text-meta uk-margin-remove-top">Lugar: {{ evento.lugar }}.</p>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>
@@ -86,4 +96,11 @@ export default {
   max-width: 100% !important;
   max-height: 100% !important;
 }
+.datos {
+    margin-top: 5px;
+}
+.mar-p {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+} 
 </style>

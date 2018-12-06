@@ -1,21 +1,23 @@
 <template>
   <div id="app" class="uk-offcanvas-content">
     <section slot="contenido">
-      <nav class="uk-navbar-container" uk-navbar>
-        <div class="uk-navbar-left">
-          <router-link class="uk-navbar-item uk-logo" to="/">
-            <img src="../static/img/icons-ccpm/logo-ccpm-160x81.png" class="uk-margin-small-right">
-          </router-link>
-        </div>
-        <div class="uk-navbar-right">
-          <ul class="uk-navbar-nav uk-visible@m">
-            <li><router-link to="/">Inicio</router-link></li>
-            <li><router-link to="/cartelera">Cartelera</router-link></li>
-            <li><router-link to="/visitaguiada">Visita Guiada</router-link></li>
-          </ul>
-          <a class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon uk-toggle="target: #offcanvas-push"></a>
-        </div>
-      </nav>
+      <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container" uk-navbar>
+          <div class="uk-navbar-left">
+            <router-link class="uk-navbar-item uk-logo" to="/">
+              <img src="../static/img/icons-ccpm/logo-ccpm-160x81.png" class="uk-margin-small-right">
+            </router-link>
+          </div>
+          <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav uk-visible@m">
+              <li><router-link to="/">Inicio</router-link></li>
+              <li><router-link to="/cartelera">Cartelera</router-link></li>
+              <li><router-link to="/visitaguiada">Visita Guiada</router-link></li>
+            </ul>
+            <a class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon uk-toggle="target: #offcanvas-push"></a>
+          </div>
+        </nav>
+      </div>
       <div >
         <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
           <div class="uk-offcanvas-bar uk-flex uk-flex-column">

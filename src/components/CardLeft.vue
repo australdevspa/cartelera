@@ -22,13 +22,26 @@
                 <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
                 <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
               </div>
-              <h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>
+              <h3 class="uk-card-title sinmar"> {{ actividad.trozo_card }}</h3>
+              <!--<h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>-->
+              <div class="mar-badge">
+                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                  <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
+                </div>
+                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                  {{actividad.entrada}}
+                </div>
+                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                  <span uk-icon="icon: location"></span> {{actividad.lugar}}
+                </div>
+              </div>
             </div>
 
             <div class="visible-movil oculto-movil">
               <div class="uk-grid-small uk-flex-middle" uk-grid>
                 <div class="uk-width-expand">
-                  <h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>
+                  <h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.trozo_card }}</h3>
+                  <!--<h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>-->
                 </div>
                 <div class="uk-width-auto">
                   <div class="date">
@@ -37,12 +50,29 @@
                   </div>
                 </div>
               </div>
+              <div class="mar-badge">
+                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                  <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
+                </div>
+                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                  {{actividad.entrada}}
+                </div>
+                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                  <span uk-icon="icon: location"></span> {{actividad.lugar}}
+                </div>
+              </div>
             </div>  
-            <div class="mar-badge">
-              <div class="uk-label" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+            <!--<div class="mar-badge">
+              <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
                 <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
               </div>
-            </div>
+              <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                {{actividad.entrada}}
+              </div>
+              <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                <span uk-icon="icon: location"></span> {{actividad.lugar}}
+              </div>
+            </div>-->
             <!--<p class="uk-text-small uk-text-muted">
               Publicado el: {{actividad.fecha_publicacion}}
             </p>-->
@@ -161,7 +191,7 @@ export default {
 }
 @media only screen and (min-width: 640px) and (max-width: 959px) {
   .img-tamaño-1 {
-    height: 500px !important;
+    height: 750px !important;
   }
 }
 @media only screen and (min-width: 960px) {
@@ -174,5 +204,12 @@ export default {
 }
 .mar-badge {
   margin-top: 20px !important;
+}
+.mar-badge-2 {
+  margin-top: 0px !important;
+}
+.mar-single-badge {
+  margin: 2px !important;
+  white-space: normal !important;
 }
 </style>
