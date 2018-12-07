@@ -8,6 +8,9 @@ import {
     existeSlug,
     getExposicion
 } from '@/services/exposiciones_api'
+import {
+    getTraduction
+} from '@/services/traduction_api'
 
 Vue.use(Vuex);
 
@@ -42,7 +45,9 @@ const state = {
 
     //state correspondiente a la vista de la Visita Guiada
     existe_slug: false,
-    expo: []
+    expo: [],
+
+    translate: []
 };
 
 const getters = {
@@ -96,6 +101,10 @@ const actions = {
             .then(expo => context.commit('updateExpo', expo));
     },
 
+    loadTranslate(context, id) {
+        return getTraduction(id)
+            .then(translate => context.commit('updateTranslate', translate));
+    },
 };
 
 const mutations = {
@@ -219,7 +228,11 @@ const mutations = {
 
     updateExpo(state, expo) {
         state.expo = expo;
-    }
+    },
+
+    updateTranslate(state, translate) {
+        state.translate = translate;
+    },
 }
 
 const store = new Vuex.Store({

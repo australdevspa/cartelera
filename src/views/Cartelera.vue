@@ -1,8 +1,21 @@
 <template>
   <section>
     <div class="uk-section uk-section-muted">
+
+      <!--<div v-if="boton_top">
+        <div class="icon-bar">
+          <a href="" class="uk-icon-button uk-margin-small-right" uk-totop uk-scroll></a>
+        </div>
+
+      </div>-->
+
+      <transition name="bounce">
+        <div v-if="show" class="icon-bar">
+          <a href="" class="uk-icon-button uk-margin-small-right" uk-totop uk-scroll></a>
+        </div>
+      </transition>
+
       <div class="uk-container uk-container-center uk-text-center">
-        
         <form class="uk-form-stacked">
           <div class="uk-margin">
             <div class="uk-text-center">
@@ -152,6 +165,7 @@ export default {
       limit_porcategoria: 10,
       filtered_porcategoria_total: 0,
       porcategoria_boton_filtered: false,
+      show: false,
       //activeBtn:''
     }
   },
@@ -227,6 +241,15 @@ export default {
     }
   },
   methods: {
+    handleScroll (event) {
+      if(window.scrollY > 300){
+        this.show = true
+        //console.log("Pasaste la posicion 300 del scroll" + window.scrollY);
+      }else{
+        this.show = false;
+      }
+      //console.log("Pasaste la posicion 300 del scroll" + window.scrollY);
+    },
     prevenirEnter: function(e){ },
     showCartelera () {
       this.filter = ''
@@ -257,6 +280,12 @@ export default {
         name: 'Evento'
       })
     }
+  },
+  created () {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>
@@ -289,4 +318,82 @@ export default {
 .active{
   background-color:red;
 }*/
+
+.icon-bar {
+  position: fixed;
+  /*top: 50%;*/
+  bottom: 10%;
+  /*-webkit-transform: translateY(-10%);
+  -ms-transform: translateY(-10%);
+  transform: translateY(-10%);*/
+  z-index: 3;
+  margin-left: 20px;
+}
+
+.icon-bar a {
+  /*display: block;
+  text-align: center;
+  padding: 40px;*/
+  transition: all 0.3s ease;
+  /*color: white;*/
+  font-size: 20px;
+      background-color: #222;
+    color: #fff;
+}
+
+/*.icon-bar a:hover {
+  background-color: #000;
+}*/
+
+/*.facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.google {
+  background: #dd4b39;
+  color: white;
+}
+
+.linkedin {
+  background: #007bb5;
+  color: white;
+}*/
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-out .5s;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounce-out {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+.uk-icon-button {
+  width: 60px !important;
+  height: 60px !important;
+}
 </style>
