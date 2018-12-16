@@ -8,11 +8,11 @@
 
         <div v-else class="uk-container uk-container-center pad-top">
 
-                  <transition name="bounce">
-        <div v-if="show" class="icon-bar">
-          <a href="" class="uk-icon-button uk-margin-small-right" uk-totop uk-scroll></a>
-        </div>
-      </transition>
+            <transition name="bounce">
+                <div v-if="show" class="icon-bar">
+                <a href="" class="uk-icon-button uk-margin-small-right" uk-totop uk-scroll></a>
+                </div>
+            </transition>
 
             <div class="uk-card uk-card-default">
 
@@ -20,13 +20,22 @@
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.nombre }}</h3>
-                                
-                                <div v-if="traduction_original">
-                                    <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(Traducción al Inglés)</a>
-                                </div>
-                                <div v-else>
-                                    <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+
+                                <div class="uk-text-left" uk-grid>
+                                    <div class="uk-width-expand@m">
+                                        <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.nombre }}</h3>                        
+                                        <div v-if="traduction_original">
+                                            <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(English Version)</a>
+                                        </div>
+                                        <div v-else>
+                                            <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-6@m uk-text-right">
+                                        <div class="audio-icon">
+                                            <a href="" class="uk-icon-button" uk-icon="play-circle"></a>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <ul uk-accordion="multiple: true">
@@ -35,8 +44,8 @@
                                         <div class="uk-accordion-content">
                                             <p class="uk-text-meta mar-p">Fecha: {{ evento.fecha_inicio_formato }}.</p>
                                             <p class="uk-text-meta mar-p">Horario: {{ evento.horario }}.</p>
-                                            <p class="uk-text-meta mar-p">Precio: {{ evento.entrada }}.</p>
-                                            <p class="uk-text-meta mar-p">Lugar: {{ evento.lugar }}.</p>
+                                            <p class="uk-text-meta mar-p">Entrada: {{ evento.entrada }}.</p>
+                                            <p class="uk-text-meta mar-p">Lugar: {{ evento.donde }}.</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -59,13 +68,22 @@
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom" v-html= translate[0].title_en></h3>
-                                
-                                <div v-if="traduction_original">
-                                    <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(Traducción al Inglés)</a>
-                                </div>
-                                <div v-else>
-                                    <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+
+                                <div class="uk-text-left" uk-grid>
+                                    <div class="uk-width-expand@m">
+                                        <h3 class="uk-card-title uk-margin-remove-bottom" v-html= translate[0].title_en></h3>
+                                        <div v-if="traduction_original">
+                                            <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(Traducción al Inglés)</a>
+                                        </div>
+                                        <div v-else>
+                                            <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+                                        </div>
+                                    </div>
+                                        <div class="uk-width-1-6@m uk-text-right">
+                                            <div class="audio-icon">
+                                                <a href="" class="uk-icon-button" uk-icon="play-circle"></a>
+                                            </div>
+                                    </div>
                                 </div>
 
                                 <ul uk-accordion="multiple: true">
@@ -74,8 +92,8 @@
                                         <div class="uk-accordion-content">
                                             <p class="uk-text-meta mar-p">Date: {{ evento.fecha_inicio_formato }}.</p>
                                             <p class="uk-text-meta mar-p">Hours: {{ evento.horario }}.</p>
-                                            <p class="uk-text-meta mar-p">Price: {{ evento.entrada }}.</p>
-                                            <p class="uk-text-meta mar-p">Place: {{ evento.lugar }}.</p>
+                                            <p class="uk-text-meta mar-p">Price: free.</p>
+                                            <p class="uk-text-meta mar-p">Place: {{ evento.donde }}.</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -273,5 +291,10 @@ export default {
 .uk-icon-button {
   width: 60px !important;
   height: 60px !important;
+}
+.audio-icon a {
+  font-size: 20px;
+      background-color: #222;
+    color: #fff;
 }
 </style>

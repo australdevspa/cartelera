@@ -92,6 +92,10 @@ function setParametros(x){
 
         x.entrada = precio(x.valor);
 
+        x.donde = donde(x.lugar);
+        
+        x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
+
         x.trozo = acortar(x.nombre);
         x.trozo_card = acortarCard(x.nombre);
 
@@ -113,6 +117,10 @@ function setParametros(x){
 
         x.entrada = precio(x.valor);
 
+        x.donde = donde(x.lugar);
+
+        x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
+        
         x.trozo = acortar(x.nombre);
         x.trozo_card = acortarCard(x.nombre);
         
@@ -154,10 +162,44 @@ function horario(inicio, fin) {
 
 function precio(valor) {
     if(valor == "0.-"){
-        return "Gratis";
+        return "liberada";
     }else{
         return "$" + valor;
     }
+}
+
+function donde(lugar) {
+    var casa = "Casa del Arte Diego Rivera"
+    if(lugar == "Sala Teatro Diego Rivera"){
+        return "Sala Teatro - " + casa;
+    }else{
+        return lugar + " - " + casa;
+    }
+}
+
+function diaSemana(inicio, fin) {
+    var fecha_actual = moment()
+    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
+    var fecha_fin = moment(fin).format('DD/MM/YYYY')
+    if(fecha_inicio == fecha_fin){
+        return moment(inicio).format('dddd');
+    }else{
+        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) == true){
+            return moment(inicio).format('dddd');
+        }else{
+            return moment(inicio).format('dddd');
+        }
+    }
+    return moment(fecha).format('dddd');/*
+// What day of the week is it?
+var day = "2018-12-16 13:30:00" // 5
+console.log( moment.weekdays[day] ); // Friday
+console.log( moment().weekday(0) );
+// What is the current month name?
+console.log( moment().weekday() ); 
+
+console.log( moment(day).format('dddd') ); 
+    //return moment.weekdays[fecha]; */
 }
 
 function acortar(titulo) {

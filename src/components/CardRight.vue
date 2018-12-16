@@ -16,23 +16,27 @@
             <div class="uk-card-badge-left uk-label" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
               {{ actividad.area }}
             </div>
+            <div class="uk-card-badge uk-label label-date" :style="{ fontWeight: 900 }">
+              {{ actividad.cuanto_falta }}
+            </div>
 
             <div class="visible-note oculto-note">
               <div class="date centro">
-                <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
+                <span class="month">{{actividad.dia_semana}}</span>
                 <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
+                <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
               </div>
-              <h3 class="uk-card-title sinmar"> {{ actividad.trozo_card }}</h3>
+              <h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>
               <!--<h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>-->
               <div class="mar-badge">
-                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                <!--<div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
                     <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
+                </div>-->
+                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                  Entrada {{actividad.entrada}}
                 </div>
                 <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-                  {{actividad.entrada}}
-                </div>
-                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-                  <span uk-icon="icon: location"></span> {{actividad.lugar}}
+                  <span uk-icon="icon: location"></span> {{actividad.donde}}
                 </div>
               </div>
             </div>
@@ -41,24 +45,25 @@
               <div class="uk-grid-small uk-flex-middle" uk-grid>
                 <div class="uk-width-auto">
                   <div class="date">
-                    <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
+                    <span class="month">{{actividad.dia_semana}}</span>
                     <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
+                    <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
                   </div>
                 </div>
                 <div class="uk-width-expand">
-                  <h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.trozo_card }}</h3>
+                  <h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>
                   <!--<h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>-->
                 </div>
               </div>
               <div class="mar-badge-2">
-                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                <!--<div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
                     <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
+                </div>-->
+                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                  Entrada {{actividad.entrada}}
                 </div>
                 <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-                  {{actividad.entrada}}
-                </div>
-                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-                  <span uk-icon="icon: location"></span> {{actividad.lugar}}
+                  <span uk-icon="icon: location"></span> {{actividad.donde}}
                 </div>
               </div>
             </div>  
@@ -95,6 +100,9 @@ export default {
 </script>
 
 <style scoped>
+.label-date {
+  background: #555 !important;
+}
 .uk-card-badge-left {
     position: absolute;
     top: 30px;
@@ -104,7 +112,7 @@ export default {
 .date {
 	display: block;
 	width: 100px;
-	height: 110px;
+	height: 120px;
 	margin: 40px 0px;
 	background: #fff;
 	text-align: center;
@@ -126,19 +134,26 @@ export default {
 .date .month {
 	background: #555;
 	display: block;
-	padding: 8px 0;
+	padding: 2px 0;
 	color: #fff;
 	font-size: 12px;
 	font-weight: bold;
-	border-bottom: 2px solid #333;
+	/*border-bottom: 2px solid #333;
 	box-shadow: inset 0 -1px 0 0 #666;
+  box-shadow: 0 0 3px #555;*/
+    /*border-style: solid;
+  border-width: 3px;
+  border-color: #555;*/
 }
 .date .day {
 	display: block;
 	margin: 0;
 	padding: 10px 0;
-	font-size: 48px;
-	box-shadow: 0 0 3px #ccc;
+	font-size: 45px;
+	/*box-shadow: 0 0 3px #ccc;*/
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
 	position: relative;
 }
 .date .day::after {
@@ -150,7 +165,10 @@ export default {
 	top: 3px;
 	left: 2%;
 	z-index: -1;
-	box-shadow: 0 0 3px #ccc;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+	/*box-shadow: 0 0 3px #ccc;*/
 }
 .date .day::before {
 	content: '';
@@ -161,7 +179,10 @@ export default {
 	top: 6px;
 	left: 5%;
 	z-index: -1;
-	box-shadow: 0 0 3px #ccc;
+	/*box-shadow: 0 0 3px #ccc;*/
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
 }
 .sinmar {
   margin-top: 0px !important;

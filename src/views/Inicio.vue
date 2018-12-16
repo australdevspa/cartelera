@@ -6,14 +6,14 @@
           <li v-for="(item, index) in actividades"
             :key="index">
             <img :src="item.thumbnail" alt="" uk-cover>
-            <div class="uk-overlay uk-overlay-primary uk-position-right uk-text-center uk-transition-slide-right uk-width-medium">
-              <p class="estilo-slider estilo-slider-h1 mar-bottom">{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</p>
-              <p class="estilo-slider estilo-slider-h4 mar-20">{{item.horario}}</p>
+            <div class="uk-overlay uk-overlay-primary uk-position-right uk-text-left uk-transition-slide-right uk-width-medium">
+              <p class="estilo-slider estilo-slider-h4 mar-bottom">{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}} - {{item.horario}}</p>
+              <!--<p class="estilo-slider estilo-slider-h4 mar-20">{{item.horario}}</p>-->
               <hr class="uk-divider-small mar-20">
-              <p class="estilo-slider estilo-slider-h1 mar-30">"{{item.trozo}}"</p>
+              <p class="estilo-slider estilo-slider-h1 mar-30 titulo">{{item.nombre}}</p>
               <hr class="uk-divider-small mar-20">
-              <p class="estilo-slider estilo-slider-h4 mar-20">Entrada: {{item.entrada}}</p>
-              <p class="estilo-slider estilo-slider-h4 mar-top">{{item.lugar}}</p>
+              <p class="estilo-slider estilo-slider-h4 mar-20">Entrada {{item.entrada}}</p>
+              <p class="estilo-slider estilo-slider-h4 mar-top">{{item.donde}}</p>
               <!--<h1 >{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</h1>-->
               <!--<h4 >Horario: {{item.horario}}</h4>
               <hr class="uk-divider-small">
@@ -34,19 +34,19 @@
         <li v-for="(item, index) in actividades"
           :key="index">
           <img :src="item.thumbnail" alt="" uk-cover>
-          <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-left uk-transition-slide-bottom">
             <!--<p class="estilo-slider estilo-slider-h1">{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</p>
             <p class="estilo-slider estilo-slider-h4">Horario: {{item.horario}}</p>-->
 
             <!--<h1 >{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</h1>
             --><!--<h3 class="uk-margin-remove">{{item.nombre}}</h3>
             <p class="uk-margin-remove">{{item.lugar}}</p>-->
-            <p class="estilo-slider estilo-slider-h1 mar-bottom">{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}} | {{item.horario}}</p>
+            <p class="estilo-slider estilo-slider-h4 mar-bottom">{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}} {{item.horario}}</p>
             <hr class="uk-divider-small mar-20">
-            <p class="estilo-slider estilo-slider-h1 mar-30">"{{item.trozo}}"</p>
+            <p class="estilo-slider estilo-slider-h1 mar-30 titulo">{{item.nombre}}</p>
             <hr class="uk-divider-small mar-20">
-            <p class="estilo-slider estilo-slider-h4 mar-20">Entrada: {{item.entrada}}</p>
-            <p class="estilo-slider estilo-slider-h4 mar-top">{{item.lugar}}</p>
+            <p class="estilo-slider estilo-slider-h4 mar-20">Entrada {{item.entrada}}</p>
+            <p class="estilo-slider estilo-slider-h4 mar-top">{{item.donde}}</p>
           </div>
         </li>
       </ul>
@@ -92,10 +92,13 @@ export default {
 }
 @media only screen and (min-width: 1200px) {
   .estilo-slider-h1 {
-    font-size: 42px;
+    /*font-size: 42px;
+    font-size: 34px;*/
+    font-size: 28px;
   }
   .estilo-slider-h4 {
-    font-size: 20px;
+    /*font-size: 20px;*/
+    font-size: 19px;
   }
   .mar-bottom {
     margin-bottom: 12px !important;
@@ -105,8 +108,10 @@ export default {
     margin-bottom: 12px !important;
   }
   .mar-30 {
-    margin-top: 25px !important;
-    margin-bottom: 25px !important;
+    /*margin-top: 25px !important;
+    margin-bottom: 25px !important;*/
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
   }
   .mar-top {
     margin-top: 12px !important;
@@ -118,10 +123,12 @@ export default {
 }
 @media only screen and (max-width: 1199px) {
   .estilo-slider-h1 {
-    font-size: calc(6px + 3vw);
+    /*font-size: calc(6px + 3vw);
+    font-size: calc(-2px + 3vw);*/
+    font-size: calc(4px + 2vw);
   }
   .estilo-slider-h4 {
-    font-size: calc(17px + 0.25vw);
+    font-size: calc(16px + 0.25vw);
   }
   .mar-bottom {
     margin-bottom: calc(0px + 1vw) !important;
@@ -131,8 +138,10 @@ export default {
     margin-bottom: calc(0px + 1vw) !important;
   }
   .mar-30 {
-    margin-top: calc(13px + 1vw) !important;
-    margin-bottom: calc(13px + 1vw) !important;
+    margin-top: calc(8px + 1vw) !important;
+    margin-bottom: calc(8px + 1vw) !important;
+        /*margin-top: calc(13px + 1vw) !important;
+    margin-bottom: calc(13px + 1vw) !important;*/
   }
   .mar-top {
     margin-top: calc(0px + 1vw) !important;
@@ -153,8 +162,10 @@ export default {
     margin-bottom: calc(0px + 1vw) !important;
   }
   .mar-30 {
-    margin-top: calc(13px + 1vw) !important;
-    margin-bottom: calc(13px + 1vw) !important;
+    /*margin-top: calc(13px + 1vw) !important;
+    margin-bottom: calc(13px + 1vw) !important;*/
+    margin-top: calc(8px + 1vw) !important;
+    margin-bottom: calc(8px + 1vw) !important;
   }
   .mar-top {
     margin-top: calc(0px + 1vw) !important;
@@ -171,5 +182,8 @@ img {
 .estilo-slider {
   color: white;
   font-weight: 700;
+}
+.titulo {
+  color: rgb(255, 255, 0);
 }
 </style>
