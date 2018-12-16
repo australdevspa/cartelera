@@ -2,7 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 moment.locale('es')
 
-const API_URL = 'https://engrane.ml/ccpm-api/public/api'
+const API_URL = 'https://api-ccpm.engrane.ml/api'
 
 //metodo que obtiene todos los datos correspondientes a la cartelera
 function getDataCartelera(){
@@ -82,7 +82,11 @@ function setParametros(x){
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
 
+        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
+
         x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
+
+        x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
 
         x.horario = horario(x.fecha_ini, x.fecha_fin)
 
@@ -98,8 +102,12 @@ function setParametros(x){
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
-
+        
+        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
+        
         x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
+
+        x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
 
         x.horario = horario(x.fecha_ini, x.fecha_fin)
 
@@ -113,6 +121,21 @@ function setParametros(x){
     }
     if(x.area_color == null){
         x.area_color = "#1e87f0"
+    }
+}
+
+function fecha_rango(inicio, fin) {
+    var fecha_actual = moment().format('DD/MM/YYYY')
+    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
+    var fecha_fin = moment(fin).format('DD/MM/YYYY')
+    if(fecha_inicio == fecha_fin){
+        return fecha_inicio;
+    }else{
+        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) == true){
+            return fecha_actual;
+        }else{
+            return fecha_inicio;
+        }
     }
 }
 
@@ -215,6 +238,16 @@ function getEvento(id){
                 return evento;
             }
         }
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+function getSalasz(){
+    return axios.get(`${API_URL}/salas`)
+    .then(function (response) {
+        return response.data;
     })
     .catch(function (error) {
         return 'An error occured..' + error;

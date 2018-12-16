@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'https://engrane.ml/ccpm-api/public/api'
+//const API_URL = 'https://engrane.ml/ccpm-api/public/api'
+
+const API_URL = 'https://api-ccpm.engrane.ml/api'
 
 //metodo que obtiene todos los datos correspondientes a la cartelera
 function getTraduction(id){

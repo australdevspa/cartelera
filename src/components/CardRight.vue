@@ -210,7 +210,7 @@ export default {
   margin-top: 20px !important;
 }
 .mar-badge-2 {
-  margin-top: 0px !important;
+  margin-top: 20px !important;
 }
 .mar-single-badge {
   margin: 2px !important;

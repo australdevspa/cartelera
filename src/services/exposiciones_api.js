@@ -2,8 +2,8 @@ import axios from 'axios';
 import moment from 'moment';
 moment.locale('es')
 
-const API_URL_EXPO = 'https://engrane.ml/ccpm-api/public/api'
-
+//const API_URL_EXPO = 'https://engrane.ml/ccpm-api/public/api'
+const API_URL_EXPO = 'https://api-ccpm.engrane.ml/api'
 // metodo correspondiente a la vista de la visita guiada
 
 function existeSlug(slug){
@@ -40,7 +40,40 @@ function getExposicion(slug){
     })
 }
 
+function getExposiciones(){
+    return axios.get(`${API_URL_EXPO}/exposiciones`)
+    .then(function (response) {
+        var expo = []
+        for (var i = 0; i < response.data.length ; i++) {
+            response.data[i].fecha_inicio_formato = moment(response.data[i].fecha_ini).format('DD/MM/YYYY')
+            response.data[i].fecha_publicacion = moment(response.data[i].creado_el).format('DD/MM/YYYY')
+            response.data[i].fecha_rango = fecha_rango(response.data[i].fecha_ini, response.data[i].fecha_fin)
+            expo.push(response.data[i]);
+        }
+        return expo;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+function fecha_rango(inicio, fin) {
+    var fecha_actual = moment().format('DD/MM/YYYY')
+    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
+    var fecha_fin = moment(fin).format('DD/MM/YYYY')
+    if(fecha_inicio == fecha_fin){
+        return fecha_inicio;
+    }else{
+        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) == true){
+            return fecha_actual;
+        }else{
+            return fecha_inicio;
+        }
+    }
+}
+
 export {
     existeSlug,
-    getExposicion
+    getExposicion,
+    getExposiciones
 }

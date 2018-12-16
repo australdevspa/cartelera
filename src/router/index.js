@@ -5,6 +5,7 @@ import CarteleraView from '@/views/Cartelera'
 import EventoView from '@/views/Evento'
 import VisitaGuiadaView from '@/views/VisitaGuiada'
 import ExpoView from '@/views/Expo'
+import CamaraView from '@/views/Camara'
 Vue.use(Router)
 
 export default new Router({
@@ -27,7 +28,12 @@ export default new Router({
     {
       path: '/visitaguiada',
       name: 'VisitaGuiada',
-      component: VisitaGuiadaView
+      component: VisitaGuiadaView,
+      children: [
+        {
+          path: ':camara',
+          component: CamaraView
+        }]
     },
     {
       path: '/exposicion/:id',

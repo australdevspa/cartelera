@@ -6,11 +6,15 @@ import {
 } from '@/services/cartelera_api'
 import {
     existeSlug,
-    getExposicion
+    getExposicion,
+    getExposiciones
 } from '@/services/exposiciones_api'
 import {
     getTraduction
 } from '@/services/traduction_api'
+import {
+    getSalas
+} from '@/services/salas'
 
 Vue.use(Vuex);
 
@@ -47,11 +51,11 @@ const state = {
     existe_slug: false,
     expo: [],
 
-    translate: []
-};
+    translate: [],
 
-const getters = {
+    salas: [],
 
+    exposiciones: []
 };
 
 const actions = {
@@ -104,6 +108,16 @@ const actions = {
     loadTranslate(context, id) {
         return getTraduction(id)
             .then(translate => context.commit('updateTranslate', translate));
+    },
+
+    loadSalas(context) {
+        return getSalas()
+            .then(salas => context.commit('updateSalas', salas));
+    },
+
+    loadExposiciones(context) {
+        return getExposiciones()
+            .then(exposiciones => context.commit('updateExposiciones', exposiciones));
     },
 };
 
@@ -233,7 +247,19 @@ const mutations = {
     updateTranslate(state, translate) {
         state.translate = translate;
     },
+
+    updateSalas(state, salas) {
+        state.salas = salas;
+    },
+
+    updateExposiciones(state, exposiciones) {
+        state.exposiciones = exposiciones;
+    },
 }
+
+const getters = {
+
+};
 
 const store = new Vuex.Store({
     state,
