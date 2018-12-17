@@ -8,11 +8,11 @@
 
         <div v-else class="uk-container uk-container-center pad-top">
 
-            <transition name="bounce">
+            <!--<transition name="bounce">
                 <div v-if="show" class="icon-bar">
                 <a href="" class="uk-icon-button uk-margin-small-right" uk-totop uk-scroll></a>
                 </div>
-            </transition>
+            </transition>-->
 
             <div class="uk-card uk-card-default">
 
@@ -21,7 +21,17 @@
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
 
-                                <div class="uk-text-left" uk-grid>
+                                <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.nombre }}</h3>                        
+                                <div v-if="traduction_original">
+                                    <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(English Version)</a>
+                                </div>
+                                <div v-else>
+                                    <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+                                </div>
+
+
+
+                                <!--<div class="uk-text-left" uk-grid>
                                     <div class="uk-width-expand@m">
                                         <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.nombre }}</h3>                        
                                         <div v-if="traduction_original">
@@ -36,7 +46,7 @@
                                             <a href="" class="uk-icon-button" uk-icon="play-circle"></a>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <ul uk-accordion="multiple: true">
                                     <li>
@@ -49,6 +59,31 @@
                                         </div>
                                     </li>
                                 </ul>
+
+                                <ul uk-accordion="multiple: true">
+                                    <li>
+                                        <a class="uk-accordion-title" href="#">Audios</a>
+                                        <div class="uk-accordion-content">
+                                            <aplayer
+                                                :music="{
+                                                    title: 'Audio del Título',
+                                                    artist: 'Español',
+                                                    src: ''+translate[0].url_audio_titulo_es,
+                                                    pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
+                                                }"
+                                            />
+                                            <aplayer
+                                                :music="{
+                                                    title: 'Audio de la Actividad',
+                                                    artist: 'Español',
+                                                    src: ''+translate[0].url_audio_nota_es,
+                                                    pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
+                                                }"
+                                            />
+                                        </div>
+                                    </li>
+                                </ul>
+
                             </div>
                         </div>
                     </div>
@@ -69,7 +104,15 @@
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
 
-                                <div class="uk-text-left" uk-grid>
+                                <h3 class="uk-card-title uk-margin-remove-bottom" v-html= translate[0].title_en></h3>
+                                <div v-if="traduction_original">
+                                    <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(Traducción al Inglés)</a>
+                                </div>
+                                <div v-else>
+                                    <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+                                </div>
+
+                                <!--<div class="uk-text-left" uk-grid>
                                     <div class="uk-width-expand@m">
                                         <h3 class="uk-card-title uk-margin-remove-bottom" v-html= translate[0].title_en></h3>
                                         <div v-if="traduction_original">
@@ -84,7 +127,7 @@
                                                 <a href="" class="uk-icon-button" uk-icon="play-circle"></a>
                                             </div>
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <ul uk-accordion="multiple: true">
                                     <li>
@@ -97,6 +140,31 @@
                                         </div>
                                     </li>
                                 </ul>
+
+                                <ul uk-accordion="multiple: true">
+                                    <li>
+                                        <a class="uk-accordion-title" href="#">Audios</a>
+                                        <div class="uk-accordion-content">
+                                            <aplayer
+                                                :music="{
+                                                    title: 'Title Audio',
+                                                    artist: 'English',
+                                                    src: ''+translate[0].url_audio_title_en,
+                                                    pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
+                                                }"
+                                            />
+                                            <aplayer
+                                                :music="{
+                                                    title: 'Audio of the Activity',
+                                                    artist: 'English',
+                                                    src: ''+translate[0].url_audio_note_en,
+                                                    pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
+                                                }"
+                                            />
+                                        </div>
+                                    </li>
+                                </ul>
+
                             </div>
                         </div>
                     </div>
@@ -125,14 +193,22 @@
 </template>
 
 <script>
+import Aplayer from 'vue-aplayer'
+
 export default {
   name: 'EventoView',
+        components: {
+        Aplayer
+    },
   data() {
     return {
         item: [],
         loading: false,
         traduction_original: true,
         show: false,
+
+        audio_titulo: '',
+        audio_descripcion: ''
     }
   },
   mounted () {
@@ -191,11 +267,15 @@ export default {
       
             
         this.traduction_original = false
+                this.audio_titulo = this.$store.state.translate[0].url_audio_title_en;
+        this.audio_descripcion = this.$store.state.translate[0].url_audio_note_en;
             //$("#translated").html(traduction);
         
     },
     traducirEs () {
         this.traduction_original = true
+                        this.audio_titulo = this.$store.state.translate[0].url_audio_titulo_es;
+        this.audio_descripcion = this.$store.state.translate[0].url_audio_nota_es;
     }
   },
   destroyed () {
