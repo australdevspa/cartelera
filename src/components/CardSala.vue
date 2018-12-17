@@ -2,6 +2,7 @@
   <div class="uk-card uk-card-default uk-card-body">
     <h2>{{sala.sala}}</h2>
     <p>{{sala.centro}}</p>
+
     <div  v-for="(it, index) in filtro_por_actividades"
       :key="index"
       @click.prevent="goToActividad(it)">
@@ -9,6 +10,15 @@
         <CardHoy :carta="it" class="cursor"></CardHoy>
       </div>
     </div>
+
+    <div  v-for="(it, index) in filtro_por_exposiciones"
+      :key="index"
+      @click.prevent="goToActividad(it)">
+      <div v-if="sala.sala === it.sala">
+        <CardHoy :carta="it" class="cursor"></CardHoy>
+      </div>
+    </div>
+
   </div>
 </template>
 
