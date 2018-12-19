@@ -13,7 +13,7 @@
 
     <div  v-for="(it, index) in filtro_por_exposiciones"
       :key="index"
-      @click.prevent="goToActividad(it)">
+      @click.prevent="goToExpo(it)">
       <div v-if="sala.sala === it.sala">
         <CardHoy :carta="it" class="cursor"></CardHoy>
       </div>
@@ -56,6 +56,15 @@ export default {
           evento: actividad
         },
         name: 'Evento'
+      })
+    },
+    goToExpo (expo) {
+      this.$router.push({
+        params: {
+          id: expo.slug,
+          evento: expo
+        },
+        name: 'Expo'
       })
     }
   },
