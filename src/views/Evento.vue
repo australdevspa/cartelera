@@ -21,12 +21,14 @@
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
 
-                                <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.nombre }}</h3>                        
-                                <div v-if="traduction_original">
-                                    <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(English Version)</a>
-                                </div>
-                                <div v-else>
-                                    <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+                                <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.nombre }}</h3>
+                                <div v-if="translate[0].note_en !== null">                            
+                                    <div v-if="traduction_original">
+                                        <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(English Version)</a>
+                                    </div>
+                                    <div v-else>
+                                        <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+                                    </div>
                                 </div>
 
 
@@ -60,7 +62,7 @@
                                     </li>
                                 </ul>
 
-                                <ul uk-accordion="multiple: true">
+                                <ul v-if="translate[0].url_audio_note_en !== null" uk-accordion="multiple: true">
                                     <li>
                                         <a class="uk-accordion-title" href="#">Audios</a>
                                         <div class="uk-accordion-content">
@@ -105,11 +107,13 @@
                             <div class="uk-width-expand">
 
                                 <h3 class="uk-card-title uk-margin-remove-bottom" v-html= translate[0].title_en></h3>
-                                <div v-if="traduction_original">
-                                    <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(Traducción al Inglés)</a>
-                                </div>
-                                <div v-else>
-                                    <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+                                <div v-if="translate[0].note_en !== null">    
+                                    <div v-if="traduction_original">
+                                        <a href="" @click.prevent="traducirEn" class="text-translate a-translate">(Traducción al Inglés)</a>
+                                    </div>
+                                    <div v-else>
+                                        <a href="" @click.prevent="traducirEs" class="text-translate a-translate">(Original Text)</a>
+                                    </div>
                                 </div>
 
                                 <!--<div class="uk-text-left" uk-grid>
@@ -141,7 +145,7 @@
                                     </li>
                                 </ul>
 
-                                <ul uk-accordion="multiple: true">
+                                <ul v-if="translate[0].url_audio_note_en !== null" uk-accordion="multiple: true">
                                     <li>
                                         <a class="uk-accordion-title" href="#">Audios</a>
                                         <div class="uk-accordion-content">
