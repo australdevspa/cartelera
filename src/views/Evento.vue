@@ -296,9 +296,11 @@ export default {
 .pad-bottom {
   padding-bottom: 500px;
 }
-.video >>> iframe {
-  max-width: 100% !important;
-  max-height: 100% !important;
+.video >>> p {
+  text-align: justify !important;
+}
+.video >>> em {
+  color: #666 !important;
 }
 .datos {
     margin-top: 5px;

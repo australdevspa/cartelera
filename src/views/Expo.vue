@@ -1,8 +1,8 @@
 <template>
     <section>
         <div v-if="loading">
-            <div class="pad-bottom uk-section-muted">
-                <div uk-spinner="ratio: 4" class="uk-position-center uk-overlay" />
+            <div class="pad-spinner uk-text-center uk-section-muted">
+                <div uk-spinner="ratio: 4"/>
             </div>
         </div>
 
