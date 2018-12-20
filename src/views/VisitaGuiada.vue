@@ -46,11 +46,11 @@
           <div class="padCamaraButton">
             <div v-if="show">
               <router-link :to="{ path: '/visitaguiada'}" @click.native="estadoFalse" class="uk-button uk-button-secondary">Desactivar Scanner QR</router-link>
+              <router-view></router-view>            
             </div>
             <div v-else>
               <router-link :to="{ path: '/visitaguiada/camara'}" @click.native="estadoTrue" class="uk-button uk-button-secondary">Activar Scanner QR</router-link>
             </div>
-            <router-view></router-view>
           </div>
         </div>
 
