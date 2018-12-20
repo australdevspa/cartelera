@@ -215,7 +215,7 @@ export default {
   data() {
     return {
         item: [],
-        loading: false,
+        loading: true,
         traduction_original: true,
         show: false,
 

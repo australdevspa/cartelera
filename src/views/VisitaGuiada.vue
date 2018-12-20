@@ -8,43 +8,50 @@
           </div>
         </form>
 
-        <div class="uk-child-width-expand@s uk-text-center" uk-grid >
-          <div>
-            <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-              <div class="uk-width-1@m"
-                v-for="(item, index) in salas.slice(0,this.mitad)"
-                :key="index">
-                <CardSala :sala="item"></CardSala>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-              <div class="uk-width-1@m"
-                v-for="(item, index) in salas.slice(this.mitad,this.salas.length)"
-                :key="index">
-                <CardSala :sala="item"></CardSala>
-              </div>
-            </div>
+        <div v-if="loading">
+          <div class="pad-spinner uk-text-center uk-section-muted">
+            <div uk-spinner="ratio: 4"/>
           </div>
         </div>
+        <div v-else>
+          <div class="uk-child-width-expand@s uk-text-center" uk-grid >
+            <div>
+              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                <div class="uk-width-1@m"
+                  v-for="(item, index) in salas.slice(0,this.mitad)"
+                  :key="index">
+                  <CardSala :sala="item"></CardSala>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                <div class="uk-width-1@m"
+                  v-for="(item, index) in salas.slice(this.mitad,this.salas.length)"
+                  :key="index">
+                  <CardSala :sala="item"></CardSala>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <!--<div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-          <div class="uk-width-1-2@m"
-          v-for="(item, index) in salas"
-          :key="index">
-          <CardSala :sala="item"></CardSala>
-          </div>
-        </div>-->
+          <!--<div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+            <div class="uk-width-1-2@m"
+            v-for="(item, index) in salas"
+            :key="index">
+            <CardSala :sala="item"></CardSala>
+            </div>
+          </div>-->
 
-        <div class="padCamaraButton">
-          <div v-if="show">
-            <router-link :to="{ path: '/visitaguiada'}" @click.native="estadoFalse" class="uk-button uk-button-secondary">Desactivar Scanner QR</router-link>
+          <div class="padCamaraButton">
+            <div v-if="show">
+              <router-link :to="{ path: '/visitaguiada'}" @click.native="estadoFalse" class="uk-button uk-button-secondary">Desactivar Scanner QR</router-link>
+            </div>
+            <div v-else>
+              <router-link :to="{ path: '/visitaguiada/camara'}" @click.native="estadoTrue" class="uk-button uk-button-secondary">Activar Scanner QR</router-link>
+            </div>
+            <router-view></router-view>
           </div>
-          <div v-else>
-            <router-link :to="{ path: '/visitaguiada/camara'}" @click.native="estadoTrue" class="uk-button uk-button-secondary">Activar Scanner QR</router-link>
-          </div>
-          <router-view></router-view>
         </div>
 
       </div>
@@ -62,12 +69,19 @@ export default {
   },
   data() {
     return {
-      show: false
+      show: false,
+      loading: true
     }
   },
   created () {
     this.$store.dispatch('loadSalas')
     this.$store.dispatch('loadExposiciones')
+          .then(response => {
+        this.loading = false
+      })
+      .catch(error => {
+        this.loading = true
+      })
   },
   computed: {
     salas() {
