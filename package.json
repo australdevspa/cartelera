@@ -21,6 +21,7 @@
     "vue-aplayer": "^1.6.1",
     "vue-qrcode-reader": "^1.2.2",
     "vue-router": "^3.0.1",
+    "vue-scrollto": "^2.13.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

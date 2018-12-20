@@ -7,7 +7,9 @@ import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import 'uikit/dist/css/uikit.min.css'
 import store from './store'
+import vueScrollto from 'vue-scrollto'
 
+Vue.use(vueScrollto)
 // loads the Icon plugin
 UIkit.use(Icons);
 Vue.config.productionTip = false
