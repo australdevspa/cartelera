@@ -35,19 +35,10 @@
             </div>
           </div>
 
-          <!--<div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-            <div class="uk-width-1-2@m"
-            v-for="(item, index) in salas"
-            :key="index">
-            <CardSala :sala="item"></CardSala>
-            </div>
-          </div>-->
-
           <div class="padCamaraButton">
             <div v-if="show">
               <router-link :to="{ path: '/visitaguiada'}" @click.native="estadoFalse" class="uk-button uk-button-secondary">Desactivar Scanner QR</router-link>
               <router-view></router-view>
-
             </div>
             <div v-else>
               <router-link v-scroll-to="'#abajo'" :to="{ path: '/visitaguiada/camara'}" @click.native="estadoTrue" class="uk-button uk-button-secondary">Activar Scanner QR</router-link>

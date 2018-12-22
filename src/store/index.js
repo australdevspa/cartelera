@@ -55,7 +55,9 @@ const state = {
 
     salas: [],
 
-    exposiciones: []
+    exposiciones: [],
+
+    estado_traduccion: false,
 };
 
 const actions = {
@@ -118,6 +120,14 @@ const actions = {
     loadExposiciones(context) {
         return getExposiciones()
             .then(exposiciones => context.commit('updateExposiciones', exposiciones));
+    },
+
+    loadTrue(context) {
+        context.commit('updateTrue')
+    },
+
+    loadFalse(context) {
+        context.commit('updateFalse')
     },
 };
 
@@ -254,6 +264,14 @@ const mutations = {
 
     updateExposiciones(state, exposiciones) {
         state.exposiciones = exposiciones;
+    },
+
+    updateTrue(state) {
+        state.estado_traduccion = true;
+    },
+
+    updateFalse(state) {
+        state.estado_traduccion = false;
     },
 }
 
