@@ -1,13 +1,12 @@
 import axios from 'axios';
 import moment from 'moment';
 moment.locale('es')
-
-//const API_URL_EXPO = 'https://engrane.ml/ccpm-api/public/api'
-const API_URL_EXPO = 'https://api-ccpm.engrane.ml/api'
-// metodo correspondiente a la vista de la visita guiada
+import {   
+    Endpoint
+} from '@/services/endpoints'
 
 function existeSlug(slug){
-    return axios.get(`${API_URL_EXPO}/exposiciones`)
+    return axios.get(`${Endpoint}/exposiciones`)
     .then(function (response) {
         var existe = false
         for (var i = 0; i < response.data.length ; i++) {
@@ -23,7 +22,7 @@ function existeSlug(slug){
 }
 
 function getExposicion(slug){
-    return axios.get(`${API_URL_EXPO}/exposiciones`)
+    return axios.get(`${Endpoint}/exposiciones`)
     .then(function (response) {
         var expo = []
         for (var i = 0; i < response.data.length ; i++) {
@@ -41,7 +40,7 @@ function getExposicion(slug){
 }
 
 function getExposiciones(){
-    return axios.get(`${API_URL_EXPO}/exposiciones`)
+    return axios.get(`${Endpoint}/exposiciones`)
     .then(function (response) {
         var expo = []
         for (var i = 0; i < response.data.length ; i++) {

@@ -1,13 +1,10 @@
 import axios from 'axios';
-import moment from 'moment';
-moment.locale('es')
-
-//const API_URL_SALAS = 'https://engrane.ml/ccpm-api/public/api'
-const API_URL_SALAS = 'https://api-ccpm.engrane.ml/api'
-// metodo correspondiente a la vista de la visita guiada
+import {   
+    Endpoint
+} from '@/services/endpoints'
 
 function getSalas(){
-    return axios.get(`${API_URL_SALAS}/salas`)
+    return axios.get(`${Endpoint}/salas`)
     .then(function (response) {
         return response.data;
     })

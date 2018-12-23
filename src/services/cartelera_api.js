@@ -1,12 +1,13 @@
 import axios from 'axios';
 import moment from 'moment';
 moment.locale('es')
-
-const API_URL = 'https://api-ccpm.engrane.ml/api'
+import {   
+    Endpoint
+} from '@/services/endpoints'
 
 //metodo que obtiene todos los datos correspondientes a la cartelera
 function getDataCartelera(){
-    return axios.get(`${API_URL}/actividades`)
+    return axios.get(`${Endpoint}/actividades`)
     .then(function (response) {
         
         //categorias
@@ -190,7 +191,8 @@ function diaSemana(inicio, fin) {
             return moment(inicio).format('dddd');
         }
     }
-    return moment(fecha).format('dddd');/*
+    //return moment(fecha).format('dddd');
+    /*
 // What day of the week is it?
 var day = "2018-12-16 13:30:00" // 5
 console.log( moment.weekdays[day] ); // Friday
@@ -270,7 +272,7 @@ function cuantoFalta(diferencia) {
 //metodo correspondiente a la vista de Evento
 
 function getEvento(id){
-    return axios.get(`${API_URL}/actividades`)
+    return axios.get(`${Endpoint}/actividades`)
     .then(function (response) {
         var evento = []
         for (var i = 0; i < response.data.length ; i++) {
@@ -280,16 +282,6 @@ function getEvento(id){
                 return evento;
             }
         }
-    })
-    .catch(function (error) {
-        return 'An error occured..' + error;
-    })
-}
-
-function getSalasz(){
-    return axios.get(`${API_URL}/salas`)
-    .then(function (response) {
-        return response.data;
     })
     .catch(function (error) {
         return 'An error occured..' + error;

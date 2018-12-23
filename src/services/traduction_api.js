@@ -1,12 +1,10 @@
 import axios from 'axios';
+import {   
+    Endpoint
+} from '@/services/endpoints'
 
-//const API_URL = 'https://engrane.ml/ccpm-api/public/api'
-
-const API_URL = 'https://api-ccpm.engrane.ml/api'
-
-//metodo que obtiene todos los datos correspondientes a la cartelera
 function getTraduction(id){
-    return axios.get(`${API_URL}/translate-actividad?id=`+id)
+    return axios.get(`${Endpoint}/translate-actividad?id=`+id)
     .then(function (response) {
         return response.data;
     })
