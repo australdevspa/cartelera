@@ -74,9 +74,13 @@ function fecha_rango(inicio, fin) {
 }
 
 function sala(lugar) {
-    var n = lugar.lastIndexOf(" -");
-    var nuevoExtracto = lugar.substring(0, n);
-    return nuevoExtracto;
+    if(lugar != null){
+        var n = lugar.lastIndexOf(" -");
+        var nuevoExtracto = lugar.substring(0, n);
+        return nuevoExtracto;
+    }else{
+        return "Sala Desconocida"
+    }
 }
 
 export {
