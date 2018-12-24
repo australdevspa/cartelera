@@ -5,7 +5,7 @@
         <nav class="uk-navbar-container" uk-navbar>
           <div class="uk-navbar-left">
             <router-link class="uk-navbar-item uk-logo" to="/">
-              <img src="../static/img/icons-ccpm/logo-ccpm-160x81.png" class="uk-margin-small-right">
+              <img src="../static/img/icons_ccpm/logo-ccpm-160x81.png" class="uk-margin-small-right">
             </router-link>
           </div>
           <div class="uk-navbar-right">
