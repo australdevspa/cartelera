@@ -26,7 +26,7 @@ export default new Router({
       component: EventoView
     },
     {
-      path: '/espaciosxxxx',
+      path: '/espacios',
       name: 'VisitaGuiada',
       component: VisitaGuiadaView,
       children: [
