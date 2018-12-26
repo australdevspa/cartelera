@@ -12,7 +12,7 @@
             <ul class="uk-navbar-nav uk-visible@m">
               <li><router-link to="/">Inicio</router-link></li>
               <li><router-link to="/cartelera">Cartelera</router-link></li>
-              <li><router-link to="/visitaguiada">Espacios</router-link></li>
+              <li><router-link to="/espacios">Espacios</router-link></li>
             </ul>
             <a class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon uk-toggle="target: #offcanvas-push"></a>
           </div>
@@ -24,7 +24,7 @@
             <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
             <li><router-link class="uk-offcanvas-close" to="/">Inicio</router-link></li>
             <li><router-link class="uk-offcanvas-close" to="/cartelera">Cartelera</router-link></li>
-            <li><router-link class="uk-offcanvas-close" to="/visitaguiada">Espacios</router-link></li>
+            <li><router-link class="uk-offcanvas-close" to="/espacios">Espacios</router-link></li>
             </ul>
           </div>
         </div>
