@@ -4,7 +4,7 @@
       <div class="uk-container uk-container-center uk-text-center">
         <form class="uk-form-stacked ">
           <div class="uk-margin">
-            <label class="uk-form-label uk-text-large">EspaciosX</label>
+            <label class="uk-form-label uk-text-large">Espacios</label>
           </div>
         </form>
 
