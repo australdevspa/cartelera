@@ -1,7 +1,7 @@
 <template>
   <div class="uk-card uk-card-default uk-card-body">
-    <h2>{{sala.sala}}</h2>
-    <p>{{sala.centro}}</p>
+    <h2 class="uk-margin-remove-bottom">{{sala.sala}}</h2>
+    <p class="uk-margin-remove-top">{{sala.centro}}</p>
 
     <div  v-for="(it, index) in filtro_por_actividades"
       :key="index"
@@ -72,5 +72,10 @@ export default {
 </script>
 
 <style scoped>
-
+.uk-margin-remove-bottom {
+    margin-bottom: 0!important;
+}
+.uk-margin-remove-top {
+    margin-top: 0!important;
+}
 </style>

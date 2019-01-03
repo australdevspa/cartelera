@@ -82,8 +82,9 @@
             <!--<p class="uk-text-small uk-text-muted">
               Publicado el: {{actividad.fecha_publicacion}}
             </p>-->
-          </div>
-      </div>
+        </div>
+   
+
   </div>
 </template>
 
@@ -101,7 +102,7 @@ export default {
 
 <style scoped>
 .label-date {
-  background: #555 !important;
+  background: #333 !important;
 }
 .uk-card-badge-left {
     position: absolute;
@@ -132,7 +133,7 @@ export default {
 	margin: auto;
 }
 .date .month {
-	background: #555;
+	background: #333;
 	display: block;
 	padding: 2px 0;
 	color: #fff;

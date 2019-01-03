@@ -1,5 +1,5 @@
 <template>
-  <section class="principal uk-section-muted">
+  <section class="principal">
     <div class="cuadro">
       <div class="uk-position-relative uk-visible-toggle uk-light visible-note oculto-note" uk-slideshow="animation: fade; autoplay: true;">
         <ul class="uk-slideshow-items">

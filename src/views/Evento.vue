@@ -1,13 +1,15 @@
 <template>
     <section>
         <div class="uk-container uk-container-center pad-top">
+            <ul class="uk-breadcrumb">
+                <li><router-link to="/cartelera" class="text-translate a-translate"><span uk-icon="chevron-left"></span>Volver atrás</router-link></li>
+            </ul>
             <div class="uk-card uk-card-default">
 
                 <div v-if="estado_traduccion === false">
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
-
                                 <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.nombre }}</h3>
                                 
                                 <div v-if="loading_detalles">
@@ -118,9 +120,119 @@ export default {
 </script>
 
 <style scoped>
+/* The ribbons */
+
+.corner-ribbon{
+          width: 10px;
+      height: 10px;
+      border-top: 100px solid #333;
+      border-left: 100px solid transparent;
+      position: absolute;
+
+
+  /*width: 200px;
+  background: #e43;
+  position: absolute;
+  top: 25px;
+  left: -50px;
+  text-align: center;
+  line-height: 50px;
+  letter-spacing: 1px;
+  color: #f0f0f0;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);*/
+}
+.corner-ribbon>p{
+
+
+  top: -80px;
+  left: -50px;
+  position: absolute;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  /*width: 200px;
+  background: #e43;
+  position: absolute;
+  top: 25px;
+  left: -50px;
+  text-align: center;
+  line-height: 50px;
+  letter-spacing: 1px;
+  color: #f0f0f0;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);*/
+}
+/* Custom styles */
+
+
+
+.corner-ribbon.shadow{
+  box-shadow: 0 0 3px rgba(0,0,0,.3);
+}
+
+/* Different positions */
+
+
+.corner-ribbon.top-right{
+    right: 0;
+ /* top: 25px;
+  right: -50px;
+  left: auto;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);*/
+}
+
+
+/*.arrow-right {
+      width: 0;
+      height: 0;
+      border-top: 100px solid #333;
+      border-left: 100px solid transparent;
+      position: absolute;
+      float: right;
+}
+
+/*.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-bottom: 80px solid transparent;
+
+	border-left: 80px solid #444;
+  margin-left: 0;
+  position: absolute;
+  top: 0;
+}*/
+
+/*.arrow-right::after {
+  background-color: transparent;
+  box-shadow: 0 6px 6px 1px black;
+  content: "";
+  display: block;
+  height: 0px;
+  left: -102px;
+  position: absolute;
+  top: 39px;
+  width: 115px;
+
+  
+  -webkit-transform: rotate(-45deg);
+}*/
+
+/*.arrow-right span {
+  color: #000;
+  font-family: sans-serif;
+  font-size: 1.005em;
+  left: 28px;
+  top: 78px;
+  /*position: absolute;*/
+  /*width: 80px;
+  float: right;
+}*/
+
+
 .pad-top {
-  margin-top: 30px !important;
-  margin-bottom: 30px !important;
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
 }
 .data >>> iframe {
   max-width: 100% !important;
@@ -133,5 +245,21 @@ export default {
 }
 .data >>> em {
   color: #666 !important;
+}
+.a-translate:link {
+  color: #999 !important;
+  text-decoration:none;
+}
+.a-translate:visited {
+  color: #999 !important;
+}
+.a-translate:hover {
+  color: #666 !important;
+}
+.a-translate:active {
+  color: #666 !important;
+}
+.text-translate {
+  color: #999 !important;
 }
 </style>

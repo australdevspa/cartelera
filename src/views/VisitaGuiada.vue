@@ -1,15 +1,14 @@
 <template>
   <section>
-    <div class="uk-section uk-section-muted">
+    <div class="uk-section">
       <div class="uk-container uk-container-center uk-text-center">
-        <form class="uk-form-stacked ">
+        <!--<form class="uk-form-stacked ">
           <div class="uk-margin">
             <label class="uk-form-label uk-text-large">Espacios</label>
           </div>
-        </form>
-
+        </form>-->
         <div v-if="loading">
-          <div class="pad-spinner uk-text-center uk-section-muted">
+          <div class="pad-spinner uk-text-center">
             <div uk-spinner="ratio: 4"/>
           </div>
         </div>
@@ -29,7 +28,7 @@
                 <div class="uk-width-1@m"
                   v-for="(item, index) in salas.slice(this.mitad,this.salas.length)"
                   :key="index">
-                  <CardSala :sala="item"></CardSala>
+                  <CardSala :sala="item" class="uk-box-shadow-medium"></CardSala>
                 </div>
               </div>
             </div>
@@ -37,17 +36,16 @@
 
           <div class="padCamaraButton">
             <div v-if="show">
-              <router-link :to="{ path: '/visitaguiada'}" @click.native="estadoFalse" class="uk-button uk-button-secondary">Desactivar Scanner QR</router-link>
+              <router-link :to="{ path: '/espacios'}" @click.native="estadoFalse" class="uk-button uk-button-secondary uk-button-large">Desactivar Scanner QR</router-link>
               <router-view></router-view>
             </div>
             <div v-else>
-              <router-link v-scroll-to="'#abajo'" :to="{ path: '/visitaguiada/camara'}" @click.native="estadoTrue" class="uk-button uk-button-secondary">Activar Scanner QR</router-link>
+              <router-link v-scroll-to="'#abajo'" :to="{ path: '/espacios/camara'}" @click.native="estadoTrue" class="uk-button uk-button-secondary uk-button-large">Activar Scanner QR</router-link>
             </div>
           </div>
         </div>
 
         <div id="abajo"></div>
-
       </div>
     </div>
   </section>
@@ -109,7 +107,56 @@ export default {
 </script>
 
 <style scoped>
+.pad-spinner {
+  padding-top: 25%;
+  padding-bottom: 25%;
+}
 .padCamaraButton{
   margin-top: 50px;
+}
+.uk-button-primary {
+    background-color: #19b868;
+    color: #fff !important;
+    border: 1px solid transparent;
+    background-image: linear-gradient(100deg,#A8DB5B 0,#19b868 35%,#4EC1B2 100%);
+}
+.uk-button {
+    /*margin: 0;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 20px;
+    vertical-align: middle;*/
+    padding: 0 20px;
+    font-size: 14px;
+    line-height: 42px;
+    /*text-align: center;
+    text-decoration: none;
+    transition: .1s ease-in-out;
+    transition-property: color,background-color,background-position,border-color,box-shadow;
+    background-origin: border-box;*/
+    border-radius: 500px;
+    letter-spacing: 1px !important;
+}
+.uk-button-secondary {
+    background: #a0a0a0 !important;
+    color: #fafafa !important;
+
+    /*background-color: #333;*/
+}
+.uk-button-secondary:hover {
+      background: #333 !important;
+    color: #fafafa !important;
+    /*background-color: #151515;*/
+}
+.uk-button-primary:hover {
+    background-color: #A8DB5B;
+    color: #fff;
+    border-color: transparent;
+    background-image: linear-gradient(100deg,#76C602 0,#19b868 35%,#00A28E 100%);
+    box-shadow: 0 8px 50px -6px rgba(84,84,120,.26);
 }
 </style>
