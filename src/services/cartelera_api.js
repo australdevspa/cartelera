@@ -55,6 +55,7 @@ function getDataCartelera(){
         var cartelera = []
         while(x < cartelera_total){
             setParametros(response.data[x])
+            /*setAttachments(response.data[x], response.data[x].id)*/
             cartelera.push(response.data[x])
             x++
         }
@@ -64,6 +65,7 @@ function getDataCartelera(){
                         cartelera_total: cartelera_total,
                         categorias: categorias,
                         categorias_total: categorias_total
+
                     }
 
         return final;
@@ -131,6 +133,17 @@ function setParametros(x){
     if(x.area_color == null){
         x.area_color = "#1e87f0"
     }
+}
+
+function setAttachments(x, id){
+    return axios.get(`${Endpoint}/attachments-actividad?id=`+id)
+    .then(function (response) {
+        x.images = response.data[0];
+        return x.images;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
 }
 
 function fecha_rango(inicio, fin) {

@@ -4,13 +4,15 @@
             <ul class="uk-breadcrumb">
                 <li><router-link to="/cartelera" class="text-translate a-translate"><span uk-icon="chevron-left"></span>Volver atrás</router-link></li>
             </ul>
-            <div class="uk-card uk-card-default">
+            <div class="uk-card uk-card-default parent">
+
+                <h4 class="ribbon">{{evento.cuanto_falta}} <br> {{evento.horario}} </h4>
 
                 <div v-if="estado_traduccion === false">
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.nombre }}</h3>
+                                <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.nombre }}</h3>
                                 
                                 <div v-if="loading_detalles">
                                     <div class="uk-text-center">
@@ -35,7 +37,7 @@
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
 
-                                <h3 class="uk-card-title uk-margin-remove-bottom" v-html= translate.title_en></h3>
+                                <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha" v-html= translate.title_en></h3>
                               
                                 <Detalles :actividad="evento" :actividad_translate="translate"></Detalles>
 
@@ -120,114 +122,50 @@ export default {
 </script>
 
 <style scoped>
-/* The ribbons */
-
-.corner-ribbon{
-          width: 10px;
-      height: 10px;
-      border-top: 100px solid #333;
-      border-left: 100px solid transparent;
-      position: absolute;
-
-
-  /*width: 200px;
-  background: #e43;
-  position: absolute;
-  top: 25px;
-  left: -50px;
-  text-align: center;
-  line-height: 50px;
-  letter-spacing: 1px;
-  color: #f0f0f0;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);*/
-}
-.corner-ribbon>p{
-
-
-  top: -80px;
-  left: -50px;
-  position: absolute;
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  /*width: 200px;
-  background: #e43;
-  position: absolute;
-  top: 25px;
-  left: -50px;
-  text-align: center;
-  line-height: 50px;
-  letter-spacing: 1px;
-  color: #f0f0f0;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);*/
-}
-/* Custom styles */
-
-
-
-.corner-ribbon.shadow{
-  box-shadow: 0 0 3px rgba(0,0,0,.3);
+.parent {
+  overflow: hidden; /* required */
+  /*width: 50%; /* for demo only */
+  /*height: 250px /* some non-zero number */;
+  /*margin: 25px auto; /* for demo only */
+  /*border:1px solid grey; /* for demo only */
+  /*position: relative; /* required  for demo*/
 }
 
-/* Different positions */
-
-
-.corner-ribbon.top-right{
-    right: 0;
- /* top: 25px;
-  right: -50px;
-  left: auto;
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);*/
-}
-
-
-/*.arrow-right {
-      width: 0;
-      height: 0;
-      border-top: 100px solid #333;
-      border-left: 100px solid transparent;
-      position: absolute;
-      float: right;
-}
-
-/*.arrow-right {
-	width: 0; 
-	height: 0; 
-	border-bottom: 80px solid transparent;
-
-	border-left: 80px solid #444;
-  margin-left: 0;
+.ribbon {
+  margin: 0;
+  padding: 0;
+  background: #19b868;
+  color:white;
+  /*padding:1em 0;*/
+  padding:10px;
   position: absolute;
-  top: 0;
-}*/
-
-/*.arrow-right::after {
-  background-color: transparent;
-  box-shadow: 0 6px 6px 1px black;
-  content: "";
-  display: block;
-  height: 0px;
-  left: -102px;
+  top:0;
+  right:0;
+  transform: translateX(30%) translateY(0%) rotate(45deg);
+  transform-origin: top left;
+}
+.ribbon:before,
+.ribbon:after {
+  content: '';
   position: absolute;
-  top: 39px;
-  width: 115px;
-
+  top:0;
+  margin: 0 -1px; /* tweak */
+  width: 150%;
+  height: 100%;
+  background: #19b868;
+  /*box-shadow: 0 0 8px rgba(0,0,0,.3);*/
   
-  -webkit-transform: rotate(-45deg);
-}*/
+}
+.ribbon:before {
+  right:100%;
+}
 
-/*.arrow-right span {
-  color: #000;
-  font-family: sans-serif;
-  font-size: 1.005em;
-  left: 28px;
-  top: 78px;
-  /*position: absolute;*/
-  /*width: 80px;
-  float: right;
-}*/
+.ribbon:after {
+  left:100%;
+  
+}
+
+
 
 
 .pad-top {
@@ -261,5 +199,8 @@ export default {
 }
 .text-translate {
   color: #999 !important;
+}
+.pad-derecha {
+ padding-right: 20%;
 }
 </style>

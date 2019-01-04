@@ -19,7 +19,7 @@
         <form class="uk-form-stacked">
           <div class="uk-margin">
             <div class="uk-text-center">
-              <ul class="grid">
+              <ul class="grid pad-ul">
                 <li>
 
                   <a href="" @click.prevent="showCartelera" class="uk-button uk-button-primary tm-button" v-on:click="setActive('todas')" :class="{ active: isActive('todas') }">
@@ -99,7 +99,7 @@
 
               <div class="pad-top">
                 <div v-if="cartelera_boton">
-                  <button class="uk-button uk-button-secondary" @click.prevent="cargarCartelera">Cargar más actividades</button>
+                  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarCartelera">Cargar más actividades</button>
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@
               
               <div class="pad-top">
                 <div v-if="cartelera_boton_filtered">
-                  <button class="uk-button uk-button-secondary" @click.prevent="cargarCarteleraBusqueda">Cargar más actividades</button>
+                  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarCarteleraBusqueda">Cargar más actividades</button>
                 </div>
               </div>
               
@@ -144,7 +144,7 @@
 
               <div class="pad-top">
                 <div v-if="por_categoria_boton">
-                  <button class="uk-button uk-button-secondary" @click.prevent="cargarPorCategoria(por_categoria[0].area)">Cargar más actividades</button>
+                  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarPorCategoria(por_categoria[0].area)">Cargar más actividades</button>
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@
               
               <div class="pad-top">
                 <div v-if="porcategoria_boton_filtered">
-                  <button class="uk-button uk-button-secondary" @click.prevent="cargarPorCategoriaBusqueda">Cargar más actividades</button>
+                  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarPorCategoriaBusqueda">Cargar más actividades</button>
                 </div>
               </div>
               
@@ -566,5 +566,58 @@ background: #fafafa !important;
 }
 .estilo-nuevo {
   background: black !important;
+}
+.uk-button-x {
+  margin: 0;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+    -webkit-transition-property: color,background-color,border-color;
+    transition-property: color,background-color,border-color;
+
+    /*margin: 0;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 20px;
+    vertical-align: middle;*/
+    padding: 0 20px;
+    font-size: 14px;
+    line-height: 42px;
+    /*text-align: center;
+    text-decoration: none;
+    transition: .1s ease-in-out;
+    transition-property: color,background-color,background-position,border-color,box-shadow;
+    background-origin: border-box;*/
+    border-radius: 500px;
+    letter-spacing: 1px !important;
+}
+.uk-button-secondary {
+    background: #a0a0a0 !important;
+    color: #fafafa !important;
+
+    /*background-color: #333;*/
+}
+.uk-button-secondary:hover {
+      background: #333 !important;
+    color: #fafafa !important;
+    /*background-color: #151515;*/
+}
+.pad-ul {
+  padding-left: 0 !important;
 }
 </style>

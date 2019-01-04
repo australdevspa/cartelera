@@ -2,8 +2,21 @@
     <div v-if="actividad_translate.note_en !== null">                        
         <div v-if="estado_traduccion">
             <a href="" @click.prevent="espanol" class="text-translate a-translate">(Original Text)</a>
-
-            <ul uk-accordion="multiple: true">
+            <div class="mar-div">
+                <p class="uk-text-meta mar-p">{{ actividad.fecha_inicio_formato }}</p>
+                <p class="uk-text-meta mar-p">{{ actividad.donde }}.</p>
+                <p class="uk-text-meta mar-p">Price {{ actividad.entrada }}</p>
+            </div>
+            <div class="mar-div" v-if="actividad_translate.tts_en !== null">
+                <aplayer :music="{
+                        title: 'Audio',
+                        artist: 'English',
+                        src: ''+actividad_translate.tts_en,
+                        pic: '../static/img/default/cover.jpg'
+                    }"
+                />
+            </div>
+            <!--<ul uk-accordion="multiple: true">
                 <li>
                     <a class="uk-accordion-title" href="#">More Details</a>
                     <div class="uk-accordion-content">
@@ -13,9 +26,9 @@
                         <p class="uk-text-meta mar-p">Place: {{ actividad.donde }}.</p>
                     </div>
                 </li>
-            </ul>
+            </ul>-->
 
-            <ul v-if="actividad_translate.url_audio_note_en !== null" uk-accordion="multiple: true">
+            <!--<ul v-if="actividad_translate.url_audio_note_en !== null" uk-accordion="multiple: true">
                 <li>
                     <a class="uk-accordion-title" href="#">Audios</a>
                     <div class="uk-accordion-content">
@@ -35,13 +48,26 @@
                         />
                     </div>
                 </li>
-            </ul>
+            </ul>-->
         </div>
         
         <div v-else>
             <a href="" @click.prevent="ingles" class="text-translate a-translate">(English Version)</a>
-
-            <ul uk-accordion="multiple: true">
+            <div class="mar-div">
+                <p class="uk-text-meta mar-p">{{ actividad.fecha_inicio_formato }}</p>
+                <p class="uk-text-meta mar-p">{{ actividad.donde }}</p>
+                <p class="uk-text-meta mar-p">Entrada {{ actividad.entrada }}</p>
+            </div>
+            <div class="mar-div" v-if="actividad_translate.tts_es !== null">
+                <aplayer :music="{
+                        title: 'Audio',
+                        artist: 'Español',
+                        src: ''+actividad_translate.tts_es,
+                        pic: '../static/img/default/cover.jpg'
+                    }"
+                />
+            </div>
+            <!--<ul uk-accordion="multiple: true">
                 <li>
                     <a class="uk-accordion-title" href="#">Más Detalles</a>
                     <div class="uk-accordion-content">
@@ -51,9 +77,9 @@
                         <p class="uk-text-meta mar-p">Lugar: {{ actividad.donde }}.</p>
                     </div>
                 </li>
-            </ul>
+            </ul>-->
 
-            <ul v-if="actividad_translate.url_audio_note_en !== null" uk-accordion="multiple: true">
+            <!--<ul v-if="actividad_translate.url_audio_note_en !== null" uk-accordion="multiple: true">
                 <li>
                     <a class="uk-accordion-title" href="#">Audios</a>
                     <div class="uk-accordion-content">
@@ -73,7 +99,7 @@
                         />
                     </div>
                 </li>
-            </ul>
+            </ul>-->
         </div>
 
     </div>
@@ -132,5 +158,9 @@ export default {
 }
 .text-translate {
   color: #999 !important;
+}
+.mar-div {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
 }
 </style>
