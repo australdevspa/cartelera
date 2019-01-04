@@ -135,7 +135,7 @@ function setParametros(x){
     }
 }
 
-function setAttachments(x, id){
+/*function setAttachments(x, id){
     return axios.get(`${Endpoint}/attachments-actividad?id=`+id)
     .then(function (response) {
         x.images = response.data[0];
@@ -144,7 +144,7 @@ function setAttachments(x, id){
     .catch(function (error) {
         return 'An error occured..' + error;
     })
-}
+}*/
 
 function fecha_rango(inicio, fin) {
     var fecha_actual = moment().format('DD/MM/YYYY')
