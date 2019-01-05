@@ -3,9 +3,9 @@
         <div v-if="estado_traduccion">
             <a href="" @click.prevent="espanol" class="text-translate a-translate">(Original Text)</a>
             <div class="mar-div">
-                <p class="uk-text-meta mar-p">{{ actividad.fecha_inicio_formato }}</p>
-                <p class="uk-text-meta mar-p">{{ actividad.donde }}.</p>
-                <p class="uk-text-meta mar-p">Price {{ actividad.entrada }}</p>
+                <p class="mar-p">{{ actividad.fecha_inicio_formato }}</p>
+                <p class="mar-p">{{ actividad.donde }}.</p>
+                <p class="mar-p">Price {{ actividad.entrada }}</p>
             </div>
             <div class="mar-div" v-if="actividad_translate.tts_en !== null">
                 <aplayer :music="{

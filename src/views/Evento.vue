@@ -2,7 +2,8 @@
     <section>
         <div class="uk-container uk-container-center pad-top">
             <ul class="uk-breadcrumb">
-                <li><router-link to="/cartelera" class="text-translate a-translate"><span uk-icon="chevron-left"></span>Volver atrás</router-link></li>
+                 <button class="uk-button-x uk-button-secondary uk-button-large"><span uk-icon="chevron-left" class="bold-icon"></span>Volver atrás</button>
+                <!--<li><router-link to="/cartelera" class="text-translate a-translate"><span uk-icon="chevron-left"></span>Volver atrás</router-link></li>-->
             </ul>
             <div class="uk-card uk-card-default parent">
 
@@ -137,12 +138,13 @@ export default {
   background: #19b868;
   color:white;
   /*padding:1em 0;*/
-  padding:10px;
+  padding:5px;
   position: absolute;
   top:0;
   right:0;
   transform: translateX(30%) translateY(0%) rotate(45deg);
   transform-origin: top left;
+  font-weight: bold;
 }
 .ribbon:before,
 .ribbon:after {
@@ -202,5 +204,62 @@ export default {
 }
 .pad-derecha {
  padding-right: 20%;
+}
+.uk-card-default {
+    color: #333 !important;
+}
+
+.uk-button-x {
+  margin: 0;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+    -webkit-transition-property: color,background-color,border-color;
+    transition-property: color,background-color,border-color;
+
+    /*margin: 0;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 20px;
+    vertical-align: middle;*/
+    padding: 0 10px;
+    font-size: 10px;
+    line-height: 42px;
+    /*text-align: center;
+    text-decoration: none;
+    transition: .1s ease-in-out;
+    transition-property: color,background-color,background-position,border-color,box-shadow;
+    background-origin: border-box;*/
+    border-radius: 500px;
+    letter-spacing: 1px !important;
+}
+.uk-button-secondary {
+    background: #a0a0a0 !important;
+    color: #fafafa !important;
+
+    /*background-color: #333;*/
+}
+.uk-button-secondary:hover {
+      background: #333 !important;
+    color: #fafafa !important;
+    /*background-color: #151515;*/
+}
+.bold-icon {
+    color: #fafafa;
 }
 </style>
