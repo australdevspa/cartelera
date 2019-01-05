@@ -10,11 +10,18 @@
                     <img src="../static/img/icons_ccpm/logo-ccpm-160x81.png" class="uk-margin-small-right" v-on:click="setActive('')" :class="{ active: isActive('') }">
                   </router-link>
                 </div>
-                <div class="uk-navbar-right">                               
-                  <ul class="uk-navbar-nav">
-                    <li><router-link to="/cartelera" class="uk-button x-button" v-on:click="setActive('cartelera')" :class="{ active: isActive('cartelera') }">Cartelera</router-link></li>
-                    <li><router-link to="/espacios" class="uk-button x-button" v-on:click="setActive('espacios')" :class="{ active: isActive('espacios') }">Espacios</router-link></li>
-                  </ul>
+                <div class="uk-navbar-center">                               
+                  <div class="uk-navbar-item">
+                    <router-link to="/cartelera" class="uk-button-x uk-button-secondary uk-button-large" v-on:click="setActive('cartelera')" :class="{ active: isActive('cartelera') }">Cartelera</router-link>
+                  </div>
+                </div>  
+                <div class="uk-navbar-right">  
+                  <div class="uk-navbar-item">
+                    <router-link to="/espacios" class="uk-button-x uk-button-secondary uk-button-large" v-on:click="setActive('espacios')" :class="{ active: isActive('espacios') }">Espacios</router-link>
+                  </div>                
+                  <!--<ul class="uk-navbar-nav_item">
+                    <li><router-link to="/espacios" class="uk-button uk-button-secondary uk-button-large" v-on:click="setActive('espacios')" :class="{ active: isActive('espacios') }">Espacios</router-link></li>
+                  </ul>-->
                 </div>  
               </nav>
           </div>
@@ -74,7 +81,7 @@ export default {
 
 <style scoped>
 .uk-navbar-container {
-  background: #fff;
+  background: #f8f8f8;
   box-shadow: 0 2px 5px 0 rgba(30,30,30,.09);
 }
 .uk-navbar-sticky {
@@ -91,6 +98,11 @@ export default {
   right: 0px;
   border-top: 2px solid #19b868;
   color: #333 !important;
+  background: #19b868;
+}
+.uk-navbar-item>a.router-link-active {
+      background: #19b868 !important;
+    color: white !important;
 }
 .pad-spinner {
   padding-top: 25%;
@@ -99,5 +111,58 @@ export default {
 .box {
   background: #fafafa;
   box-shadow: inset 0 2px 5px 0 rgba(30,30,30,.09);
+}
+.uk-button-x {
+  margin: 0;
+  font-weight: bold !important;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+    -webkit-transition-property: color,background-color,border-color;
+    transition-property: color,background-color,border-color;
+
+    /*margin: 0;
+    border: none;
+    overflow: visible;
+    font: inherit;
+    color: inherit;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 20px;
+    vertical-align: middle;*/
+    padding: 0 20px;
+    font-size: 14px;
+    line-height: 42px;
+    /*text-align: center;
+    text-decoration: none;
+    transition: .1s ease-in-out;
+    transition-property: color,background-color,background-position,border-color,box-shadow;
+    background-origin: border-box;*/
+    border-radius: 5px;
+    letter-spacing: 1px !important;
+    box-shadow: 0 2px 10px 0 rgba(30,30,30,.09);
+}
+.uk-button-secondary {
+    background: white !important;
+    color: #19b868 !important;
+
+    /*background-color: #333;*/
+}
+.uk-button-secondary:hover {
+      background: #19b868 !important;
+    color: white !important;
+
+    /*background-color: #151515;*/
 }
 </style>
