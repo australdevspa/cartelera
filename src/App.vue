@@ -7,17 +7,17 @@
               <nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;,&quot;boundary&quot;:&quot;!.uk-navbar-container&quot;,&quot;dropbar&quot;:true,&quot;dropbar-anchor&quot;:&quot;!.uk-navbar-container&quot;,&quot;dropbar-mode&quot;:&quot;slide&quot;}">
                 <div class="uk-navbar-left">
                   <router-link class="uk-navbar-item uk-logo" to="/">
-                    <img src="../static/img/icons_ccpm/logo-ccpm-160x81.png" class="uk-margin-small-right" v-on:click="setActive('')" :class="{ active: isActive('') }">
+                    <img src="../static/img/icons_ccpm/logo-ccpm-160x81.png" class="tamaño_logo uk-margin-small-right" v-on:click="setActive('')" :class="{ active: isActive('') }">
                   </router-link>
                 </div>
                 <div class="uk-navbar-center">                               
                   <div class="uk-navbar-item">
-                    <router-link to="/cartelera" class="uk-button-x uk-button-secondary uk-button-large" v-on:click="setActive('cartelera')" :class="{ active: isActive('cartelera') }">Cartelera</router-link>
+                    <router-link to="/cartelera" class="tamaño uk-button-x uk-button-secondary uk-button-large" v-on:click="setActive('cartelera')" :class="{ active: isActive('cartelera') }">Cartelera</router-link>
                   </div>
                 </div>  
                 <div class="uk-navbar-right">  
                   <div class="uk-navbar-item">
-                    <router-link to="/espacios" class="uk-button-x uk-button-secondary uk-button-large" v-on:click="setActive('espacios')" :class="{ active: isActive('espacios') }">Espacios</router-link>
+                    <router-link to="/espacios" class="tamaño uk-button-x uk-button-secondary uk-button-large" v-on:click="setActive('espacios')" :class="{ active: isActive('espacios') }">Espacios</router-link>
                   </div>                
                   <!--<ul class="uk-navbar-nav_item">
                     <li><router-link to="/espacios" class="uk-button uk-button-secondary uk-button-large" v-on:click="setActive('espacios')" :class="{ active: isActive('espacios') }">Espacios</router-link></li>
@@ -164,5 +164,14 @@ export default {
     color: white !important;
 
     /*background-color: #151515;*/
+}
+@media only screen and (max-width: 480px) {
+  .tamaño {
+    font-size: calc(4px + 2vw) !important;
+    padding: 0 calc(4px + 2vw) !important;
+  }
+  .tamaño_logo {
+    height: calc(40px + 2vw) !important;
+  }
 }
 </style>
