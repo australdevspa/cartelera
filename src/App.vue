@@ -167,11 +167,20 @@ export default {
 }
 @media only screen and (max-width: 480px) {
   .tamaño {
-    font-size: calc(4px + 2vw) !important;
     padding: 0 calc(4px + 2vw) !important;
   }
   .tamaño_logo {
     height: calc(40px + 2vw) !important;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .tamaño {
+    font-size: calc(5px + 2vw) !important;
+  }
+}
+@media only screen and (min-width: 481px) and (max-width: 550px){
+  .tamaño_logo {
+    height: calc(60px + 2vw) !important;
   }
 }
 </style>
