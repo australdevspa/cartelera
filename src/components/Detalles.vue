@@ -3,7 +3,7 @@
         <div v-if="estado_traduccion">
             <a href="" @click.prevent="espanol" class="text-translate a-translate">(Original Text)</a>
             <div class="mar-div">
-                <p class="mar-p">{{ actividad.fecha_inicio_formato }}</p>
+                <p class="mar-p ">{{ actividad.fecha_inicio_formato }}</p>
                 <p class="mar-p">{{ actividad.donde }}.</p>
                 <p class="mar-p">Price {{ actividad.entrada }}</p>
             </div>
@@ -142,6 +142,7 @@ export default {
 .mar-p {
   margin-top: 5px !important;
   margin-bottom: 5px !important;
+  color: #333 !important;
 }
 .a-translate:link {
   color: #999 !important;

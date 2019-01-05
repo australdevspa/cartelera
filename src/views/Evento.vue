@@ -260,6 +260,6 @@ export default {
     /*background-color: #151515;*/
 }
 .bold-icon {
-    color: #fafafa;
+    color: #fafafa !important;
 }
 </style>
