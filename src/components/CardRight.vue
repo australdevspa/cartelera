@@ -1,6 +1,10 @@
 <template>
-  <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover" uk-grid>
+  <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover parent" uk-grid>
+     
       <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
+
+        <h4 class="ribbon">{{ actividad.cuanto_falta }}</h4>
+
           <img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
             style="
               max-width: none;
@@ -16,9 +20,9 @@
             <div class="uk-card-badge-left uk-label" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
               {{ actividad.area }}
             </div>
-            <div class="uk-card-badge uk-label label-date" :style="{ fontWeight: 900 }">
+            <!--<div class="uk-card-badge uk-label label-date" :style="{ fontWeight: 900 }">
               {{ actividad.cuanto_falta }}
-            </div>
+            </div>-->
 
             <div class="visible-note oculto-note">
               <div class="date centro">
@@ -101,6 +105,51 @@ export default {
 </script>
 
 <style scoped>
+.parent {
+  overflow: hidden; /* required */
+  /*width: 50%; /* for demo only */
+  /*height: 250px /* some non-zero number */;
+  /*margin: 25px auto; /* for demo only */
+  /*border:1px solid grey; /* for demo only */
+  /*position: relative; /* required  for demo*/
+}
+
+.ribbon {
+  margin: 0;
+  padding: 0;
+  background: #19b868;
+  color:white;
+  /*padding:1em 0;*/
+  padding:5px;
+  position: absolute;
+  top:0;
+  right:0;
+  transform: translateX(30%) translateY(0%) rotate(45deg);
+  transform-origin: top left;
+  z-index: 5;
+  font-weight: bold;
+}
+.ribbon:before,
+.ribbon:after {
+  content: '';
+  position: absolute;
+  top:0;
+  margin: 0 -1px; /* tweak */
+  width: 150%;
+  height: 100%;
+  background: #19b868;
+  /*box-shadow: 0 0 8px rgba(0,0,0,.3);*/
+  
+}
+.ribbon:before {
+  right:100%;
+}
+
+.ribbon:after {
+  left:100%;
+  
+}
+
 .label-date {
   background: #333 !important;
 }
