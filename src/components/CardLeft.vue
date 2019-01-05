@@ -1,7 +1,21 @@
 <template>
   <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover" uk-grid>
       <div class="uk-card-media-left uk-cover-container">
-          <img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
+
+              <div v-if="loading_detalles">
+            <div class="uk-text-center">
+                <div uk-spinner="ratio: 2" style="
+              max-width: none;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              -webkit-transform: translate(-50%,-50%);
+              transform: translate(-50%,-50%);"/>
+            </div>
+        </div>
+        <div v-else>
+          <div v-if="covers_original_size === null">
+<img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
             style="
               max-width: none;
               position: absolute;
@@ -9,6 +23,19 @@
               top: 50%;
               -webkit-transform: translate(-50%,-50%);
               transform: translate(-50%,-50%);" >
+          </div>
+           <div v-else>
+            <Images :shiet="covers" :original="cover_original_size" :grid="cover_grid_size" class="cursor"></Images>
+           </div>
+        </div>
+          <!--<img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
+            style="
+              max-width: none;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              -webkit-transform: translate(-50%,-50%);
+              transform: translate(-50%,-50%);" >-->
           <canvas width="600" height="300"></canvas>
       </div>
       <div>
@@ -87,12 +114,42 @@
 </template>
 
 <script>
+import Images from '@/components/Images'
 export default {
   name: 'CardLeft',
+  components: {
+    Images  
+  },
+  data() {
+    return {
+        loading_detalles: true,
+                cover_id: '',
+        cover_original_size: '',
+        cover_grid_size: ''
+    }
+  },
   props: {
     actividad: {
       type: Object,
       required: true
+    }
+  },
+  created () {
+    this.$store.dispatch('loadCovers', this.actividad.id)
+                .then(response => {
+                this.loading_detalles = false;
+                                this.cover_id = this.$store.state.covers[0].id;
+                this.cover_original_size = this.$store.state.covers[0].original_size;
+                this.cover_grid_size = this.$store.state.covers[0].grid_size;
+            })
+            .catch(error => {
+                this.loading_detalles= true;
+            })
+  },
+  computed:
+  {
+    covers() {
+      return this.$store.state.covers[0];
     }
   }
 }
@@ -207,14 +264,24 @@ export default {
   margin-left: auto !important;
   margin-right: auto !important;
 }
-@media only screen and (max-width: 639px) {
+/*@media only screen and (max-width: 639px) {
   .img-tamaño-1 {
     width: 700px !important;
+  }
+}*/
+/*@media only screen and (min-width: 640px) and (max-width: 959px) {
+  .img-tamaño-1 {
+    height: 750px !important;
+  }
+}*/
+@media only screen and (max-width: 639px) {
+  .img-tamaño-1 {
+    width: 600px !important;
   }
 }
 @media only screen and (min-width: 640px) and (max-width: 959px) {
   .img-tamaño-1 {
-    height: 750px !important;
+    height: 700px !important;
   }
 }
 @media only screen and (min-width: 960px) {

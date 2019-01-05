@@ -15,6 +15,9 @@ import {
 import {
     getSalas
 } from '@/services/salas'
+import {
+    getCovers
+} from '@/services/img'
 
 Vue.use(Vuex);
 
@@ -58,6 +61,9 @@ const state = {
     exposiciones: [],
 
     estado_traduccion: false,
+
+    covers: [],
+    covers_array: []
 };
 
 const actions = {
@@ -128,6 +134,21 @@ const actions = {
 
     loadFalse(context) {
         context.commit('updateFalse')
+    },
+
+    /*loadImagenes(context, id) {
+        return getAttachments(id)
+            .then(imagenes => context.commit('updateImagenes', imagenes));
+    },*/
+
+    loadCovers(context, id) {
+        return getCovers(id)
+            .then(covers => context.commit('updateCovers', covers));
+    },
+
+    loadCoversArray(context, id) {
+        return getCovers(id)
+            .then(covers_array => context.commit('updateCoversArray', covers_array));
     },
 };
 
@@ -272,6 +293,19 @@ const mutations = {
 
     updateFalse(state) {
         state.estado_traduccion = false;
+    },
+
+    updateTranslate(state, imagenes) {
+        state.imagenes = imagenes;
+    },
+
+    updateCovers(state, covers) {
+        state.covers = covers;
+    },
+
+    updateCoversArray(state, covers_array) {
+        state.covers_array.push(covers_array);
+        //state.covers_array = covers_array;
     },
 }
 

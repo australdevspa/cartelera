@@ -9,7 +9,7 @@ import {
 function getDataCartelera(){
     return axios.get(`${Endpoint}/actividades`)
     .then(function (response) {
-        
+        /*(async () => { console.log(await asyncFun()) })()*/
         //categorias
         var flags = []
         var categorias = {}
@@ -55,6 +55,9 @@ function getDataCartelera(){
         var cartelera = []
         while(x < cartelera_total){
             setParametros(response.data[x])
+        
+            /*(async () => { await setAttachments(response.data[x], response.data[x].id) })()*/
+            
             /*setAttachments(response.data[x], response.data[x].id)*/
             cartelera.push(response.data[x])
             x++
@@ -74,6 +77,11 @@ function getDataCartelera(){
         return 'An error occured..' + error;
     })
 }
+
+/*async function asyncFun () {
+    var value = 10
+    return value
+  }*/
 
 //Asignacion y modificacion de parametros a los objetos de la api
 function setParametros(x){
@@ -135,16 +143,16 @@ function setParametros(x){
     }
 }
 
-/*function setAttachments(x, id){
+async function setAttachments(x, id){
     return axios.get(`${Endpoint}/attachments-actividad?id=`+id)
     .then(function (response) {
-        x.images = response.data[0];
+        x.images = response.data[0].original_size;
         return x.images;
     })
     .catch(function (error) {
         return 'An error occured..' + error;
     })
-}*/
+}
 
 function fecha_rango(inicio, fin) {
     var fecha_actual = moment().format('DD/MM/YYYY')
