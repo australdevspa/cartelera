@@ -31,7 +31,7 @@
                 <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
                 <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
               </div>
-              <h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>
+              <h3 @click.prevent="goToActividad(actividad)" class="uk-card-title sinmar titulo cursor"> {{ actividad.nombre }}</h3>
               <!--<h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>-->
               <div class="mar-badge">
                 <!--<div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
@@ -56,7 +56,9 @@
                   </div>
                 </div>
                 <div class="uk-width-expand">
-                  <h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>
+                  <h3 @click.prevent="goToActividad(actividad)" class="uk-card-title sinmar font-tamaño titulo cursor"> {{ actividad.nombre }}</h3>
+                  
+                  <!--<h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>-->
                   <!--<h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>-->
                 </div>
               </div>
@@ -101,11 +103,28 @@ export default {
       type: Object,
       required: true
     }
+  },
+    methods: {
+    goToActividad (actividad) {
+      this.$router.push({
+        params: {
+          id: actividad.slug,
+          evento: actividad
+        },
+        name: 'Evento'
+      })
+    },
   }
 }
 </script>
 
 <style scoped>
+.titulo:hover {
+  color: #19b868;
+}
+.cursor {
+    cursor:pointer;
+}
 .parent {
   overflow: hidden; /* required */
   /*width: 50%; /* for demo only */
