@@ -139,7 +139,7 @@ export default {
   margin: 25px !important;
 }
 .sala-estilo {
-  color: white;
+  color: white !important;
   margin: 10px !important;
 }
 .sala-titulo {
