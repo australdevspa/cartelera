@@ -8,7 +8,8 @@
             </ul>
             <div class="uk-card uk-card-default parent">
 
-                <h4 class="ribbon">{{evento.cuanto_falta}} <br> {{evento.horario}} </h4>
+                <!--<h4 class="ribbon">{{evento.cuanto_falta}} <br> {{evento.horario}} </h4>-->
+                <h4 class="ribbon">{{evento.cuanto_moment}} <br> {{evento.horario}} </h4>
 
                 <div v-if="estado_traduccion === false">
                     <div class="uk-card-header">
@@ -146,6 +147,7 @@ export default {
   transform: translateX(30%) translateY(0%) rotate(45deg);
   transform-origin: top left;
   font-weight: bold;
+  text-align: center;
 }
 .ribbon:before,
 .ribbon:after {
@@ -188,20 +190,20 @@ export default {
   color: #666 !important;
 }
 .a-translate:link {
-  color: #999 !important;
+  color: #666 !important;
   text-decoration:none;
 }
 .a-translate:visited {
-  color: #999 !important;
+  color: #666 !important;
 }
 .a-translate:hover {
-  color: #666 !important;
+  color: #333 !important;
 }
 .a-translate:active {
-  color: #666 !important;
+  color: #333 !important;
 }
 .text-translate {
-  color: #999 !important;
+  color: #666 !important;
 }
 .pad-derecha {
  padding-right: 20%;

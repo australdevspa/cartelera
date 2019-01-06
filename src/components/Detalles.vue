@@ -144,7 +144,7 @@ export default {
   margin-bottom: 5px !important;
   color: #333 !important;
 }
-.a-translate:link {
+/*.a-translate:link {
   color: #999 !important;
   text-decoration:none;
 }
@@ -159,6 +159,22 @@ export default {
 }
 .text-translate {
   color: #999 !important;
+}*/
+.a-translate:link {
+  color: #666 !important;
+  text-decoration:none;
+}
+.a-translate:visited {
+  color: #666 !important;
+}
+.a-translate:hover {
+  color: #333 !important;
+}
+.a-translate:active {
+  color: #333 !important;
+}
+.text-translate {
+  color: #666 !important;
 }
 .mar-div {
   margin-top: 15px !important;

@@ -2,7 +2,8 @@
   <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover parent" uk-grid>
       <div class="uk-card-media-left uk-cover-container">
 
-        <h4 class="ribbon">{{ actividad.cuanto_falta }}</h4>
+        <!--<h4 class="ribbon">{{ actividad.cuanto_falta }}</h4>-->
+        <h4 class="ribbon">{{ actividad.cuanto_moment }}</h4>
 
           <img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
             style="

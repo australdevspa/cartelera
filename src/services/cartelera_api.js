@@ -103,6 +103,7 @@ function setParametros(x){
         x.trozo_card = acortarCard(x.nombre);
 
         x.cuanto_falta = cuantoFalta(x.diff)
+        x.cuanto_moment = cuantoMoment(x.fecha_ini);
         //x.cuanto_falta = cuantoFalta(x.fecha_ini)
     }else{
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
@@ -127,7 +128,12 @@ function setParametros(x){
         x.trozo = acortar(x.nombre);
         x.trozo_card = acortarCard(x.nombre);
         
-        x.cuanto_falta = cuantoFalta(x.diff)
+        x.cuanto_falta = cuantoFalta(x.diff);
+        /*x.moment = moment().add(1, 'd').calendar();
+        x.moment_x = moment(x.fecha_ini).endOf('days').fromNow();
+        x.moment_y = moment("2019-01-05").startOf('days').fromNow();*/
+
+        x.cuanto_moment = cuantoMoment(x.fecha_ini);
         //x.cuanto_falta = cuantoFalta(x.fecha_ini)
     }
     if(x.area_color == null){
@@ -248,6 +254,52 @@ function cuantoFalta(diferencia) {
     }else{
         return 'En '+ diferencia +' días'
     }
+}
+
+function cuantoMoment(date) {
+    
+    // get from-now for this date
+    var fromNow = moment( date ).fromNow();
+
+    moment.updateLocale('es', {
+        calendar : {
+            lastDay : '[Ayer]',
+            sameDay : '[Hoy]',
+            /*sameDay: function (now) {
+                if (this.isBefore(now)) {
+                  return '[Will Happen Today]';
+                } else {
+                  return '[Happened Today]';
+                }},*/
+            nextDay : '[Mañana]',
+            lastWeek : '[Pasado] dddd',
+            nextWeek : '[Próximo] dddd',
+            //sameElse : 'DD/MM/YYYY',
+            sameElse: function () {
+                return "[" + fromNow + "]";
+            }
+        }
+    });
+    
+    /*moment.updateLocale('fr', {
+        calendar : {
+            lastDay : '[Hier]',
+            sameDay : '[Aujourd’hui] L',
+            nextDay : '[Demain]',
+            lastWeek : 'll',
+            nextWeek : 'll',
+            sameElse : 'll'
+        }
+    });*/
+    /*var date = moment().startOf('day');
+    return date;*/
+    //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          return date.locale('es').calendar();
+    //return date.locale('es').calendar();
+    //var today2 = moment().startOf('day');
+    //return today2.locale('es').calendar();
+
+    return moment(date).startOf('days').locale('es').calendar();
+    //console.log(today2.locale('fr').calendar());
 }
 
 // funciones momentjs

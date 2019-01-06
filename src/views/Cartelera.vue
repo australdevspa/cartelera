@@ -488,7 +488,7 @@ background: #fafafa !important;
   /*-webkit-transform: translateY(-10%);
   -ms-transform: translateY(-10%);
   transform: translateY(-10%);*/
-  z-index: 3;
+  z-index: 6;
   /*margin-left: 20px;*/
       right: 20px;
 }
