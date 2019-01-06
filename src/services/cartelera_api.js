@@ -104,6 +104,7 @@ function setParametros(x){
 
         x.cuanto_falta = cuantoFalta(x.diff)
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
+        x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
         //x.cuanto_falta = cuantoFalta(x.fecha_ini)
     }else{
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
@@ -134,6 +135,7 @@ function setParametros(x){
         x.moment_y = moment("2019-01-05").startOf('days').fromNow();*/
 
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
+        x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
         //x.cuanto_falta = cuantoFalta(x.fecha_ini)
     }
     if(x.area_color == null){
@@ -259,7 +261,7 @@ function cuantoFalta(diferencia) {
 function cuantoMoment(date) {
     
     // get from-now for this date
-    var fromNow = moment( date ).fromNow();
+    //var fromNow = moment( date ).fromNow();
 
     moment.updateLocale('es', {
         calendar : {
@@ -276,6 +278,7 @@ function cuantoMoment(date) {
             nextWeek : '[Próximo] dddd',
             //sameElse : 'DD/MM/YYYY',
             sameElse: function () {
+                var fromNow = moment( date ).fromNow();
                 return "[" + fromNow + "]";
             }
         }
@@ -300,6 +303,34 @@ function cuantoMoment(date) {
 
     return moment(date).startOf('days').locale('es').calendar();
     //console.log(today2.locale('fr').calendar());
+}
+
+function cuantoMomentEn(date) {
+    
+    //var fromNow = moment( date ).lang("en").fromNow();
+
+    moment.updateLocale('en', {
+        calendar : {
+            lastDay : '[Yesterday]',
+            sameDay : '[Today]',
+            /*sameDay: function (now) {
+                if (this.isBefore(now)) {
+                  return '[Will Happen Today]';
+                } else {
+                  return '[Happened Today]';
+                }},*/
+            nextDay : '[Tomorrow]',
+            lastWeek : '[Last] dddd',
+            nextWeek : '[Next] dddd',
+            //sameElse : 'DD/MM/YYYY',
+            sameElse: function () {
+                var fromNow = moment( date ).fromNow();
+                return "[" + fromNow + "]";
+            }
+        }
+    });
+
+    return moment(date).startOf('days').locale('en').calendar();
 }
 
 // funciones momentjs
