@@ -5,7 +5,7 @@
           Hoy <br> {{carta.horario}}
         </div>
         <div class="uk-width-expand@s">
-          <div class="cursor titulo" @click.prevent="goToActividad(carta)">{{carta.nombre}}</div>
+          <div class="cursor titulo" @click.prevent="goToExpo(carta)">{{carta.nombre}}</div>
         </div>
     </div>
   </div>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'CardHoy',
+  name: 'CardHoyExpo',
   props: {
     carta: {
       type: Object,
@@ -21,15 +21,15 @@ export default {
     }
   },
   methods: {
-    goToActividad (actividad) {
+    goToExpo (expo) {
       this.$router.push({
         params: {
-          id: actividad.slug,
-          evento: actividad
+          id: expo.slug,
+          evento: expo
         },
-        name: 'Evento'
+        name: 'Expo'
       })
-    },
+    }
   },
 }
 </script>

@@ -26,7 +26,7 @@
     
       <div  v-for="(it, index) in filtro_por_actividades"
         :key="index"
-        @click.prevent="goToActividad(it)">
+        >
         <div v-if="sala.id === it.sala_id">
           <CardHoy :carta="it"></CardHoy>
         </div>
@@ -34,9 +34,9 @@
 
       <div  v-for="(it, index) in filtro_por_exposiciones"
         :key="index"
-        @click.prevent="goToExpo(it)">
+        >
         <div v-if="sala.sala === it.sala">
-          <CardHoy :carta="it"></CardHoy>
+          <CardHoyExpo :carta="it"></CardHoyExpo>
         </div>
       </div>
 
@@ -74,6 +74,7 @@
 
 <script>
 import CardHoy from '@/components/CardHoy'
+import CardHoyExpo from '@/components/CardHoyExpo'
 import moment from 'moment';
 moment.locale('es')
 
@@ -99,7 +100,7 @@ export default {
     },
   },
   methods: {
-    goToActividad (actividad) {
+    /*goToActividad (actividad) {
       this.$router.push({
         params: {
           id: actividad.slug,
@@ -116,7 +117,7 @@ export default {
         },
         name: 'Expo'
       })
-    }
+    }*/
   },
 }
 </script>
