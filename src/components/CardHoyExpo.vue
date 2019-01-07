@@ -1,13 +1,22 @@
 <template>
   <div class="carta-hoy">
     <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
+              <div class="uk-width-auto">
+                                Hoy <br> {{carta.horario}}
+            </div>
+            <div class="uk-width-expand">
+              <div class="cursor titulo" @click.prevent="goToExpo(carta)">{{carta.nombre}}</div>
+            </div>
+    </div>
+    <!--<div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
         <div class="uk-width-1-3@s">
           Hoy <br> {{carta.horario}}
         </div>
         <div class="uk-width-expand@s">
           <div class="cursor titulo" @click.prevent="goToExpo(carta)">{{carta.nombre}}</div>
         </div>
-    </div>
+    </div>-->
+
   </div>
 </template>
 

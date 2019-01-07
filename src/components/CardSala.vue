@@ -26,15 +26,23 @@
       
       <div v-if="loading">
           <div class="carta-vacia">
-              <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
+            <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
+                      <div class="uk-width-auto">
+                                Hoy
+            </div>
+            <div class="uk-width-expand">
+              No hay actividades, ni exposiciones programadas para esta sala.
+            </div>
+
+              <!--<div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
         <div class="uk-width-1-3@s">
           Hoy
         </div>
         <div class="uk-width-expand@s">
           No hay actividades, ni exposiciones programadas para esta sala.
         </div>
-    </div>
-      
+    </div>-->
+            </div>
           </div>
       </div>
       <div v-else>
