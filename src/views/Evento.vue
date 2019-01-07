@@ -37,7 +37,7 @@
                 </div>
 
                 <div v-if="estado_traduccion === true">
-                    <h4 class="ribbon">{{evento.cuanto_moment_en}} <br> {{evento.horario}} </h4>
+                    <h4 class="ribbon tamaño">{{evento.cuanto_moment_en}} <br> {{evento.horario}} </h4>
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
