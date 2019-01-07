@@ -4,7 +4,7 @@
       <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
 
         <!--<h4 class="ribbon">{{ actividad.cuanto_falta }}</h4>-->
-        <h4 class="ribbon">{{ actividad.cuanto_moment }}</h4>
+        <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}</h4>
 
           <img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
             style="
@@ -306,5 +306,12 @@ export default {
 .mar-single-badge {
   margin: 2px !important;
   white-space: normal !important;
+}
+
+
+@media only screen and (max-width: 500px) {
+  .tamaño-ribbon {
+    font-size: 16px !important;
+  }
 }
 </style>

@@ -23,13 +23,29 @@
         </div>
     </div>
     <div class="uk-card-body">
-    
+      
+      <div v-if="loading">
+          <div class="carta-vacia">
+              <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
+        <div class="uk-width-1-3@s">
+          Hoy
+        </div>
+        <div class="uk-width-expand@s">
+          No hay actividades, ni exposiciones programadas para esta sala.
+        </div>
+    </div>
+      
+          </div>
+      </div>
+      <div v-else>
+
       <div  v-for="(it, index) in filtro_por_actividades"
         :key="index"
         >
         <div v-if="sala.id === it.sala_id">
           <CardHoy :carta="it"></CardHoy>
         </div>
+
       </div>
 
       <div  v-for="(it, index) in filtro_por_exposiciones"
@@ -39,6 +55,12 @@
           <CardHoyExpo :carta="it"></CardHoyExpo>
         </div>
       </div>
+
+      </div>
+
+
+
+
 
     </div>
     <!--<div class="uk-card-footer">
@@ -89,6 +111,47 @@ export default {
       required: true
     }
   },
+   data() {
+    return {
+      show: false,
+      loading: true,
+      //filtro_actividades: [],
+      //filtro_exposiciones: [],
+      actividades_hoy: [],
+      exposiciones_hoy: [],
+      /*ar: [],
+      vas: "",
+      nose: [],
+      wena: []*/
+    }
+  },
+  created () {
+    //this.filtro_actividades = this.filtro_por_actividades
+    for(var x in this.filtro_por_actividades){
+      if(this.filtro_por_actividades[x].sala_id === this.sala.id){
+        this.actividades_hoy.push(this.filtro_por_actividades[x])
+        this.loading = false;
+      }
+      //if(x.id)
+      //this.nose = this.ar[x].id;
+    }
+    for(var y in this.filtro_por_exposiciones){
+      if(this.filtro_por_exposiciones[y].sala_id === this.sala.id){
+        this.exposiciones_hoy.push(this.filtro_por_exposiciones[y])
+        this.loading = false;
+      }
+      //if(x.id)
+      //this.nose = this.ar[x].id;
+    }
+    /*this.loading = true
+    this.$store.dispatch('loadDataCartelera')
+      .then(response => {
+        this.loading = false
+      })
+      .catch(error => {
+        this.loading = true
+      })*/
+  },
   computed: {
     filtro_por_actividades() {
       var fecha_hoy = moment().format('DD/MM/YYYY');
@@ -123,6 +186,16 @@ export default {
 </script>
 
 <style scoped>
+
+.carta-vacia {
+  background-color: #19b868;
+  padding: 30px;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  /*border: solid 2px #f8f8f8;*/
+      font-weight: 900;
+}
 .uk-card-badge-left {
     position: absolute;
     top: 30px;

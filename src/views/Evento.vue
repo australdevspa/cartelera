@@ -12,7 +12,7 @@
                 <!--<h4 class="ribbon">{{evento.cuanto_moment}} <br> {{evento.horario}} </h4>-->
 
                 <div v-if="estado_traduccion === false">
-                    <h4 class="ribbon">{{evento.cuanto_moment}} <br> {{evento.horario}} </h4>
+                    <h4 class="ribbon tamaño">{{evento.cuanto_moment}} <br> {{evento.horario}} </h4>
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
@@ -208,7 +208,7 @@ export default {
   color: #666 !important;
 }
 .pad-derecha {
- padding-right: 20%;
+ padding-right: 30%;
 }
 .uk-card-default {
     color: #333 !important;
@@ -266,5 +266,10 @@ export default {
 }
 .bold-icon {
     color: #fafafa !important;
+}
+@media only screen and (max-width: 500px) {
+  .tamaño {
+    font-size: 16px !important;
+  }
 }
 </style>

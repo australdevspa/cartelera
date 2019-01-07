@@ -71,13 +71,13 @@
 
         <form class="uk-form-stacked">
           <div class="uk-margin">
-            <label class="uk-form-label uk-text-large" for="form-stacked-text">Encuentra tu actividad preferida:</label>
+            <!--<label class="uk-form-label uk-text-large" for="form-stacked-text">Encuentra tu actividad preferida:</label>-->
             <div class="uk-form-controls">
               <input class="uk-input" 
                 id="form-stacked-text" 
                 type="text" 
                 v-model="filter"
-                placeholder="Introduce el nombre de tu actividad"
+                placeholder="Buscar actividad"
                 v-on:keydown.enter.prevent='prevenirEnter'>
             </div>
           </div>
@@ -382,7 +382,10 @@ export default {
 
 .tm-button {
     padding: 0 20px;
-    font-size: 24px;
+    
+    font-size: 14px;
+
+    /*font-size: 24px;*/
     line-height: 42px;
     /*text-align: center;
     text-decoration: none;

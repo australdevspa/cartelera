@@ -77,6 +77,7 @@ function getDataCartelera(){
 
 //Asignacion y modificacion de parametros a los objetos de la api
 function setParametros(x){
+    moment.locale('es')
     if(x.thumbnail == null){
         x.thumbnail = "../static/img/default/evento_default.jpg"
 
@@ -200,6 +201,7 @@ function donde(lugar) {
 }
 
 function diaSemana(inicio, fin) {
+    moment.locale('es')
     var fecha_actual = moment()
     var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
     var fecha_fin = moment(fin).format('DD/MM/YYYY')
