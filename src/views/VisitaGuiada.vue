@@ -1,7 +1,15 @@
 <template>
   <section>
-    <div class="uk-section">
+    <div class="uk-section pad-nuevo">
       <div class="uk-container uk-container-center uk-text-center">
+        <form class="uk-form-stacked ">
+          <div class="uk-margin">
+            <label class="uk-form-label uk-text-large">
+              Programación para hoy, {{fecha}}.
+            </label>
+          </div>
+        </form>
+
         <!--<form class="uk-form-stacked ">
           <div class="uk-margin">
             <label class="uk-form-label uk-text-large">Espacios</label>
@@ -53,6 +61,7 @@
 
 <script>
 import CardSala from '@/components/CardSala'
+import moment from 'moment';
 
 export default {
   name: 'VisitaGuiadaView',
@@ -62,7 +71,10 @@ export default {
   data() {
     return {
       show: false,
-      loading: true
+      loading: true,
+      dia: moment.locale("es").format('D'),
+      mes: moment.locale("es").format('MMMM'),
+      dianame: moment.locale("es").format('dddd'),
     }
   },
   created () {
@@ -76,6 +88,13 @@ export default {
       })
   },
   computed: {
+    fecha() {
+      moment.locale('es')
+      var dianombre = moment().format('dddd')
+      var dianumero = moment().format('D')
+      var mesnombre = moment().format('MMMM')
+      return dianombre +" "+ dianumero +" de "+ mesnombre
+    },
     salas() {
       return this.$store.state.salas;
     },
@@ -107,6 +126,9 @@ export default {
 </script>
 
 <style scoped>
+.pad-nuevo {
+  padding: 20px 0px !important;
+}
 .pad-spinner {
   padding-top: 25%;
   padding-bottom: 25%;

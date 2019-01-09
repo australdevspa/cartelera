@@ -10,7 +10,7 @@
             </div>-->
 
                               <div class="uk-width-auto">
-                                Hoy <br> {{carta.horario}}
+                               {{carta.horario}}
             </div>
             <div class="uk-width-expand">
               <div class="cursor titulo" @click.prevent="goToActividad(carta)">{{carta.nombre}}</div>
@@ -60,7 +60,7 @@ export default {
   border: solid 2px #f8f8f8;*/
 
     background-color: #19b868;
-  padding: 30px;
+  padding: 10px;
   color: white;
   text-align: center;
   border-radius: 5px;

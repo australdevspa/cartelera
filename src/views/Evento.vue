@@ -1,6 +1,12 @@
 <template>
     <section>
-        <div class="uk-container uk-container-center pad-top">
+        <div v-if="loading_evento">
+          <div class="pad-spinner uk-text-center">
+            <div uk-spinner="ratio: 4"/>
+          </div>
+        </div>
+
+        <div v-else class="uk-container uk-container-center pad-top">
             <ul class="uk-breadcrumb">
                 <a href="javascript:window.history.back();" class="uk-button-x uk-button-secondary uk-button-large"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
                  <!--<button class="uk-button-x uk-button-secondary uk-button-large"><span uk-icon="chevron-left" class="bold-icon"></span>Volver atrás</button>-->
@@ -71,7 +77,8 @@ export default {
   data() {
     return {
         loading_detalles: true,
-        item: []
+        item: [],
+        loading_evento: true,
     }
   },
   mounted () {
@@ -85,6 +92,7 @@ export default {
         var last = str.substring(str.lastIndexOf("/") + 1, str.length);
         this.$store.dispatch('loadEvento', last)
             .then(response => {
+                this.loading_evento = false;
                 this.$store.dispatch('loadTranslate', this.$store.state.evento[0].id)
                     .then(response => {
                         this.loading_detalles = false;
@@ -94,10 +102,12 @@ export default {
                     })
             })
             .catch(error => {
+                this.loading_evento = true;
             })  
     }else{
         /*cuando viene desde la cartelera*/
         this.item = this.$route.params.evento;
+        this.loading_evento = false;
         this.$store.dispatch('loadTranslate', this.$route.params.evento.id)
             .then(response => {
                 this.loading_detalles = false;
@@ -127,6 +137,10 @@ export default {
 </script>
 
 <style scoped>
+.pad-spinner {
+  padding-top: 25%;
+  padding-bottom: 25%;
+}
 .parent {
   overflow: hidden; /* required */
   /*width: 50%; /* for demo only */

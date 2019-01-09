@@ -27,11 +27,12 @@
       <div v-if="loading">
           <div class="carta-vacia">
             <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
-                      <div class="uk-width-auto">
+                      <!--<div class="uk-width-auto">
                                 Hoy
-            </div>
+            </div>-->
             <div class="uk-width-expand">
-              No hay actividades, ni exposiciones programadas para esta sala.
+              Sin actividades o exposiciones programadas.
+              <!--No hay actividades, ni exposiciones programadas para esta sala.-->
             </div>
 
               <!--<div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
@@ -198,8 +199,8 @@ export default {
   padding: 2px !important; 
 }
 .carta-vacia {
-  background-color: #19b868;
-  padding: 30px;
+  background-color: #faa05a;
+  padding: 10px;
   color: white;
   text-align: center;
   border-radius: 5px;

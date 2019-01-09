@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="uk-section">
+    <div class="uk-section pad-nuevo">
 
       <!--<div v-if="boton_top">
         <div class="icon-bar">
@@ -426,8 +426,8 @@ export default {
 
   font-weight: bold;
   vertical-align: text-top;
-  height: 24px;
-  width: 24px;
+  /*height: 24px;
+  width: 24px;*/
 }
 .tm-button:hover {
 background: #333 !important;
@@ -632,5 +632,8 @@ background: #fafafa !important;
 }
 .pad-ul {
   padding-left: 0 !important;
+}
+.pad-nuevo {
+  padding: 20px 0px !important;
 }
 </style>
