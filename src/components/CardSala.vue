@@ -12,7 +12,7 @@
       <div class="uk-card-header uk-background-cover uk-background-top-center border" :style="{ 'background': 'linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(200, 200, 200, 0.3)), url(' + sala.rutaimg + ')' }">
         
         <div class="uk-card-badge-left uk-label" :style="{ background: '#19b868 !important', fontWeight: 900 }">
-          Piso
+          Piso {{sala.piso}}
         </div>
         
         <div class="uk-grid-small uk-flex-middle" uk-grid>
@@ -47,7 +47,7 @@
       </div>
       <div v-else>
 
-      <div  v-for="(it, index) in filtro_por_actividades"
+      <div class="pad-hoy" v-for="(it, index) in filtro_por_actividades"
         :key="index"
         >
         <div v-if="sala.id === it.sala_id">
@@ -56,7 +56,7 @@
 
       </div>
 
-      <div  v-for="(it, index) in filtro_por_exposiciones"
+      <div class="pad-hoy"  v-for="(it, index) in filtro_por_exposiciones"
         :key="index"
         >
         <div v-if="sala.sala === it.sala">
@@ -194,7 +194,9 @@ export default {
 </script>
 
 <style scoped>
-
+.pad-hoy {
+  padding: 2px !important; 
+}
 .carta-vacia {
   background-color: #19b868;
   padding: 30px;

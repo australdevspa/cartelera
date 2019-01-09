@@ -21,6 +21,22 @@ function existeSlug(slug){
     })
 }
 
+function existeSlugActividades(slug){
+    return axios.get(`${Endpoint}/actividades`)
+    .then(function (response) {
+        var existe = false
+        for (var i = 0; i < response.data.length ; i++) {
+            if (response.data[i].slug === slug) {
+                existe = true;
+            }
+        }
+        return existe;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
 function getExposicion(slug){
     return axios.get(`${Endpoint}/exposiciones`)
     .then(function (response) {
@@ -84,6 +100,7 @@ function sala(lugar) {
 
 export {
     existeSlug,
+    existeSlugActividades,
     getExposicion,
     getExposiciones
 }

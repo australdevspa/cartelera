@@ -6,6 +6,7 @@ import {
 } from '@/services/cartelera_api'
 import {
     existeSlug,
+    existeSlugActividades,
     getExposicion,
     getExposiciones
 } from '@/services/exposiciones_api'
@@ -96,6 +97,11 @@ const actions = {
     loadExisteSlug(context, slug) {
         return existeSlug(slug)
             .then(existe_slug => context.commit('updateExisteSlug', existe_slug));
+    },
+
+    loadExisteSlugActividades(context, slug) {
+        return existeSlugActividades(slug)
+            .then(existe_slug => context.commit('updateExisteSlugActividades', existe_slug));
     },
 
     loadResetExisteSlug(context) {
@@ -243,6 +249,10 @@ const mutations = {
 
     //mutations correspondiente a la vista de la Visita Guiada
     updateExisteSlug(state, existe_slug) {
+        state.existe_slug = existe_slug;
+    },
+
+    updateExisteSlugActividades(state, existe_slug) {
         state.existe_slug = existe_slug;
     },
 
