@@ -30,8 +30,42 @@
                                     </div>
                                 </div>
                                 <div v-else>
-                                    <Detalles :actividad="evento" :actividad_translate="translate"></Detalles>
+
+                                    <!--<div class="uk-grid-divider uk-child-width-expand@s" uk-grid>-->
+                                    <div class="uk-child-width-expand@s" uk-grid>
+                                        <div class="uk-width-auto">
+                                            <Detalles :actividad="evento" :actividad_translate="translate"></Detalles>
+                                        </div>
+
+                                        <div v-if="loading_boton_obras">
+                                            <div class="uk-text-center">
+                                                <div uk-spinner="ratio: 2"/>
+                                            </div>
+                                        </div>
+                                        <div v-else>
+                                            <div v-if="detalle.length !== 0">
+                                                <div class="uk-width-expand">
+                                                     <a @click.prevent="goToObras(evento, detalle)" class="uk-button-x uk-button-secondary uk-button-large">Obras</a>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!--<Detalles :actividad="evento" :actividad_translate="translate"></Detalles>-->
                                 </div>
+
+                                <!--<div v-if="loading_boton_obras">
+                                    <div class="uk-text-center">
+                                        <div uk-spinner="ratio: 2"/>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <div v-if="detalle.length !== 0">
+                                        <a class="uk-button-x uk-button-secondary uk-button-large">Obras</a>
+                                    </div>
+                                </div>-->
 
                             </div>
                         </div>
@@ -61,6 +95,22 @@
                     </div>
                 </div>
 
+
+                <!--<div v-if="detalle.length === 0">
+                    <h4 class="ribbon tamaño">jojo</h4>
+                </div>-->
+
+                               <!-- <div v-if="loading_boton_obras">
+                                    <div class="uk-text-center">
+                                        <div uk-spinner="ratio: 2"/>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <div v-if="detalle.length === 0">
+                    <h4 class="ribbon tamaño">jojo</h4>
+                </div>
+                                </div>-->
+
             </div>
         </div>
     </section>
@@ -79,6 +129,7 @@ export default {
         loading_detalles: true,
         item: [],
         loading_evento: true,
+        loading_boton_obras: true,
     }
   },
   mounted () {
@@ -93,6 +144,15 @@ export default {
         this.$store.dispatch('loadEvento', last)
             .then(response => {
                 this.loading_evento = false;
+
+                this.$store.dispatch('loadDetalle', this.$store.state.evento[0].id)
+                    .then(response => {
+                        this.loading_boton_obras = false;
+                    })
+                    .catch(error => {
+                        this.loading_boton_obras= true;
+                    })
+
                 this.$store.dispatch('loadTranslate', this.$store.state.evento[0].id)
                     .then(response => {
                         this.loading_detalles = false;
@@ -108,6 +168,15 @@ export default {
         /*cuando viene desde la cartelera*/
         this.item = this.$route.params.evento;
         this.loading_evento = false;
+
+        this.$store.dispatch('loadDetalle', this.$route.params.evento.id)
+            .then(response => {
+                this.loading_boton_obras = false;
+            })
+            .catch(error => {
+                this.loading_boton_obras= true;
+            })
+
         this.$store.dispatch('loadTranslate', this.$route.params.evento.id)
             .then(response => {
                 this.loading_detalles = false;
@@ -131,7 +200,24 @@ export default {
     },
     translate() {
         return this.$store.state.translate[0];
-    }
+    },
+    detalle() {
+        return this.$store.state.detalle;
+    },
+  },
+      methods: {
+    goToObras (actividad, detail) {
+      this.$router.push({
+        params: {
+            slug:actividad.slug,
+          id: actividad.id,
+          evento: actividad,
+          detalle: detail
+
+        },
+        name: 'Obras'
+      })
+    },
   }
 }
 </script>

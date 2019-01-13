@@ -386,7 +386,41 @@ function getEvento(id){
     })
 }
 
+/*oobtener detalles de las actividades*/
+function getDetalle(id){
+    return axios.get(`${Endpoint}/detalle-actividad?id=`+id)
+    .then(function (response) {
+        return response.data;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
+/*oobtener detalles de las actividades*/
+function getDetalleX(id, x){
+    return axios.get(`${Endpoint}/detalle-actividad?id=`+id)
+    .then(function (response) {
+        var evento = []
+        for (var i = 0; i < response.data.length ; i++) {
+            if (response.data[i].id === x) {
+                evento.push(response.data[i]);
+                //return evento;
+            }/*else{
+                return response.data;
+            }*/
+        }
+        return evento;
+        //return id + x;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
 export {
     getDataCartelera,
-    getEvento
+    getEvento,
+    getDetalle,
+    getDetalleX
 }

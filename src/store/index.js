@@ -2,7 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {   
     getDataCartelera,
-    getEvento
+    getEvento,
+    getDetalle,
+    getDetalleX
 } from '@/services/cartelera_api'
 import {
     existeSlug,
@@ -59,6 +61,9 @@ const state = {
     exposiciones: [],
 
     estado_traduccion: false,
+
+    detalle: [],
+    detallex: []
 };
 
 const actions = {
@@ -134,6 +139,15 @@ const actions = {
 
     loadFalse(context) {
         context.commit('updateFalse')
+    },
+
+    loadDetalle(context, id) {
+        return getDetalle(id)
+            .then(detalle => context.commit('updateDetalle', detalle));
+    },
+    loadDetalleX(context, {a, b}) {
+        return getDetalleX(a, b)
+            .then(detallex => context.commit('updateDetalleX', detallex));
     },
 };
 
@@ -282,6 +296,13 @@ const mutations = {
 
     updateFalse(state) {
         state.estado_traduccion = false;
+    },
+
+    updateDetalle(state, detalle) {
+        state.detalle = detalle;
+    },
+    updateDetalleX(state, detallex) {
+        state.detallex = detallex;
     },
 }
 

@@ -72,9 +72,9 @@ export default {
     return {
       show: false,
       loading: true,
-      dia: moment.locale("es").format('D'),
+      /*dia: moment.locale("es").format('D'),
       mes: moment.locale("es").format('MMMM'),
-      dianame: moment.locale("es").format('dddd'),
+      dianame: moment.locale("es").format('dddd'),*/
     }
   },
   created () {

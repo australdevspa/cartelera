@@ -6,6 +6,8 @@ import EventoView from '@/views/Evento'
 import VisitaGuiadaView from '@/views/VisitaGuiada'
 import ExpoView from '@/views/Expo'
 import CamaraView from '@/views/Camara'
+import ObrasView from '@/views/Obras'
+import ObraView from '@/views/Obra'
 Vue.use(Router)
 
 export default new Router({
@@ -39,6 +41,17 @@ export default new Router({
       path: '/exposicion/:id',
       name: 'Expo',
       component: ExpoView
+    },
+    {
+      //path: '/cartelera/:slug/detalle/:id',
+      path: '/cartelera/:slug/detalle',
+      name: 'Obras',
+      component: ObrasView
+    },
+    {
+      path: '/cartelera/:slug/detalle/:id',
+      name: 'Obra',
+      component: ObraView
     },
   ],
   mode: 'history',
