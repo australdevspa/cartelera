@@ -204,7 +204,7 @@ export default {
           id: expo.slug,
           evento: expo
         },
-        name: 'Expo'
+        name: 'Expo' xxx
       })
     }*/
   },
