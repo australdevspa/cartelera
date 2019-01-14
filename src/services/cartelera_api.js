@@ -156,16 +156,17 @@ function setParametros(x){
 }*/
 
 function fecha_rango(inicio, fin) {
-    var fecha_actual = moment().format('DD/MM/YYYY')
-    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
-    var fecha_fin = moment(fin).format('DD/MM/YYYY')
-    if(fecha_inicio == fecha_fin){
-        return fecha_inicio;
+    var fecha_actual = moment().format('YYYY-MM-DD')
+    var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
+    var fecha_fin = moment(fin).format('YYYY-MM-DD')
+    
+    if(fecha_inicio === fecha_fin){
+        return moment(inicio).format('DD/MM/YYYY');
     }else{
-        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) == true){
-            return fecha_actual;
+        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
+            return moment(fecha_actual).format('DD/MM/YYYY');
         }else{
-            return fecha_inicio;
+            return moment(inicio).format('DD/MM/YYYY');
         }
     }
 }
