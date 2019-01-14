@@ -33,14 +33,14 @@
               </div>
               <h3 @click.prevent="goToActividad(actividad)" class="uk-card-title sinmar titulo cursor"> {{ actividad.nombre }}</h3>
               <!--<h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>-->
-              <div class="mar-badge">
+              <div class="mar-badge estilo-ultimate" :style="{ 'border-left': '10px solid' + actividad.area_color }">
                 <!--<div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
                     <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
                 </div>-->
-                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
                   Entrada {{actividad.entrada}}
                 </div>
-                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
                   <span uk-icon="icon: location"></span> {{actividad.donde}}
                 </div>
               </div>
@@ -62,14 +62,14 @@
                   <!--<h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>-->
                 </div>
               </div>
-              <div class="mar-badge-2">
+              <div class="mar-badge-2 estilo-ultimate" :style="{ 'border-left': '10px solid' + actividad.area_color }">
                 <!--<div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
                     <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
                 </div>-->
-                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
                   Entrada {{actividad.entrada}}
                 </div>
-                <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+                <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
                   <span uk-icon="icon: location"></span> {{actividad.donde}}
                 </div>
               </div>
@@ -183,7 +183,8 @@ export default {
 	display: block;
 	width: 100px;
 	height: 120px;
-	margin: 40px 0px;
+		/*margin: 40px 0px;*/
+  margin: 40px 0px 20px 0px;
 	background: #fff;
 	text-align: center;
 	font-family: 'Helvetica', sans-serif;
@@ -283,6 +284,9 @@ export default {
   .img-tamaño-1 {
     width: 700px !important;
   }
+  .date {
+  margin: 20px 0px 20px 0px !important; 
+}
 }
 @media only screen and (min-width: 640px) and (max-width: 959px) {
   .img-tamaño-1 {
@@ -313,5 +317,9 @@ export default {
   .tamaño-ribbon {
     font-size: 16px !important;
   }
+}
+
+.estilo-ultimate {
+  background-color: #333 !important;
 }
 </style>
