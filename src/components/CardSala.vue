@@ -48,7 +48,24 @@
       </div>
       <div v-else>
 
-      <div class="pad-hoy" v-for="(it, index) in filtro_por_actividades"
+      <div class="pad-hoy" v-for="(it, index) in actividades_hoy"
+        :key="index"
+        >
+        <div v-if="sala.id === it.sala_id">
+          <CardHoy :carta="it"></CardHoy>
+        </div>
+
+      </div>
+
+      <div class="pad-hoy"  v-for="(it, index) in exposiciones_hoy"
+        :key="index"
+        >
+        <div v-if="sala.sala === it.sala">
+          <CardHoyExpo :carta="it"></CardHoyExpo>
+        </div>
+      </div>
+
+      <!--<div class="pad-hoy" v-for="(it, index) in filtro_por_actividades"
         :key="index"
         >
         <div v-if="sala.id === it.sala_id">
@@ -63,7 +80,7 @@
         <div v-if="sala.sala === it.sala">
           <CardHoyExpo :carta="it"></CardHoyExpo>
         </div>
-      </div>
+      </div>-->
 
       </div>
 
