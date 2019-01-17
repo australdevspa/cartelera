@@ -3,7 +3,51 @@
       <div class="uk-card-media-left uk-cover-container">
 
         <!--<h4 class="ribbon">{{ actividad.cuanto_falta }}</h4>-->
-        <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}</h4>
+<div v-if="actividad.fecha_rango === fechahoy && actividad.horario === 'horario indefinido'">
+  
+    <div v-if="dia === 'sabado'">
+      <h4 class="ribbon tamaño-ribbon">Hoy<br> 11:00 a 19:00 hrs</h4>
+    </div>
+    <div v-else-if="dia === 'domingo'">
+    </div>
+    <div v-else>
+      <h4 class="ribbon tamaño-ribbon">Hoy<br> 10:00 a 20:00 hrs</h4>
+    </div>
+</div>
+<div v-else-if="actividad.fecha_rango !== fechahoy && actividad.horario === 'horario indefinido'">
+  
+    <div v-if="dia === 'sabado'">
+      <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br> 11:00 a 19:00 hrs</h4>
+    </div>
+    <div v-else-if="dia === 'domingo'">
+    </div>
+    <div v-else>
+      <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br> 10:00 a 20:00 hrs</h4>
+    </div>
+</div>
+  <div v-else>
+    <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br>{{actividad.horario}}</h4>
+  </div>
+
+
+
+
+                          <!--    <div v-if="actividad.horario === 'horario indefinido'">
+                                <div v-if="dia === 'sabado'">
+                                  <h4 class="ribbon tamaño-ribbon">Hoy<br> 11:00 a 19:00 hrs</h4>
+                                </div>
+                                <div v-else-if="dia === 'domingo'">
+                                
+                                </div>
+                                <div v-else>
+                                  <h4 class="ribbon tamaño-ribbon">Hoy<br> 10:00 a 20:00 hrs</h4>
+                                </div>
+                              </div>
+                              <div v-else>
+                                <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br>{{actividad.horario}}</h4>
+                              </div>-->
+
+        <!--<h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}</h4>-->
 
           <img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
             style="
@@ -93,6 +137,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'CardLeft',
   props: {
@@ -111,7 +157,19 @@ export default {
         name: 'Evento'
       })
     },
-  }
+  },
+      computed: {
+    dia() {
+      moment.locale('es')
+      var dianombre = moment().format('dddd')
+      return dianombre;
+    },
+        fechahoy() {
+      moment.locale('es')
+      var fechanombre = moment().format('DD/MM/YYYY')
+      return fechanombre;
+    },
+  },
 }
 </script>
 

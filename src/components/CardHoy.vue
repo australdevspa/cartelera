@@ -12,13 +12,13 @@
                               <div class="uk-width-auto">
                               <div v-if="carta.horario === 'horario indefinido'">
                                 <div v-if="dia === 'sabado'">
-                                  11:00 hrs a<br> 19:00 hrs
+                                  11:00 a<br> 19:00 hrs
                                 </div>
                                 <div v-else-if="dia === 'domingo'">
                                 
                                 </div>
                                 <div v-else>
-                                  10:00 hrs a<br> 20:00 hrs
+                                  10:00 a<br> 20:00 hrs
                                 </div>
                               </div>
                               <div v-else>
