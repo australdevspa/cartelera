@@ -18,7 +18,35 @@
                 <!--<h4 class="ribbon">{{evento.cuanto_moment}} <br> {{evento.horario}} </h4>-->
 
                 <div v-if="estado_traduccion === false">
-                    <h4 class="ribbon tamaño">{{evento.cuanto_moment}} <br> {{evento.horario}} </h4>
+
+                    <!--<h4 class="ribbon tamaño">{{evento.cuanto_moment}} <br> {{evento.horario}} </h4>-->
+
+<div v-if="evento.fecha_rango === fechahoy && evento.horario === 'horario indefinido'">
+  
+    <div v-if="dia === 'sabado'">
+      <h4 class="ribbon tamaño">Hoy<br> 11:00 a 19:00 hrs</h4>
+    </div>
+    <div v-else-if="dia === 'domingo'">
+    </div>
+    <div v-else>
+      <h4 class="ribbon tamaño">Hoy<br> 10:00 a 20:00 hrs</h4>
+    </div>
+</div>
+<div v-else-if="evento.fecha_rango !== fechahoy && evento.horario === 'horario indefinido'">
+  
+    <div v-if="dia === 'sabado'">
+      <h4 class="ribbon tamaño">{{ evento.cuanto_moment }}<br> 11:00 a 19:00 hrs</h4>
+    </div>
+    <div v-else-if="dia === 'domingo'">
+    </div>
+    <div v-else>
+      <h4 class="ribbon tamaño">{{ evento.cuanto_moment }}<br> 10:00 a 20:00 hrs</h4>
+    </div>
+</div>
+  <div v-else>
+    <h4 class="ribbon tamaño">{{ evento.cuanto_moment }}<br>{{evento.horario}}</h4>
+  </div>
+
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
@@ -77,7 +105,35 @@
                 </div>
 
                 <div v-if="estado_traduccion === true">
-                    <h4 class="ribbon tamaño">{{evento.cuanto_moment_en}} <br> {{evento.horario}} </h4>
+                    <!--<h4 class="ribbon tamaño">{{evento.cuanto_moment_en}} <br> {{evento.horario}} </h4>-->
+
+                    <div v-if="evento.fecha_rango === fechahoy && evento.horario === 'horario indefinido'">
+  
+    <div v-if="dia === 'sabado'">
+      <h4 class="ribbon tamaño">Today<br> 11:00 to 19:00 hrs</h4>
+    </div>
+    <div v-else-if="dia === 'domingo'">
+    </div>
+    <div v-else>
+      <h4 class="ribbon tamaño">Today<br> 10:00 to 20:00 hrs</h4>
+    </div>
+</div>
+<div v-else-if="evento.fecha_rango !== fechahoy && evento.horario === 'horario indefinido'">
+  
+    <div v-if="dia === 'sabado'">
+      <h4 class="ribbon tamaño">{{ evento.cuanto_moment_en }}<br> 11:00 to 19:00 hrs</h4>
+    </div>
+    <div v-else-if="dia === 'domingo'">
+    </div>
+    <div v-else>
+      <h4 class="ribbon tamaño">{{ evento.cuanto_moment_en }}<br> 10:00 to 20:00 hrs</h4>
+    </div>
+</div>
+  <div v-else>
+    <h4 class="ribbon tamaño">{{ evento.cuanto_moment_en }}<br>{{evento.horario}}</h4>
+  </div>
+
+
                     <div class="uk-card-header">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
@@ -118,6 +174,7 @@
 
 <script>
 import Detalles from '@/components/Detalles'
+import moment from 'moment';
 
 export default {
   name: 'EventoView',
@@ -203,6 +260,16 @@ export default {
     },
     detalle() {
         return this.$store.state.detalle;
+    },
+        dia() {
+      moment.locale('es')
+      var dianombre = moment().format('dddd')
+      return dianombre;
+    },
+        fechahoy() {
+      moment.locale('es')
+      var fechanombre = moment().format('DD/MM/YYYY')
+      return fechanombre;
     },
   },
       methods: {
