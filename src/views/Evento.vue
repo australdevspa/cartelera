@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="uk-card-body uk-text-center data" v-html= evento.contenido></div>
+                    <div class="uk-card-body uk-text-center data" v-html= translate.note_es></div>
                     <div class="uk-card-body uk-text-center">
                         <img :src="evento.thumbnail"/>
                     </div>
