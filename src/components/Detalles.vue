@@ -7,7 +7,7 @@
                 <p class="mar-p">{{ actividad.donde }}.</p>
 
                 <p v-if="actividad.entrada ==='liberada' " class="mar-p">Free pass</p>
-                <p v-else class="mar-p">Entry {{actividad.entrada}}</p>
+                <p v-else class="mar-p">Ticket {{actividad.entrada}}</p>
             </div>
             <div class="mar-div" v-if="actividad_translate.tts_en !== null">
                 <aplayer :music="{
