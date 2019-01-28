@@ -2,9 +2,9 @@
   <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover parent" uk-grid
               :style="{ background: actividad.color_oscuro + '!important', 
 
-                        background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.dale[2]+') !important',
-                        background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.dale[2]+') !important',
-                        background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.dale[2]+') !important', 
+                        background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.dale[3]+') !important',
+                        background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.dale[3]+') !important',
+                        background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.dale[3]+') !important', 
                         
 
                        /* background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_oscuro+') !important',
@@ -361,7 +361,7 @@ border-top-color: rgba(255,255,255,.5);
    /* height: 420px !important;
 }*/
 .uk-child-width-1-2\@s>* {
-    height: 420px;
+    height: 350px;
 }
   .canvas-height {
   height: 420px !important;

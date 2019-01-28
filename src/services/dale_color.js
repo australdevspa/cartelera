@@ -29,6 +29,12 @@ function dale(color) {
         evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+        if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+            evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+        }else{
+            evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+        }
+
         return evento;
         //return "rojo"
     }else if(primario_azul_1 > primario_verde_1 && primario_verde_1 == primario_rojo_1){
@@ -49,7 +55,11 @@ function dale(color) {
         evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
-        
+                if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+            evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+        }else{
+            evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+        }
         return evento;
         //return "azul"
     }else if(primario_verde_1 > primario_rojo_1 && primario_rojo_1 == primario_azul_1){
@@ -69,7 +79,11 @@ function dale(color) {
         evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
-        
+        if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+            evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+        }else{
+            evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+        }
         return evento;
         //return "verde"
     }else if(primario_rojo_1 == primario_azul_1 && primario_rojo_1 > primario_verde_1){
@@ -90,7 +104,11 @@ function dale(color) {
         evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
-        
+        if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+            evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+        }else{
+            evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+        }
         return evento;
         //return "rosa"
     }else if(primario_azul_1 == primario_verde_1 && primario_azul_1 > primario_rojo_1){
@@ -111,7 +129,11 @@ function dale(color) {
         evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
-        
+        if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+            evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+        }else{
+            evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+        }
         return evento;
 
         //return "celeste"
@@ -137,7 +159,11 @@ function dale(color) {
         evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
         evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
-        
+        if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+            evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+        }else{
+            evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+        }
         return evento;
         //return "amarillo"
     }else if(primario_rojo_1 > primario_azul_1 && primario_rojo_1 > primario_verde_1){
@@ -159,6 +185,11 @@ function dale(color) {
             evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
             
             evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+            if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+                evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+            }else{
+                evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+            }
             return evento;
             //return "rojo izq"
         }else if(primario_verde_1 < primario_azul_1){
@@ -179,7 +210,11 @@ function dale(color) {
             evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
             evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
             evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
-            
+            if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+                evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+            }else{
+                evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+            }
             return evento;
             //return "rojo der"
         }
@@ -203,6 +238,11 @@ function dale(color) {
             evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
             
             evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+            if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+                evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+            }else{
+                evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+            }
             return evento;
             //return "azul izq"
         }else if(primario_rojo_1 < primario_verde_1){
@@ -222,7 +262,11 @@ function dale(color) {
             evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
             evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
             evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
-            
+            if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+                evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+            }else{
+                evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+            }
             return evento;
             //return "azul der"
         }
@@ -245,7 +289,11 @@ function dale(color) {
             evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
             evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
             evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
-            
+            if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+                evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+            }else{
+                evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+            }
             return evento;
             //return "verde izq"
         }else if(primario_azul_1 < primario_rojo_1){
@@ -264,7 +312,11 @@ function dale(color) {
             evento.push("#" + ((1 << 24) + (terciario_rojo_1 << 16) + (terciario_verde_1 << 8) + terciario_azul_1).toString(16).slice(1));
             evento.push("#" + ((1 << 24) + (terciario_rojo_2 << 16) + (terciario_verde_2 << 8) + terciario_azul_2).toString(16).slice(1));
             evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
-            
+            if(terciario_rojo_3 > 150 && terciario_verde_3 > 150 && terciario_azul_3 > 150){
+                evento.push("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1));
+            }else{
+                evento.push(lighten("#" + ((1 << 24) + (terciario_rojo_3 << 16) + (terciario_verde_3 << 8) + terciario_azul_3).toString(16).slice(1),30));
+            }
             return evento;
             //return "verde der"
         }
@@ -283,6 +335,41 @@ function dale(color) {
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16)
     } : null;*/
+}
+
+
+/* Suma el porcentaje indicado a un color (RR, GG o BB) hexadecimal para aclararlo */
+const addLight = function(color, amount){
+    let cc = parseInt(color,16) + amount;
+    let c = (cc > 255) ? 255 : (cc);
+    c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
+    return c;
+  }
+  
+  /* const hexToRGB = (color) => {
+    color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
+    let colorRGB = [color.substring(0,2)]
+  } */
+  
+  /* Aclara un color hexadecimal de 6 caracteres #RRGGBB segun el porcentaje indicado */
+  const lighten = (color, amount)=> {
+    color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
+    amount = parseInt((255*amount)/100);
+    return color = `#${addLight(color.substring(0,2), amount)}${addLight(color.substring(2,4), amount)}${addLight(color.substring(4,6), amount)}`;
+  }
+/* Resta el porcentaje indicado a un color (RR, GG o BB) hexadecimal para oscurecerlo */
+const subtractLight = function(color, amount){
+  let cc = parseInt(color,16) - amount;
+  let c = (cc < 0) ? 0 : (cc);
+  c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
+  return c;
+}
+
+/* Oscurece un color hexadecimal de 6 caracteres #RRGGBB segun el porcentaje indicado */
+const darken = (color, amount) =>{
+  color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
+  amount = parseInt((255*amount)/100);
+  return color = `#${subtractLight(color.substring(0,2), amount)}${subtractLight(color.substring(2,4), amount)}${subtractLight(color.substring(4,6), amount)}`;
 }
 
 export {
