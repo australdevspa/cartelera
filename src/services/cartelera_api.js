@@ -4,6 +4,9 @@ moment.locale('es')
 import {   
     Endpoint
 } from '@/services/endpoints'
+import {   
+    dale
+} from '@/services/dale_color'
 
 //metodo que obtiene todos los datos correspondientes a la cartelera
 function getDataCartelera(){
@@ -107,6 +110,11 @@ function setParametros(x){
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
         //x.cuanto_falta = cuantoFalta(x.fecha_ini)
+
+        x.color_claro = lighten(x.area_color,30);
+        x.color_oscuro = darken(x.area_color,30);
+
+        x.dale = dale(x.area_color);
     }else{
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
@@ -138,6 +146,13 @@ function setParametros(x){
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
         //x.cuanto_falta = cuantoFalta(x.fecha_ini)
+
+        /*x.color_claro = lighten('#23B19D',20);
+        x.color_oscuro = darken('#23B19D',20);*/
+        x.color_claro = lighten(x.area_color,30);
+        x.color_oscuro = darken(x.area_color,30);
+
+        x.dale = dale(x.area_color);
     }
     if(x.area_color == null){
         x.area_color = "#1e87f0"
@@ -154,6 +169,41 @@ function setParametros(x){
         return 'An error occured..' + error;
     })
 }*/
+
+
+/* Suma el porcentaje indicado a un color (RR, GG o BB) hexadecimal para aclararlo */
+const addLight = function(color, amount){
+    let cc = parseInt(color,16) + amount;
+    let c = (cc > 255) ? 255 : (cc);
+    c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
+    return c;
+  }
+  
+  /* const hexToRGB = (color) => {
+    color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
+    let colorRGB = [color.substring(0,2)]
+  } */
+  
+  /* Aclara un color hexadecimal de 6 caracteres #RRGGBB segun el porcentaje indicado */
+  const lighten = (color, amount)=> {
+    color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
+    amount = parseInt((255*amount)/100);
+    return color = `#${addLight(color.substring(0,2), amount)}${addLight(color.substring(2,4), amount)}${addLight(color.substring(4,6), amount)}`;
+  }
+/* Resta el porcentaje indicado a un color (RR, GG o BB) hexadecimal para oscurecerlo */
+const subtractLight = function(color, amount){
+  let cc = parseInt(color,16) - amount;
+  let c = (cc < 0) ? 0 : (cc);
+  c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
+  return c;
+}
+
+/* Oscurece un color hexadecimal de 6 caracteres #RRGGBB segun el porcentaje indicado */
+const darken = (color, amount) =>{
+  color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
+  amount = parseInt((255*amount)/100);
+  return color = `#${subtractLight(color.substring(0,2), amount)}${subtractLight(color.substring(2,4), amount)}${subtractLight(color.substring(4,6), amount)}`;
+}
 
 function fecha_rango(inicio, fin) {
     var fecha_actual = moment().format('YYYY-MM-DD')

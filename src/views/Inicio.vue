@@ -1,6 +1,7 @@
 <template>
   <section class="principal">
     <div class="cuadro">
+    <!--<div class="cuadro">
       <div class="uk-position-relative uk-visible-toggle uk-light visible-note oculto-note" uk-slideshow="animation: fade; autoplay: true;">
         <ul class="uk-slideshow-items">
           <li v-for="(item, index) in actividades"
@@ -8,19 +9,11 @@
             <img :src="item.thumbnail" alt="" uk-cover>
             <div class="uk-overlay uk-overlay-primary uk-position-right uk-text-left uk-transition-slide-right uk-width-medium">
               <p class="estilo-slider estilo-slider-h4 mar-bottom">{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}} - {{item.horario}}</p>
-              <!--<p class="estilo-slider estilo-slider-h4 mar-20">{{item.horario}}</p>-->
               <hr class="uk-divider-small mar-20">
               <p class="estilo-slider estilo-slider-h1 mar-30 titulo">{{item.nombre}}</p>
               <hr class="uk-divider-small mar-20">
               <p class="estilo-slider estilo-slider-h4 mar-20">Entrada {{item.entrada}}</p>
               <p class="estilo-slider estilo-slider-h4 mar-top">{{item.donde}}</p>
-              <!--<h1 >{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</h1>-->
-              <!--<h4 >Horario: {{item.horario}}</h4>
-              <hr class="uk-divider-small">
-              <h2 >"{{item.nombre}}"</h2>
-              <hr class="uk-divider-small">
-              <h4 >Entrada: {{item.entrada}}</h4>
-              <p class="uk-margin-remove">{{item.lugar}}</p>-->
             </div>
           </li>
         </ul>
@@ -35,12 +28,6 @@
           :key="index">
           <img :src="item.thumbnail" alt="" uk-cover>
           <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-left uk-transition-slide-bottom">
-            <!--<p class="estilo-slider estilo-slider-h1">{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</p>
-            <p class="estilo-slider estilo-slider-h4">Horario: {{item.horario}}</p>-->
-
-            <!--<h1 >{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}}</h1>
-            --><!--<h3 class="uk-margin-remove">{{item.nombre}}</h3>
-            <p class="uk-margin-remove">{{item.lugar}}</p>-->
             <p class="estilo-slider estilo-slider-h4 mar-bottom">{{item.fecha_inicio_formato_day}} de {{item.fecha_inicio_formato_month}} {{item.horario}}</p>
             <hr class="uk-divider-small mar-20">
             <p class="estilo-slider estilo-slider-h1 mar-30 titulo">{{item.nombre}}</p>
@@ -52,13 +39,87 @@
       </ul>
       <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
       <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+    </div>-->
+
+
+      <div uk-slider="center: true">
+
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+
+        <ul class="uk-slider-items uk-child-width-1@s uk-grid">
+            <li v-for="(item, index) in actividades"
+                :key="index">
+                              
+                  <card-inicio :actividad="item"></card-inicio>
+                 
+            </li>
+            <!--<li>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img src="images/dark.jpg" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Headline</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img src="images/light.jpg" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Headline</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img src="images/photo2.jpg" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Headline</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img src="images/photo3.jpg" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">Headline</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    </div>
+                </div>
+            </li>-->
+            
+        </ul>
+
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+
     </div>
+
+    <!--<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>-->
+      </div>
+</div>
+
+
   </section>
 </template>
 
 <script>
+import CardInicio from '@/components/CardInicio'
 export default {
   name: 'InicioView',
+  components: {
+    CardInicio,
+  },
   computed:
   {
     actividades() {
@@ -69,8 +130,15 @@ export default {
 </script>
 
 <style scoped>
+.uk-grid>* {
+     padding-left: 0px; 
+}
 .principal {
   position: relative;
+      background: #333;
+}
+.cuadro {
+  /*background: #fafafa !important;*/
 }
 .oculto-note {
   display: none;

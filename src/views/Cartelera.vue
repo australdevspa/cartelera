@@ -515,6 +515,7 @@ background: #fafafa !important;
   font-size: 20px;
       background-color: #333;
     color: #fff;
+    border: 1px solid #a0a0a0;
 }
 
 .icon-bar a:hover {

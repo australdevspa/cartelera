@@ -109,6 +109,7 @@ export default {
   padding-bottom: 25%;
 }
 .box {
+  /*background: #fafafa;*/
   background: #fafafa;
   box-shadow: inset 0 2px 5px 0 rgba(30,30,30,.09);
 }
