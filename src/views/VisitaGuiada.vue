@@ -5,8 +5,11 @@
         <form class="uk-form-stacked ">
           <div class="uk-margin">
             <label class="uk-form-label uk-text-large">
-              Programación para hoy, {{fecha}}.
+              Programación para hoy, {{fecha}} y las próximas 2 semanas.
             </label>
+            <div class="ayuda"><div class="pintura-hoy"/>Actividades para hoy</div>
+            <div class="ayuda"><div class="pintura-prox"/>Actividades próximas</div>
+<div class="ayuda"><div class="pintura-sin"/>Sin actividades programadas</div>
           </div>
         </form>
 
@@ -126,6 +129,35 @@ export default {
 </script>
 
 <style scoped>
+.ayuda {
+    display: inline-block;
+     margin: 0 5px 0 5px;
+     color: #999;
+}
+.pintura-hoy {
+  width: 16px;
+    height: 16px;
+    border-radius: 500px;
+    background: #19b868;
+    display: inline-block;
+    margin: 0 5px 0 5px;
+}
+.pintura-prox {
+   width: 16px;
+    height: 16px;
+    border-radius: 500px;
+    background: rebeccapurple;
+    display: inline-block;
+    margin: 0 5px 0 5px;
+}
+.pintura-sin {
+   width: 16px;
+    height: 16px;
+    border-radius: 500px;
+    background: #faa05a;
+    display: inline-block;
+    margin: 0 5px 0 5px;
+}
 .pad-nuevo {
   padding: 20px 0px !important;
 }

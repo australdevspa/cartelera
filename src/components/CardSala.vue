@@ -27,22 +27,9 @@
       <div v-if="loading">
           <div class="carta-vacia">
             <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
-                      <!--<div class="uk-width-auto">
-                                Hoy
-            </div>-->
-            <div class="uk-width-expand">
-              Sin actividades o exposiciones programadas.
-              <!--No hay actividades, ni exposiciones programadas para esta sala.-->
-            </div>
-
-              <!--<div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
-        <div class="uk-width-1-3@s">
-          Hoy
-        </div>
-        <div class="uk-width-expand@s">
-          No hay actividades, ni exposiciones programadas para esta sala.
-        </div>
-    </div>-->
+              <div class="uk-width-expand">
+                Sin actividades o exposiciones programadas.
+              </div>
             </div>
           </div>
       </div>
@@ -63,6 +50,16 @@
         <div v-if="sala.sala === it.sala">
           <CardHoyExpo :carta="it"></CardHoyExpo>
         </div>
+      </div>
+
+      <div class="pad-hoy" v-for="(it, index) in actividades_siguientes" 
+        :key="index" 
+        >
+        <div v-if="sala.id === it.sala_id && index < 2">
+          <CardProx :carta="it"></CardProx>
+        
+        </div>
+
       </div>
 
       <!--<div class="pad-hoy" v-for="(it, index) in filtro_por_actividades"
@@ -123,13 +120,16 @@
 <script>
 import CardHoy from '@/components/CardHoy'
 import CardHoyExpo from '@/components/CardHoyExpo'
+import CardProx from '@/components/CardProx'
 import moment from 'moment';
 moment.locale('es')
 
 export default {
   name: 'CardSala',
   components: {
-    CardHoy  
+    CardHoy,
+    CardProx,
+    CardHoyExpo,  
   },
   props: {
     sala: {
@@ -145,6 +145,8 @@ export default {
       //filtro_exposiciones: [],
       actividades_hoy: [],
       exposiciones_hoy: [],
+      actividades_siguientes: [],
+      contador: 0,
       /*ar: [],
       vas: "",
       nose: [],
@@ -152,31 +154,8 @@ export default {
     }
   },
   created () {
-    //this.filtro_actividades = this.filtro_por_actividades
-    for(var x in this.filtro_por_actividades){
-      if(this.filtro_por_actividades[x].sala_id === this.sala.id){
-        this.actividades_hoy.push(this.filtro_por_actividades[x])
-        this.loading = false;
-      }
-      //if(x.id)
-      //this.nose = this.ar[x].id;
-    }
-    for(var y in this.filtro_por_exposiciones){
-      if(this.filtro_por_exposiciones[y].sala_id === this.sala.id){
-        this.exposiciones_hoy.push(this.filtro_por_exposiciones[y])
-        this.loading = false;
-      }
-      //if(x.id)
-      //this.nose = this.ar[x].id;
-    }
-    /*this.loading = true
-    this.$store.dispatch('loadDataCartelera')
-      .then(response => {
-        this.loading = false
-      })
-      .catch(error => {
-        this.loading = true
-      })*/
+    this.wena();
+    this.wena2();
   },
   computed: {
     filtro_por_actividades() {
@@ -187,8 +166,37 @@ export default {
       var fecha_hoy = moment().format('DD/MM/YYYY');
       return this.$store.state.exposiciones.filter((item) => item.fecha_rango.includes(fecha_hoy));
     },
+    filtro_por_actividades_siguientes() {
+      return this.$store.state.data_cartelera.cartelera.filter((item) => item.w.includes("2 semanas"));
+    },
+    /*itemsLessThanTen: function() {
+    return this.shoppingItems.filter(function(item) {
+      return item.price > 10;
+    })
+  }*/
   },
   methods: {
+    wena(){
+    for(var x in this.filtro_por_actividades){
+      if(this.filtro_por_actividades[x].sala_id === this.sala.id){
+        this.actividades_hoy.push(this.filtro_por_actividades[x])
+        this.loading = false;
+      }
+      //if(x.id)
+      //this.nose = this.ar[x].id;
+    }
+    },
+    wena2(){
+   for(var w in this.filtro_por_actividades_siguientes){
+      if(this.filtro_por_actividades_siguientes[w].sala_id === this.sala.id){
+        this.actividades_siguientes.push(this.filtro_por_actividades_siguientes[w])
+        this.loading = false;
+      }
+    }
+    },
+    suma(){
+      this.contador= this.contador+1;
+     }
     /*goToActividad (actividad) {
       this.$router.push({
         params: {

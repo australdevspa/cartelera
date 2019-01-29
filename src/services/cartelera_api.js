@@ -115,6 +115,9 @@ function setParametros(x){
         x.color_oscuro = darken(x.area_color,30);
 
         x.dale = dale(x.area_color);
+
+        x.w = w(x.fecha_ini);
+        //x.unque = fechas_proximas();
     }else{
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
@@ -153,6 +156,9 @@ function setParametros(x){
         x.color_oscuro = darken(x.area_color,30);
 
         x.dale = dale(x.area_color);
+
+        x.w = w(x.fecha_ini);
+        //x.unque = fechas_proximas();
     }
     if(x.area_color == null){
         x.area_color = "#1e87f0"
@@ -219,6 +225,57 @@ function fecha_rango(inicio, fin) {
             return moment(inicio).format('DD/MM/YYYY');
         }
     }
+}
+
+function w(inicio) {
+    var hoy = moment().format('YYYY-MM-DD')
+    var dos_semanas = moment(hoy, "YYYY-MM-DD").add('days', 14);
+    
+    var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
+
+    if(fecha_inicio === hoy){
+        return "hoy";
+    }else{
+        if(moment(fecha_inicio).isBetween(hoy, dos_semanas) === true){
+            return "2 semanas";
+        }else{
+            return "no";
+        }
+    }
+
+    /*var day = new_date.format('DD');
+    var month = new_date.format('MM');
+    var year = new_date.format('YYYY');
+
+    return day + '.' + month + '.' + year;*/
+    return moment(dos_semanas).format('DD/MM/YYYY');
+}
+
+function fechas_proximas() {
+    /*var hoy = moment().format('YYYY-MM-DD')
+    var dossemanas = moment(new Date()).add(14,'days')
+    
+    var fecha_actual = moment().format('YYYY-MM-DD')
+    var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
+    var fecha_fin = moment(fin).format('YYYY-MM-DD')
+    
+    if(fecha_inicio === fecha_fin){
+        return moment(inicio).format('DD/MM/YYYY');
+    }else{
+        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
+            return moment(fecha_actual).format('DD/MM/YYYY');
+        }else{
+            return moment(inicio).format('DD/MM/YYYY');
+        }
+    }*/
+    startdate = "20.03.2014";
+var new_date = moment(startdate, "DD-MM-YYYY").add('days', 5);
+
+var day = new_date.format('DD');
+var month = new_date.format('MM');
+var year = new_date.format('YYYY');
+
+return "cc";
 }
 
 function horario(inicio, fin) {

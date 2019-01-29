@@ -42,7 +42,7 @@
     </div>-->
 
 
-      <div uk-slider="center: true">
+      <div uk-slider="center: true; animation: fade; autoplay: true;">
 
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
 
