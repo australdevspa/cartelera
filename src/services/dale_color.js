@@ -11,6 +11,8 @@ function dale(color) {
     var primario_azul_1 = parseInt(result[3], 16);
     var primario_verde_1 = parseInt(result[2], 16);
 
+
+    //negro blanco
     if(primario_verde_1 == primario_rojo_1 && primario_verde_1 == primario_azul_1){
 
     
