@@ -11,6 +11,28 @@ function dale(color) {
     var primario_azul_1 = parseInt(result[3], 16);
     var primario_verde_1 = parseInt(result[2], 16);
 
+    if(primario_verde_1 == primario_rojo_1 && primario_verde_1 == primario_azul_1){
+
+    
+
+
+        var evento = []
+        if(primario_verde_1 > 150){
+            //oscurecer
+            evento.push(darken("#" + ((1 << 24) + (primario_rojo_1 << 16) + (primario_verde_1 << 8) + primario_azul_1).toString(16).slice(1),30));
+            evento.push(darken("#" + ((1 << 24) + (primario_rojo_1 << 16) + (primario_verde_1 << 8) + primario_azul_1).toString(16).slice(1),30));
+            evento.push(darken("#" + ((1 << 24) + (primario_rojo_1 << 16) + (primario_verde_1 << 8) + primario_azul_1).toString(16).slice(1),30));
+            evento.push(darken("#" + ((1 << 24) + (primario_rojo_1 << 16) + (primario_verde_1 << 8) + primario_azul_1).toString(16).slice(1),30));
+            
+        }else{
+            evento.push(lighten("#" + ((1 << 24) + (primario_rojo_1 << 16) + (primario_verde_1 << 8) + primario_azul_1).toString(16).slice(1),30));
+            evento.push(lighten("#" + ((1 << 24) + (primario_rojo_1 << 16) + (primario_verde_1 << 8) + primario_azul_1).toString(16).slice(1),30));
+            evento.push(lighten("#" + ((1 << 24) + (primario_rojo_1 << 16) + (primario_verde_1 << 8) + primario_azul_1).toString(16).slice(1),30));
+            evento.push(lighten("#" + ((1 << 24) + (primario_rojo_1 << 16) + (primario_verde_1 << 8) + primario_azul_1).toString(16).slice(1),30));
+        }
+        return evento;
+}else
+
     if(primario_rojo_1 > primario_azul_1 && primario_azul_1 == primario_verde_1){
         var terciario_rojo_1 = primario_rojo_1;
         var terciario_verde_1 = Math.ceil(primario_rojo_1/2);
@@ -322,6 +344,13 @@ function dale(color) {
         }
         //return "verde claro oscuro"
     }
+
+
+
+//negro blanco
+   
+
+
     /*if(color_primario_rojo_1 > color_primario_azul_1 && color_primario_rojo_1 > color_primario_verde_1){
         return "rojo"
     }else if(color_primario_azul_1 > color_primario_rojo_1 && color_primario_azul_1 > color_primario_verde_1){
