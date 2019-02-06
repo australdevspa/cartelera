@@ -292,9 +292,11 @@ function horario(inicio, fin) {
 }
 
 function precio(valor) {
-    if(valor == "0.-"){
+    if(valor == "0.-" || valor == "0"){
         return "liberada";
-    }else{
+    }else if(valor.indexOf(".-") != -1){
+        return "$" + valor.substr(0, valor.indexOf(".-"))
+    }else {
         return "$" + valor;
     }
 }
