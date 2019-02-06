@@ -13,7 +13,7 @@
           <a class="uk-icon-button uk-icon" href="https://www.youtube.com/channel/UCDlH1MHCO9PKRwn4o4fNcpw" uk-icon="icon: youtube;"></a>
           <br>
           <br>
-          Copyright © 2018 Cartelera.
+          Copyright © {{year}} Cartelera.
           <br>
           Puerto Montt, Chile.
         </p>
@@ -23,8 +23,16 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
-  name: 'Footer'
+  name: 'Footer',
+  computed: {
+    year() {
+      moment.locale('es')
+      return moment().format('YYYY')
+    },
+  }
 }
 </script>
 
