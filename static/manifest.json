@@ -1,5 +1,5 @@
 {
-  "name": "Cartelera Corporación Cultural Puerto Montt",
+  "name": "",
   "short_name": "Cartelera CCPM",
   "icons": [
     {
@@ -8,7 +8,7 @@
       "type": "image/png"
     },
     {
-      "src": "../static/img/icons_ccpm/logo-ccpm-160x81.png",
+      "src": "../static/img/icons_ccpm/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
