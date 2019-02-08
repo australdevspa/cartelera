@@ -8,6 +8,8 @@ import {
     dale
 } from '@/services/dale_color'
 
+import dc from 'dale_color';
+
 //metodo que obtiene todos los datos correspondientes a la cartelera
 function getDataCartelera(){
     return axios.get(`${Endpoint}/actividades`)
@@ -115,6 +117,7 @@ function setParametros(x){
         x.color_oscuro = darken(x.area_color,30);
 
         x.dale = dale(x.area_color);
+        x.colorOpuesto = colorOpuesto(x.color_claro);
 
         x.w = w(x.fecha_ini);
         //x.unque = fechas_proximas();
@@ -156,6 +159,7 @@ function setParametros(x){
         x.color_oscuro = darken(x.area_color,30);
 
         x.dale = dale(x.area_color);
+        x.colorOpuesto = colorOpuesto(x.color_claro);
 
         x.w = w(x.fecha_ini);
         //x.unque = fechas_proximas();
@@ -224,6 +228,16 @@ function fecha_rango(inicio, fin) {
         }else{
             return moment(inicio).format('DD/MM/YYYY');
         }
+    }
+}
+
+function colorOpuesto(color) {
+    var opuesto = dc.armonias.opuesto(color)
+    if(dc.validaciones.isClaro(opuesto, 177) == true){
+        var masOscuro = dc.brillo.oscurecer(opuesto, 50)
+        return masOscuro
+    }else{
+        return opuesto
     }
 }
 

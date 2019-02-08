@@ -2,9 +2,15 @@
   <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover parent" uk-grid
               :style="{ background: actividad.color_oscuro + '!important', 
 
-                        background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.dale[3]+') !important',
+
+                        background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.colorOpuesto+') !important',
+                        background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.colorOpuesto+') !important',
+                        background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.colorOpuesto+') !important', 
+
+
+                        /*background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.dale[3]+') !important',
                         background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.dale[3]+') !important',
-                        background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.dale[3]+') !important', 
+                        background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.dale[3]+') !important',*/ 
                         
 
                        /* background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_oscuro+') !important',
