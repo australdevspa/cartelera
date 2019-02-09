@@ -60,7 +60,10 @@
                                 <div v-else>
 
                                     <!--<div class="uk-grid-divider uk-child-width-expand@s" uk-grid>-->
-                                    <div class="uk-child-width-expand@s" uk-grid>
+                                   
+                                   
+                                   
+                                   <!-- <div class="uk-child-width-expand@s" uk-grid>
                                         <div class="uk-width-auto">
                                             <Detalles :actividad="evento" :actividad_translate="translate"></Detalles>
                                         </div>
@@ -79,9 +82,9 @@
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </div>-->
 
-                                    <!--<Detalles :actividad="evento" :actividad_translate="translate"></Detalles>-->
+                                    <Detalles :detalle="detalle" :actividad="evento" :actividad_translate="translate"></Detalles>
                                 </div>
 
                                 <!--<div v-if="loading_boton_obras">
@@ -140,7 +143,7 @@
 
                                 <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha" v-html= translate.title_en></h3>
                               
-                                <Detalles :actividad="evento" :actividad_translate="translate"></Detalles>
+                                <Detalles :detalle="detalle" :actividad="evento" :actividad_translate="translate"></Detalles>
 
                             </div>
                         </div>

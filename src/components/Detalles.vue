@@ -2,6 +2,9 @@
     <div v-if="actividad_translate.note_en !== null">                        
         <div v-if="estado_traduccion">
             <a href="" @click.prevent="espanol" class="text-translate a-translate">(Original Text)</a>
+                        <div v-if="detalle.length !== 0">
+              <a @click.prevent="goToObras(actividad, detalle)" class="text-translate a-translate">Artworks</a>
+            </div>
             <div class="mar-div">
                 <p class="mar-p ">{{ actividad.fecha_inicio_formato }}</p>
                 <p class="mar-p">{{ actividad.donde }}.</p>
@@ -54,7 +57,11 @@
         </div>
         
         <div v-else>
-            <a href="" @click.prevent="ingles" class="text-translate a-translate">(English Version)</a>
+            <a href="" :detalle="detalle" @click.prevent="ingles" class="text-translate a-translate">(English Version)</a>
+            <div v-if="detalle.length !== 0">
+              <a @click.prevent="goToObras(actividad, detalle)" class="text-translate a-translate">Obras</a>
+            </div>
+            
             <div class="mar-div">
                 <p class="mar-p">{{ actividad.fecha_inicio_formato }}</p>
                 <p class="mar-p">{{ actividad.donde }}</p>
@@ -122,6 +129,10 @@ export default {
     actividad_translate: {
       type: Object,
       required: true
+    },
+        detalle: {
+      type: Object,
+      required: true
     }
   },
   computed: {
@@ -135,7 +146,19 @@ export default {
     },
     espanol () {
         this.$store.dispatch('loadFalse')
-    }
+    },
+        goToObras (actividad, detail) {
+      this.$router.push({
+        params: {
+            slug:actividad.slug,
+          id: actividad.id,
+          evento: actividad,
+          detalle: detail
+
+        },
+        name: 'Obras'
+      })
+    },
   },
 }
 </script>
