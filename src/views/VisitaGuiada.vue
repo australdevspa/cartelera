@@ -7,6 +7,7 @@
                  <!--<button class="uk-button-x uk-button-secondary uk-button-large"><span uk-icon="chevron-left" class="bold-icon"></span>Volver atrás</button>-->
                 <!--<li><router-link to="/cartelera" class="text-translate a-translate"><span uk-icon="chevron-left"></span>Volver atrás</router-link></li>-->
             </ul>
+            
         <form class="uk-form-stacked ">
           <div class="uk-margin">
             <label class="uk-form-label uk-text-large">
