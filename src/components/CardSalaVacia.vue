@@ -125,7 +125,7 @@ import moment from 'moment';
 moment.locale('es')
 
 export default {
-  name: 'CardSala',
+  name: 'CardSalaVacia',
   components: {
     CardHoy,
     CardProx,
@@ -245,11 +245,11 @@ export default {
     margin-top: 0!important;
 }
 .margen {
-  margin: 25px !important;
+  margin: 4px !important;
 }
 .sala-estilo {
   color: white !important;
-  margin: 10px !important;
+  margin: 10px 10px 0px 10px!important;
 }
 .sala-titulo {
   font-size: 24px !important;
@@ -259,7 +259,7 @@ export default {
 }
 .uk-card-body {
   background: black;
-  padding: 10px !important;
+  padding: 0px 10px 10px 10px !important;
 }
 /*.tinted-image {
   background: 

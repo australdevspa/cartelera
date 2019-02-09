@@ -16,7 +16,8 @@ import {
     getTraduction
 } from '@/services/traduction_api'
 import {
-    getSalas
+    getSalas,
+    getEjemplo
 } from '@/services/salas'
 
 Vue.use(Vuex);
@@ -57,6 +58,7 @@ const state = {
     translate: [],
 
     salas: [],
+    ejemplo: [],
 
     exposiciones: [],
 
@@ -126,6 +128,10 @@ const actions = {
     loadSalas(context) {
         return getSalas()
             .then(salas => context.commit('updateSalas', salas));
+    },
+    loadEjemplo(context) {
+        return getEjemplo()
+            .then(ejemplo => context.commit('updateEjemplo', ejemplo));
     },
 
     loadExposiciones(context) {
@@ -284,6 +290,9 @@ const mutations = {
 
     updateSalas(state, salas) {
         state.salas = salas;
+    },
+    updateEjemplo(state, ejemplo) {
+        state.ejemplo = ejemplo;
     },
 
     updateExposiciones(state, exposiciones) {

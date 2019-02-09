@@ -243,7 +243,7 @@ function colorOpuesto(color) {
 
 function w(inicio) {
     var hoy = moment().format('YYYY-MM-DD')
-    var dos_semanas = moment(hoy, "YYYY-MM-DD").add('days', 14);
+    var dos_semanas = moment(hoy, "YYYY-MM-DD").add('days', 28);
     
     var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
 
@@ -251,7 +251,7 @@ function w(inicio) {
         return "hoy";
     }else{
         if(moment(fecha_inicio).isBetween(hoy, dos_semanas) === true){
-            return "2 semanas";
+            return "4 semanas";
         }else{
             return "no";
         }

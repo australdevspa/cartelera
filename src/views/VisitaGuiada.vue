@@ -10,7 +10,7 @@
         <form class="uk-form-stacked ">
           <div class="uk-margin">
             <label class="uk-form-label uk-text-large">
-              Programación para hoy, {{fecha}} y las próximas 2 semanas.
+              Programación para hoy, {{fecha}} y las próximas 4 semanas.
             </label>
             <div class="ayuda"><div class="pintura-hoy"/>Actividades para hoy</div>
             <div class="ayuda"><div class="pintura-prox"/>Actividades próximas</div>
@@ -29,26 +29,152 @@
           </div>
         </div>
         <div v-else>
-          <div class="uk-child-width-expand@s uk-text-center" uk-grid >
+           <div class="visible-note oculto-note">
+         
+         <div class="uk-child-width-expand@s uk-text-center" uk-grid >
             <div>
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1@m"
+                                             <div class="uk-width-1@m"
+                  v-for="(itemm, indexx) in ejemplo.hoy"
+                  :key="indexx">
+
+                <div
+                  v-for="(item, index) in salas"
+                  :key="index">
+ <CardSala v-if="item.id === indexx"
+                  :sala="item" class="uk-box-shadow-medium"></CardSala>
+                  </div>
+                 
+                
+                </div> 
+                <!--<div class="uk-width-1@m"
                   v-for="(item, index) in salas.slice(0,this.mitad)"
                   :key="index">
-                  <CardSala :sala="item"></CardSala>
-                </div>
+                  <CardSala    :sala="item"></CardSala>
+                </div>-->
+              </div>
+            </div>
+            <div>
+              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid> 
+                                <div class="uk-width-1@m"
+                  v-for="(itemm, indexx) in ejemplo.proximo"
+                  :key="indexx">
+
+                <div
+                  v-for="(item, index) in salas"
+                  :key="index">
+
+
+<CardSala v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSala>
+             
+
+ 
+                  </div>
+                 
+                
+                </div> 
+                <!--<div class="uk-width-1@m"
+                  v-for="(item, index) in salas.slice(this.mitad,this.salas.length)"
+                  :key="index">
+                  <CardSala :sala="item" class="uk-box-shadow-medium"></CardSala>
+                </div>-->
               </div>
             </div>
             <div>
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1@m"
-                  v-for="(item, index) in salas.slice(this.mitad,this.salas.length)"
+                  v-for="(itemm, indexx) in ejemplo.cero"
+                  :key="indexx">
+
+                <div
+                  v-for="(item, index) in salas"
                   :key="index">
-                  <CardSala :sala="item" class="uk-box-shadow-medium"></CardSala>
+ <CardSalaVacia v-if="item.id === indexx"
+                  :sala="item" class="uk-box-shadow-medium"></CardSalaVacia>
+                  </div>
+                 
+                
                 </div>
               </div>
             </div>
           </div>
+
+            </div>
+
+            <div class="visible-movil oculto-movil">
+         
+<div class="uk-child-width-expand@s uk-text-center" uk-grid >
+            <div>
+              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                                             <div class="uk-width-1@m"
+                  v-for="(itemm, indexx) in ejemplo.hoy"
+                  :key="indexx">
+
+                <div
+                  v-for="(item, index) in salas"
+                  :key="index">
+ <CardSala v-if="item.id === indexx"
+                  :sala="item" class="uk-box-shadow-medium"></CardSala>
+                  </div>
+                 
+                
+                </div> 
+
+
+
+                         <div class="uk-width-1@m"
+                  v-for="(itemm, indexx) in ejemplo.proximo"
+                  :key="indexx">
+
+                <div
+                  v-for="(item, index) in salas"
+                  :key="index">
+
+
+<CardSala v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSala>
+             
+
+ 
+                  </div>
+                 
+                
+                </div> 
+
+                <!--<div class="uk-width-1@m"
+                  v-for="(item, index) in salas.slice(0,this.mitad)"
+                  :key="index">
+                  <CardSala    :sala="item"></CardSala>
+                </div>-->
+              </div>
+            </div>
+            
+
+
+
+            <div>
+              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                <div class="uk-width-1@m"
+                  v-for="(itemm, indexx) in ejemplo.cero"
+                  :key="indexx">
+
+                <div
+                  v-for="(item, index) in salas"
+                  :key="index">
+ <CardSalaVacia v-if="item.id === indexx"
+                  :sala="item" class="uk-box-shadow-medium"></CardSalaVacia>
+                  </div>
+                 
+                
+                </div>
+              </div>
+            </div>
+          </div>
+          
+            </div>  
+
+
+
+
 
           <div class="padCamaraButton">
             <div v-if="show">
@@ -69,12 +195,14 @@
 
 <script>
 import CardSala from '@/components/CardSala'
+import CardSalaVacia from '@/components/CardSalaVacia'
 import moment from 'moment';
 
 export default {
   name: 'VisitaGuiadaView',
   components: {
-    CardSala
+    CardSala,
+    CardSalaVacia
   },
   data() {
     return {
@@ -87,6 +215,7 @@ export default {
   },
   created () {
     this.$store.dispatch('loadSalas')
+    this.$store.dispatch('loadEjemplo')
     this.$store.dispatch('loadExposiciones')
           .then(response => {
         this.loading = false
@@ -105,6 +234,9 @@ export default {
     },
     salas() {
       return this.$store.state.salas;
+    },
+        ejemplo() {
+      return this.$store.state.ejemplo;
     },
     filtro() {
         return this.$store.state.salas.filter((item) => item.id.includes("360"));
@@ -128,6 +260,16 @@ export default {
     },
     estadoFalse () {
       this.show = false;
+    },
+    find(id){
+        
+        for(var i = 0; i < salas.length; i++){
+            if(salas.id === id){
+       
+                      return salas[i]    
+               
+            }
+        }
     }
   }
 }
@@ -264,5 +406,24 @@ export default {
 .pad-top {
   padding-top: 30px !important;
   padding-bottom: 30px !important;
+}
+
+.oculto-note {
+  display: none;
+  visibility: hidden;
+}
+.visible-movil {
+  display: block;
+  visibility: visible;
+}
+@media only screen and (min-width: 1000px) {
+  .visible-note {
+    display: block;
+    visibility: visible;
+  }
+  .oculto-movil {
+    display: none;
+    visibility: hidden;
+  }
 }
 </style>
