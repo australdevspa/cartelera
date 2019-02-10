@@ -25,7 +25,7 @@
         </form>
 
        
-            <div class="pad-top">
+            <!--<div class="pad-top">
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div 
                 v-for="(item, index) in evento"
@@ -38,7 +38,22 @@
                 
                 </div>
               </div>
-            </div>
+            </div>-->
+
+              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                <div  class="uk-width-1-3@m"
+                v-for="(item, index) in evento"
+                :key="index"
+                >
+                  <div class="uk-alert-success" uk-alert>
+                    <h3 class="obra-titulo cursor" @click.prevent="goToObra(item)">{{item.titulo}}</h3>
+                      <p>{{item.descripcion}}</p>
+                  </div>                
+                
+                </div>
+              </div>
+
+            
 
         <!--<div v-if="loading">
           <div class="pad-spinner uk-text-center">
@@ -317,5 +332,10 @@ return this.$store.state.detalle;
 .pad-top {
   padding-top: 30px !important;
   padding-bottom: 30px !important;
+}
+
+.uk-alert {
+    padding: 15px !important;
+
 }
 </style>
