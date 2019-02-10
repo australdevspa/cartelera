@@ -54,14 +54,23 @@
             <div class="uk-modal-header">
               <h2 class="uk-modal-title">Acceder al contenido de la Actividad</h2>
             </div>
-            <div v-if="load_evento.length != 0" class="uk-modal-body">
 
-              <h2 class="uk-modal-title">{{load_evento[0].nombre}}</h2>
-                          <div class="mar-div">
-                <p class="mar-p">{{ load_evento[0].fecha_inicio_formato }}</p>
-                <p class="mar-p">{{ load_evento[0].donde }}</p>
-                <p class="mar-p">Entrada {{ load_evento[0].entrada }}</p>
-            </div>
+            <div class="uk-modal-body">
+              <div v-if="loading_modal_info">
+                <div class="pad-spinner uk-text-center">
+                  <div uk-spinner="ratio: 4"/>
+                </div>
+              </div>
+              <div v-else>
+                <div v-if="load_evento.length != 0" >
+                  <h2 class="uk-modal-title">{{load_evento[0].nombre}}</h2>
+                  <div class="mar-div">
+                    <p class="mar-p">{{ load_evento[0].fecha_inicio_formato }}</p>
+                    <p class="mar-p">{{ load_evento[0].donde }}</p>
+                    <p class="mar-p">Entrada {{ load_evento[0].entrada }}</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="uk-modal-footer uk-text-right">
               <button class="uk-button-x uk-button-secondary uk-button-large uk-modal-close" type="button" @click.prevent="setFalseActividad">Cancelar</button>
@@ -88,7 +97,8 @@ export default {
       isValidActividad: false,
       validating: false,
       paused: false,
-      content: null
+      content: null,
+      loading_modal_info: true,
     }
   },
 computed:
@@ -186,6 +196,7 @@ computed:
       this.paused = false
     },
     validate (content) {
+      this.loading_modal_info= true;
       this.$store.dispatch('loadResetEvento')
 
 
@@ -195,7 +206,12 @@ computed:
           if (this.existe_el_slug === true){
           //if (content.startsWith('https')) {
             this.$store.dispatch('loadEvento', content)
-
+                    .then(response => {
+                        this.loading_modal_info = false;
+                    })
+                    .catch(error => {
+                        this.loading_modal_info= true;
+                    })
             this.$store.dispatch('loadResetExisteSlug')
             resolve(true)
           } else {
@@ -212,7 +228,12 @@ computed:
           if (this.existe_el_slug === true){
           //if (content.startsWith('https')) {
             this.$store.dispatch('loadEvento', content)
-
+                    .then(response => {
+                        this.loading_modal_info = false;
+                    })
+                    .catch(error => {
+                        this.loading_modal_info= true;
+                    })
             this.$store.dispatch('loadResetExisteSlug')
             resolve(true)
           } else {
