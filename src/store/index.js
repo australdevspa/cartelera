@@ -155,6 +155,10 @@ const actions = {
         return getDetalleX(a, b)
             .then(detallex => context.commit('updateDetalleX', detallex));
     },
+
+    loadResetEvento(context) {
+        context.commit('updateResetEvento')
+    },
 };
 
 const mutations = {
@@ -312,6 +316,10 @@ const mutations = {
     },
     updateDetalleX(state, detallex) {
         state.detallex = detallex;
+    },
+
+    updateResetEvento(state) {
+        state.evento = [];
     },
 }
 

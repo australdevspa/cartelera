@@ -52,10 +52,16 @@
           <div class="uk-modal-dialog">
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-header">
-              <h2 class="uk-modal-title">Acceder a contenido descriptivo de la Actividad</h2>
+              <h2 class="uk-modal-title">Acceder al contenido de la Actividad</h2>
             </div>
-            <div class="uk-modal-body">
-              <p>Lorems ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div v-if="load_evento.length != 0" class="uk-modal-body">
+
+              <h2 class="uk-modal-title">{{load_evento[0].nombre}}</h2>
+                          <div class="mar-div">
+                <p class="mar-p">{{ load_evento[0].fecha_inicio_formato }}</p>
+                <p class="mar-p">{{ load_evento[0].donde }}</p>
+                <p class="mar-p">Entrada {{ load_evento[0].entrada }}</p>
+            </div>
             </div>
             <div class="uk-modal-footer uk-text-right">
               <button class="uk-button-x uk-button-secondary uk-button-large uk-modal-close" type="button" @click.prevent="setFalseActividad">Cancelar</button>
@@ -90,42 +96,83 @@ computed:
     existe_el_slug() {
       return this.$store.state.existe_slug;
     },
+    load_evento() {
+      return this.$store.state.evento;
+    },
   },
   methods: {
     async onDecode (content) {
+
+      if(content.lastIndexOf("/") === -1){
+
       this.content = content
       this.pauseCamera()
       this.validating = true
       this.isValid = await this.validate(content)
 
+
       if(this.isValid == true){
         UIkit.modal('#modal-acceso-expo').show();
-        //UIkit.modal('#modal-acceso-expo').hide();
-          /*  UIkit.modal.dialog(`
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-header">
-            <h2 class="uk-modal-title">Acceder a contenido descriptivo</h2>
-        </div>
-        <div class="uk-modal-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="uk-modal-footer uk-text-right">
-        <a data-v-3c6e6ddc href="/exposicion/`+this.content+`" class="uk-button uk-button-primary">Acceder</a>
-        <router-link to="/">Inicio</router-link>
-        <a data-v-3c6e6ddc="" href="/exposicion/`+this.content+`" class="uk-button uk-button-primary">Acceder</a>
-        <a data-v-7ba5bd90="" href="/" class="router-link-active">Inicio</a>
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-            <a class="uk-button uk-button-primary" href="/exposicion/`+this.content+`">Acceder</a>
-        </div>`)*/
       }else{
 
-      this.isValidActividad = await this.validateActividad(content)
+        this.isValidActividad = await this.validateActividad(content)
 
-      if(this.isValidActividad == true){
-        UIkit.modal('#modal-acceso-actividad').show();
-      }
+        if(this.isValidActividad == true){
+          UIkit.modal('#modal-acceso-actividad').show();
+        }
 
       }
+      }else{
+              var n = content.lastIndexOf("/")
+      var content_slug = content.slice(n+1, content.length);
+
+
+      this.content = content_slug
+      this.pauseCamera()
+      this.validating = true
+      this.isValid = await this.validate(content_slug)
+
+      /*this.content = content
+      this.pauseCamera()
+      this.validating = true
+      this.isValid = await this.validate(content)*/
+
+      if(this.isValid == true){
+        UIkit.modal('#modal-acceso-expo').show();
+      }else{
+
+        this.isValidActividad = await this.validateActividad(content_slug)
+
+        if(this.isValidActividad == true){
+          UIkit.modal('#modal-acceso-actividad').show();
+        }
+
+      }
+      }
+      //var n = content.lastIndexOf("/")
+      //var content_slug = content.slice(n+1, content.length);
+
+      /*this.content = content
+      this.pauseCamera()
+      this.validating = true
+      this.isValid = await this.validate(content)*/
+
+      /*this.content = content
+      this.pauseCamera()
+      this.validating = true
+      this.isValid = await this.validate(content)*/
+
+      /*if(this.isValid == true){
+        UIkit.modal('#modal-acceso-expo').show();
+      }else{
+
+        this.isValidActividad = await this.validateActividad(content)
+
+        if(this.isValidActividad == true){
+          UIkit.modal('#modal-acceso-actividad').show();
+        }
+
+      }*/
 
       this.validating = false
       window.setTimeout(() => {
@@ -139,11 +186,16 @@ computed:
       this.paused = false
     },
     validate (content) {
+      this.$store.dispatch('loadResetEvento')
+
+
       this.$store.dispatch('loadExisteSlug', content)
       return new Promise(resolve => {
         window.setTimeout(() => { // pretend it's taking really long
           if (this.existe_el_slug === true){
           //if (content.startsWith('https')) {
+            this.$store.dispatch('loadEvento', content)
+
             this.$store.dispatch('loadResetExisteSlug')
             resolve(true)
           } else {
@@ -153,11 +205,14 @@ computed:
       })
     },
     validateActividad (content) {
+      this.$store.dispatch('loadResetEvento')
       this.$store.dispatch('loadExisteSlugActividades', content)
       return new Promise(resolve => {
         window.setTimeout(() => { // pretend it's taking really long
           if (this.existe_el_slug === true){
           //if (content.startsWith('https')) {
+            this.$store.dispatch('loadEvento', content)
+
             this.$store.dispatch('loadResetExisteSlug')
             resolve(true)
           } else {
@@ -250,5 +305,15 @@ computed:
     color: white !important;
 
     /*background-color: #151515;*/
+}
+
+.mar-p {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  color: #333 !important;
+}
+.mar-div {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
 }
 </style>

@@ -225,7 +225,7 @@ export default {
 }
 .carta-vacia {
   background-color: #faa05a;
-  padding: 10px;
+  /*padding: 10px;*/
   color: white;
   text-align: center;
   border-radius: 5px;

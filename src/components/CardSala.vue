@@ -55,7 +55,7 @@
       <div class="pad-hoy" v-for="(it, index) in actividades_siguientes" 
         :key="index" 
         >
-        <div v-if="sala.id === it.sala_id && index < 2">
+        <div v-if="sala.id === it.sala_id && index < 3">
           <CardProx :carta="it"></CardProx>
         
         </div>
