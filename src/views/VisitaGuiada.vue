@@ -175,7 +175,10 @@
 
 
 
-
+          <div class="padCamaraButton">
+            <button @click.prevent="onButtonClick" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE</button>
+            <!--<input type="text" id="">-->
+          </div>
 
           <div class="padCamaraButton">
             <div v-if="show">
@@ -186,6 +189,7 @@
               <router-link v-scroll-to="'#abajo'" :to="{ path: '/espacios/camara'}" @click.native="estadoTrue" class="uk-button uk-button-secondary uk-button-large">Activar Scanner QR</router-link>
             </div>
           </div>
+
         </div>
 
         <div id="abajo"></div>
@@ -198,12 +202,13 @@
 import CardSala from '@/components/CardSala'
 import CardSalaVacia from '@/components/CardSalaVacia'
 import moment from 'moment';
+import { onButtonClick }  from '@/services/main_ble'
 
 export default {
   name: 'VisitaGuiadaView',
   components: {
     CardSala,
-    CardSalaVacia
+    CardSalaVacia,
   },
   data() {
     return {
@@ -271,7 +276,8 @@ export default {
                
             }
         }
-    }
+    },
+    onButtonClick
   }
 }
 </script>
