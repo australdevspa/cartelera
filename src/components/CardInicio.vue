@@ -75,7 +75,7 @@
             style="
               max-width: none;
               position: absolute;
-              left: 50%;
+              left: 53%;
               top: 50%;
               -webkit-transform: translate(-50%,-50%);
               transform: translate(-50%,-50%);
@@ -297,11 +297,11 @@ border-top-color: rgba(255,255,255,.5);
 
 .titulo-1m {
   font-weight: 900;
-  color: #333;
-  margin: 10px 0px 0px 0px !important;
+  color: white;
+  margin: 20px 0px 0px 0px !important;
 }
 .titulo-2m {
-  color: #333;
+  color: white;
 
   font-weight:400;
   margin: 0 !important;

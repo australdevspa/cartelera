@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "Cartelera CCPM",
   "short_name": "Cartelera CCPM",
   "icons": [
     {
@@ -15,6 +15,6 @@
   ],
   "start_url": "../",
   "display": "standalone",
-  "background_color": "#19b868",
-  "theme_color": "#19B868"
+  "background_color": "#333333",
+  "theme_color": "#333333"
 }
