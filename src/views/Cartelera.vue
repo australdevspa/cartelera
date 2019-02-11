@@ -99,7 +99,9 @@
 
               <div class="pad-top">
                 <div v-if="cartelera_boton">
+                <!--  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarCartelera">Cargar más actividades</button>-->
                   <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarCartelera">Cargar más actividades</button>
+                
                 </div>
               </div>
             </div>
@@ -315,7 +317,8 @@ export default {
       this.$store.dispatch('loadEstadoFalse')
     },
     cargarCartelera () {
-      this.$store.dispatch('loadCartelera')
+      //this.$store.dispatch('loadCartelera')
+      this.$store.dispatch('loadActividades');
     },
     showPorCategoria (x) {
       this.filter = ''
