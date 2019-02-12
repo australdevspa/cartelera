@@ -4,6 +4,7 @@
             <a href="" @click.prevent="espanol" class="text-translate a-translate">(Original Text)</a>
                         <div v-if="detalle.length !== 0">
               <a @click.prevent="goToObras(actividad, detalle)" class="text-translate a-translate">Artworks</a>
+              <a v-if="actividad_translate.video !== null" class="text-translate a-translate" href="#modal-media-video" uk-toggle>Video</a>
             </div>
             <div class="mar-div">
                 <p class="mar-p ">{{ actividad.fecha_inicio_formato }}</p>
@@ -60,6 +61,8 @@
             <a href="" :detalle="detalle" @click.prevent="ingles" class="text-translate a-translate">(English Version)</a>
             <div v-if="detalle.length !== 0">
               <a @click.prevent="goToObras(actividad, detalle)" class="text-translate a-translate">Obras</a>
+              <a v-if="actividad_translate.video !== null" class="text-translate a-translate" href="#modal-media-video" uk-toggle>Video</a>
+            
             </div>
             
             <div class="mar-div">
@@ -110,6 +113,16 @@
                 </li>
             </ul>-->
         </div>
+
+
+        <div id="modal-media-video" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+        <button class="uk-modal-close-outside" type="button" uk-close></button>
+        <video width="720" height="576" controls playsinline uk-video>
+            <source :src="actividad_translate.video" type="video/mp4">
+        </video>
+    </div>
+</div>
 
     </div>
 </template>
