@@ -194,7 +194,9 @@
 import CardRight from '@/components/CardRight'
 import CardLeft from '@/components/CardLeft'
 import _ from 'lodash'
-
+import {   
+    setParametros
+} from '@/services/cartelera_api'
 export default {
   name: 'CarteleraView',
   components: {
@@ -268,7 +270,7 @@ export default {
     por_categoria_boton() {
       return this.$store.state.por_categoria_boton;
     },
-    filtered_busqueda() {
+    /*filtered_busqueda() {
       if(this.filter === ''){
         this.limit = 10
       }
@@ -282,6 +284,64 @@ export default {
       }else{
         this.cartelera_boton_filtered = false
       }
+      return filteredPokemon.slice(0, this.limit)
+    },*/
+    filtered_busqueda() {
+      if(this.filter === ''){
+        this.limit = 10
+      }
+var resultado = []
+
+  var hola = this.$store.state.data_cartelera.categorias['Cine'].eventos
+  /*Object.keys(obj).forEach(function(key,index) {
+   var x = hola.concat(this.$store.state.data_cartelera.categorias['Cine'].eventos)
+   resultado = resultado.concat(x)
+});*/
+for (var propiedad in this.$store.state.data_cartelera.categorias) {
+
+  var ejemplo = resultado.concat(this.$store.state.data_cartelera.categorias[propiedad].eventos)
+
+  resultado = ejemplo
+}
+  /*for (var i in this.$store.state.data_cartelera.categorias) {
+    if (this.$store.state.data_cartelera.categorias.hasOwnProperty(i)) {
+
+        resultado = this.$store.state.data_cartelera.categorias['Cine'].eventos
+        //resultado += nombreObjeto + "." + i + " = " + objeto[i] + "\n";
+    }
+  }*/
+  //return resultado;
+
+      /*var final = []
+        for (var i = 0; i < this.$store.state.data_cartelera.categorias_total ; i++) {
+
+            response.data[i].fecha_inicio_formato = moment(response.data[i].fecha_ini).format('DD/MM/YYYY')
+            response.data[i].fecha_publicacion = moment(response.data[i].creado_el).format('DD/MM/YYYY')
+            response.data[i].fecha_rango = fecha_rango(response.data[i].fecha_ini, response.data[i].fecha_fin)
+            response.data[i].sala = sala(response.data[i].lugar)
+            expo.push(response.data[i]);
+        }*/
+      //var obj_unidos = this.$store.state.data_cartelera.cartelera
+      //var hola = this.$store.state.data_cartelera.categorias[0].eventos
+      //var hello = this.$store.state.data_cartelera.categorias[1].eventos
+      
+      //hola= hola.concat(hello);
+//var obj_unidos = Object.assign(hola, hello);
+
+      const filteredPokemon = (this.filter === '') ? resultado : resultado.filter(item => {
+        const itemName = item.nombre.toLowerCase()
+        return itemName.includes(this.filter.toLowerCase())
+      })
+      this.filtered_total =  Object.keys(filteredPokemon).length;
+      if(this.limit < this.filtered_total){
+        this.cartelera_boton_filtered = true
+      }else{
+        this.cartelera_boton_filtered = false
+      }
+      for (var i = 0; i < this.filtered_total ; i++) {
+        //filteredPokemon[i].nono = 'nono'
+        setParametros(filteredPokemon[i])
+}
       return filteredPokemon.slice(0, this.limit)
     },
     filtered_busqueda_porcategoria() {
@@ -298,10 +358,15 @@ export default {
       }else{
         this.porcategoria_boton_filtered = false
       }
+            for (var i = 0; i < this.filtered_porcategoria_total ; i++) {
+        //filteredPokemon[i].nono = 'nono'
+        setParametros(filteredPokemon[i])
+}
       return filteredPokemon.slice(0, this.limit_porcategoria)
     }
   },
   methods: {
+    setParametros,
     handleScroll (event) {
       if(window.scrollY > 300){
         this.show = true

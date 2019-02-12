@@ -26,9 +26,26 @@ function getSegmentoActividades(limite, inicio){
 }
 
 // https://api.culturapuertomontt.cl/api/actividades/limit=1&offset=0
-function getGET(limite, inicio){
-    var extracto = state.categorias[area].eventos.slice(state.por_categoria_inicio, state.por_categoria_inicio+state.por_categoria_tamaño);
-    
+function get1(limite, inicio, arr){
+    var extracto = arr.slice(inicio, limite);
+    var expo = []
+    for (var i = 0; i < extracto.length ; i++) {
+        setParametros(i)
+        /*response.data[i].fecha_inicio_formato = moment(response.data[i].fecha_ini).format('DD/MM/YYYY')
+        response.data[i].fecha_publicacion = moment(response.data[i].creado_el).format('DD/MM/YYYY')
+        response.data[i].fecha_rango = fecha_rango(response.data[i].fecha_ini, response.data[i].fecha_fin)
+        response.data[i].sala = sala(response.data[i].lugar)*/
+        expo.push(i);
+    }
+    return expo;
+
+    /*extracto.resultados.forEach(element => {
+        setParametros(element)
+    });
+    return extracto;*/
+    //a
+    //var extracto = state.categorias[area].eventos.slice(state.por_categoria_inicio, state.por_categoria_inicio+state.por_categoria_tamaño);
+
 
     /*return axios.get(`${Endpoint}/actividades/limit=`+limite+`&offset=`+inicio)
     .then(function (response) {
@@ -343,13 +360,15 @@ function horario(inicio, fin) {
 }
 
 function precio(valor) {
-    if(valor == "0.-" || valor == "0"){
-        return "liberada";
-    }else if(valor.indexOf(".-") != -1){
-        return "$" + valor.substr(0, valor.indexOf(".-"))
-    }else {
-        return "$" + valor;
-    }
+  
+        if(valor == "0.-" || valor == "0"){
+            return "liberada";
+        }else if(valor.indexOf(".-") != -1){
+            return "$" + valor.substr(0, valor.indexOf(".-"))
+        }else {
+            return "$" + valor;
+        }
+    
 }
 
 function donde(lugar) {
@@ -584,5 +603,7 @@ export {
     getEvento,
     getDetalle,
     getDetalleX,
-    getSegmentoActividades
+    getSegmentoActividades,
+    get1,
+    setParametros
 }
