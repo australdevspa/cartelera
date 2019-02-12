@@ -18,18 +18,60 @@
 
 
                     <div class="uk-card-header">
-                        <div class="uk-grid-small uk-flex-middle" uk-grid>
-                            <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.titulo }}</h3>
+
+<div class="uk-text-left" uk-grid>
+    
+    <div class="uk-width-expand@m">
+      <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.titulo }}</h3>
                                 
+       <!-- <div class="uk-card uk-card-default uk-card-body">Expand</div>-->
+    </div>
+        <div v-if="evento.video_url !== null" class="uk-width-1-4@m">
 
+<a class="uk-button uk-button-default" href="#modal-media-video" uk-toggle>Video</a>
+        <!--<div class="uk-card uk-card-default uk-card-body">1-3</div>-->
+    </div>
+</div>
 
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="uk-card-body uk-text-center data">{{evento.descripcion}}</div>
                     <div class="uk-card-body uk-text-center">
-                        <img :src="evento.RutaImg"/>
+                        <img :src="evento.RutaImgLow"/>
+
+
+
+    
+<!-- This is a button toggling the modal 
+<button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-acceso-video">Open</button>
+
+        <div id="modal-acceso-video" class="uk-modal-container" uk-modal>
+          <div class="uk-modal-dialog uk-modal-body">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+                      <video width="720" height="576" controls>
+                <source :src="evento.video_url" type="video/mp4">
+                  Your browser does not support the video tag.
+              </video>
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Salir</button>
+        </p>-->
+
+
+
+
+<div id="modal-media-video" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+        <button class="uk-modal-close-outside" type="button" uk-close></button>
+        <video width="720" height="576" controls playsinline uk-video>
+            <source :src="evento.video_url" type="video/mp4">
+        </video>
+    </div>
+</div>
+            
+
+
+
+
                     </div>
 
             </div>
@@ -144,6 +186,12 @@ data() {
 </script>
 
 <style scoped>
+video{
+    max-width: 100% !important;
+  max-height: 100% !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
 .pad-spinner {
   padding-top: 25%;
   padding-bottom: 25%;
