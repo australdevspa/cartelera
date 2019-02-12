@@ -22,7 +22,10 @@
             </div>
         </div>
     </div>
-    <div class="uk-card-body">
+    <div class="uk-card-body">  
+      
+
+
       
       <div v-if="loading">
           <div class="carta-vacia">
@@ -35,7 +38,7 @@
       </div>
       <div v-else>
 
-      <div class="pad-hoy" v-for="(it, index) in actividades_hoy"
+      <!--<div class="pad-hoy" v-for="(it, index) in actividades_hoy"
         :key="index"
         >
         <div v-if="sala.id === it.sala_id">
@@ -60,8 +63,46 @@
         
         </div>
 
+      </div>-->
+
+
+
+
+      <div class="pad-hoy" v-for="(it, index) in cargar_actividades_hoy"
+        :key="index"
+        >
+        <div v-if="sala.id === it.sala_id">
+          <CardHoy :carta="it"></CardHoy>
+        </div>
+
       </div>
 
+      <div class="pad-hoy"  v-for="(it, index) in exposiciones_hoy"
+        :key="index"
+        >
+        <div v-if="sala.sala === it.sala">
+          <CardHoyExpo :carta="it"></CardHoyExpo>
+        </div>
+      </div>
+
+      <div class="pad-hoy" v-for="(it, index) in cargar_actividades_prox" 
+        :key="index" 
+        >
+        <div v-if="sala.id === it.sala_id && index < 3">
+          <CardProx :carta="it"></CardProx>
+        
+        </div>
+
+      </div>
+
+      </div>
+
+
+
+
+
+
+      
       <!--<div class="pad-hoy" v-for="(it, index) in filtro_por_actividades"
         :key="index"
         >
@@ -79,7 +120,6 @@
         </div>
       </div>-->
 
-      </div>
 
 
 
@@ -156,8 +196,37 @@ export default {
   created () {
     this.wena();
     this.wena2();
+    this.hoy_valid();
+    this.prox_valid();
   },
   computed: {
+    cargar_actividades_hoy(){
+      for (var propiedad in this.$store.state.ejemplo.hoy) {
+        if(propiedad === this.sala.id){
+          //this.loading = false;
+          return this.$store.state.ejemplo.hoy[this.sala.id].eventos
+        }
+  //var ejemplo = resultado.concat(this.$store.state.data_cartelera.categorias[propiedad].eventos)
+
+  //resultado = ejemplo
+}
+
+
+    /*  if(this.$store.state.ejemplo.hoy[this.sala.id].eventos !== null)
+       return this.$store.state.ejemplo.hoy[this.sala.id].eventos
+      else*/
+      return null
+    },
+        cargar_actividades_prox(){
+                for (var propiedad in this.$store.state.ejemplo.proximo) {
+        if(propiedad === this.sala.id){
+          //this.loading = false;
+          return this.$store.state.ejemplo.proximo[this.sala.id].eventos
+        }
+    }
+      return null
+    },
+
     filtro_por_actividades() {
       var fecha_hoy = moment().format('DD/MM/YYYY');
       return this.$store.state.data_cartelera.cartelera.filter((item) => item.fecha_rango.includes(fecha_hoy));
@@ -176,6 +245,16 @@ export default {
   }*/
   },
   methods: {
+    hoy_valid(){
+      if (this.cargar_actividades_hoy !== null){
+        this.loading = false;
+      }
+    },
+    prox_valid(){
+      if (this.cargar_actividades_prox !== null){
+        this.loading = false;
+      }
+    },
     wena(){
     for(var x in this.filtro_por_actividades){
       if(this.filtro_por_actividades[x].sala_id === this.sala.id){
