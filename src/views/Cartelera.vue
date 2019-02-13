@@ -1,16 +1,8 @@
 <template>
   <section>
-    <div class="uk-section pad-nuevo">
-
-      <!--<div v-if="boton_top">
-        <div class="icon-bar">
-          <a href="" class="uk-icon-button uk-margin-small-right" uk-totop uk-scroll></a>
-        </div>
-
-      </div>-->
-
+    <div class="uk-section pad-views">
       <transition name="bounce">
-        <div v-if="show" class="icon-bar">
+        <div v-if="show" class="icono-totop">
           <a href="" class="uk-icon-button uk-margin-small-right" uk-totop uk-scroll></a>
         </div>
       </transition>
@@ -19,51 +11,18 @@
         <form class="uk-form-stacked">
           <div class="uk-margin">
             <div class="uk-text-center">
-              <ul class="grid pad-ul">
+              <ul class="grid pad-ul-categorias">
                 <li>
-
-                  <a href="" @click.prevent="showCartelera" class="uk-button uk-button-primary tm-button" v-on:click="setActive('todas')" :class="{ active: isActive('todas') }">
+                  <a href="" @click.prevent="showCartelera" class="uk-button boton-secundario" v-on:click="setActive('todas')" :class="{ active: isActive('todas') }">
                     Todas
                   </a>
-
-
-
-
-
-
-
-                <!--  <a href="" @click.prevent="showCartelera" class="uk-button uk-button-primary tm-button all-button" v-on:click="setActive('todas')" :class="{ active: isActive('todas') }">
-                    Todas
-                  </a>
-
-                  <a href="" @click.prevent="showCartelera" class="uk-button uk-button-primary tm-button" v-bind:style = "categoria_estilo" v-on:mouseover = "categoria_change_color" v-on:mouseout = "categoria_original_color">
-                    Todas
-                  </a>-->
-
-
-
                 </li>
                 <li v-for="(item, index) in categorias"
                   :key="index">
-                    <a href="" @click.prevent="showPorCategoria(item.area)" class="uk-button uk-button-primary tm-button" v-on:click="setActive(item.area)" :class="{ active: isActive(item.area) }">
+                    <a href="" @click.prevent="showPorCategoria(item.area)" class="uk-button boton-secundario" v-on:click="setActive(item.area)" :class="{ active: isActive(item.area) }">
                       {{ item.area }} <span class="uk-badge badge-background">{{ item.ocurrence }}</span>
                     </a>
-
                 </li>
-
-                <!--<li v-for="(item, index) in categorias"
-                  :key="index">
-                    <a href="" @click.prevent="showPorCategoria(item.area)" class="uk-button uk-button-primary tm-button" :style="{ background: item.color + '!important' }" v-on:click="setActive(item.area)" :class="{ active: isActive(item.area) }">
-                      {{ item.area }} <span class="uk-badge badge-background" :style="{ color: item.color + '!important' }">{{ item.ocurrence }}</span>
-                    </a>
-
-                    <a href="" @click.prevent="showPorCategoria(item.area)" class="uk-button uk-button-primary tm-button" v-bind:style = "categoria_estilo" v-on:mouseover = "categoria_change_color" v-on:mouseout = "categoria_original_color">
-                      {{ item.area }} <span class="uk-badge badge-background" :style="{ color: item.color + '!important' }">{{ item.ocurrence }}</span>
-                    </a>
-
-
-
-                </li>-->
               </ul>
             </div>
           </div>
@@ -71,7 +30,6 @@
 
         <form class="uk-form-stacked">
           <div class="uk-margin">
-            <!--<label class="uk-form-label uk-text-large" for="form-stacked-text">Encuentra tu actividad preferida:</label>-->
             <div class="uk-form-controls">
               <input class="uk-input" 
                 id="form-stacked-text" 
@@ -90,18 +48,14 @@
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
                 v-for="(item, index) in cartelera"
-                :key="index"
-                >
+                :key="index">
                   <card-right v-if="(index % 2) === 0" :actividad="item"></card-right>
                   <card-left v-else :actividad="item"></card-left>
                 </div>
               </div>
-
               <div class="pad-top">
                 <div v-if="cartelera_boton">
-                <!--  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarCartelera">Cargar más actividades</button>-->
-                  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarCartelera">Cargar más actividades</button>
-                
+                  <button class="uk-button boton-secundario" @click.prevent="cargarCartelera">Cargar más actividades</button>
                 </div>
               </div>
             </div>
@@ -117,14 +71,12 @@
                   <card-right v-if="(index % 2) === 0" :actividad="item"></card-right>
                   <card-left v-else :actividad="item"></card-left>
                 </div>
-              </div>
-              
+              </div> 
               <div class="pad-top">
                 <div v-if="cartelera_boton_filtered">
-                  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarCarteleraBusqueda">Cargar más actividades</button>
+                  <button class="uk-button boton-secundario" @click.prevent="cargarCarteleraBusqueda">Cargar más actividades</button>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>
@@ -136,51 +88,35 @@
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
                 v-for="(item, index) in por_categoria"
-                :key="index"
-                >
+                :key="index">
                   <card-right v-if="(index % 2) === 0" :actividad="item"></card-right>
                   <card-left v-else :actividad="item"></card-left>
                 </div>
               </div>
-
               <div class="pad-top">
                 <div v-if="por_categoria_boton">
-                  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarPorCategoria(por_categoria[0].area)">Cargar más actividades</button>
+                  <button class="uk-button boton-secundario" @click.prevent="cargarPorCategoria(por_categoria[0].area)">Cargar más actividades</button>
                 </div>
               </div>
             </div>
           </div>
 
           <div v-else>
-            <!--<p class="uk-text-small uk-text-muted uk-text-left">{{filtered_porcategoria_total}} actividades encontradas.</p>
-            <div class="pad-top">
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1-2@m"
-                v-for="(item, index) in filtered_busqueda_porcategoria"
-                :key="index"
-                @click.prevent="goToActividad(item)">
-                  <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
-                  <card-left v-else :actividad="item" class="cursor"></card-left>
-                </div>
-              </div>-->
             <p class="uk-text-small uk-text-muted uk-text-left">{{filtered_porcategoria_total}} actividades encontradas.</p>
             <div class="pad-top">
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
                 v-for="(item, index) in filtered_busqueda_porcategoria"
-                :key="index"
-                >
+                :key="index">
                   <card-right v-if="(index % 2) === 0" :actividad="item"></card-right>
                   <card-left v-else :actividad="item"></card-left>
                 </div>
               </div>
-              
               <div class="pad-top">
                 <div v-if="porcategoria_boton_filtered">
-                  <button class="uk-button-x uk-button-secondary uk-button-large" @click.prevent="cargarPorCategoriaBusqueda">Cargar más actividades</button>
+                  <button class="uk-button boton-secundario" @click.prevent="cargarPorCategoriaBusqueda">Cargar más actividades</button>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>
@@ -212,23 +148,7 @@ export default {
       filtered_porcategoria_total: 0,
       porcategoria_boton_filtered: false,
       show: false,
-      activeItem: 'todas',
-      /*nose: {
-        color: "red !important"
-      }*/
-      /*categoria_estilo : {
-        color:"#333 !important",
-        background: "transparent !important",
-        border: "1px solid #333 !important"
-      },*/
-      /*estilo : {
-        color:"red !important",
-        background: "transparent !important",
-        border: "1px solid red !important"
-      } ,*/
-
-      //nose: ''
-      //activeBtn:''
+      activeItem: 'todas'
     }
   },
   computed:
@@ -289,44 +209,11 @@ export default {
       if(this.filter === ''){
         this.limit = 10
       }
-var resultado = []
-
-  var hola = this.$store.state.data_cartelera.categorias['Cine'].eventos
-  /*Object.keys(obj).forEach(function(key,index) {
-   var x = hola.concat(this.$store.state.data_cartelera.categorias['Cine'].eventos)
-   resultado = resultado.concat(x)
-});*/
-for (var propiedad in this.$store.state.data_cartelera.categorias) {
-
-  var ejemplo = resultado.concat(this.$store.state.data_cartelera.categorias[propiedad].eventos)
-
-  resultado = ejemplo
-}
-  /*for (var i in this.$store.state.data_cartelera.categorias) {
-    if (this.$store.state.data_cartelera.categorias.hasOwnProperty(i)) {
-
-        resultado = this.$store.state.data_cartelera.categorias['Cine'].eventos
-        //resultado += nombreObjeto + "." + i + " = " + objeto[i] + "\n";
-    }
-  }*/
-  //return resultado;
-
-      /*var final = []
-        for (var i = 0; i < this.$store.state.data_cartelera.categorias_total ; i++) {
-
-            response.data[i].fecha_inicio_formato = moment(response.data[i].fecha_ini).format('DD/MM/YYYY')
-            response.data[i].fecha_publicacion = moment(response.data[i].creado_el).format('DD/MM/YYYY')
-            response.data[i].fecha_rango = fecha_rango(response.data[i].fecha_ini, response.data[i].fecha_fin)
-            response.data[i].sala = sala(response.data[i].lugar)
-            expo.push(response.data[i]);
-        }*/
-      //var obj_unidos = this.$store.state.data_cartelera.cartelera
-      //var hola = this.$store.state.data_cartelera.categorias[0].eventos
-      //var hello = this.$store.state.data_cartelera.categorias[1].eventos
-      
-      //hola= hola.concat(hello);
-//var obj_unidos = Object.assign(hola, hello);
-
+      var resultado = []
+      for (var propiedad in this.$store.state.data_cartelera.categorias) {
+        var ejemplo = resultado.concat(this.$store.state.data_cartelera.categorias[propiedad].eventos)
+        resultado = ejemplo
+      }
       const filteredPokemon = (this.filter === '') ? resultado : resultado.filter(item => {
         const itemName = item.nombre.toLowerCase()
         return itemName.includes(this.filter.toLowerCase())
@@ -338,9 +225,8 @@ for (var propiedad in this.$store.state.data_cartelera.categorias) {
         this.cartelera_boton_filtered = false
       }
       for (var i = 0; i < this.filtered_total ; i++) {
-        //filteredPokemon[i].nono = 'nono'
         setParametros(filteredPokemon[i])
-}
+      }
       return filteredPokemon.slice(0, this.limit)
     },
     filtered_busqueda_porcategoria() {
@@ -357,10 +243,9 @@ for (var propiedad in this.$store.state.data_cartelera.categorias) {
       }else{
         this.porcategoria_boton_filtered = false
       }
-            for (var i = 0; i < this.filtered_porcategoria_total ; i++) {
-        //filteredPokemon[i].nono = 'nono'
+      for (var i = 0; i < this.filtered_porcategoria_total ; i++) {
         setParametros(filteredPokemon[i])
-}
+      }
       return filteredPokemon.slice(0, this.limit_porcategoria)
     }
   },
@@ -369,11 +254,9 @@ for (var propiedad in this.$store.state.data_cartelera.categorias) {
     handleScroll (event) {
       if(window.scrollY > 300){
         this.show = true
-        //console.log("Pasaste la posicion 300 del scroll" + window.scrollY);
       }else{
         this.show = false;
       }
-      //console.log("Pasaste la posicion 300 del scroll" + window.scrollY);
     },
     prevenirEnter: function(e){ },
     showCartelera () {
@@ -381,7 +264,6 @@ for (var propiedad in this.$store.state.data_cartelera.categorias) {
       this.$store.dispatch('loadEstadoFalse')
     },
     cargarCartelera () {
-      //this.$store.dispatch('loadCartelera')
       this.$store.dispatch('loadMasActividades');
     },
     showPorCategoria (x) {
@@ -412,20 +294,7 @@ for (var propiedad in this.$store.state.data_cartelera.categorias) {
     },
     setActive: function (menuItem) {
       this.activeItem = menuItem
-      //this.nose.color = "green !important"
-      /*this.estilo.background = "#333 !important";
-      this.estilo.color = "white !important";*/
     },
-    /*categoria_change_color : function() {
-      this.categoria_estilo.background = "#333 !important";
-      this.categoria_estilo.color = "white !important";
-      this.categoria_estilo.border = "1px solid white !important";
-    },
-    categoria_original_color : function() {
-      this.categoria_estilo.background = "transparent !important";
-      this.categoria_estilo.color = "#333 !important";
-      this.categoria_estilo.border = "1px solid #333 !important";
-    }*/
   },
   created () {
     window.addEventListener('scroll', this.handleScroll);
@@ -437,183 +306,6 @@ for (var propiedad in this.$store.state.data_cartelera.categorias) {
 </script>
 
 <style scoped>
-.pad-top {
-  margin-top: 30px !important;
-}
-.cursor {
-    cursor:pointer;
-}
-.grid li {
-  display: inline-block;
-  padding: 5px 5px;
-}
-
-.tm-button {
-    padding: 0 20px;
-    
-    font-size: 14px;
-
-    /*font-size: 24px;*/
-    line-height: 42px;
-    /*text-align: center;
-    text-decoration: none;
-    transition: .1s ease-in-out;
-    transition-property: color,background-color,background-position,border-color,box-shadow;
-    background-origin: border-box;*/
-    border-radius: 500px;
-    letter-spacing: 1px !important;
-    transition: .1s ease-in-out;
-    transition-property: color,background-color,border-color,box-shadow;
-
- background: #a0a0a0 !important;
-    color: #fafafa !important;
-
-/*background: transparent !important;
-    color: #a0a0a0 !important;
-    border: 1px solid #a0a0a0 !important;*/
-
-    /*background: transparent !important;
-    color: #333 !important;
-    border: 1px solid #333 !important;
-
-    transition: .1s ease-in-out;
-    transition-property: color,background-color,border-color,box-shadow;*/
-
-  /*border-radius: 500px; 
-  font-weight: bold;
-  font-size: 150%;*/
-
-
-}
-.tm-button span.badge-background {
-  background: #fafafa !important;
-  color: #a0a0a0 !important;
-
-  /*background: #a0a0a0 !important;
-  color: #fafafa !important;*/
-
-  font-weight: bold;
-  vertical-align: text-top;
-  /*height: 24px;
-  width: 24px;*/
-}
-.tm-button:hover {
-background: #333 !important;
-  color: white !important;
-  border: 1px solid white !important;
-    
-      /*background: transparent !important;
-  color: white !important;
-  border: 1px solid white !important;*/
-
-  transition: .1s ease-in-out;
-  transition-property: color,background-color,border-color,box-shadow;
-
-  /*border-radius: 500px; 
-  font-weight: bold;
-  font-size: 150%;*/
-
-
-}
-.tm-button:hover span.badge-background {
-background: #fafafa !important;
-  color: #333 !important;
-    
-      /*background: transparent !important;
-  color: white !important;
-  border: 1px solid white !important;*/
-
-  transition: .1s ease-in-out;
-  transition-property: color,background-color,border-color,box-shadow;
-
-  /*border-radius: 500px; 
-  font-weight: bold;
-  font-size: 150%;*/
-
-
-}
-
-.tm-button.active {
-  background: #333 !important;
-  color: white !important;
-  border: 1px solid white !important;
-}
-
-.tm-button.active span.badge-background {
-background: #fafafa !important;
-  color: #333 !important;
-}
-
-.badge-background {
-  /*background: white !important;
-  font-weight: bold;
-  font-size: 100%;
-  background: #a0a0a0 !important;
-  font-weight: bold;*/
-}
-.all-button {
-  background: #333 !important;
-}
-.uk-input:focus, .uk-select:focus, .uk-textarea:focus {
-    border-color: #19b868 !important;
-}
-/*
-.active{
-  background-color:red;
-}ejemplo*/
-
-.icon-bar {
-  position: fixed;
-  /*top: 50%;*/
-  bottom: 10%;
-  /*-webkit-transform: translateY(-10%);
-  -ms-transform: translateY(-10%);
-  transform: translateY(-10%);*/
-  z-index: 6;
-  /*margin-left: 20px;*/
-      right: 20px;
-}
-
-.icon-bar a {
-  /*display: block;
-  text-align: center;
-  padding: 40px;*/
-  transition: all 0.3s ease;
-  /*color: white;*/
-  font-size: 20px;
-      background-color: #333;
-    color: #fff;
-    border: 1px solid #a0a0a0;
-}
-
-.icon-bar a:hover {
-
-      background-color: #151515;
-
-}
-/*.icon-bar a:hover {
-  background-color: #000;
-}*/
-
-/*.facebook {
-  background: #3B5998;
-  color: white;
-}
-
-.twitter {
-  background: #55ACEE;
-  color: white;
-}
-
-.google {
-  background: #dd4b39;
-  color: white;
-}
-
-.linkedin {
-  background: #007bb5;
-  color: white;
-}*/
 .bounce-enter-active {
   animation: bounce-in .5s;
 }
@@ -642,67 +334,37 @@ background: #fafafa !important;
     transform: scale(0);
   }
 }
+.icono-totop {
+  position: fixed;
+  bottom: 10%;
+  z-index: 6;
+  right: 20px;
+}
+.icono-totop a {
+  transition: all 0.3s ease;
+  font-size: 20px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #a0a0a0;
+}
+.icono-totop a:hover {
+  background-color: #151515;
+}
 .uk-icon-button {
   width: 60px !important;
   height: 60px !important;
 }
-.estilo-nuevo {
-  background: black !important;
-}
-.uk-button-x {
-  margin: 0;
-    border: none;
-    overflow: visible;
-    font: inherit;
-    color: inherit;
-    text-transform: none;
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    vertical-align: middle;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    -webkit-transition: .1s ease-in-out;
-    transition: .1s ease-in-out;
-    -webkit-transition-property: color,background-color,border-color;
-    transition-property: color,background-color,border-color;
-
-    /*margin: 0;
-    border: none;
-    overflow: visible;
-    font: inherit;
-    color: inherit;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 0 20px;
-    vertical-align: middle;*/
-    padding: 0 20px;
-    font-size: 14px;
-    line-height: 42px;
-    /*text-align: center;
-    text-decoration: none;
-    transition: .1s ease-in-out;
-    transition-property: color,background-color,background-position,border-color,box-shadow;
-    background-origin: border-box;*/
-    border-radius: 500px;
-    letter-spacing: 1px !important;
-}
-.uk-button-secondary {
-    background: #a0a0a0 !important;
-    color: #fafafa !important;
-
-    /*background-color: #333;*/
-}
-.uk-button-secondary:hover {
-      background: #333 !important;
-    color: #fafafa !important;
-    /*background-color: #151515;*/
-}
-.pad-ul {
+.pad-ul-categorias {
   padding-left: 0 !important;
 }
-.pad-nuevo {
-  padding: 20px 0px !important;
+.pad-top {
+  margin-top: 30px !important;
+}
+.grid li {
+  display: inline-block;
+  padding: 5px 5px;
+}
+.uk-input:focus, .uk-select:focus, .uk-textarea:focus {
+    border-color: #19b868 !important;
 }
 </style>
