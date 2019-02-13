@@ -124,3 +124,15 @@
   color: #19b868;
   border-color: rgba(255,255,255,.7);
 }
+
+/*css Inicio.vue*/
+.main-slider {
+  position: relative;
+  background: #333;
+}
+@media only screen and (min-width: 1200px) {
+  .cuadro-slider {
+    width: 1200px;
+    margin: 0 auto;
+  }
+}

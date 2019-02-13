@@ -4,17 +4,83 @@ moment.locale('es')
 import {   
     Endpoint
 } from '@/services/endpoints'
+import dc from 'dale_color';
 import {   
     dale
 } from '@/services/dale_color'
 
-import dc from 'dale_color';
+//metodo que obtiene todos los datos correspondientes a la cartelera
+function getDataCartelera(){
+    return axios.get(`${Endpoint}/actividades`)
+    .then(function (response) {
+        //categorias
+        var flags = []
+        var categorias = {}
+        for(var i = 0; i < response.data.length; i++){
+            if(flags[response.data[i].area]) continue
+            flags[response.data[i].area] = true
+            //si es que no posee ningun color asignado, le entregamos uno por defecto
+            if(response.data[i].area_color == null){
+                response.data[i].area_color = "#1e87f0"
+            }
+
+            categorias[response.data[i].area] = {
+                                                    area: response.data[i].area, 
+                                                    color: response.data[i].area_color, 
+                                                    ocurrence : nro_ocurrencias(response.data[i].area),
+                                                    eventos: cartelera_ocurrencias(response.data[i].area)
+                                                }
+
+            function nro_ocurrencias(value){
+                var nro = 0
+                for(var i = 0; i < response.data.length; i++){
+                    if(response.data[i].area === value)
+                        nro+=1 
+                }
+                return nro
+            }
+
+            function cartelera_ocurrencias(value){
+                var eventos = []
+                for(var i = 0; i < response.data.length; i++){
+                    if(response.data[i].area === value)
+                        eventos.push(response.data[i]) 
+                }
+                return eventos
+            }
+        }
+        //categorias total
+        var categorias_total = Object.keys(categorias).length
+
+        //cartelera total
+        var cartelera_total = Object.keys(response.data).length
+        //cartelera
+        var x = 0
+        var cartelera = []
+        while(x < 10){
+            setParametros(response.data[x])
+            cartelera.push(response.data[x])
+            x++
+        }
+
+        var final = {
+                        cartelera: cartelera,
+                        cartelera_total: cartelera_total,
+                        categorias: categorias,
+                        categorias_total: categorias_total
+
+                    }
+        return final;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
 
 // https://api.culturapuertomontt.cl/api/actividades/limit=1&offset=0
 function getSegmentoActividades(limite, inicio){
     return axios.get(`${Endpoint}/actividades/limit=`+limite+`&offset=`+inicio)
     .then(function (response) {
-        
         response.data.resultados.forEach(element => {
             setParametros(element)
         });
@@ -63,76 +129,7 @@ function get1(limite, inicio, arr){
 
 
 
-//metodo que obtiene todos los datos correspondientes a la cartelera
-function getDataCartelera(){
-    return axios.get(`${Endpoint}/actividades`)
-    .then(function (response) {
-        
-        //categorias
-        var flags = []
-        var categorias = {}
-        for(var i = 0; i < response.data.length; i++){
-            if(flags[response.data[i].area]) continue
-            flags[response.data[i].area] = true
 
-            //si es que no posee ningun color asignado, le entregamos uno por defecto
-            if(response.data[i].area_color == null){
-                response.data[i].area_color = "#1e87f0"
-            }
-
-            categorias[response.data[i].area] = {
-                                                    area: response.data[i].area, 
-                                                    color: response.data[i].area_color, 
-                                                    ocurrence : nro_ocurrencias(response.data[i].area),
-                                                    eventos: cartelera_ocurrencias(response.data[i].area)
-                                                }
-
-            function nro_ocurrencias(value){
-                var nro = 0
-                for(var i = 0; i < response.data.length; i++){
-                    if(response.data[i].area === value)
-                        nro+=1 
-                }
-                return nro
-            }
-
-            function cartelera_ocurrencias(value){
-                var eventos = []
-                for(var i = 0; i < response.data.length; i++){
-                    if(response.data[i].area === value)
-                        eventos.push(response.data[i]) 
-                }
-                return eventos
-            }
-        }
-        var categorias_total = Object.keys(categorias).length
-
-        //cartelera
-        var cartelera_total = Object.keys(response.data).length
-        var x = 0
-        var cartelera = []
-        //while(x < cartelera_total){
-        while(x < 10){
-            setParametros(response.data[x])
-            /*setAttachments(response.data[x], response.data[x].id)*/
-            cartelera.push(response.data[x])
-            x++
-        }
-
-        var final = {
-                        cartelera: cartelera,
-                        cartelera_total: cartelera_total,
-                        categorias: categorias,
-                        categorias_total: categorias_total
-
-                    }
-
-        return final;
-    })
-    .catch(function (error) {
-        return 'An error occured..' + error;
-    })
-}
 
 //Asignacion y modificacion de parametros a los objetos de la api
 function setParametros(x){
@@ -144,13 +141,10 @@ function setParametros(x){
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
-
         x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
 
-        x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
-
         x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
-
+        
         x.horario = horario(x.fecha_ini, x.fecha_fin)
 
         x.entrada = precio(x.valor);
@@ -159,8 +153,6 @@ function setParametros(x){
         
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
 
-        x.trozo = acortar(x.nombre);
-        x.trozo_card = acortarCard(x.nombre);
 
         x.cuanto_falta = cuantoFalta(x.diff)
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
@@ -180,10 +172,9 @@ function setParametros(x){
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
-        
         x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
         
-        x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
+        //x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
 
         x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
 
@@ -195,8 +186,6 @@ function setParametros(x){
 
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
         
-        x.trozo = acortar(x.nombre);
-        x.trozo_card = acortarCard(x.nombre);
         
         x.cuanto_falta = cuantoFalta(x.diff);
         /*x.moment = moment().add(1, 'd').calendar();
@@ -407,27 +396,6 @@ console.log( moment(day).format('dddd') );
     //return moment.weekdays[fecha]; */
 }
 
-function acortar(titulo) {
-    if(titulo.length > 33){
-        var extracto = titulo.substring(0, 33);
-        var n = extracto.lastIndexOf(" ");
-        var nuevoExtracto = titulo.substring(0, n);
-        return nuevoExtracto + " ...";
-    }else{
-        return titulo;
-    }
-}
-
-function acortarCard(titulo) {
-    if(titulo.length > 53){
-        var extracto = titulo.substring(0, 53);
-        var n = extracto.lastIndexOf(" ");
-        var nuevoExtracto = titulo.substring(0, n);
-        return nuevoExtracto + " ...";
-    }else{
-        return titulo;
-    }
-}
 
 // funciones momentjs
 function cuantoFalta(diferencia) {

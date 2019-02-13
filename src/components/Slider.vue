@@ -229,7 +229,7 @@
 import moment from 'moment';
 
 export default {
-  name: 'CardLeft',
+  name: 'Slider',
   props: {
     actividad: {
       type: Object,
@@ -321,12 +321,12 @@ border-top-color: rgba(255,255,255,.5);
   color: white;
 }
 
-@media only screen and (min-width: 1200px) {
+/*@media only screen and (min-width: 1200px) {
   .cuadro {
     width: 1200px;
     margin: 0 auto;
   }
-}
+}*/
 @media only screen and (max-width: 1199px) {
 .uk-child-width-1-2\@s>* {
     height: 650px;
