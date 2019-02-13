@@ -194,9 +194,8 @@
 import CardRight from '@/components/CardRight'
 import CardLeft from '@/components/CardLeft'
 import _ from 'lodash'
-import {   
-    setParametros
-} from '@/services/cartelera_api'
+import { setParametros } from '@/services/parametros'
+
 export default {
   name: 'CarteleraView',
   components: {
@@ -383,9 +382,10 @@ for (var propiedad in this.$store.state.data_cartelera.categorias) {
     },
     cargarCartelera () {
       //this.$store.dispatch('loadCartelera')
-      this.$store.dispatch('loadActividades');
+      this.$store.dispatch('loadMasActividades');
     },
     showPorCategoria (x) {
+      this.limit_porcategoria = 10
       this.filter = ''
       this.$store.dispatch('loadPorCategoria', x)
     },

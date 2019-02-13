@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { setParametros } from '@/services/parametros'
 import {   
     getDataCartelera,
+
     getEvento,
     getDetalle,
     getDetalleX,
     getSegmentoActividades,
-    get1
+   
 } from '@/services/cartelera_api'
 import {
     existeSlug,
@@ -22,20 +24,6 @@ import {
     getEjemplo
 } from '@/services/salas'
 
-
-import axios from 'axios';
-import moment from 'moment';
-moment.locale('es')
-import {   
-    Endpoint
-} from '@/services/endpoints'
-import {   
-    dale
-} from '@/services/dale_color'
-
-import dc from 'dale_color';
-
-
 Vue.use(Vuex);
 
 const state = {
@@ -49,6 +37,7 @@ const state = {
 
     //state correspondientes a la vista de la Cartelera
     categorias: [],
+
 
     estado: false,
 
@@ -84,449 +73,23 @@ const state = {
     detallex: []
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Asignacion y modificacion de parametros a los objetos de la api
-function setParametros(x){
-    moment.locale('es')
-    if(x.thumbnail == null){
-        x.thumbnail = "../static/img/default/evento_default.jpg"
-
-        x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
-        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
-        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
-        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
-
-        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
-
-        x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
-
-        x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
-
-        x.horario = horario(x.fecha_ini, x.fecha_fin)
-
-        x.entrada = precio(x.valor);
-
-        x.donde = donde(x.lugar);
-        
-        x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
-
-        x.trozo = acortar(x.nombre);
-        x.trozo_card = acortarCard(x.nombre);
-
-        x.cuanto_falta = cuantoFalta(x.diff)
-        x.cuanto_moment = cuantoMoment(x.fecha_ini);
-        x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
-        //x.cuanto_falta = cuantoFalta(x.fecha_ini)
-
-        x.color_claro = lighten(x.area_color,30);
-        x.color_oscuro = darken(x.area_color,30);
-
-        x.dale = dale(x.area_color);
-        x.colorOpuesto = colorOpuesto(x.color_claro);
-
-        x.w = w(x.fecha_ini);
-        //x.unque = fechas_proximas();
-    }else{
-        x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
-        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
-        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
-        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
-        
-        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
-        
-        x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
-
-        x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
-
-        x.horario = horario(x.fecha_ini, x.fecha_fin)
-
-        x.entrada = precio(x.valor);
-
-        x.donde = donde(x.lugar);
-
-        x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
-        
-        x.trozo = acortar(x.nombre);
-        x.trozo_card = acortarCard(x.nombre);
-        
-        x.cuanto_falta = cuantoFalta(x.diff);
-        /*x.moment = moment().add(1, 'd').calendar();
-        x.moment_x = moment(x.fecha_ini).endOf('days').fromNow();
-        x.moment_y = moment("2019-01-05").startOf('days').fromNow();*/
-
-        x.cuanto_moment = cuantoMoment(x.fecha_ini);
-        x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
-        //x.cuanto_falta = cuantoFalta(x.fecha_ini)
-
-        /*x.color_claro = lighten('#23B19D',20);
-        x.color_oscuro = darken('#23B19D',20);*/
-        x.color_claro = lighten(x.area_color,30);
-        x.color_oscuro = darken(x.area_color,30);
-
-        x.dale = dale(x.area_color);
-        x.colorOpuesto = colorOpuesto(x.color_claro);
-
-        x.w = w(x.fecha_ini);
-        //x.unque = fechas_proximas();
-    }
-    if(x.area_color == null){
-        x.area_color = "#1e87f0"
-    }
-}
-
-/*function setAttachments(x, id){
-    return axios.get(`${Endpoint}/attachments-actividad?id=`+id)
-    .then(function (response) {
-        x.images = response.data[0];
-        return x.images;
-    })
-    .catch(function (error) {
-        return 'An error occured..' + error;
-    })
-}*/
-
-
-/* Suma el porcentaje indicado a un color (RR, GG o BB) hexadecimal para aclararlo */
-const addLight = function(color, amount){
-    let cc = parseInt(color,16) + amount;
-    let c = (cc > 255) ? 255 : (cc);
-    c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
-    return c;
-  }
-  
-  /* const hexToRGB = (color) => {
-    color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
-    let colorRGB = [color.substring(0,2)]
-  } */
-  
-  /* Aclara un color hexadecimal de 6 caracteres #RRGGBB segun el porcentaje indicado */
-  const lighten = (color, amount)=> {
-      
-    color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
-    amount = parseInt((255*amount)/100);
-    return color = `#${addLight(color.substring(0,2), amount)}${addLight(color.substring(2,4), amount)}${addLight(color.substring(4,6), amount)}`;
-  }
-/* Resta el porcentaje indicado a un color (RR, GG o BB) hexadecimal para oscurecerlo */
-const subtractLight = function(color, amount){
-  let cc = parseInt(color,16) - amount;
-  let c = (cc < 0) ? 0 : (cc);
-  c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
-  return c;
-}
-
-/* Oscurece un color hexadecimal de 6 caracteres #RRGGBB segun el porcentaje indicado */
-const darken = (color, amount) =>{
-  color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
-  amount = parseInt((255*amount)/100);
-  return color = `#${subtractLight(color.substring(0,2), amount)}${subtractLight(color.substring(2,4), amount)}${subtractLight(color.substring(4,6), amount)}`;
-}
-
-function fecha_rango(inicio, fin) {
-    var fecha_actual = moment().format('YYYY-MM-DD')
-    var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
-    var fecha_fin = moment(fin).format('YYYY-MM-DD')
-    
-    if(fecha_inicio === fecha_fin){
-        return moment(inicio).format('DD/MM/YYYY');
-    }else{
-        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-            return moment(fecha_actual).format('DD/MM/YYYY');
-        }else{
-            return moment(inicio).format('DD/MM/YYYY');
-        }
-    }
-}
-
-function colorOpuesto(color) {
-    var opuesto = dc.armonias.opuesto(color)
-    if(dc.validaciones.isClaro(opuesto, 177) == true){
-        var masOscuro = dc.brillo.oscurecer(opuesto, 50)
-        return masOscuro
-    }else{
-        return opuesto
-    }
-}
-
-function w(inicio) {
-    var hoy = moment().format('YYYY-MM-DD')
-    var dos_semanas = moment(hoy, "YYYY-MM-DD").add('days', 28);
-    
-    var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
-
-    if(fecha_inicio === hoy){
-        return "hoy";
-    }else{
-        if(moment(fecha_inicio).isBetween(hoy, dos_semanas) === true){
-            return "4 semanas";
-        }else{
-            return "no";
-        }
-    }
-
-    /*var day = new_date.format('DD');
-    var month = new_date.format('MM');
-    var year = new_date.format('YYYY');
-
-    return day + '.' + month + '.' + year;*/
-    return moment(dos_semanas).format('DD/MM/YYYY');
-}
-
-function fechas_proximas() {
-    /*var hoy = moment().format('YYYY-MM-DD')
-    var dossemanas = moment(new Date()).add(14,'days')
-    
-    var fecha_actual = moment().format('YYYY-MM-DD')
-    var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
-    var fecha_fin = moment(fin).format('YYYY-MM-DD')
-    
-    if(fecha_inicio === fecha_fin){
-        return moment(inicio).format('DD/MM/YYYY');
-    }else{
-        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-            return moment(fecha_actual).format('DD/MM/YYYY');
-        }else{
-            return moment(inicio).format('DD/MM/YYYY');
-        }
-    }*/
-    startdate = "20.03.2014";
-var new_date = moment(startdate, "DD-MM-YYYY").add('days', 5);
-
-var day = new_date.format('DD');
-var month = new_date.format('MM');
-var year = new_date.format('YYYY');
-
-return "cc";
-}
-
-function horario(inicio, fin) {
-    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
-    var fecha_fin = moment(fin).format('DD/MM/YYYY')
-    if(fecha_inicio == fecha_fin){
-        var hora_inicio = moment(inicio).format('HH:mm')
-        //var hora_fin = moment(fin).format('HH:mm')
-
-        return hora_inicio + " hrs";
-    }else{
-        return "horario indefinido";
-    }
-}
-
-function precio(valor) {
-    if(valor == "0.-" || valor == "0"){
-        return "liberada";
-    }else if(valor.indexOf(".-") != -1){
-        return "$" + valor.substr(0, valor.indexOf(".-"))
-    }else {
-        return "$" + valor;
-    }
-}
-
-function donde(lugar) {
-    var casa = "Casa del Arte Diego Rivera"
-    if(lugar == "Sala Teatro Diego Rivera"){
-        return "Sala Teatro - " + casa;
-    }else{
-        return lugar + " - " + casa;
-    }
-}
-
-function diaSemana(inicio, fin) {
-    moment.locale('es')
-    var fecha_actual = moment()
-    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
-    var fecha_fin = moment(fin).format('DD/MM/YYYY')
-    if(fecha_inicio == fecha_fin){
-        return moment(inicio).format('dddd');
-    }else{
-        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) == true){
-            return moment(inicio).format('dddd');
-        }else{
-            return moment(inicio).format('dddd');
-        }
-    }
-    //return moment(fecha).format('dddd');
-    /*
-// What day of the week is it?
-var day = "2018-12-16 13:30:00" // 5
-console.log( moment.weekdays[day] ); // Friday
-console.log( moment().weekday(0) );
-// What is the current month name?
-console.log( moment().weekday() ); 
-
-console.log( moment(day).format('dddd') ); 
-    //return moment.weekdays[fecha]; */
-}
-
-function acortar(titulo) {
-    if(titulo.length > 33){
-        var extracto = titulo.substring(0, 33);
-        var n = extracto.lastIndexOf(" ");
-        var nuevoExtracto = titulo.substring(0, n);
-        return nuevoExtracto + " ...";
-    }else{
-        return titulo;
-    }
-}
-
-function acortarCard(titulo) {
-    if(titulo.length > 53){
-        var extracto = titulo.substring(0, 53);
-        var n = extracto.lastIndexOf(" ");
-        var nuevoExtracto = titulo.substring(0, n);
-        return nuevoExtracto + " ...";
-    }else{
-        return titulo;
-    }
-}
-
-// funciones momentjs
-function cuantoFalta(diferencia) {
-    if(diferencia == 0){
-        return 'Hoy'
-    }else if(diferencia == 1){
-        return 'En '+ diferencia +' día'
-    }else{
-        return 'En '+ diferencia +' días'
-    }
-}
-
-function cuantoMoment(date) {
-    
-    // get from-now for this date
-    //var fromNow = moment( date ).fromNow();
-
-    moment.updateLocale('es', {
-        calendar : {
-            lastDay : '[Ayer]',
-            sameDay : '[Hoy]',
-            /*sameDay: function (now) {
-                if (this.isBefore(now)) {
-                  return '[Will Happen Today]';
-                } else {
-                  return '[Happened Today]';
-                }},*/
-            nextDay : '[Mañana]',
-            lastWeek : '[Pasado] dddd',
-            nextWeek : '[Próximo] dddd',
-            //sameElse : 'DD/MM/YYYY',
-            sameElse: function () {
-                var fromNow = moment( date ).fromNow();
-                return "[" + fromNow + "]";
-            }
-        }
-    });
-    
-    /*moment.updateLocale('fr', {
-        calendar : {
-            lastDay : '[Hier]',
-            sameDay : '[Aujourd’hui] L',
-            nextDay : '[Demain]',
-            lastWeek : 'll',
-            nextWeek : 'll',
-            sameElse : 'll'
-        }
-    });*/
-    /*var date = moment().startOf('day');
-    return date;*/
-    //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          return date.locale('es').calendar();
-    //return date.locale('es').calendar();
-    //var today2 = moment().startOf('day');
-    //return today2.locale('es').calendar();
-
-    return moment(date).startOf('days').locale('es').calendar();
-    //console.log(today2.locale('fr').calendar());
-}
-
-function cuantoMomentEn(date) {
-    
-    //var fromNow = moment( date ).lang("en").fromNow();
-
-    moment.updateLocale('en', {
-        calendar : {
-            lastDay : '[Yesterday]',
-            sameDay : '[Today]',
-            /*sameDay: function (now) {
-                if (this.isBefore(now)) {
-                  return '[Will Happen Today]';
-                } else {
-                  return '[Happened Today]';
-                }},*/
-            nextDay : '[Tomorrow]',
-            lastWeek : '[Last] dddd',
-            nextWeek : '[Next] dddd',
-            //sameElse : 'DD/MM/YYYY',
-            sameElse: function () {
-                var fromNow = moment( date ).fromNow();
-                return "[" + fromNow + "]";
-            }
-        }
-    });
-
-    return moment(date).startOf('days').locale('en').calendar();
-}
-
-
-
-
-
-
-
-
-
 const actions = {
+    //actions correspondiente a la vista App
     loadDataCartelera(context) {
         return getDataCartelera()
             .then(data_cartelera => context.commit('updateDataCartelera', data_cartelera));
     },
-//load viejo trae segmento de actividades ya cargadas
-    loadCartelera(context) {
-        context.commit('updateCartelera');
-    },
-   
-//load nuevo trae segmento de actividades
-    loadActividades(context) {
+
+    //actions correspondiente a la vista Cartelera
+    loadMasActividades(context) {
         return getSegmentoActividades(state.cartelera_tamaño, state.cartelera_inicio)
-        .then(cartelera => context.commit('updateActividades', cartelera))
-
-        /*return getSegmentoActividades(state.limiteActividades, state.contadorActividades)
-            .then(actividades => context.commit('updateActividades', actividades))*/
-    
+        .then(cartelera => context.commit('updateMasActividades', cartelera))
     },
-
-
-
-
 
     loadPorCategoria(context, area) {
         context.commit('updatePorCategoria', area);
     },
-
-    /*loadMasPorCategoria(context, area, arr) {
-        get1(state.cartelera_tamaño, state.cartelera_inicio, area, arr)
-        arr => context.commit('updateMasPorCategoria', arr)
-
-        //context.commit('updateMasPorCategoria', area);
-    },*/
-
+    
     loadMasPorCategoria(context, area) {
         context.commit('updateMasPorCategoria', area);
     },
@@ -538,6 +101,25 @@ const actions = {
     loadEstadoTrue(context) {
         context.commit('updateEstadoTrue')
     },
+
+
+    //load viejo trae segmento de actividades ya cargadas
+    /*loadCartelera(context) {
+        context.commit('updateCartelera');
+    },*/
+   
+    /*loadActividades(context) {
+        return getSegmentoActividades(state.cartelera_tamaño, state.cartelera_inicio)
+        .then(cartelera => context.commit('updateActividades', cartelera))
+    },*/
+
+
+
+
+
+
+
+
 
     //actions correspondiente a la vista Evento
     loadEvento(context, slug) {
@@ -607,6 +189,7 @@ const actions = {
 };
 
 const mutations = {
+    //mutations correspondiente a la vista App
     updateDataCartelera(state, data_cartelera) {
         state.data_cartelera = data_cartelera;
         
@@ -630,15 +213,13 @@ const mutations = {
             }
         }
     },
-    //update viejo trae segmento de actividades ya cargadas
-    updateCartelera(state) {
-        //state.estado = false;
-        var extracto = state.data_cartelera.cartelera.slice(state.cartelera_inicio, state.cartelera_inicio+state.cartelera_tamaño);
+
+    //mutations correspondiente a la vista Cartelera
+    updateMasActividades(state, cartelera) {
         if(state.cartelera_inicio !== 0){
-            extracto.forEach(function (value, key) {
+            cartelera.resultados.forEach(function (value, key) {
                 state.cartelera.push(value);
             });
-            // la suma del inicio y el tamaño, supera al total desabilita boton
             if(state.cartelera_inicio + state.cartelera_tamaño >= state.data_cartelera.cartelera_total){
                 state.cartelera_inicio = state.data_cartelera.cartelera_total;
                 state.cartelera_boton = false;
@@ -648,51 +229,6 @@ const mutations = {
             }
         }
     },
-
-    //update nuevo trae segmento de actividades
-    updateActividades(state, cartelera) {
-        if(state.cartelera_inicio !== 0){
-            cartelera.resultados.forEach(function (value, key) {
-                state.cartelera.push(value);
-            });
-            //state.cartelera_inicio = state.cartelera_inicio + 10;
-
-            if(state.cartelera_inicio + state.cartelera_tamaño >= state.data_cartelera.cartelera_total){
-                state.cartelera_inicio = state.data_cartelera.cartelera_total;
-                state.cartelera_boton = false;
-            }else{
-                state.cartelera_inicio = state.cartelera_inicio + state.cartelera_tamaño;
-                state.cartelera_boton = true;
-            }
-            //state.actividades = actividades.resultados;
-            //state.contadorActividades = state.contadorActividades + 10;
-        }
-        //state.totalActividades = actividades.total;
-        
-        /*if(state.cartelera_inicio === 0){
-            //state.actividades = actividades.resultados;
-            //state.contadorActividades = state.contadorActividades + 10;
-        }else{
-            cartelera.resultados.forEach(function (value, key) {
-                state.cartelera.push(value);
-            });
-            state.cartelera_inicio = state.cartelera_inicio + 10;
-        }*/
-    },
-
-
-    /*updateActividades(state, actividades) {
-        state.totalActividades = actividades.total;
-        if(state.contadorActividades === 0){
-            state.actividades = actividades.resultados;
-            state.contadorActividades = state.contadorActividades + 10;
-        }else{
-            actividades.resultados.forEach(function (value, key) {
-                state.actividades.push(value);
-            });
-            state.contadorActividades = state.contadorActividades + 10;
-        }
-    },*/
 
     updatePorCategoria(state, area) {
         state.estado = true;
@@ -701,12 +237,6 @@ const mutations = {
             var extracto = state.categorias[area].eventos.slice(state.por_categoria_inicio, state.por_categoria_tamaño);
             extracto.forEach(function (value, key) {
                 setParametros(value)
-
-
-
-
-                //value.hola = "nose"
-                
                 state.por_categoria.push(value);
             });
             
@@ -732,17 +262,8 @@ const mutations = {
             var extracto = state.categorias[area].eventos.slice(state.por_categoria_inicio, state.por_categoria_tamaño);
             extracto.forEach(function (value, key) {
                 setParametros(value)
-
-
-
-
-                //value.hola = "nose"
-                
                 state.por_categoria.push(value);
             });
-            
-            
-            
             state.por_categoria_total = state.categorias[area].ocurrence;
             // la suma del inicio y el tamaño, supera al total desabilita boton
             if(state.por_categoria_tamaño >= state.por_categoria_total){
@@ -754,6 +275,69 @@ const mutations = {
             }
         }
     },
+
+    updateMasPorCategoria(state, area) {
+        var extracto = state.categorias[area].eventos.slice(state.por_categoria_inicio, state.por_categoria_inicio+state.por_categoria_tamaño);
+        if(state.por_categoria_inicio !== 0){
+            extracto.forEach(function (value, key) {
+                setParametros(value)
+                state.por_categoria.push(value);
+            });
+            // la suma del inicio y el tamaño, supera al total desabilita boton
+            if(state.por_categoria_inicio + state.por_categoria_tamaño >= state.por_categoria_total){
+                state.por_categoria_inicio = state.por_categoria_total;
+                state.por_categoria_boton = false;
+            }else{
+                state.por_categoria_inicio = state.por_categoria_inicio + state.por_categoria_tamaño;
+                state.por_categoria_boton = true;
+            }
+        }
+    },
+
+    updateEstadoFalse(state) {
+        state.estado = false;
+    },
+
+    updateEstadoTrue(state) {
+        state.estado = true;
+    },
+
+
+    //update viejo trae segmento de actividades ya cargadas
+    /*updateCartelera(state) {
+        //state.estado = false;
+        var extracto = state.data_cartelera.cartelera.slice(state.cartelera_inicio, state.cartelera_inicio+state.cartelera_tamaño);
+        if(state.cartelera_inicio !== 0){
+            extracto.forEach(function (value, key) {
+                state.cartelera.push(value);
+            });
+            // la suma del inicio y el tamaño, supera al total desabilita boton
+            if(state.cartelera_inicio + state.cartelera_tamaño >= state.data_cartelera.cartelera_total){
+                state.cartelera_inicio = state.data_cartelera.cartelera_total;
+                state.cartelera_boton = false;
+            }else{
+                state.cartelera_inicio = state.cartelera_inicio + state.cartelera_tamaño;
+                state.cartelera_boton = true;
+            }
+        }
+    },*/
+
+
+
+    /*updateActividades(state, actividades) {
+        state.totalActividades = actividades.total;
+        if(state.contadorActividades === 0){
+            state.actividades = actividades.resultados;
+            state.contadorActividades = state.contadorActividades + 10;
+        }else{
+            actividades.resultados.forEach(function (value, key) {
+                state.actividades.push(value);
+            });
+            state.contadorActividades = state.contadorActividades + 10;
+        }
+    },*/
+
+
 
     /*updatePorCategoria(state, area) {
         state.estado = true;
@@ -792,31 +376,6 @@ const mutations = {
         }
     },*/
 
-    updateMasPorCategoria(state, area) {
-        //state.estado = true;
-        //state.por_categoria_area = por_categoria[0].area;
-        var extracto = state.categorias[area].eventos.slice(state.por_categoria_inicio, state.por_categoria_inicio+state.por_categoria_tamaño);
-        if(state.por_categoria_inicio !== 0){
-            extracto.forEach(function (value, key) {
-                setParametros(value)
-
-
-
-
-                //value.hola = "nose"
-                
-                state.por_categoria.push(value);
-            });
-            // la suma del inicio y el tamaño, supera al total desabilita boton
-            if(state.por_categoria_inicio + state.por_categoria_tamaño >= state.por_categoria_total){
-                state.por_categoria_inicio = state.por_categoria_total;
-                state.por_categoria_boton = false;
-            }else{
-                state.por_categoria_inicio = state.por_categoria_inicio + state.por_categoria_tamaño;
-                state.por_categoria_boton = true;
-            }
-        }
-    },
 
     /*updateMasPorCategoria(state, area) {
         //state.estado = true;
@@ -854,13 +413,7 @@ const mutations = {
 
 
 
-    updateEstadoFalse(state) {
-        state.estado = false;
-    },
-
-    updateEstadoTrue(state) {
-        state.estado = true;
-    },
+  
 
     //mutations correspondiente a la vista Evento
     updateEvento(state, evento) {
