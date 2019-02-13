@@ -1,28 +1,10 @@
 <template>
   <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover parent" uk-grid
-              :style="{ background: actividad.color_oscuro + '!important', 
-
-
-                        background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.colorOpuesto+') !important',
-                        background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.colorOpuesto+') !important',
-                        background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.colorOpuesto+') !important', 
-
-
-                        /*background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.dale[3]+') !important',
-                        background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.dale[3]+') !important',
-                        background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.dale[3]+') !important',*/ 
-                        
-
-                       /* background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_oscuro+') !important',
-                        background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_oscuro+') !important',
-                        background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.color_oscuro+') !important', */
-                        
-                      }"
-                        
-
-
-              >
-      <div class="uk-card-media-left uk-cover-container">
+    :style="{ background: actividad.color_oscuro + '!important', 
+              background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_opuesto+') !important',
+              background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_opuesto+') !important',
+              background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.color_opuesto+') !important' }">
+    <div class="uk-card-media-left uk-cover-container">
 
         <!--<h4 class="ribbon">{{ actividad.cuanto_falta }}</h4>-->
 <!--<div v-if="actividad.fecha_rango === fechahoy && actividad.horario === 'horario indefinido'">

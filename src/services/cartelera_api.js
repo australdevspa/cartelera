@@ -5,9 +5,6 @@ import {
     Endpoint
 } from '@/services/endpoints'
 import dc from 'dale_color';
-import {   
-    dale
-} from '@/services/dale_color'
 
 //metodo que obtiene todos los datos correspondientes a la cartelera
 function getDataCartelera(){
@@ -142,122 +139,49 @@ function setParametros(x){
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
         x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
-
         x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
-        
-        x.horario = horario(x.fecha_ini, x.fecha_fin)
 
-        x.entrada = precio(x.valor);
-
-        x.donde = donde(x.lugar);
-        
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
+        x.entrada = precio(x.valor);
+        x.donde = donde(x.lugar);
 
-
-        x.cuanto_falta = cuantoFalta(x.diff)
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
-        //x.cuanto_falta = cuantoFalta(x.fecha_ini)
+        x.horario = horario(x.fecha_ini, x.fecha_fin)
 
-        x.color_claro = lighten(x.area_color,30);
-        x.color_oscuro = darken(x.area_color,30);
-
-        x.dale = dale(x.area_color);
-        x.colorOpuesto = colorOpuesto(x.color_claro);
+        x.color_claro = dc.brillo.aclarar(x.area_color, 30)
+        x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 
+        x.color_opuesto = colorOpuesto(x.color_claro);
 
         x.w = w(x.fecha_ini);
-        //x.unque = fechas_proximas();
     }else{
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
         x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
         x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
         x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
-        
-        //x.fecha_publicacion = moment(x.creado_el).format('DD/MM/YYYY')
-
         x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
-
-        x.horario = horario(x.fecha_ini, x.fecha_fin)
-
-        x.entrada = precio(x.valor);
-
-        x.donde = donde(x.lugar);
-
+        
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
-        
-        
-        x.cuanto_falta = cuantoFalta(x.diff);
-        /*x.moment = moment().add(1, 'd').calendar();
-        x.moment_x = moment(x.fecha_ini).endOf('days').fromNow();
-        x.moment_y = moment("2019-01-05").startOf('days').fromNow();*/
+        x.entrada = precio(x.valor);
+        x.donde = donde(x.lugar);
 
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
-        //x.cuanto_falta = cuantoFalta(x.fecha_ini)
+        x.horario = horario(x.fecha_ini, x.fecha_fin)
 
-        /*x.color_claro = lighten('#23B19D',20);
-        x.color_oscuro = darken('#23B19D',20);*/
-        x.color_claro = lighten(x.area_color,30);
-        x.color_oscuro = darken(x.area_color,30);
-
-        x.dale = dale(x.area_color);
-        x.colorOpuesto = colorOpuesto(x.color_claro);
+        x.color_claro = dc.brillo.aclarar(x.area_color, 30)
+        x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 
+        x.color_opuesto = colorOpuesto(x.color_claro);
 
         x.w = w(x.fecha_ini);
-        //x.unque = fechas_proximas();
     }
     if(x.area_color == null){
         x.area_color = "#1e87f0"
     }
 }
 
-/*function setAttachments(x, id){
-    return axios.get(`${Endpoint}/attachments-actividad?id=`+id)
-    .then(function (response) {
-        x.images = response.data[0];
-        return x.images;
-    })
-    .catch(function (error) {
-        return 'An error occured..' + error;
-    })
-}*/
-
-
-/* Suma el porcentaje indicado a un color (RR, GG o BB) hexadecimal para aclararlo */
-const addLight = function(color, amount){
-    let cc = parseInt(color,16) + amount;
-    let c = (cc > 255) ? 255 : (cc);
-    c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
-    return c;
-  }
-  
-  /* const hexToRGB = (color) => {
-    color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
-    let colorRGB = [color.substring(0,2)]
-  } */
-  
-  /* Aclara un color hexadecimal de 6 caracteres #RRGGBB segun el porcentaje indicado */
-  const lighten = (color, amount)=> {
-    color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
-    amount = parseInt((255*amount)/100);
-    return color = `#${addLight(color.substring(0,2), amount)}${addLight(color.substring(2,4), amount)}${addLight(color.substring(4,6), amount)}`;
-  }
-/* Resta el porcentaje indicado a un color (RR, GG o BB) hexadecimal para oscurecerlo */
-const subtractLight = function(color, amount){
-  let cc = parseInt(color,16) - amount;
-  let c = (cc < 0) ? 0 : (cc);
-  c = (c.toString(16).length > 1 ) ? c.toString(16) : `0${c.toString(16)}`;
-  return c;
-}
-
-/* Oscurece un color hexadecimal de 6 caracteres #RRGGBB segun el porcentaje indicado */
-const darken = (color, amount) =>{
-  color = (color.indexOf("#")>=0) ? color.substring(1,color.length) : color;
-  amount = parseInt((255*amount)/100);
-  return color = `#${subtractLight(color.substring(0,2), amount)}${subtractLight(color.substring(2,4), amount)}${subtractLight(color.substring(4,6), amount)}`;
-}
-
+/*se utiliza para determinar si una exposicion se encuentra dentro del rango de su realizacion*/
 function fecha_rango(inicio, fin) {
     var fecha_actual = moment().format('YYYY-MM-DD')
     var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
@@ -274,6 +198,93 @@ function fecha_rango(inicio, fin) {
     }
 }
 
+/*se utiliza en el calendario de los cards */
+function diaSemana(inicio, fin) {
+    moment.locale('es')
+    var fecha_actual = moment()
+    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
+    var fecha_fin = moment(fin).format('DD/MM/YYYY')
+    if(fecha_inicio == fecha_fin){
+        return moment(inicio).format('dddd');
+    }else{
+        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) == true){
+            return moment(inicio).format('dddd');
+        }else{
+            return moment(inicio).format('dddd');
+        }
+    }
+}
+
+/*se utiliza en los cards*/
+function precio(valor) {
+    if(valor == "0.-" || valor == "0"){
+        return "liberada";
+    }else if(valor.indexOf(".-") != -1){
+        return "$" + valor.substr(0, valor.indexOf(".-"))
+    }else {
+        return "$" + valor;
+    }
+}
+
+/*se utiliza en los cards*/
+function donde(lugar) {
+    var casa = "Casa del Arte Diego Rivera"
+    if(lugar == "Sala Teatro Diego Rivera"){
+        return "Sala Teatro - " + casa;
+    }else{
+        return lugar + " - " + casa;
+    }
+}
+
+/*se utiliza en el ribbon*/
+function cuantoMoment(date) {
+    moment.updateLocale('es', {
+        calendar : {
+            lastDay : '[Ayer]',
+            sameDay : '[Hoy]',
+            nextDay : '[Mañana]',
+            lastWeek : '[Pasado] dddd',
+            nextWeek : '[Próximo] dddd',
+            sameElse: function () {
+                var fromNow = moment( date ).fromNow();
+                return "[" + fromNow + "]";
+            }
+        }
+    });
+    return moment(date).startOf('days').locale('es').calendar();
+}
+
+/*se utiliza en el ribbon*/
+function cuantoMomentEn(date) {
+    moment.updateLocale('en', {
+        calendar : {
+            lastDay : '[Yesterday]',
+            sameDay : '[Today]',
+            nextDay : '[Tomorrow]',
+            lastWeek : '[Last] dddd',
+            nextWeek : '[Next] dddd',
+            sameElse: function () {
+                var fromNow = moment( date ).fromNow();
+                return "[" + fromNow + "]";
+            }
+        }
+    });
+    return moment(date).startOf('days').locale('en').calendar();
+}
+
+/*se utiliza en el ribbon */
+function horario(inicio, fin) {
+    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
+    var fecha_fin = moment(fin).format('DD/MM/YYYY')
+    if(fecha_inicio == fecha_fin){
+        var hora_inicio = moment(inicio).format('HH:mm')
+        return hora_inicio + " hrs";
+    }else{
+        return "horario indefinido";
+    }
+}
+
+/*se utiliza en el slider*/
 function colorOpuesto(color) {
     var opuesto = dc.armonias.opuesto(color)
     if(dc.validaciones.isClaro(opuesto, 177) == true){
@@ -284,6 +295,7 @@ function colorOpuesto(color) {
     }
 }
 
+/*se utiliza para determinar si una actividad se encuentra dentro de un determinado rango*/
 function w(inicio) {
     var hoy = moment().format('YYYY-MM-DD')
     var dos_semanas = moment(hoy, "YYYY-MM-DD").add('days', 28);
@@ -299,224 +311,20 @@ function w(inicio) {
             return "no";
         }
     }
-
-    /*var day = new_date.format('DD');
-    var month = new_date.format('MM');
-    var year = new_date.format('YYYY');
-
-    return day + '.' + month + '.' + year;*/
-    return moment(dos_semanas).format('DD/MM/YYYY');
-}
-
-function fechas_proximas() {
-    /*var hoy = moment().format('YYYY-MM-DD')
-    var dossemanas = moment(new Date()).add(14,'days')
-    
-    var fecha_actual = moment().format('YYYY-MM-DD')
-    var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
-    var fecha_fin = moment(fin).format('YYYY-MM-DD')
-    
-    if(fecha_inicio === fecha_fin){
-        return moment(inicio).format('DD/MM/YYYY');
-    }else{
-        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-            return moment(fecha_actual).format('DD/MM/YYYY');
-        }else{
-            return moment(inicio).format('DD/MM/YYYY');
-        }
-    }*/
-    startdate = "20.03.2014";
-var new_date = moment(startdate, "DD-MM-YYYY").add('days', 5);
-
-var day = new_date.format('DD');
-var month = new_date.format('MM');
-var year = new_date.format('YYYY');
-
-return "cc";
-}
-
-function horario(inicio, fin) {
-    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
-    var fecha_fin = moment(fin).format('DD/MM/YYYY')
-    if(fecha_inicio == fecha_fin){
-        var hora_inicio = moment(inicio).format('HH:mm')
-        //var hora_fin = moment(fin).format('HH:mm')
-
-        return hora_inicio + " hrs";
-    }else{
-        return "horario indefinido";
-    }
-}
-
-function precio(valor) {
-  
-        if(valor == "0.-" || valor == "0"){
-            return "liberada";
-        }else if(valor.indexOf(".-") != -1){
-            return "$" + valor.substr(0, valor.indexOf(".-"))
-        }else {
-            return "$" + valor;
-        }
-    
-}
-
-function donde(lugar) {
-    var casa = "Casa del Arte Diego Rivera"
-    if(lugar == "Sala Teatro Diego Rivera"){
-        return "Sala Teatro - " + casa;
-    }else{
-        return lugar + " - " + casa;
-    }
-}
-
-function diaSemana(inicio, fin) {
-    moment.locale('es')
-    var fecha_actual = moment()
-    var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
-    var fecha_fin = moment(fin).format('DD/MM/YYYY')
-    if(fecha_inicio == fecha_fin){
-        return moment(inicio).format('dddd');
-    }else{
-        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) == true){
-            return moment(inicio).format('dddd');
-        }else{
-            return moment(inicio).format('dddd');
-        }
-    }
-    //return moment(fecha).format('dddd');
-    /*
-// What day of the week is it?
-var day = "2018-12-16 13:30:00" // 5
-console.log( moment.weekdays[day] ); // Friday
-console.log( moment().weekday(0) );
-// What is the current month name?
-console.log( moment().weekday() ); 
-
-console.log( moment(day).format('dddd') ); 
-    //return moment.weekdays[fecha]; */
 }
 
 
-// funciones momentjs
-function cuantoFalta(diferencia) {
-    if(diferencia == 0){
-        return 'Hoy'
-    }else if(diferencia == 1){
-        return 'En '+ diferencia +' día'
-    }else{
-        return 'En '+ diferencia +' días'
-    }
-}
 
-function cuantoMoment(date) {
-    
-    // get from-now for this date
-    //var fromNow = moment( date ).fromNow();
 
-    moment.updateLocale('es', {
-        calendar : {
-            lastDay : '[Ayer]',
-            sameDay : '[Hoy]',
-            /*sameDay: function (now) {
-                if (this.isBefore(now)) {
-                  return '[Will Happen Today]';
-                } else {
-                  return '[Happened Today]';
-                }},*/
-            nextDay : '[Mañana]',
-            lastWeek : '[Pasado] dddd',
-            nextWeek : '[Próximo] dddd',
-            //sameElse : 'DD/MM/YYYY',
-            sameElse: function () {
-                var fromNow = moment( date ).fromNow();
-                return "[" + fromNow + "]";
-            }
-        }
-    });
-    
-    /*moment.updateLocale('fr', {
-        calendar : {
-            lastDay : '[Hier]',
-            sameDay : '[Aujourd’hui] L',
-            nextDay : '[Demain]',
-            lastWeek : 'll',
-            nextWeek : 'll',
-            sameElse : 'll'
-        }
-    });*/
-    /*var date = moment().startOf('day');
-    return date;*/
-    //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          return date.locale('es').calendar();
-    //return date.locale('es').calendar();
-    //var today2 = moment().startOf('day');
-    //return today2.locale('es').calendar();
 
-    return moment(date).startOf('days').locale('es').calendar();
-    //console.log(today2.locale('fr').calendar());
-}
 
-function cuantoMomentEn(date) {
-    
-    //var fromNow = moment( date ).lang("en").fromNow();
 
-    moment.updateLocale('en', {
-        calendar : {
-            lastDay : '[Yesterday]',
-            sameDay : '[Today]',
-            /*sameDay: function (now) {
-                if (this.isBefore(now)) {
-                  return '[Will Happen Today]';
-                } else {
-                  return '[Happened Today]';
-                }},*/
-            nextDay : '[Tomorrow]',
-            lastWeek : '[Last] dddd',
-            nextWeek : '[Next] dddd',
-            //sameElse : 'DD/MM/YYYY',
-            sameElse: function () {
-                var fromNow = moment( date ).fromNow();
-                return "[" + fromNow + "]";
-            }
-        }
-    });
 
-    return moment(date).startOf('days').locale('en').calendar();
-}
 
-// funciones momentjs
-/*function cuantoFalta(fecha_evento) {
-    var fecha_actual = moment.utc();
-    var fecha_del_evento = moment.utc(fecha_evento);
-    var diferencia = fecha_del_evento.diff(fecha_actual, 'days');
 
-    if(diferencia == 0){
-        return 'Hoy'
-    }else if(diferencia == 1){
-        return 'En '+ diferencia +' día'
-    }else{
-        return 'En '+ diferencia +' días'
-    }
-}*/
 
-/*function cuantoFalta(fecha_evento) {
-    //var now = moment(new Date()); //todays date
-    //var fecha_actual = moment.utc();
-    var fecha_del_evento = moment.utc(fecha_evento);
-    //var diferencia = fecha_del_evento.diff(fecha_actual, 'days');
-
-    return fecha_del_evento.fromNow()
-
-    /*if(diferencia == 0){
-        return 'Hoy'
-    }else if(diferencia == 1){
-        return 'Falta '+ diferencia +' día'
-    }else{
-        return 'Faltan '+ diferencia +' días'
-    }*/
-//}
 
 //metodo correspondiente a la vista de Evento
-
 function getEvento(id){
     return axios.get(`${Endpoint}/actividades`)
     .then(function (response) {
