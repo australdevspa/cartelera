@@ -102,11 +102,19 @@ function precio(valor) {
 
 /*se utiliza en los cards*/
 function donde(lugar) {
-    var casa = "Casa del Arte Diego Rivera"
-    if(lugar == "Sala Teatro Diego Rivera"){
-        return "Sala Teatro - " + casa;
+    if(lugar == "Arena Puerto Montt"){
+        var centro = "Arena"
+        return lugar + " - " + centro;
+    }else if(lugar == "Casona Cultural Ex Banco Llanquihuet" || lugar == "2° piso"){
+        var centro = "Casona"
+        return lugar + " - " + centro;
     }else{
-        return lugar + " - " + casa;
+        var centro = "Casa del Arte Diego Rivera"
+        if(lugar == "Sala Teatro Diego Rivera"){
+            return "Sala Teatro - " + centro;
+        }else{
+            return lugar + " - " + centro;
+        }
     }
 }
 
@@ -187,6 +195,59 @@ function w(inicio) {
     }
 }
 
+function setParametros2(x){
+    moment.locale('es')
+    if(x.thumbnail == null){
+        x.thumbnail = "../static/img/default/evento_default.jpg"
+
+        x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
+        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
+        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
+        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
+        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
+        x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
+
+        x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
+        x.entrada = precio(x.valor);
+        x.donde = donde(x.lugar);
+
+        x.cuanto_moment = cuantoMoment(x.fecha_ini);
+        x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
+        x.horario = horario(x.fecha_ini, x.fecha_fin)
+
+        x.color_claro = dc.brillo.aclarar(x.area_color, 30)
+        x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 
+        x.color_opuesto = colorOpuesto(x.color_claro);
+
+        x.w = w(x.fecha_ini);
+    }else{
+        x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
+        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
+        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
+        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
+        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
+        x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
+        
+        x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
+        x.entrada = precio(x.valor);
+        x.donde = donde(x.lugar);
+
+        x.cuanto_moment = cuantoMoment(x.fecha_ini);
+        x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
+        x.horario = horario(x.fecha_ini, x.fecha_fin)
+
+        x.color_claro = dc.brillo.aclarar(x.area_color, 30)
+        x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 
+        x.color_opuesto = colorOpuesto(x.color_claro);
+
+        x.w = w(x.fecha_ini);
+    }
+    if(x.area_color == null){
+        x.area_color = "#1e87f0"
+    }
+}
+
 export {
-    setParametros
+    setParametros,
+    setParametros2
 }

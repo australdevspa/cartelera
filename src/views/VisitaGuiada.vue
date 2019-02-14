@@ -66,7 +66,7 @@
                   :key="index">
 
 
-<CardSala v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSala>
+<CardSalaProx v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSalaProx>
              
 
  
@@ -132,7 +132,7 @@
                   :key="index">
 
 
-<CardSala v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSala>
+<CardSalaProx v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSalaProx>
              
 
  
@@ -200,6 +200,7 @@
 
 <script>
 import CardSala from '@/components/CardSala'
+import CardSalaProx from '@/components/CardSalaProx'
 import CardSalaVacia from '@/components/CardSalaVacia'
 import moment from 'moment';
 import { onButtonClick }  from '@/services/main_ble'
@@ -208,6 +209,7 @@ export default {
   name: 'VisitaGuiadaView',
   components: {
     CardSala,
+    CardSalaProx,
     CardSalaVacia,
   },
   data() {

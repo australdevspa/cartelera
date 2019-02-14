@@ -22,7 +22,7 @@
                                 </div>
                               </div>
                               <div v-else>
-                                  {{carta.cuanto_falta}}
+                                  {{carta.cuanto_moment}}
                                   <br>
                                 {{carta.horario}}
                               </div>

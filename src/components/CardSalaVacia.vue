@@ -11,7 +11,7 @@
 
       <div class="uk-card-header uk-background-cover uk-background-top-center border" :style="{ 'background': 'linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(200, 200, 200, 0.3)), url(' + sala.rutaimg + ')' }">
         
-        <div class="uk-card-badge-left uk-label" :style="{ background: '#19b868 !important', fontWeight: 900 }">
+        <div v-if="sala.piso !== null" class="uk-card-badge-left uk-label" :style="{ background: '#19b868 !important', fontWeight: 900 }">
           Piso {{sala.piso}}
         </div>
         

@@ -68,14 +68,14 @@
 
 
 
-      <div class="pad-hoy" v-for="(it, index) in cargar_actividades_hoy"
+      <!--<div class="pad-hoy" v-for="(it, index) in cargar_actividades_hoy"
         :key="index"
         >
         <div v-if="sala.id === it.sala_id">
           <CardHoy :carta="it"></CardHoy>
         </div>
 
-      </div>
+      </div>-->
 
       <div class="pad-hoy"  v-for="(it, index) in exposiciones_hoy"
         :key="index"
@@ -85,15 +85,15 @@
         </div>
       </div>
 
-      <!--<div class="pad-hoy" v-for="(it, index) in cargar_actividades_prox" 
+      <div class="pad-hoy" v-for="(it, index) in cargar_actividades_prox" 
         :key="index" 
         >
-        <div v-if="sala.id === it.sala_id && index < 3">
+        <div v-if="sala.id === it.sala_id && index < 4">
           <CardProx :carta="it"></CardProx>
         
         </div>
 
-      </div>-->
+      </div>
 
       </div>
 
@@ -165,7 +165,7 @@ import moment from 'moment';
 moment.locale('es')
 
 export default {
-  name: 'CardSala',
+  name: 'CardSalaProx',
   components: {
     CardHoy,
     CardProx,

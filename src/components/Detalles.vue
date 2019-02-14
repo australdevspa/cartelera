@@ -3,7 +3,7 @@
     <div v-if="estado_traduccion">
       <ul class="barra-botones">
         <li>
-          <a href="" @click.prevent="espanol" class="boton-principal-pequeño">(Original Text)</a>
+          <a href="" @click.prevent="espanol" class="boton-principal-pequeño">Original Text</a>
         </li>
         <li>
           <a v-if="detalle.length !== 0" @click.prevent="goToObras(actividad, detalle)" class="boton-principal-pequeño">Artworks</a>
