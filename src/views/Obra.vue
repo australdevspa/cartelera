@@ -17,47 +17,46 @@
             <div class="uk-card uk-card-default parent">
 
 
-                    <div class="uk-card-header">
+              <div class="uk-card-header">
 
-<div class="uk-text-left" uk-grid>
-    
-    <div class="uk-width-expand@m">
-      <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.titulo }}</h3>
-                                
-       <!-- <div class="uk-card uk-card-default uk-card-body">Expand</div>-->
-    </div>
-        <div v-if="evento.video_url !== null" class="uk-width-1-4@m">
+                <div class="uk-text-left" uk-grid>
+                  <div class="uk-width-expand@m">
+                    <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.titulo }}</h3>
+                  
+                    <ul class="barra-botones">
+                      <li>
+                        <a v-if="evento.video_url !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
+                      </li>
+                    </ul>
+                  
+                  </div>
+                  <!--<div v-if="evento.video_url !== null" class="uk-width-1-4@m">
+                    <a class="uk-button uk-button-default" href="#modal-media-video" uk-toggle>Video</a>
+                  </div>-->
+                </div>
+          
+              </div>
 
-<a class="uk-button uk-button-default" href="#modal-media-video" uk-toggle>Video</a>
-        <!--<div class="uk-card uk-card-default uk-card-body">1-3</div>-->
-    </div>
-</div>
+  
 
-                        
-                    </div>
-                    <div class="uk-card-body uk-text-center data">{{evento.descripcion}}</div>
+
+              <div class="uk-card-body uk-text-center data">{{evento.descripcion}}</div>
+                    
                     <div class="uk-card-body uk-text-center">
-                        <img :src="evento.RutaImgLow"/>
+
+                      
+                      <div class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
+                           <div>
+                              <a class="uk-inline" :href="evento.RutaImgLow">
+                                  <img :src="evento.RutaImgLow" alt="">
+                              </a>
+                          </div>
+                      </div>
 
 
+                        <!--<img :src="evento.RutaImgLow"/>-->
 
-    
-<!-- This is a button toggling the modal 
-<button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-acceso-video">Open</button>
-
-        <div id="modal-acceso-video" class="uk-modal-container" uk-modal>
-          <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-                      <video width="720" height="576" controls>
-                <source :src="evento.video_url" type="video/mp4">
-                  Your browser does not support the video tag.
-              </video>
-        <p class="uk-text-right">
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Salir</button>
-        </p>-->
-
-
-
+                    </div>
 
 <div id="modal-media-video" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
@@ -67,12 +66,7 @@
         </video>
     </div>
 </div>
-            
 
-
-
-
-                    </div>
 
             </div>
         </div>
