@@ -1,134 +1,71 @@
 <template>
-    <div v-if="actividad_translate.note_en !== null">                        
-        <div v-if="estado_traduccion">
-            <a href="" @click.prevent="espanol" class="text-translate a-translate">(Original Text)</a>
-                        <div v-if="detalle.length !== 0">
-              <a @click.prevent="goToObras(actividad, detalle)" class="text-translate a-translate">Artworks</a>
-              <a v-if="actividad_translate.video !== null" class="text-translate a-translate" href="#modal-media-video" uk-toggle>Video</a>
-            </div>
-            <div class="mar-div">
-                <p class="mar-p ">{{ actividad.fecha_inicio_formato }}</p>
-                <p class="mar-p">{{ actividad.donde }}.</p>
-
-                <p v-if="actividad.entrada ==='liberada' " class="mar-p">Free pass</p>
-                <p v-else class="mar-p">Ticket {{actividad.entrada}}</p>
-            </div>
-            <div class="mar-div" v-if="actividad_translate.tts_en !== null">
-                <aplayer :music="{
-                        title: 'Audio',
-                        artist: 'English',
-                        src: ''+actividad_translate.tts_en,
-                        pic: '../static/img/default/cover.jpg'
-                    }"
-                />
-            </div>
-            <!--<ul uk-accordion="multiple: true">
-                <li>
-                    <a class="uk-accordion-title" href="#">More Details</a>
-                    <div class="uk-accordion-content">
-                        <p class="uk-text-meta mar-p">Date: {{ actividad.fecha_inicio_formato }}.</p>
-                        <p class="uk-text-meta mar-p">Hours: {{ actividad.horario }}.</p>
-                        <p class="uk-text-meta mar-p">Price: free.</p>
-                        <p class="uk-text-meta mar-p">Place: {{ actividad.donde }}.</p>
-                    </div>
-                </li>
-            </ul>-->
-
-            <!--<ul v-if="actividad_translate.url_audio_note_en !== null" uk-accordion="multiple: true">
-                <li>
-                    <a class="uk-accordion-title" href="#">Audios</a>
-                    <div class="uk-accordion-content">
-                        <aplayer :music="{
-                                title: 'Title Audio',
-                                artist: 'English',
-                                src: ''+actividad_translate.url_audio_title_en,
-                                pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
-                            }"
-                        />
-                        <aplayer :music="{
-                                title: 'Audio of the Activity',
-                                artist: 'English',
-                                src: ''+actividad_translate.url_audio_note_en,
-                                pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
-                            }"
-                        />
-                    </div>
-                </li>
-            </ul>-->
-        </div>
+  <div v-if="actividad_translate.note_en !== null">                        
+    <div v-if="estado_traduccion">
+      <ul class="barra-botones">
+        <li>
+          <a href="" @click.prevent="espanol" class="boton-principal-pequeño">(Original Text)</a>
+        </li>
+        <li>
+          <a v-if="detalle.length !== 0" @click.prevent="goToObras(actividad, detalle)" class="boton-principal-pequeño">Artworks</a>
+        </li>
+        <li>
+          <a v-if="detalle.length !== 0 && actividad_translate.video !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
+        </li>
+      </ul>
+      <div class="mar-div">
+        <p class="mar-p ">{{ actividad.fecha_inicio_formato }}</p>
+        <p class="mar-p">{{ actividad.donde }}.</p>
+        <p v-if="actividad.entrada ==='liberada' " class="mar-p">Free pass</p>
+        <p v-else class="mar-p">Ticket {{actividad.entrada}}</p>
+      </div>
+      <div class="mar-div" v-if="actividad_translate.tts_en !== null">
+        <aplayer :music="{  title: 'Audio',
+                            artist: 'English',
+                            src: ''+actividad_translate.tts_en,
+                            pic: '../static/img/default/cover.jpg'}"/>
+      </div>
+    </div>
         
-        <div v-else>
-            <a href="" :detalle="detalle" @click.prevent="ingles" class="text-translate a-translate">(English Version)</a>
-            <div v-if="detalle.length !== 0">
-              <a @click.prevent="goToObras(actividad, detalle)" class="text-translate a-translate">Obras</a>
-              <a v-if="actividad_translate.video !== null" class="text-translate a-translate" href="#modal-media-video" uk-toggle>Video</a>
-            
-            </div>
-            
-            <div class="mar-div">
-                <p class="mar-p">{{ actividad.fecha_inicio_formato }}</p>
-                <p class="mar-p">{{ actividad.donde }}</p>
-                <p class="mar-p">Entrada {{ actividad.entrada }}</p>
-            </div>
-            <div class="mar-div" v-if="actividad_translate.tts_es !== null">
-                <aplayer :music="{
-                        title: 'Audio',
-                        artist: 'Español',
-                        src: ''+actividad_translate.tts_es,
-                        pic: '../static/img/default/cover.jpg'
-                    }"
-                />
-            </div>
-            <!--<ul uk-accordion="multiple: true">
-                <li>
-                    <a class="uk-accordion-title" href="#">Más Detalles</a>
-                    <div class="uk-accordion-content">
-                        <p class="uk-text-meta mar-p">Fecha: {{ actividad.fecha_inicio_formato }}.</p>
-                        <p class="uk-text-meta mar-p">Horario: {{ actividad.horario }}.</p>
-                        <p class="uk-text-meta mar-p">Entrada: {{ actividad.entrada }}.</p>
-                        <p class="uk-text-meta mar-p">Lugar: {{ actividad.donde }}.</p>
-                    </div>
-                </li>
-            </ul>-->
+    <div v-else>
+      <ul class="barra-botones">
+        <li>
+          <a href="" :detalle="detalle" @click.prevent="ingles" class="boton-principal-pequeño">English Version</a>
+        </li>
+        <li>
+          <a v-if="detalle.length !== 0" @click.prevent="goToObras(actividad, detalle)" class="boton-principal-pequeño">Obras</a>
+        </li>
+        <li>
+          <a v-if="detalle.length !== 0 && actividad_translate.video !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
+        </li>
+      </ul>
+      <div class="mar-div">
+        <p class="mar-p">{{ actividad.fecha_inicio_formato }}</p>
+        <p class="mar-p">{{ actividad.donde }}</p>
+        <p class="mar-p">Entrada {{ actividad.entrada }}</p>
+      </div>
+      <div class="mar-div" v-if="actividad_translate.tts_es !== null">
+          <aplayer :music="{  title: 'Audio',
+                              artist: 'Español',
+                              src: ''+actividad_translate.tts_es,
+                              pic: '../static/img/default/cover.jpg'}"/>
+      </div>
+    </div>
 
-            <!--<ul v-if="actividad_translate.url_audio_note_en !== null" uk-accordion="multiple: true">
-                <li>
-                    <a class="uk-accordion-title" href="#">Audios</a>
-                    <div class="uk-accordion-content">
-                        <aplayer :music="{
-                                title: 'Audio del Título',
-                                artist: 'Español',
-                                src: ''+actividad_translate.url_audio_titulo_es,
-                                pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
-                            }"
-                        />
-                        <aplayer :music="{
-                                title: 'Audio de la Actividad',
-                                artist: 'Español',
-                                src: ''+actividad_translate.url_audio_nota_es,
-                                pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
-                            }"
-                        />
-                    </div>
-                </li>
-            </ul>-->
-        </div>
-
-
-        <div id="modal-media-video" class="uk-flex-top" uk-modal>
-    <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+    <div id="modal-media-video" class="uk-flex-top" uk-modal>
+      <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
         <button class="uk-modal-close-outside" type="button" uk-close></button>
         <video width="720" height="576" controls playsinline uk-video>
-            <source :src="actividad_translate.video" type="video/mp4">
+          <source :src="actividad_translate.video" type="video/mp4">
         </video>
+      </div>
     </div>
-</div>
 
-    </div>
+  </div>
 </template>
 
 <script>
 import Aplayer from 'vue-aplayer'
+
 export default {
   name: 'Detalles',
   components: {
@@ -143,31 +80,30 @@ export default {
       type: Object,
       required: true
     },
-        detalle: {
+    detalle: {
       type: Object,
       required: true
     }
   },
   computed: {
     estado_traduccion() {
-        return this.$store.state.estado_traduccion;
+      return this.$store.state.estado_traduccion;
     }
   },
   methods: {
     ingles () {
-        this.$store.dispatch('loadTrue')
+      this.$store.dispatch('loadTrue')
     },
     espanol () {
-        this.$store.dispatch('loadFalse')
+      this.$store.dispatch('loadFalse')
     },
-        goToObras (actividad, detail) {
+    goToObras (actividad, detail) {
       this.$router.push({
         params: {
-            slug:actividad.slug,
+          slug:actividad.slug,
           id: actividad.id,
           evento: actividad,
           detalle: detail
-
         },
         name: 'Obras'
       })
@@ -178,41 +114,9 @@ export default {
 
 <style scoped>
 .mar-p {
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
   color: #333 !important;
-}
-/*.a-translate:link {
-  color: #999 !important;
-  text-decoration:none;
-}
-.a-translate:visited {
-  color: #999 !important;
-}
-.a-translate:hover {
-  color: #666 !important;
-}
-.a-translate:active {
-  color: #666 !important;
-}
-.text-translate {
-  color: #999 !important;
-}*/
-.a-translate:link {
-  color: #666 !important;
-  text-decoration:none;
-}
-.a-translate:visited {
-  color: #666 !important;
-}
-.a-translate:hover {
-  color: #333 !important;
-}
-.a-translate:active {
-  color: #333 !important;
-}
-.text-translate {
-  color: #666 !important;
 }
 .mar-div {
   margin-top: 15px !important;

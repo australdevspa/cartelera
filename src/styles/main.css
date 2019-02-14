@@ -56,6 +56,7 @@
 .boton-principal:hover {
   background: #19b868 !important;
   color: white !important;
+  text-decoration:none;
 }
 /*tamaño del logo y botones del navbar*/
 @media only screen and (max-width: 480px) {
@@ -333,4 +334,44 @@
 .boton-secundario.active span.badge-background {
   background: #fafafa !important;
   color: #333 !important;
+}
+
+/*boton principal pequeño*/
+.boton-principal-pequeño {
+  margin: 0;
+  font-weight: bold !important;
+  border: none;
+  overflow: visible;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: .1s ease-in-out;
+  transition: .1s ease-in-out;
+  -webkit-transition-property: color,background-color,border-color;
+  transition-property: color,background-color,border-color;
+  padding: 2px 5px;
+  font-size: 13px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px 0 rgba(30,30,30,.09);
+  background: #19b868 !important;
+  color: white !important;
+}
+.boton-principal-pequeño:hover {
+  background: #007929 !important;
+  color: white !important;
+  text-decoration:none;
+}
+.barra-botones{
+  margin: 10px 0px;
+  padding: 0;
+}
+.barra-botones li {
+  display:inline;
 }
