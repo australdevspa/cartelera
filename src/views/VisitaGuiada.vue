@@ -178,6 +178,7 @@
           <div class="padCamaraButton">
             <button @click.prevent="onButtonClick" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE</button>
             <!--<input type="text" id="">-->
+            <button type="button" @click.prevent="notificar()">Enviar notificación</button>
           </div>
 
           <div class="padCamaraButton">
@@ -204,6 +205,7 @@ import CardSalaProx from '@/components/CardSalaProx'
 import CardSalaVacia from '@/components/CardSalaVacia'
 import moment from 'moment';
 import { onButtonClick }  from '@/services/main_ble'
+import { notificar }  from '@/services/notifications'
 
 export default {
   name: 'VisitaGuiadaView',
@@ -279,7 +281,8 @@ export default {
             }
         }
     },
-    onButtonClick
+    onButtonClick,
+    notificar
   }
 }
 </script>
