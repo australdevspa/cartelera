@@ -178,7 +178,7 @@
           <div class="padCamaraButton">
             <button @click.prevent="onButtonClick" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE</button>
             <!--<input type="text" id="">-->
-            <button type="button" @click.prevent="notificar()">Enviar notificación</button>
+            <!--<button type="button" @click.prevent="notificar()">Enviar notificación</button>-->
           </div>
 
           <div class="padCamaraButton">

@@ -2,7 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 moment.locale('es')
 import { Endpoint } from '@/services/endpoints'
-import { setParametros, setParametros2 } from '@/services/parametros'
+import { setParametros } from '@/services/parametros'
 
 function getSalas(){
     return axios.get(`${Endpoint}/salas`)
@@ -116,11 +116,11 @@ function getEjemplo(){
                     var fecha_fin = moment(response.data[i].fecha_fin).format('YYYY-MM-DD')
         
                     if(fecha_actual === fecha_inicio){
-                        setParametros2(response.data[i])
+                        setParametros(response.data[i])
                         eventos.push(response.data[i]) 
                     }else{
                         if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-                        setParametros2(response.data[i])
+                        setParametros(response.data[i])
                             eventos.push(response.data[i]) 
                         }
                     }
@@ -201,7 +201,7 @@ function getEjemplo(){
                             
                         }else{
                             if(moment(fecha_inicio).isBetween(fecha_actual, dos_semanas) === true){
-                                setParametros2(response.data[i])
+                                setParametros(response.data[i])
                                 eventos.push(response.data[i]) 
                             }
                         }

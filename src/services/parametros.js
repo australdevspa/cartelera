@@ -23,6 +23,9 @@ function setParametros(x){
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
         x.horario = horario(x.fecha_ini, x.fecha_fin)
 
+        if(x.area_color == null){
+            x.area_color = "#1e87f0"
+        }
         x.color_claro = dc.brillo.aclarar(x.area_color, 30)
         x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 
         x.color_opuesto = colorOpuesto(x.color_claro);
@@ -44,14 +47,14 @@ function setParametros(x){
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
         x.horario = horario(x.fecha_ini, x.fecha_fin)
 
+        if(x.area_color == null){
+            x.area_color = "#1e87f0"
+        }
         x.color_claro = dc.brillo.aclarar(x.area_color, 30)
         x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 
         x.color_opuesto = colorOpuesto(x.color_claro);
 
         x.w = w(x.fecha_ini);
-    }
-    if(x.area_color == null){
-        x.area_color = "#1e87f0"
     }
 }
 
@@ -91,12 +94,16 @@ function diaSemana(inicio, fin) {
 
 /*se utiliza en los cards*/
 function precio(valor) {
-    if(valor == "0.-" || valor == "0"){
-        return "liberada";
-    }else if(valor.indexOf(".-") != -1){
-        return "$" + valor.substr(0, valor.indexOf(".-"))
-    }else {
-        return "$" + valor;
+    if(valor == null){
+        return "indefinido";
+    }else{
+        if(valor == "0.-" || valor == "0"){
+            return "liberada";
+        }else if(valor.indexOf(".-") != -1){
+            return "$" + valor.substr(0, valor.indexOf(".-"))
+        }else {
+            return "$" + valor;
+        }
     }
 }
 
@@ -195,59 +202,6 @@ function w(inicio) {
     }
 }
 
-function setParametros2(x){
-    moment.locale('es')
-    if(x.thumbnail == null){
-        x.thumbnail = "../static/img/default/evento_default.jpg"
-
-        x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
-        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
-        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
-        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
-        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
-        x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
-
-        x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
-        x.entrada = precio(x.valor);
-        x.donde = donde(x.lugar);
-
-        x.cuanto_moment = cuantoMoment(x.fecha_ini);
-        x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
-        x.horario = horario(x.fecha_ini, x.fecha_fin)
-
-        x.color_claro = dc.brillo.aclarar(x.area_color, 30)
-        x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 
-        x.color_opuesto = colorOpuesto(x.color_claro);
-
-        x.w = w(x.fecha_ini);
-    }else{
-        x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
-        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
-        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
-        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
-        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
-        x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
-        
-        x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
-        x.entrada = precio(x.valor);
-        x.donde = donde(x.lugar);
-
-        x.cuanto_moment = cuantoMoment(x.fecha_ini);
-        x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
-        x.horario = horario(x.fecha_ini, x.fecha_fin)
-
-        x.color_claro = dc.brillo.aclarar(x.area_color, 30)
-        x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 
-        x.color_opuesto = colorOpuesto(x.color_claro);
-
-        x.w = w(x.fecha_ini);
-    }
-    if(x.area_color == null){
-        x.area_color = "#1e87f0"
-    }
-}
-
 export {
-    setParametros,
-    setParametros2
+    setParametros
 }
