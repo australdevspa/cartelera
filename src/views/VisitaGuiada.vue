@@ -15,7 +15,7 @@
             </label>
             <div class="ayuda"><div class="pintura-hoy"/>Actividades para hoy</div>
             <div class="ayuda"><div class="pintura-prox"/>Actividades próximas</div>
-<div class="ayuda"><div class="pintura-sin"/>Sin actividades programadas</div>
+<!--<div class="ayuda"><div class="pintura-sin"/>Sin actividades programadas</div>-->
           </div>
         </form>
 
@@ -81,7 +81,7 @@
                 </div>-->
               </div>
             </div>
-            <div>
+            <!--<div>
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1@m"
                   v-for="(itemm, indexx) in ejemplo.cero"
@@ -97,7 +97,7 @@
                 
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
 
             </div>
@@ -152,7 +152,7 @@
 
 
 
-            <div>
+            <!--<div>
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1@m"
                   v-for="(itemm, indexx) in ejemplo.cero"
@@ -168,7 +168,8 @@
                 
                 </div>
               </div>
-            </div>
+            </div>-->
+            
           </div>
           
             </div>  
