@@ -189,7 +189,7 @@ export default {
         loading_detalles: true,
         item: [],
         loading_evento: true,
-        loading_boton_obras: true,
+        loading_boton_obras: true
     }
   },
   mounted () {
@@ -223,27 +223,53 @@ export default {
             })
             .catch(error => {
                 this.loading_evento = true;
-            })  
+            }) 
+            
+            this.$store.dispatch('loadPrimeraCarga')
     }else{
         /*cuando viene desde la cartelera*/
-        this.item = this.$route.params.evento;
-        this.loading_evento = false;
+        if(this.$store.state.primera_carga === true){
+          this.item = this.$route.params.evento;
 
-        this.$store.dispatch('loadDetalle', this.$route.params.evento.id)
-            .then(response => {
-                this.loading_boton_obras = false;
-            })
-            .catch(error => {
-                this.loading_boton_obras= true;
-            })
+          this.$store.dispatch('loadDetalle', this.$route.params.evento.id)
+              .then(response => {
+                  this.loading_evento = false;
+                  this.loading_boton_obras = false;
+              })
+              .catch(error => {
+                  this.loading_boton_obras= true;
+              })
 
-        this.$store.dispatch('loadTranslate', this.$route.params.evento.id)
-            .then(response => {
-                this.loading_detalles = false;
-            })
-            .catch(error => {
-                this.loading_detalles= true;
-            })
+          this.$store.dispatch('loadTranslate', this.$route.params.evento.id)
+              .then(response => {
+                  this.loading_detalles = false;
+              })
+              .catch(error => {
+                  this.loading_detalles= true;
+              })
+
+              this.$store.dispatch('loadPrimeraCarga')
+          
+        }else{
+          this.item = this.$route.params.evento;
+          this.loading_evento = false;
+
+          this.$store.dispatch('loadDetalle', this.$route.params.evento.id)
+              .then(response => {
+                  this.loading_boton_obras = false;
+              })
+              .catch(error => {
+                  this.loading_boton_obras= true;
+              })
+
+          this.$store.dispatch('loadTranslate', this.$route.params.evento.id)
+              .then(response => {
+                  this.loading_detalles = false;
+              })
+              .catch(error => {
+                  this.loading_detalles= true;
+              })
+        }
     }
   },
   computed:

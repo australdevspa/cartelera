@@ -56,6 +56,7 @@ const state = {
 
     //state correspondiente a la vista Evento
     evento: [],
+    primera_carga: true,
 
     //state correspondiente a la vista de la Visita Guiada
     existe_slug: false,
@@ -186,6 +187,10 @@ const actions = {
 
     loadResetEvento(context) {
         context.commit('updateResetEvento')
+    },
+
+    loadPrimeraCarga(context) {
+        context.commit('updatePrimeraCarga')
     },
 };
 
@@ -472,6 +477,10 @@ const mutations = {
 
     updateResetEvento(state) {
         state.evento = [];
+    },
+
+    updatePrimeraCarga(state) {
+        state.primera_carga = false;
     },
 }
 
