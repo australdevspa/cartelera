@@ -46,6 +46,7 @@ const state = {
     cartelera_inicio: 0,
     cartelera_tamaño: 10,
     cartelera_boton: false,
+    cartelera_categoria_activa: '',
 
     por_categoria: [],
     por_categoria_total: 0,
@@ -241,6 +242,7 @@ const mutations = {
             });
             
             state.por_categoria_total = state.categorias[area].ocurrence;
+            state.cartelera_categoria_activa = area;
             // la suma del inicio y el tamaño, supera al total desabilita boton
             if(state.por_categoria_tamaño >= state.por_categoria_total){
                 state.por_categoria_inicio = state.por_categoria_total;
@@ -265,6 +267,7 @@ const mutations = {
                 state.por_categoria.push(value);
             });
             state.por_categoria_total = state.categorias[area].ocurrence;
+            state.cartelera_categoria_activa = area;
             // la suma del inicio y el tamaño, supera al total desabilita boton
             if(state.por_categoria_tamaño >= state.por_categoria_total){
                 state.por_categoria_inicio = state.por_categoria_total;

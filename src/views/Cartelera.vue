@@ -13,13 +13,13 @@
             <div class="uk-text-center">
               <ul class="grid pad-ul-categorias">
                 <li>
-                  <a href="" @click.prevent="showCartelera" class="uk-button boton-secundario" v-on:click="setActive('todas')" :class="{ active: isActive('todas') }">
+                  <a href="" @click.prevent="showCartelera" class="uk-button boton-secundario" :class="{ active: isActiveTodas() }">
                     Todas
                   </a>
                 </li>
                 <li v-for="(item, index) in categorias"
                   :key="index">
-                    <a href="" @click.prevent="showPorCategoria(item.area)" class="uk-button boton-secundario" v-on:click="setActive(item.area)" :class="{ active: isActive(item.area) }">
+                    <a href="" @click.prevent="showPorCategoria(item.area)" class="uk-button boton-secundario" :class="{ active: isActive(item.area) }">
                       {{ item.area }} <span class="uk-badge badge-background">{{ item.ocurrence }}</span>
                     </a>
                 </li>
@@ -148,7 +148,7 @@ export default {
       filtered_porcategoria_total: 0,
       porcategoria_boton_filtered: false,
       show: false,
-      activeItem: 'todas'
+      //activeItem: 'todas'
     }
   },
   computed:
@@ -188,6 +188,9 @@ export default {
     },
     por_categoria_boton() {
       return this.$store.state.por_categoria_boton;
+    },
+    cartelera_categoria_activa() {
+      return this.$store.state.cartelera_categoria_activa;
     },
     /*filtered_busqueda() {
       if(this.filter === ''){
@@ -289,12 +292,16 @@ export default {
         name: 'Evento'
       })
     },
+    isActiveTodas: function () {
+      return this.estado === false
+    },
     isActive: function (menuItem) {
-      return this.activeItem === menuItem
+      return this.estado === true && this.cartelera_categoria_activa === menuItem
+      //return this.activeItem === menuItem
     },
-    setActive: function (menuItem) {
+    /*setActive: function (menuItem) {
       this.activeItem = menuItem
-    },
+    },*/
   },
   created () {
     window.addEventListener('scroll', this.handleScroll);
