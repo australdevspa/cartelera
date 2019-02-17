@@ -202,7 +202,19 @@ const mutations = {
         if(state.carousel_tamaño >= state.data_cartelera.cartelera_total){
             state.carousel_tamaño = state.data_cartelera.cartelera_total;
         }
-        state.carousel = data_cartelera.cartelera.slice(state.carousel_inicio, state.carousel_tamaño);
+        //slider
+        var ex = data_cartelera.expo.slice(0, 6);
+        if(ex.length == 6){
+            state.carousel = ex;
+        }else{
+            var ac = data_cartelera.cartelera.slice(0, 6 - ex.length);
+            state.carousel = ex.concat(ac);
+        }
+
+        //var ac = data_cartelera.cartelera.slice(state.carousel_inicio, state.carousel_tamaño);
+        //state.carousel = ex.concat(ac);
+
+        //state.carousel = data_cartelera.cartelera.slice(state.carousel_inicio, state.carousel_tamaño);
 
         state.categorias = data_cartelera.categorias;
         //state.estado = false;

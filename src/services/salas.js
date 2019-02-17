@@ -54,7 +54,7 @@ function getSalaActividades(sala_id){
 
                     }
 
-        return final;*/
+        return final;*///#1e87f0
     })
     .catch(function (error) {
         return 'An error occured..' + error;
@@ -76,7 +76,7 @@ function getEjemplo(){
 
         //si es que no posee ningun color asignado, le entregamos uno por defecto
         if(response.data[i].area_color == null){
-            response.data[i].area_color = "#1e87f0"
+            response.data[i].area_color = "#734525"
         }
 
         if(nro_ocurrencias(response.data[i].sala_id) != 0){
@@ -143,7 +143,7 @@ function getEjemplo(){
 
         //si es que no posee ningun color asignado, le entregamos uno por defecto
         if(response.data[i].area_color == null){
-            response.data[i].area_color = "#1e87f0"
+            response.data[i].area_color = "#734525"
         }
 
         if(nro_ocurrencias1(response.data[i].sala_id) != 0){
@@ -224,7 +224,7 @@ function getEjemplo(){
 
         //si es que no posee ningun color asignado, le entregamos uno por defecto
         if(response.data[i].area_color == null){
-            response.data[i].area_color = "#1e87f0"
+            response.data[i].area_color = "#734525"
         }
 
         if(nro_ocurrencias2(response.data[i].sala_id) == 0){

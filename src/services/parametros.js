@@ -24,7 +24,7 @@ function setParametros(x){
         x.horario = horario(x.fecha_ini, x.fecha_fin)
 
         if(x.area_color == null){
-            x.area_color = "#1e87f0"
+            x.area_color = "#734525"
         }
         x.color_claro = dc.brillo.aclarar(x.area_color, 30)
         x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 
@@ -48,7 +48,7 @@ function setParametros(x){
         x.horario = horario(x.fecha_ini, x.fecha_fin)
 
         if(x.area_color == null){
-            x.area_color = "#1e87f0"
+            x.area_color = "#734525"
         }
         x.color_claro = dc.brillo.aclarar(x.area_color, 30)
         x.color_oscuro = dc.brillo.oscurecer(x.area_color, 30) 

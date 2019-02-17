@@ -27,6 +27,7 @@
       <h4 class="ribbon tamaño">Hoy<br> 11:00 a 19:00 hrs</h4>
     </div>
     <div v-else-if="dia === 'domingo'">
+      <h4 class="ribbon tamaño">Mañana Lunes<br> 10:00 a 20:00 hrs</h4>
     </div>
     <div v-else>
       <h4 class="ribbon tamaño">Hoy<br> 10:00 a 20:00 hrs</h4>
@@ -38,6 +39,7 @@
       <h4 class="ribbon tamaño">{{ evento.cuanto_moment }}<br> 11:00 a 19:00 hrs</h4>
     </div>
     <div v-else-if="dia === 'domingo'">
+      <h4 class="ribbon tamaño">Mañana Lunes<br> 10:00 a 20:00 hrs</h4>
     </div>
     <div v-else>
       <h4 class="ribbon tamaño">{{ evento.cuanto_moment }}<br> 10:00 a 20:00 hrs</h4>
@@ -116,6 +118,7 @@
       <h4 class="ribbon tamaño">Today<br> 11:00 to 19:00 hrs</h4>
     </div>
     <div v-else-if="dia === 'domingo'">
+      <h4 class="ribbon tamaño">Mañana Lunes<br> 10:00 a 20:00 hrs</h4>
     </div>
     <div v-else>
       <h4 class="ribbon tamaño">Today<br> 10:00 to 20:00 hrs</h4>
@@ -127,6 +130,7 @@
       <h4 class="ribbon tamaño">{{ evento.cuanto_moment_en }}<br> 11:00 to 19:00 hrs</h4>
     </div>
     <div v-else-if="dia === 'domingo'">
+      <h4 class="ribbon tamaño">Mañana Lunes<br> 10:00 a 20:00 hrs</h4>
     </div>
     <div v-else>
       <h4 class="ribbon tamaño">{{ evento.cuanto_moment_en }}<br> 10:00 to 20:00 hrs</h4>

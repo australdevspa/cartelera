@@ -15,7 +15,8 @@
                                   11:00 a<br> 19:00 hrs
                                 </div>
                                 <div v-else-if="dia === 'domingo'">
-                                
+
+                                Mañana Lunes<br> 10:00 a<br> 20:00 hrs
                                 </div>
                                 <div v-else>
                                   10:00 a<br> 20:00 hrs
