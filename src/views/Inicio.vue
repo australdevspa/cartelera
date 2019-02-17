@@ -13,16 +13,19 @@
         </div>
       </div>
     </div>
+    <Banner></Banner>
   </section>
 </template>
 
 <script>
 import Slider from '@/components/Slider'
+import Banner from '@/components/Banner'
 
 export default {
   name: 'InicioView',
   components: {
     Slider,
+    Banner
   },
   computed: {
     actividades() {
