@@ -296,7 +296,7 @@ export default {
     //onButtonClick,
     //notificar,
     bateria() {
-      this.notificarPush()
+      //this.notificarPush()
   console.log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(
     {filters: [{services: ['battery_service']}]})
@@ -319,7 +319,7 @@ export default {
   .then(value => {
     let batteryLevel = value.getUint8(0);
     console.log('> Battery Level is ' + batteryLevel + '%');
-
+    this.notificacion(batteryLevel)
   })
   .catch(error => {
     console.log('Argh! ' + error);
@@ -328,7 +328,7 @@ export default {
     notificacion(x){
                 push.create("Titulo de la Notificación",
                         {
-                            body: x,
+                            body: "El nivel de bateria del dispositivo es de el "+x+"%",
                             icon: "",
                             timeout: 5000,//5 segundos
                             vibrate: [100, 100, 100],
