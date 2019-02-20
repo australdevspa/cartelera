@@ -344,13 +344,13 @@ export default {
 let options = {};
 options.acceptAllDevices = true
 
-  log('Requesting Bluetooth Device...');
-  log('with ' + JSON.stringify(options));
+  console.log('Requesting Bluetooth Device...');
+  console.log('with ' + JSON.stringify(options));
   navigator.bluetooth.requestDevice(options)
   .then(device => {
-    log('> Name:             ' + device.name);
-    log('> Id:               ' + device.id);
-    log('> Connected:        ' + device.gatt.connected);
+    console.log('> Name:             ' + device.name);
+    console.log('> Id:               ' + device.id);
+    console.log('> Connected:        ' + device.gatt.connected);
 
     if(device.name == "Xperia E5"){
       this.notificacionName(device.name, device.id)
@@ -358,7 +358,7 @@ options.acceptAllDevices = true
 
   })
   .catch(error => {
-    log('Argh! ' + error);
+    console.log('Argh! ' + error);
   });
 
 
