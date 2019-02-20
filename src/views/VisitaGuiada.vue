@@ -318,7 +318,7 @@ export default {
   .then(value => {
     let batteryLevel = value.getUint8(0);
     console.log('> Battery Level is ' + batteryLevel + '%');
-    notificacion(batteryLevel)
+    this.notificarPush
 
   })
   .catch(error => {
