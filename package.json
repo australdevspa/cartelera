@@ -15,6 +15,7 @@
     "hls.js": "^0.12.1",
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
+    "push.js": "1.0.9",
     "sw-precache-webpack-plugin": "^0.11.4",
     "uglify-es": "^3.3.9",
     "uikit": "^3.0.0-beta.40",

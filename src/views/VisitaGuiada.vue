@@ -177,7 +177,12 @@
 
 
           <div class="padCamaraButton">
+            <button @click.prevent="notificarPush" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE Push</button>
+            
+<!--notificacion javascript
             <button @click.prevent="onButtonClick" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE</button>
+    -->        
+            
             <!--<input type="text" id="">-->
             <!--<button type="button" @click.prevent="notificar()">Enviar notificación</button>-->
           </div>
@@ -205,8 +210,9 @@ import CardSala from '@/components/CardSala'
 import CardSalaProx from '@/components/CardSalaProx'
 import CardSalaVacia from '@/components/CardSalaVacia'
 import moment from 'moment';
-import { onButtonClick }  from '@/services/main_ble'
-import { notificar }  from '@/services/notifications'
+//import { onButtonClick }  from '@/services/main_ble'
+//import { notificar }  from '@/services/notifications'
+import push from 'push.js'
 
 export default {
   name: 'VisitaGuiadaView',
@@ -234,6 +240,11 @@ export default {
       .catch(error => {
         this.loading = true
       })
+  },
+  mounted(){
+                    document.addEventListener("DOMContentLoaded", function(){
+                push.Permission.request();
+            });
   },
   computed: {
     fecha() {
@@ -282,8 +293,20 @@ export default {
             }
         }
     },
-    onButtonClick,
-    notificar
+    //onButtonClick,
+    //notificar,
+    notificarPush(){
+                push.create("Titulo de la Notificación",
+                        {
+                            body: "descripcion",
+                            icon: "",
+                            timeout: 5000,//5 segundos
+                            vibrate: [100, 100, 100],
+                            onClick: function(){
+                                alert('click en la notification');
+                            }
+                        });
+            }
   }
 }
 </script>
