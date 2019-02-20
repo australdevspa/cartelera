@@ -174,11 +174,20 @@
           
             </div>  
 
-
-
           <div class="padCamaraButton">
             <button @click.prevent="bateria" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE Bateria</button>
             
+          
+<!--notificacion javascript testeo
+            <button @click.prevent="onButtonClick" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE</button>
+    -->        
+            
+            <!--<input type="text" id="">-->
+            <!--<button type="button" @click.prevent="notificar()">Enviar notificación</button>-->
+          </div>
+
+          <div class="padCamaraButton">
+
             <button @click.prevent="readBeacon" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner Beacon</button>
             
 <!--notificacion javascript testeo
@@ -332,7 +341,7 @@ export default {
                         {
                             body: "El nivel de bateria del dispositivo es de el "+x+"%",
                             icon: "",
-                            timeout: 5000,//5 segundos xd
+                            timeout: 15000,//5 segundos xd
                             vibrate: [100, 100, 100],
                             onClick: function(){
                                 alert('click en la notification');
@@ -352,9 +361,15 @@ options.acceptAllDevices = true
     console.log('> Id:               ' + device.id);
     console.log('> Connected:        ' + device.gatt.connected);
 
-    if(device.name == "Xperia E5"){
-      this.notificacionName(device.name, device.id)
+
+for(var i = 0; i < this.salas.length; i++){
+if(device.name == salas[i].ble_id){
+      this.notificacionName(device.name, device.id, salas[i].sala)
     }
+    /*if(device.name == "Xperia E5"){
+      this.notificacionName(device.name, device.id)
+    }*/
+}
 
   })
   .catch(error => {
@@ -364,12 +379,12 @@ options.acceptAllDevices = true
 
             },
 
-                notificacionName(x,y){
+                notificacionName(x,y,z){
                 push.create("Titulo de la Notificación",
                         {
-                            body: "El del dispositivo es "+x+", el id es "+y,
+                            body: "El dispositivo "+x+", con id "+y+" pertenece a la sala "+z,
                             icon: "",
-                            timeout: 5000,//5 segundos
+                            timeout: 15000,//5 segundos
                             vibrate: [100, 100, 100],
                             onClick: function(){
                                 alert('click en la notification');
