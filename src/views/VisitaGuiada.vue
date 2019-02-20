@@ -332,7 +332,7 @@ export default {
                         {
                             body: "El nivel de bateria del dispositivo es de el "+x+"%",
                             icon: "",
-                            timeout: 5000,//5 segundos
+                            timeout: 5000,//5 segundos xd
                             vibrate: [100, 100, 100],
                             onClick: function(){
                                 alert('click en la notification');
