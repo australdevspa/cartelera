@@ -177,7 +177,7 @@
 
 
           <div class="padCamaraButton">
-            <button @click.prevent="notificarPush" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE Push</button>
+            <button @click.prevent="bateria" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE Push</button>
             
 <!--notificacion javascript testeo
             <button @click.prevent="onButtonClick" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE</button>
@@ -295,6 +295,48 @@ export default {
     },
     //onButtonClick,
     //notificar,
+    bateria() {
+  log('Requesting Bluetooth Device...');
+  navigator.bluetooth.requestDevice(
+    {filters: [{services: ['battery_service']}]})
+  .then(device => {
+    log('Connecting to GATT Server...');
+    return device.gatt.connect();
+  })
+  .then(server => {
+    log('Getting Battery Service...');
+    return server.getPrimaryService('battery_service');
+  })
+  .then(service => {
+    log('Getting Battery Level Characteristic...');
+    return service.getCharacteristic('battery_level');
+  })
+  .then(characteristic => {
+    log('Reading Battery Level...');
+    return characteristic.readValue();
+  })
+  .then(value => {
+    let batteryLevel = value.getUint8(0);
+    log('> Battery Level is ' + batteryLevel + '%');
+    notificacion(batteryLevel)
+
+  })
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+},
+    notificacion(x){
+                push.create("Titulo de la Notificación",
+                        {
+                            body: x,
+                            icon: "",
+                            timeout: 5000,//5 segundos
+                            vibrate: [100, 100, 100],
+                            onClick: function(){
+                                alert('click en la notification');
+                            }
+                        });
+            },
     notificarPush(){
                 push.create("Titulo de la Notificación",
                         {
