@@ -177,7 +177,9 @@
 
 
           <div class="padCamaraButton">
-            <button @click.prevent="bateria" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE Push</button>
+            <button @click.prevent="bateria" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE Bateria</button>
+            
+            <button @click.prevent="readBeacon" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner Beacon</button>
             
 <!--notificacion javascript testeo
             <button @click.prevent="onButtonClick" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE</button>
@@ -337,6 +339,44 @@ export default {
                             }
                         });
             },
+
+            readBeacon(){
+let options = {};
+options.acceptAllDevices = true
+
+  log('Requesting Bluetooth Device...');
+  log('with ' + JSON.stringify(options));
+  navigator.bluetooth.requestDevice(options)
+  .then(device => {
+    log('> Name:             ' + device.name);
+    log('> Id:               ' + device.id);
+    log('> Connected:        ' + device.gatt.connected);
+
+    if(device.name == "Xperia E5"){
+      this.notificacionName(device.name, device.id)
+    }
+
+  })
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+
+
+            },
+
+                notificacionName(x,y){
+                push.create("Titulo de la Notificación",
+                        {
+                            body: "El del dispositivo es "+x+", el id es "+y,
+                            icon: "",
+                            timeout: 5000,//5 segundos
+                            vibrate: [100, 100, 100],
+                            onClick: function(){
+                                alert('click en la notification');
+                            }
+                        });
+            },
+
     notificarPush(){
                 push.create("Titulo de la Notificación",
                         {
