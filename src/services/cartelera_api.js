@@ -134,10 +134,18 @@ function getDataCartelera(){
         //cartelera
         var x = 0
         var cartelera = []
-        while(x < 10){
-            setParametros(response.data[x])
-            cartelera.push(response.data[x])
-            x++
+        if(cartelera_total < 10){
+            while(x < cartelera_total){
+                setParametros(response.data[x])
+                cartelera.push(response.data[x])
+                x++
+            }
+        }else{
+            while(x < 10){
+                setParametros(response.data[x])
+                cartelera.push(response.data[x])
+                x++
+            }
         }
 
         var final = {
