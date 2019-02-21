@@ -14,7 +14,6 @@ Vue.use(vueScrollto)
 // loads the Icon plugin
 UIkit.use(Icons);
 Vue.config.productionTip = false
-window.UIkit = UIkit;
 
 /* eslint-disable no-new */
 new Vue({
