@@ -274,9 +274,9 @@ export default {
     filtro() {
         return this.$store.state.salas.filter((item) => item.id.includes("360"));
     },
-    exposiciones() {
+    /*exposiciones() {
       return this.$store.state.exposiciones;
-    },
+    },*/
     mitad() {
       var x = this.$store.state.salas.length%2;
       if(x == 0){
