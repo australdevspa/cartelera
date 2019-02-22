@@ -101,12 +101,12 @@
 </template>
 
 <script>
-import CardObra from '@/components/CardObra'
+//import CardObra from '@/components/CardObra'
 
 export default {
   name: 'ObrasView',
     components: {
-    CardObra,
+    //CardObra,
   },
 data() {
     return {

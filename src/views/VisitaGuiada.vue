@@ -219,7 +219,7 @@
 <script>
 import CardSala from '@/components/CardSala'
 import CardSalaProx from '@/components/CardSalaProx'
-import CardSalaVacia from '@/components/CardSalaVacia'
+//import CardSalaVacia from '@/components/CardSalaVacia'
 import moment from 'moment';
 //import { onButtonClick }  from '@/services/main_ble'
 //import { notificar }  from '@/services/notifications'
@@ -230,7 +230,7 @@ export default {
   components: {
     CardSala,
     CardSalaProx,
-    CardSalaVacia,
+    //CardSalaVacia,
   },
   data() {
     return {

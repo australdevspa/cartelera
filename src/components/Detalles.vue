@@ -12,13 +12,13 @@
           <a v-if="detalle.length !== 0 && actividad_translate.video !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
         </li>
       </ul>
-      <div class="mar-div">
-        <p class="mar-p ">{{ actividad.fecha_inicio_formato }}</p>
-        <p class="mar-p">{{ actividad.donde }}.</p>
-        <p v-if="actividad.entrada ==='liberada' " class="mar-p">Free pass</p>
-        <p v-else class="mar-p">Ticket {{actividad.entrada}}</p>
+      <div class="mar-div-detalles">
+        <p class="mar-p-detalles">{{ actividad.fecha_inicio_formato }}</p>
+        <p class="mar-p-detalles">{{ actividad.donde }}.</p>
+        <p v-if="actividad.entrada ==='liberada' " class="mar-p-detalles">Free pass</p>
+        <p v-else class="mar-p-detalles">Ticket {{actividad.entrada}}</p>
       </div>
-      <div class="mar-div" v-if="actividad_translate.tts_en !== null">
+      <div class="mar-div-detalles" v-if="actividad_translate.tts_en !== null">
         <aplayer :music="{  title: 'Audio',
                             artist: 'English',
                             src: ''+actividad_translate.tts_en,
@@ -38,12 +38,12 @@
           <a v-if="detalle.length !== 0 && actividad_translate.video !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
         </li>
       </ul>
-      <div class="mar-div">
-        <p class="mar-p">{{ actividad.fecha_inicio_formato }}</p>
-        <p class="mar-p">{{ actividad.donde }}</p>
-        <p class="mar-p">Entrada {{ actividad.entrada }}</p>
+      <div class="mar-div-detalles">
+        <p class="mar-p-detalles">{{ actividad.fecha_inicio_formato }}</p>
+        <p class="mar-p-detalles">{{ actividad.donde }}</p>
+        <p class="mar-p-detalles">Entrada {{ actividad.entrada }}</p>
       </div>
-      <div class="mar-div" v-if="actividad_translate.tts_es !== null">
+      <div class="mar-div-detalles" v-if="actividad_translate.tts_es !== null">
           <aplayer :music="{  title: 'Audio',
                               artist: 'Español',
                               src: ''+actividad_translate.tts_es,
@@ -111,15 +111,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.mar-p {
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
-  color: #333 !important;
-}
-.mar-div {
-  margin-top: 15px !important;
-  margin-bottom: 15px !important;
-}
-</style>

@@ -77,13 +77,13 @@
 
       </div>-->
 
-      <div class="pad-hoy"  v-for="(it, index) in exposiciones_hoy"
+      <!--<div class="pad-hoy"  v-for="(it, index) in exposiciones_hoy"
         :key="index"
         >
         <div v-if="sala.sala === it.sala">
           <CardHoyExpo :carta="it"></CardHoyExpo>
         </div>
-      </div>
+      </div>-->
 
       <div class="pad-hoy" v-for="(it, index) in cargar_actividades_prox" 
         :key="index" 
@@ -159,7 +159,7 @@
 
 <script>
 import CardHoy from '@/components/CardHoy'
-import CardHoyExpo from '@/components/CardHoyExpo'
+//import CardHoyExpo from '@/components/CardHoyExpo'
 import CardProx from '@/components/CardProx'
 import moment from 'moment';
 moment.locale('es')
@@ -169,7 +169,7 @@ export default {
   components: {
     CardHoy,
     CardProx,
-    CardHoyExpo,  
+    //CardHoyExpo,  
   },
   props: {
     sala: {
