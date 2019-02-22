@@ -1,138 +1,89 @@
 <template>
   <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover parent" uk-grid>
-      <div class="uk-card-media-left uk-cover-container">
-
-        <!--<h4 class="ribbon">{{ actividad.cuanto_falta }}</h4>-->
-<div v-if="actividad.fecha_rango === fechahoy && actividad.horario === 'horario indefinido'">
-  
-    <div v-if="dia === 'sabado'">
-      <h4 class="ribbon tamaño-ribbon">Hoy<br> 11:00 a 19:00 hrs</h4>
-    </div>
-    <div v-else-if="dia === 'domingo'">
-    </div>
-    <div v-else>
-      <h4 class="ribbon tamaño-ribbon">Hoy<br> 10:00 a 20:00 hrs</h4>
-    </div>
-</div>
-<div v-else-if="actividad.fecha_rango !== fechahoy && actividad.horario === 'horario indefinido'">
-  
-    <div v-if="dia === 'sabado'">
-      <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br> 11:00 a 19:00 hrs</h4>
-    </div>
-    <div v-else-if="dia === 'domingo'">
-    </div>
-    <div v-else>
-      <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br> 10:00 a 20:00 hrs</h4>
-    </div>
-</div>
-  <div v-else>
-    <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br>{{actividad.horario}}</h4>
-  </div>
-
-
-
-
-                          <!--    <div v-if="actividad.horario === 'horario indefinido'">
-                                <div v-if="dia === 'sabado'">
-                                  <h4 class="ribbon tamaño-ribbon">Hoy<br> 11:00 a 19:00 hrs</h4>
-                                </div>
-                                <div v-else-if="dia === 'domingo'">
-                                
-                                </div>
-                                <div v-else>
-                                  <h4 class="ribbon tamaño-ribbon">Hoy<br> 10:00 a 20:00 hrs</h4>
-                                </div>
-                              </div>
-                              <div v-else>
-                                <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br>{{actividad.horario}}</h4>
-                              </div>-->
-
-        <!--<h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}</h4>-->
-
-          <img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
-            style="
-              max-width: none;
-              position: absolute;
-              left: 50%;
-              top: 50%;
-              -webkit-transform: translate(-50%,-50%);
-              transform: translate(-50%,-50%);" >
-          <canvas width="600" height="300"></canvas>
+    <div class="uk-card-media-left uk-cover-container">
+      <div v-if="actividad.fecha_rango === fechahoy && actividad.horario === 'horario indefinido'">
+        <div v-if="dia === 'sabado'">
+          <h4 class="ribbon tamaño-ribbon">Hoy<br> 11:00 a 19:00 hrs</h4>
+        </div>
+        <div v-else-if="dia === 'domingo'">
+          <h4 class="ribbon tamaño-ribbon">Mañana Lunes<br> 10:00 a 20:00 hrs</h4>
+        </div>
+        <div v-else>
+          <h4 class="ribbon tamaño-ribbon">Hoy<br> 10:00 a 20:00 hrs</h4>
+        </div>
       </div>
-      <div>
-          <div class="uk-card-body uk-text-right">
-            <!--<div class="uk-card-badge-left uk-label label-date" :style="{ fontWeight: 900 }">
-              {{ actividad.cuanto_falta }}
-            </div>-->
-            <div class="uk-card-badge uk-label" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-              {{ actividad.area }}
-            </div>
+      <div v-else-if="actividad.fecha_rango !== fechahoy && actividad.horario === 'horario indefinido'">
+        <div v-if="dia === 'sabado'">
+          <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br> 11:00 a 19:00 hrs</h4>
+        </div>
+        <div v-else-if="dia === 'domingo'">
+          <h4 class="ribbon tamaño-ribbon">Mañana Lunes<br> 10:00 a 20:00 hrs</h4>
+        </div>
+        <div v-else>
+          <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br> 10:00 a 20:00 hrs</h4>
+        </div>
+      </div>
+      <div v-else>
+        <h4 class="ribbon tamaño-ribbon">{{ actividad.cuanto_moment }}<br>{{actividad.horario}}</h4>
+      </div>
+      <img :src="actividad.thumbnail" alt="" class="img-tamaño-1"
+        style="
+          max-width: none;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);" >
+      <canvas width="600" height="300"></canvas>
+    </div>
+    <div>
+      <div class="uk-card-body uk-text-right">
+        <div class="uk-card-badge uk-label" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
+          {{ actividad.area }}
+        </div>
 
-            <div class="visible-note oculto-note">
-              <div class="date centro">
-                 <span class="month">{{actividad.dia_semana}}</span>
-                    <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
-                    <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
-              </div>
-              <h3 @click.prevent="goToActividad(actividad)" class="uk-card-title sinmar titulo cursor"> {{ actividad.nombre }}</h3>
-              <!--<h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>-->
-              <!--<h3 class="uk-card-title sinmar"> {{ actividad.nombre }}</h3>-->
-              <div class="mar-badge estilo-ultimate" :style="{ 'border-right': '10px solid' + actividad.area_color }">
-                <!--<div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-                  <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
-                </div>-->
-                <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
-                  Entrada {{actividad.entrada}}
-                </div>
-                <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
-                  <span uk-icon="icon: location"></span> {{actividad.donde}}
-                </div>
-              </div>
-            </div>
-
-            <div class="visible-movil oculto-movil">
-              <div class="uk-grid-small uk-flex-middle" uk-grid>
-                <div class="uk-width-expand">
-                  <h3 @click.prevent="goToActividad(actividad)" class="uk-card-title sinmar font-tamaño titulo cursor"> {{ actividad.nombre }}</h3>
-                  <!--<h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>-->
-                  <!--<h3 class="uk-card-title sinmar font-tamaño"> {{ actividad.nombre }}</h3>-->
-                </div>
-                <div class="uk-width-auto">
-                  <div class="date">
-                     <span class="month">{{actividad.dia_semana}}</span>
-                    <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
-                    <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="mar-badge estilo-ultimate" :style="{ 'border-right': '10px solid' + actividad.area_color }">
-                <!--<div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-                  <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
-                </div>-->
-                <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
-                  Entrada {{actividad.entrada}}
-                </div>
-                <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
-                  <span uk-icon="icon: location"></span> {{actividad.donde}}
-                </div>
-              </div>
-            </div>  
-            <!--<div class="mar-badge">
-              <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-                <span uk-icon="icon: calendar"></span> {{actividad.cuanto_falta}}
-              </div>
-              <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-                {{actividad.entrada}}
-              </div>
-              <div class="uk-label mar-single-badge" :style="{ background: actividad.area_color + '!important', fontWeight: 900 }">
-                <span uk-icon="icon: location"></span> {{actividad.lugar}}
-              </div>
-            </div>-->
-            <!--<p class="uk-text-small uk-text-muted">
-              Publicado el: {{actividad.fecha_publicacion}}
-            </p>-->
+        <div class="visible-note oculto-note">
+          <div class="date centro">
+              <span class="month">{{actividad.dia_semana}}</span>
+              <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
+              <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
           </div>
+          <h3 @click.prevent="goToActividad(actividad)" class="uk-card-title sinmar titulo cursor"> {{ actividad.nombre }}</h3>
+          <div class="mar-badge estilo-ultimate" :style="{ 'border-right': '10px solid' + actividad.area_color }">
+            <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
+              Entrada {{actividad.entrada}}
+            </div>
+            <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
+              <span uk-icon="icon: location"></span> {{actividad.donde}}
+            </div>
+          </div>
+        </div>
+
+        <div class="visible-movil oculto-movil">
+          <div class="uk-grid-small uk-flex-middle" uk-grid>
+            <div class="uk-width-expand">
+              <h3 @click.prevent="goToActividad(actividad)" class="uk-card-title sinmar font-tamaño titulo cursor"> {{ actividad.nombre }}</h3>
+            </div>
+            <div class="uk-width-auto">
+              <div class="date">
+                <span class="month">{{actividad.dia_semana}}</span>
+                <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
+                <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="mar-badge estilo-ultimate" :style="{ 'border-right': '10px solid' + actividad.area_color }">
+            <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
+              Entrada {{actividad.entrada}}
+            </div>
+            <div class="uk-label mar-single-badge" :style="{ background: '#333 !important', fontWeight: 900 }">
+              <span uk-icon="icon: location"></span> {{actividad.donde}}
+            </div>
+          </div>
+        </div>  
+
       </div>
+    </div>
   </div>
 </template>
 
@@ -176,9 +127,6 @@ export default {
 <style scoped>
 .titulo:hover {
   color: #19b868;
-}
-.cursor {
-    cursor:pointer;
 }
 .parent {
   overflow: hidden; /* required */
