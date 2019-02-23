@@ -128,7 +128,7 @@ export default {
   created () {
     this.$store.dispatch('loadSalas')
     this.$store.dispatch('loadEjemplo')
-    this.$store.dispatch('loadExposiciones')
+    //this.$store.dispatch('loadExposiciones')
           .then(response => {
         this.loading = false
       })
@@ -137,9 +137,9 @@ export default {
       })
   },
   mounted(){
-                    document.addEventListener("DOMContentLoaded", function(){
-                push.Permission.request();
-            });
+    document.addEventListener("DOMContentLoaded", function(){
+      push.Permission.request();
+    });
   },
   computed: {
     fecha() {
