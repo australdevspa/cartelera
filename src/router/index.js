@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import InicioView from '@/views/Inicio'
+//import InicioView from '@/views/Inicio'
 import CarteleraView from '@/views/Cartelera'
 import EventoView from '@/views/Evento'
 import VisitaGuiadaView from '@/views/VisitaGuiada'
@@ -8,6 +8,7 @@ import VisitaGuiadaView from '@/views/VisitaGuiada'
 import CamaraView from '@/views/Camara'
 import ObrasView from '@/views/Obras'
 import ObraView from '@/views/Obra'
+const InicioView = () => import('@/views/Inicio')
 Vue.use(Router)
 
 export default new Router({
