@@ -2,11 +2,9 @@
   <section>
     <div class="uk-section pad-nuevo">
       <div class="uk-container uk-container-center uk-text-center pad-top">
-                    <ul class="uk-breadcrumb">
-                <a href="javascript:window.history.back();" class="uk-button-x uk-button-secondary uk-button-large"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
-                 <!--<button class="uk-button-x uk-button-secondary uk-button-large"><span uk-icon="chevron-left" class="bold-icon"></span>Volver atrás</button>-->
-                <!--<li><router-link to="/cartelera" class="text-translate a-translate"><span uk-icon="chevron-left"></span>Volver atrás</router-link></li>-->
-            </ul>
+        <ul class="uk-breadcrumb">
+          <a href="javascript:window.history.back();" class="uk-button-x uk-button-secondary uk-button-large"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
+        </ul>
             
         <form class="uk-form-stacked ">
           <div class="uk-margin">
@@ -15,187 +13,73 @@
             </label>
             <div class="ayuda"><div class="pintura-hoy"/>Actividades para hoy</div>
             <div class="ayuda"><div class="pintura-prox"/>Actividades próximas</div>
-<!--<div class="ayuda"><div class="pintura-sin"/>Sin actividades programadas</div>-->
           </div>
         </form>
 
-        <!--<form class="uk-form-stacked ">
-          <div class="uk-margin">
-            <label class="uk-form-label uk-text-large">Espacios</label>
-          </div>
-        </form>-->
         <div v-if="loading">
           <div class="pad-spinner uk-text-center">
             <div uk-spinner="ratio: 4"/>
           </div>
         </div>
         <div v-else>
-           <div class="visible-note oculto-note">
-         
-         <div class="uk-child-width-expand@s uk-text-center" uk-grid >
-            <div>
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                                             <div class="uk-width-1@m"
-                  v-for="(itemm, indexx) in ejemplo.hoy"
-                  :key="indexx">
-
-                <div
-                  v-for="(item, index) in salas"
-                  :key="index">
- <CardSala v-if="item.id === indexx"
-                  :sala="item" class="uk-box-shadow-medium"></CardSala>
-                  </div>
-                 
-                
-                </div> 
-                <!--<div class="uk-width-1@m"
-                  v-for="(item, index) in salas.slice(0,this.mitad)"
-                  :key="index">
-                  <CardSala    :sala="item"></CardSala>
-                </div>-->
-              </div>
-            </div>
-            <div>
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid> 
-                                <div class="uk-width-1@m"
-                  v-for="(itemm, indexx) in ejemplo.proximo"
-                  :key="indexx">
-
-                <div
-                  v-for="(item, index) in salas"
-                  :key="index">
-
-
-<CardSalaProx v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSalaProx>
-             
-
- 
-                  </div>
-                 
-                
-                </div> 
-                <!--<div class="uk-width-1@m"
-                  v-for="(item, index) in salas.slice(this.mitad,this.salas.length)"
-                  :key="index">
-                  <CardSala :sala="item" class="uk-box-shadow-medium"></CardSala>
-                </div>-->
-              </div>
-            </div>
-            <!--<div>
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1@m"
-                  v-for="(itemm, indexx) in ejemplo.cero"
-                  :key="indexx">
-
-                <div
-                  v-for="(item, index) in salas"
-                  :key="index">
- <CardSalaVacia v-if="item.id === indexx"
-                  :sala="item" class="uk-box-shadow-medium"></CardSalaVacia>
-                  </div>
-                 
-                
+          <div class="visible-note oculto-note">
+            <div class="uk-child-width-expand@s uk-text-center" uk-grid >
+              <div>
+                <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                  <div class="uk-width-1@m"
+                    v-for="(itemm, indexx) in ejemplo.hoy"
+                    :key="indexx">
+                    <div v-for="(item, index) in salas"
+                      :key="index">
+                      <CardSala v-if="item.id === indexx"
+                        :sala="item" class="uk-box-shadow-medium"></CardSala>
+                    </div>
+                  </div> 
                 </div>
               </div>
-            </div>-->
-          </div>
-
-            </div>
-
-            <div class="visible-movil oculto-movil">
-         
-<div class="uk-child-width-expand@s uk-text-center" uk-grid >
-            <div>
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                                             <div class="uk-width-1@m"
-                  v-for="(itemm, indexx) in ejemplo.hoy"
-                  :key="indexx">
-
-                <div
-                  v-for="(item, index) in salas"
-                  :key="index">
- <CardSala v-if="item.id === indexx"
-                  :sala="item" class="uk-box-shadow-medium"></CardSala>
-                  </div>
-                 
-                
-                </div> 
-
-
-
-                         <div class="uk-width-1@m"
-                  v-for="(itemm, indexx) in ejemplo.proximo"
-                  :key="indexx">
-
-                <div
-                  v-for="(item, index) in salas"
-                  :key="index">
-
-
-<CardSalaProx v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSalaProx>
-             
-
- 
-                  </div>
-                 
-                
-                </div> 
-
-                <!--<div class="uk-width-1@m"
-                  v-for="(item, index) in salas.slice(0,this.mitad)"
-                  :key="index">
-                  <CardSala    :sala="item"></CardSala>
-                </div>-->
-              </div>
-            </div>
-            
-
-
-
-            <!--<div>
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1@m"
-                  v-for="(itemm, indexx) in ejemplo.cero"
-                  :key="indexx">
-
-                <div
-                  v-for="(item, index) in salas"
-                  :key="index">
- <CardSalaVacia v-if="item.id === indexx"
-                  :sala="item" class="uk-box-shadow-medium"></CardSalaVacia>
-                  </div>
-                 
-                
+              <div>
+                <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid> 
+                  <div class="uk-width-1@m"
+                    v-for="(itemm, indexx) in ejemplo.proximo"
+                    :key="indexx">
+                    <div v-for="(item, index) in salas"
+                      :key="index">
+                      <CardSalaProx v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSalaProx>
+                    </div>
+                  </div> 
                 </div>
               </div>
-            </div>-->
-            
+            </div>
           </div>
-          
-            </div>  
 
-          <div class="padCamaraButton">
-            <button @click.prevent="bateria" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE Bateria</button>
-            
-          
-<!--notificacion javascript testeo
-            <button @click.prevent="onButtonClick" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE</button>
-    -->        
-            
-            <!--<input type="text" id="">-->
-            <!--<button type="button" @click.prevent="notificar()">Enviar notificación</button>-->
+          <div class="visible-movil oculto-movil">   
+            <div class="uk-child-width-expand@s uk-text-center" uk-grid >
+              <div>
+                <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
+                  <div class="uk-width-1@m"
+                    v-for="(itemm, indexx) in ejemplo.hoy"
+                    :key="indexx">
+                    <div v-for="(item, index) in salas"
+                      :key="index">
+                      <CardSala v-if="item.id === indexx"
+                        :sala="item" class="uk-box-shadow-medium"></CardSala>
+                    </div>
+                  </div> 
+                  <div class="uk-width-1@m"
+                    v-for="(itemm, indexx) in ejemplo.proximo"
+                    :key="indexx">
+                    <div v-for="(item, index) in salas"
+                      :key="index">
+                      <CardSalaProx v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSalaProx>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="padCamaraButton">
-
             <button @click.prevent="readBeacon" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner Beacon</button>
-            
-<!--notificacion javascript testeo
-            <button @click.prevent="onButtonClick" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner BLE</button>
-    -->        
-            
-            <!--<input type="text" id="">-->
-            <!--<button type="button" @click.prevent="notificar()">Enviar notificación</button>-->
           </div>
 
           <div class="padCamaraButton">
@@ -306,49 +190,6 @@ export default {
     },
     //onButtonClick,
     //notificar,
-    bateria() {
-      //this.notificarPush()
-  console.log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice(
-    {filters: [{services: ['battery_service']}]})
-  .then(device => {
-    console.log('Connecting to GATT Server...');
-    return device.gatt.connect();
-  })
-  .then(server => {
-    console.log('Getting Battery Service...');
-    return server.getPrimaryService('battery_service');
-  })
-  .then(service => {
-    console.log('Getting Battery Level Characteristic...');
-    return service.getCharacteristic('battery_level');
-  })
-  .then(characteristic => {
-    console.log('Reading Battery Level...');
-    return characteristic.readValue();
-  })
-  .then(value => {
-    let batteryLevel = value.getUint8(0);
-    console.log('> Battery Level is ' + batteryLevel + '%');
-    this.notificacion(batteryLevel)
-  })
-  .catch(error => {
-    console.log('Argh! ' + error);
-  });
-},
-    notificacion(x){
-                push.create("Titulo de la Notificación",
-                        {
-                            body: "El nivel de bateria del dispositivo es de el "+x+"%",
-                            icon: "",
-                            timeout: 15000,//5 segundos xd
-                            vibrate: [100, 100, 100],
-                            onClick: function(){
-                                alert('click en la notification');
-                            }
-                        });
-            },
-
             readBeacon(){
 let options = {};
 options.acceptAllDevices = true

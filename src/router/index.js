@@ -4,7 +4,7 @@ import InicioView from '@/views/Inicio'
 import CarteleraView from '@/views/Cartelera'
 import EventoView from '@/views/Evento'
 import VisitaGuiadaView from '@/views/VisitaGuiada'
-import ExpoView from '@/views/Expo'
+//import ExpoView from '@/views/Expo'
 import CamaraView from '@/views/Camara'
 import ObrasView from '@/views/Obras'
 import ObraView from '@/views/Obra'
@@ -37,11 +37,11 @@ export default new Router({
           component: CamaraView
         }]
     },
-    {
+    /*{
       path: '/exposicion/:id',
       name: 'Expo',
       component: ExpoView
-    },
+    },*/
     {
       //path: '/cartelera/:slug/detalle/:id',
       path: '/cartelera/:slug/detalle',
