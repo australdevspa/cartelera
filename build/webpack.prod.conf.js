@@ -129,8 +129,11 @@ const webpackConfig = merge(baseWebpackConfig, {
       staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: true,
       stripPrefix: 'dist/'
-    })
+    }),
     
+    // Ignore all locale files of moment.js
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
   ]
 })
 
