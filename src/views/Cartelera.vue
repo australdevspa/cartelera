@@ -127,8 +127,8 @@
 </template>
 
 <script>
-import CardRight from '@/components/CardRight'
-import CardLeft from '@/components/CardLeft'
+import CardRight from '@/components/CarteleraCardRight'
+import CardLeft from '@/components/CarteleraCardLeft'
 import _ from 'lodash'
 import { setParametros } from '@/services/parametros'
 
@@ -147,8 +147,7 @@ export default {
       limit_porcategoria: 10,
       filtered_porcategoria_total: 0,
       porcategoria_boton_filtered: false,
-      show: false,
-      //activeItem: 'todas'
+      show: false
     }
   },
   computed:
@@ -192,22 +191,6 @@ export default {
     cartelera_categoria_activa() {
       return this.$store.state.cartelera_categoria_activa;
     },
-    /*filtered_busqueda() {
-      if(this.filter === ''){
-        this.limit = 10
-      }
-      const filteredPokemon = (this.filter === '') ? this.$store.state.data_cartelera.cartelera : this.$store.state.data_cartelera.cartelera.filter(item => {
-        const itemName = item.nombre.toLowerCase()
-        return itemName.includes(this.filter.toLowerCase())
-      })
-      this.filtered_total =  Object.keys(filteredPokemon).length;
-      if(this.limit < this.filtered_total){
-        this.cartelera_boton_filtered = true
-      }else{
-        this.cartelera_boton_filtered = false
-      }
-      return filteredPokemon.slice(0, this.limit)
-    },*/
     filtered_busqueda() {
       if(this.filter === ''){
         this.limit = 10
@@ -297,11 +280,7 @@ export default {
     },
     isActive: function (menuItem) {
       return this.estado === true && this.cartelera_categoria_activa === menuItem
-      //return this.activeItem === menuItem
     },
-    /*setActive: function (menuItem) {
-      this.activeItem = menuItem
-    },*/
   },
   created () {
     window.addEventListener('scroll', this.handleScroll);
@@ -311,67 +290,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.bounce-enter-active {
-  animation: bounce-in .5s;
-}
-.bounce-leave-active {
-  animation: bounce-out .5s;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes bounce-out {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(0);
-  }
-}
-.icono-totop {
-  position: fixed;
-  bottom: 10%;
-  z-index: 6;
-  right: 20px;
-}
-.icono-totop a {
-  transition: all 0.3s ease;
-  font-size: 20px;
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #a0a0a0;
-}
-.icono-totop a:hover {
-  background-color: #151515;
-}
-.uk-icon-button {
-  width: 60px !important;
-  height: 60px !important;
-}
-.pad-ul-categorias {
-  padding-left: 0 !important;
-}
-.pad-top {
-  margin-top: 30px !important;
-}
-.grid li {
-  display: inline-block;
-  padding: 5px 5px;
-}
-.uk-input:focus, .uk-select:focus, .uk-textarea:focus {
-    border-color: #19b868 !important;
-}
-</style>

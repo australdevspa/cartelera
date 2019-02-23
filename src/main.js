@@ -11,7 +11,6 @@ import vueScrollto from 'vue-scrollto'
 import './styles/main.css'
 
 Vue.use(vueScrollto)
-// loads the Icon plugin
 UIkit.use(Icons);
 Vue.config.productionTip = false
 

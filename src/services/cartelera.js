@@ -2,10 +2,6 @@ import axios from 'axios';
 const moment = require('moment');
 require('moment/locale/es');
 moment.locale('es');
-
-//import moment from 'moment';
-//moment.locale('es')
-
 import { Endpoint } from '@/services/endpoints'
 import { setParametros } from '@/services/parametros'
 
@@ -14,86 +10,68 @@ function getDataCartelera(){
     return axios.get(`${Endpoint}/actividades`)
     .then(function (response) {
 
+        //exposiciones hoy
+        var flags1 = []
+        var categorias1 = {}
+        var expos1 = []
+        for(var i = 0; i < response.data.length; i++){
 
+            if(flags1[response.data[i].sala_id]) continue
+            flags1[response.data[i].sala_id] = true
 
-    //exposiciones hoy
-    var flags1 = []
-    var categorias1 = {}
-    var expos1 = []
-    for(var i = 0; i < response.data.length; i++){
-
-        if(flags1[response.data[i].sala_id]) continue
-        flags1[response.data[i].sala_id] = true
-
-        //si es que no posee ningun color asignado, le entregamos uno por defecto
-        if(response.data[i].area_color == null){
-            response.data[i].area_color = "#734525"
-        }
-
-        if(nro_ocurrencias(response.data[i].sala_id) != 0){
-            categorias1[response.data[i].sala_id] = {
-                area: response.data[i].sala_id,  
-                ocurrence : nro_ocurrencias(response.data[i].sala_id),
-                eventos: cartelera_ocurrencias(response.data[i].sala_id)
+            //si es que no posee ningun color asignado, le entregamos uno por defecto
+            if(response.data[i].area_color == null){
+                response.data[i].area_color = "#734525"
             }
-        }
 
-        function nro_ocurrencias(value){
-            var nro = 0
-            for(var i = 0; i < response.data.length; i++){
-                if(response.data[i].sala_id === value){
-                    var fecha_actual = moment().format('YYYY-MM-DD')
-                    var fecha_inicio = moment(response.data[i].fecha_ini).format('YYYY-MM-DD')
-                    var fecha_fin = moment(response.data[i].fecha_fin).format('YYYY-MM-DD')
+            if(nro_ocurrencias(response.data[i].sala_id) != 0){
+                categorias1[response.data[i].sala_id] = {
+                    area: response.data[i].sala_id,  
+                    ocurrence : nro_ocurrencias(response.data[i].sala_id),
+                    eventos: cartelera_ocurrencias(response.data[i].sala_id)
+                }
+            }
 
-                    
-                    /*if(fecha_actual === fecha_inicio){
-                        nro+=1 
-                    }else{
-                        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-                            nro+=1 
-                        }
-                    }*/
+            function nro_ocurrencias(value){
+                var nro = 0
+                for(var i = 0; i < response.data.length; i++){
+                    if(response.data[i].sala_id === value){
+                        var fecha_actual = moment().format('YYYY-MM-DD')
+                        var fecha_inicio = moment(response.data[i].fecha_ini).format('YYYY-MM-DD')
+                        var fecha_fin = moment(response.data[i].fecha_fin).format('YYYY-MM-DD')
 
-                    if(fecha_actual !== fecha_inicio){
-                        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-                            nro+=1
+                        if(fecha_actual !== fecha_inicio){
+                            if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
+                                nro+=1
+                            }
                         }
                     }
                 }
+                return nro
             }
-            return nro
-        }
 
-        function cartelera_ocurrencias(value){
-            var eventos = []
-            for(var i = 0; i < response.data.length; i++){
-                if(response.data[i].sala_id === value){
-                    var fecha_actual = moment().format('YYYY-MM-DD')
-                    var fecha_inicio = moment(response.data[i].fecha_ini).format('YYYY-MM-DD')
-                    var fecha_fin = moment(response.data[i].fecha_fin).format('YYYY-MM-DD')
-        
-                    /*if(fecha_actual === fecha_inicio){
-                        setParametros(response.data[i])
-                        eventos.push(response.data[i]) 
-                    }else{*/
-                    if(fecha_actual !== fecha_inicio){
-                        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-                        setParametros(response.data[i])
-                            eventos.push(response.data[i]) 
-                            expos1.push(response.data[i])
-                           
+            function cartelera_ocurrencias(value){
+                var eventos = []
+                for(var i = 0; i < response.data.length; i++){
+                    if(response.data[i].sala_id === value){
+                        var fecha_actual = moment().format('YYYY-MM-DD')
+                        var fecha_inicio = moment(response.data[i].fecha_ini).format('YYYY-MM-DD')
+                        var fecha_fin = moment(response.data[i].fecha_fin).format('YYYY-MM-DD')
+
+                        if(fecha_actual !== fecha_inicio){
+                            if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
+                            setParametros(response.data[i])
+                                eventos.push(response.data[i]) 
+                                expos1.push(response.data[i])
+                            
+                            }
                         }
+                        
                     }
-                    
                 }
+                return eventos
             }
-            return eventos
         }
-    }
-
-
-
 
         //categorias
         var flags = []

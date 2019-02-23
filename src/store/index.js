@@ -3,13 +3,13 @@ import Vuex from 'vuex';
 import { setParametros } from '@/services/parametros'
 import {   
     getDataCartelera,
-
+    getSegmentoActividades,
+    
     getEvento,
     getDetalle,
     getDetalleX,
-    getSegmentoActividades,
    
-} from '@/services/cartelera_api'
+} from '@/services/cartelera'
 import {
     existeSlug,
     existeSlugActividades,
@@ -32,7 +32,6 @@ const state = {
 
     //state correspondiente a la vista de Inicio
     carousel: [],
-    carousel_inicio: 0,
     carousel_tamaño: 5,
 
     //state correspondientes a la vista de la Cartelera
@@ -103,6 +102,9 @@ const actions = {
     loadEstadoTrue(context) {
         context.commit('updateEstadoTrue')
     },
+
+
+
 
 
     //load viejo trae segmento de actividades ya cargadas
@@ -211,11 +213,6 @@ const mutations = {
             state.carousel = ex.concat(ac);
         }
 
-        //var ac = data_cartelera.cartelera.slice(state.carousel_inicio, state.carousel_tamaño);
-        //state.carousel = ex.concat(ac);
-
-        //state.carousel = data_cartelera.cartelera.slice(state.carousel_inicio, state.carousel_tamaño);
-
         state.categorias = data_cartelera.categorias;
         //state.estado = false;
         if(state.cartelera_inicio === 0){
@@ -321,6 +318,8 @@ const mutations = {
     updateEstadoTrue(state) {
         state.estado = true;
     },
+
+
 
 
     //update viejo trae segmento de actividades ya cargadas
