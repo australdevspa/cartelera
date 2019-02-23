@@ -1,5 +1,8 @@
-import moment from 'moment';
-moment.locale('es')
+//import moment from 'moment';
+//moment.locale('es')
+const moment = require('moment');
+require('moment/locale/es');
+moment.locale('es');
 import dc from 'dale_color';
 
 //Asignacion y modificacion de parametros a los objetos de la api

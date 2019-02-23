@@ -1,6 +1,11 @@
 import axios from 'axios';
-import moment from 'moment';
-moment.locale('es')
+const moment = require('moment');
+require('moment/locale/es');
+moment.locale('es');
+
+//import moment from 'moment';
+//moment.locale('es')
+
 import { Endpoint } from '@/services/endpoints'
 import { setParametros } from '@/services/parametros'
 
