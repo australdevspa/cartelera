@@ -1,11 +1,9 @@
 import axios from 'axios';
 import moment from 'moment';
 moment.locale('es')
-import {   
-    Endpoint
-} from '@/services/endpoints'
+import { Endpoint } from '@/services/endpoints'
 
-function existeSlug(slug){
+/*function existeSlug(slug){
     return axios.get(`${Endpoint}/exposiciones`)
     .then(function (response) {
         var existe = false
@@ -19,8 +17,8 @@ function existeSlug(slug){
     .catch(function (error) {
         return 'An error occured..' + error;
     })
-}
-
+}*/
+/*
 function existeSlugActividades(slug){
     return axios.get(`${Endpoint}/actividades`)
     .then(function (response) {
@@ -35,7 +33,7 @@ function existeSlugActividades(slug){
     .catch(function (error) {
         return 'An error occured..' + error;
     })
-}
+}*/
 
 function getExposicion(slug){
     return axios.get(`${Endpoint}/exposiciones`)
@@ -55,7 +53,7 @@ function getExposicion(slug){
     })
 }
 
-function getExposiciones(){
+/*function getExposiciones(){
     return axios.get(`${Endpoint}/exposiciones`)
     .then(function (response) {
         var expo = []
@@ -71,8 +69,8 @@ function getExposiciones(){
     .catch(function (error) {
         return 'An error occured..' + error;
     })
-}
-
+}*/
+/*
 function fecha_rango(inicio, fin) {
     var fecha_actual = moment()
     var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
@@ -86,8 +84,8 @@ function fecha_rango(inicio, fin) {
             return fecha_inicio;
         }
     }
-}
-
+}*/
+/*
 function sala(lugar) {
     if(lugar != null){
         var n = lugar.lastIndexOf(" -");
@@ -96,11 +94,11 @@ function sala(lugar) {
     }else{
         return "Sala Desconocida"
     }
-}
+}*/
 
 export {
-    existeSlug,
-    existeSlugActividades,
+    //existeSlug,
+    //existeSlugActividades,
     getExposicion,
-    getExposiciones
+    //getExposiciones
 }

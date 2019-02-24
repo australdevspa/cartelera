@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="uk-section pad-nuevo">
-      <div class="uk-container uk-container-center uk-text-center pad-top">
+      <div class="uk-container uk-container-center uk-text-center pad-evento">
         <ul class="uk-breadcrumb">
           <a href="javascript:window.history.back();" class="uk-button-x uk-button-secondary uk-button-large"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
         </ul>
@@ -17,7 +17,7 @@
         </form>
 
         <div v-if="loading">
-          <div class="pad-spinner uk-text-center">
+          <div class="pad-spinner-view uk-text-center">
             <div uk-spinner="ratio: 4"/>
           </div>
         </div>
@@ -103,7 +103,6 @@
 <script>
 import CardSala from '@/components/CardSala'
 import CardSalaProx from '@/components/CardSalaProx'
-//import CardSalaVacia from '@/components/CardSalaVacia'
 import moment from 'moment';
 //import { onButtonClick }  from '@/services/main_ble'
 //import { notificar }  from '@/services/notifications'
@@ -113,16 +112,12 @@ export default {
   name: 'VisitaGuiadaView',
   components: {
     CardSala,
-    CardSalaProx,
-    //CardSalaVacia,
+    CardSalaProx
   },
   data() {
     return {
       show: false,
-      loading: true,
-      /*dia: moment.locale("es").format('D'),
-      mes: moment.locale("es").format('MMMM'),
-      dianame: moment.locale("es").format('dddd'),*/
+      loading: true
     }
   },
   created () {
@@ -282,10 +277,6 @@ if(device.name == salas[i].ble_id){
 .pad-nuevo {
   padding: 0px 0px !important;
 }
-.pad-spinner {
-  padding-top: 25%;
-  padding-bottom: 25%;
-}
 .padCamaraButton{
   margin-top: 50px;
 }
@@ -296,23 +287,9 @@ if(device.name == salas[i].ble_id){
     background-image: linear-gradient(100deg,#A8DB5B 0,#19b868 35%,#4EC1B2 100%);
 }
 .uk-button {
-    /*margin: 0;
-    border: none;
-    overflow: visible;
-    font: inherit;
-    color: inherit;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 0 20px;
-    vertical-align: middle;*/
     padding: 0 20px;
     font-size: 14px;
     line-height: 42px;
-    /*text-align: center;
-    text-decoration: none;
-    transition: .1s ease-in-out;
-    transition-property: color,background-color,background-position,border-color,box-shadow;
-    background-origin: border-box;*/
     border-radius: 500px;
     letter-spacing: 1px !important;
 }
@@ -320,12 +297,10 @@ if(device.name == salas[i].ble_id){
     background: #a0a0a0 !important;
     color: #fafafa !important;
 
-    /*background-color: #333;*/
 }
 .uk-button-secondary:hover {
       background: #333 !important;
     color: #fafafa !important;
-    /*background-color: #151515;*/
 }
 .uk-button-primary:hover {
     background-color: #A8DB5B;
@@ -353,33 +328,14 @@ if(device.name == salas[i].ble_id){
     transition: .1s ease-in-out;
     -webkit-transition-property: color,background-color,border-color;
     transition-property: color,background-color,border-color;
-
-    /*margin: 0;
-    border: none;
-    overflow: visible;
-    font: inherit;
-    color: inherit;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 0 20px;
-    vertical-align: middle;*/
     padding: 0 10px;
     font-size: 10px;
     line-height: 42px;
-    /*text-align: center;
-    text-decoration: none;
-    transition: .1s ease-in-out;
-    transition-property: color,background-color,background-position,border-color,box-shadow;
-    background-origin: border-box;*/
     border-radius: 500px;
     letter-spacing: 1px !important;
 }
 .bold-icon {
     color: #fafafa !important;
-}
-.pad-top {
-  padding-top: 30px !important;
-  padding-bottom: 30px !important;
 }
 
 .oculto-note {

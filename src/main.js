@@ -13,6 +13,8 @@ import './styles/main.css'
 Vue.use(vueScrollto)
 UIkit.use(Icons);
 Vue.config.productionTip = false
+//UIkit que se utiliza en Camara.vue para llamar a modal
+window.UIkit = UIkit;
 
 /* eslint-disable no-new */
 new Vue({

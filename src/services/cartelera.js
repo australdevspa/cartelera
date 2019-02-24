@@ -212,11 +212,30 @@ function getDetalleX(id, x){
     })
 }
 
+
+function existeSlugActividades(slug){
+    return axios.get(`${Endpoint}/actividades`)
+    .then(function (response) {
+        var existe = false
+        for (var i = 0; i < response.data.length ; i++) {
+            if (response.data[i].slug === slug) {
+                existe = true;
+            }
+        }
+        return existe;
+    })
+    .catch(function (error) {
+        return 'An error occured..' + error;
+    })
+}
+
 export {
     getDataCartelera,
     getSegmentoActividades,
     getEvento,
     getDetalle,
     
-    getDetalleX
+    getDetalleX,
+
+    existeSlugActividades
 }

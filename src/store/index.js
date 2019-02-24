@@ -7,16 +7,18 @@ import {
     getEvento,
     getDetalle,
 
-    getDetalleX
+    getDetalleX,
+
+    existeSlugActividades,
 } from '@/services/cartelera'
 import {
     getTraduction
 } from '@/services/traduction'
 import {
-    existeSlug,
-    existeSlugActividades,
+    //existeSlug,
+    //existeSlugActividades,
     getExposicion,
-    getExposiciones
+    //getExposiciones
 } from '@/services/exposiciones_api'
 import {
     getSalas,
@@ -55,15 +57,18 @@ const state = {
     evento: [],
     primera_carga: true,
 
+    detalle: [],
+    detallex: [],//Obra.vue
+
     translate: [],
     estado_traduccion: false,
 
-    //state correspondiente a la vista de la Visita Guiada
+    //state correspondiente a la vista de la Camara
     existe_slug: false,
-    expo: [],
 
 
-
+//state correspondiente a la vista de la Visita Guiada
+expo: [],
 
     salas: [],
     ejemplo: [],
@@ -71,8 +76,7 @@ const state = {
     exposiciones: [],
 
 
-    detalle: [],
-    detallex: []
+
 };
 
 const actions = {
@@ -128,12 +132,13 @@ const actions = {
         context.commit('updateFalse')
     },
 
+    loadPrimeraCarga(context) {
+        context.commit('updatePrimeraCarga')
+    },
 
-
-    //actions correspondiente a la vista de la Visita Guiada
-    loadExisteSlug(context, slug) {
-        return existeSlug(slug)
-            .then(existe_slug => context.commit('updateExisteSlug', existe_slug));
+    //actions correspondiente a la vista Camara
+    loadResetEvento(context) {
+        context.commit('updateResetEvento')
     },
 
     loadExisteSlugActividades(context, slug) {
@@ -144,6 +149,15 @@ const actions = {
     loadResetExisteSlug(context) {
         context.commit('updateResetExisteSlug')
     },
+
+
+    //actions correspondiente a la vista de la Visita Guiada
+    /*loadExisteSlug(context, slug) {
+        return existeSlug(slug)
+            .then(existe_slug => context.commit('updateExisteSlug', existe_slug));
+    },*/
+
+
 
     loadExpo(context, slug) {
         return getExposicion(slug)
@@ -162,10 +176,10 @@ const actions = {
             .then(ejemplo => context.commit('updateEjemplo', ejemplo));
     },
 
-    loadExposiciones(context) {
+    /*loadExposiciones(context) {
         return getExposiciones()
             .then(exposiciones => context.commit('updateExposiciones', exposiciones));
-    },
+    },*/
 
 
 
@@ -175,13 +189,9 @@ const actions = {
             .then(detallex => context.commit('updateDetalleX', detallex));
     },
 
-    loadResetEvento(context) {
-        context.commit('updateResetEvento')
-    },
 
-    loadPrimeraCarga(context) {
-        context.commit('updatePrimeraCarga')
-    },
+
+
 };
 
 const mutations = {
@@ -328,10 +338,13 @@ const mutations = {
         state.estado_traduccion = false;
     },
 
+    updatePrimeraCarga(state) {
+        state.primera_carga = false;
+    },
 
-    //mutations correspondiente a la vista de la Visita Guiada
-    updateExisteSlug(state, existe_slug) {
-        state.existe_slug = existe_slug;
+    //mutations correspondiente a la vista Camara
+    updateResetEvento(state) {
+        state.evento = [];
     },
 
     updateExisteSlugActividades(state, existe_slug) {
@@ -341,6 +354,15 @@ const mutations = {
     updateResetExisteSlug(state) {
         state.existe_slug = false;
     },
+
+
+
+    //mutations correspondiente a la vista de la Visita Guiada
+    /*updateExisteSlug(state, existe_slug) {
+        state.existe_slug = existe_slug;
+    },*/
+
+
 
     updateExpo(state, expo) {
         state.expo = expo;
@@ -355,9 +377,9 @@ const mutations = {
         state.ejemplo = ejemplo;
     },
 
-    updateExposiciones(state, exposiciones) {
+    /*updateExposiciones(state, exposiciones) {
         state.exposiciones = exposiciones;
-    },
+    },*/
 
 
 
@@ -366,13 +388,9 @@ const mutations = {
         state.detallex = detallex;
     },
 
-    updateResetEvento(state) {
-        state.evento = [];
-    },
 
-    updatePrimeraCarga(state) {
-        state.primera_carga = false;
-    },
+
+ 
 }
 
 const getters = {
