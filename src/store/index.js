@@ -15,12 +15,6 @@ import {
     getTraduction
 } from '@/services/traduction'
 import {
-    //existeSlug,
-    //existeSlugActividades,
-    getExposicion,
-    //getExposiciones
-} from '@/services/exposiciones_api'
-import {
     getSalas,
     getEjemplo
 } from '@/services/salas'
@@ -67,16 +61,8 @@ const state = {
     existe_slug: false,
 
 
-//state correspondiente a la vista de la Visita Guiada
-expo: [],
-
     salas: [],
     ejemplo: [],
-
-    exposiciones: [],
-
-
-
 };
 
 const actions = {
@@ -151,21 +137,6 @@ const actions = {
     },
 
 
-    //actions correspondiente a la vista de la Visita Guiada
-    /*loadExisteSlug(context, slug) {
-        return existeSlug(slug)
-            .then(existe_slug => context.commit('updateExisteSlug', existe_slug));
-    },*/
-
-
-
-    loadExpo(context, slug) {
-        return getExposicion(slug)
-            .then(expo => context.commit('updateExpo', expo));
-    },
-
-
-
 
     loadSalas(context) {
         return getSalas()
@@ -175,13 +146,6 @@ const actions = {
         return getEjemplo()
             .then(ejemplo => context.commit('updateEjemplo', ejemplo));
     },
-
-    /*loadExposiciones(context) {
-        return getExposiciones()
-            .then(exposiciones => context.commit('updateExposiciones', exposiciones));
-    },*/
-
-
 
 
     loadDetalleX(context, {a, b}) {
@@ -357,18 +321,6 @@ const mutations = {
 
 
 
-    //mutations correspondiente a la vista de la Visita Guiada
-    /*updateExisteSlug(state, existe_slug) {
-        state.existe_slug = existe_slug;
-    },*/
-
-
-
-    updateExpo(state, expo) {
-        state.expo = expo;
-    },
-
-
 
     updateSalas(state, salas) {
         state.salas = salas;
@@ -376,13 +328,6 @@ const mutations = {
     updateEjemplo(state, ejemplo) {
         state.ejemplo = ejemplo;
     },
-
-    /*updateExposiciones(state, exposiciones) {
-        state.exposiciones = exposiciones;
-    },*/
-
-
-
 
     updateDetalleX(state, detallex) {
         state.detallex = detallex;

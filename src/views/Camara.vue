@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pad-top">
+    <div class="pad-camara">
       <QrcodeReader
         :paused="paused"
         @decode="onDecode"
@@ -12,7 +12,6 @@
               Buscando actividad ...
             </div>
 
-            <!--<div v-else-if="isValid || isValidActividad" class="text-success">-->
             <div v-else-if="isValidActividad" class="text-success">
               <!-- Código QR válido. -->
             </div>
@@ -43,36 +42,19 @@
           <div v-else>
             <div v-if="load_evento.length != 0" >
               <h2 class="uk-modal-title">{{load_evento[0].nombre}}</h2>
-              <div class="mar-div">
-                <p class="mar-p">{{ load_evento[0].fecha_inicio_formato }}</p>
-                <p class="mar-p">{{ load_evento[0].donde }}</p>
-                <p class="mar-p">Entrada {{ load_evento[0].entrada }}</p>
+              <div class="camara-modal">
+                <p>{{ load_evento[0].fecha_inicio_formato }}</p>
+                <p>{{ load_evento[0].donde }}</p>
+                <p>Entrada {{ load_evento[0].entrada }}</p>
               </div>
             </div>
           </div>
         </div>
         <div class="uk-modal-footer uk-text-right">
-          <button class="uk-button-x uk-button-secondary uk-button-large uk-modal-close" type="button" @click.prevent="setFalseActividad">Cancelar</button>
-          <router-link :to="{name: 'Evento', params: { id: this.content } }" class="uk-button-x uk-button-secondary uk-button-large uk-modal-close">Acceder</router-link>
+          <button class="tamaño-boton-principal boton-principal uk-button-large uk-modal-close" type="button" @click.prevent="setFalseActividad">Cancelar</button>
+          <router-link :to="{name: 'Evento', params: { id: this.content } }" class="tamaño-boton-principal boton-principal uk-button-large uk-modal-close">Acceder</router-link>
         </div>
       </div>
-
-      <!-- modal de acceso a exposición-->
-      <!--<div id="modal-acceso-expo" uk-modal>
-        <div class="uk-modal-dialog">
-          <button class="uk-modal-close-default" type="button" uk-close></button>
-          <div class="uk-modal-header">
-            <h2 class="uk-modal-title">Acceder a contenido descriptivo de la Exposición</h2>
-          </div>
-          <div class="uk-modal-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-          <div class="uk-modal-footer uk-text-right">
-            <button class="uk-button-x uk-button-secondary uk-button-large uk-modal-close" type="button" @click.prevent="setFalseExpo">Cancelar</button>
-            <router-link :to="{name: 'Expo', params: { id: this.content } }" class="uk-button-x uk-button-secondary uk-button-large uk-modal-close">Acceder</router-link>
-          </div>
-        </div>
-      </div>-->
 
     </div>
   </div>
@@ -90,7 +72,6 @@ export default {
   mixins: [ InitHandler ],
   data () {
     return {
-      //isValid: false,
       isValidActividad: false,
       validating: false,
       paused: false,
@@ -117,16 +98,6 @@ export default {
         if(this.isValidActividad == true){
           UIkit.modal('#modal-acceso-actividad').show();
         }
-
-        /*this.isValid = await this.validate(content)
-        if(this.isValid == true){
-          UIkit.modal('#modal-acceso-expo').show();
-        }else{
-          this.isValidActividad = await this.validateActividad(content)
-          if(this.isValidActividad == true){
-            UIkit.modal('#modal-acceso-actividad').show();
-          }
-        }*/
       }else{
         var n = content.lastIndexOf("/")
         var content_slug = content.slice(n+1, content.length);
@@ -138,16 +109,6 @@ export default {
         if(this.isValidActividad == true){
           UIkit.modal('#modal-acceso-actividad').show();
         }
-
-        /*this.isValid = await this.validate(content_slug)
-        if(this.isValid == true){
-          UIkit.modal('#modal-acceso-expo').show();
-        }else{
-          this.isValidActividad = await this.validateActividad(content_slug)
-          if(this.isValidActividad == true){
-            UIkit.modal('#modal-acceso-actividad').show();
-          }
-        }*/
       }
       this.validating = false
       window.setTimeout(() => {
@@ -160,29 +121,6 @@ export default {
     unPauseCamera () {
       this.paused = false
     },
-    /*validate (content) {
-      this.loading_modal_info= true;
-      this.$store.dispatch('loadResetEvento')
-
-      this.$store.dispatch('loadExisteSlug', content)
-      return new Promise(resolve => {
-        window.setTimeout(() => {
-          if (this.existe_el_slug === true){
-            this.$store.dispatch('loadEvento', content)
-              .then(response => {
-                  this.loading_modal_info = false;
-              })
-              .catch(error => {
-                  this.loading_modal_info= true;
-              })
-            this.$store.dispatch('loadResetExisteSlug')
-            resolve(true)
-          }else{
-            resolve(false)
-          }
-        }, 3000)
-      })
-    },*/
     validateActividad (content) {
       this.$store.dispatch('loadResetEvento')
       this.$store.dispatch('loadExisteSlugActividades', content)
@@ -204,10 +142,6 @@ export default {
         }, 3000)
       })
     },
-    /*setFalseExpo () {
-      this.isValid = false;
-      UIkit.modal('#modal-acceso-expo').hide();
-    },*/
     setFalseActividad () {
       this.isValidActividad = false;
       UIkit.modal('#modal-acceso-actividad').hide();
@@ -215,69 +149,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.validation-layer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, .9);
-  text-align: center;
-  padding: 10px;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-}
-.validation-notice {
-  font-weight: bold;
-  font-size: 1.4rem;
-}
-.pad-top {
-  margin-top: 30px !important;
-}
-
-.uk-button-x {
-  margin: 0;
-  font-weight: bold !important;
-    border: none;
-    overflow: visible;
-    font: inherit;
-    color: inherit;
-    text-transform: none;
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    vertical-align: middle;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    -webkit-transition: .1s ease-in-out;
-    transition: .1s ease-in-out;
-    -webkit-transition-property: color,background-color,border-color;
-    transition-property: color,background-color,border-color;
-    padding: 0 20px;
-    font-size: 14px;
-    line-height: 42px;
-    border-radius: 5px;
-    letter-spacing: 1px !important;
-    box-shadow: 0 2px 10px 0 rgba(30,30,30,.09);
-}
-.uk-button-secondary {
-    background: white !important;
-    color: #19b868 !important;
-}
-.uk-button-secondary:hover {
-      background: #19b868 !important;
-    color: white !important;
-}
-
-.mar-p {
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
-  color: #333 !important;
-}
-.mar-div {
-  margin-top: 15px !important;
-  margin-bottom: 15px !important;
-}
-</style>

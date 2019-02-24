@@ -794,3 +794,32 @@
 .obra-titulo:hover {
   color: #19b868 !important;
 }
+
+/*Css Camara.vue*/
+.validation-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, .9);
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+.validation-notice {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.pad-camara {
+  margin-top: 30px !important;
+}
+.camara-modal {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+.camara-modal>p {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  color: #333 !important;
+}
