@@ -1,10 +1,10 @@
 <template>
-    <section>
-        <div v-if="loading_evento">
-          <div class="pad-spinner uk-text-center">
-            <div uk-spinner="ratio: 4"/>
-          </div>
-        </div>
+  <section>
+    <div v-if="loading_evento">
+      <div class="pad-spinner uk-text-center">
+        <div uk-spinner="ratio: 4"/>
+      </div>
+    </div>
 
         <div v-else class="uk-container uk-container-center pad-top">
 
