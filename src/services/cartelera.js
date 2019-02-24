@@ -161,23 +161,6 @@ function getSegmentoActividades(limite, inicio){
     })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //metodo correspondiente a la vista de Evento
 function getEvento(id){
     return axios.get(`${Endpoint}/actividades`)
@@ -196,7 +179,7 @@ function getEvento(id){
     })
 }
 
-/*oobtener detalles de las actividades*/
+//obtener detalles de la actividad
 function getDetalle(id){
     return axios.get(`${Endpoint}/detalle-actividad?id=`+id)
     .then(function (response) {
@@ -206,6 +189,7 @@ function getDetalle(id){
         return 'An error occured..' + error;
     })
 }
+
 
 /*oobtener detalles de las actividades*/
 function getDetalleX(id, x){
@@ -231,8 +215,8 @@ function getDetalleX(id, x){
 export {
     getDataCartelera,
     getSegmentoActividades,
-    
     getEvento,
     getDetalle,
+    
     getDetalleX
 }

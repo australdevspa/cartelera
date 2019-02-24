@@ -4,21 +4,20 @@ import { setParametros } from '@/services/parametros'
 import {   
     getDataCartelera,
     getSegmentoActividades,
-    
     getEvento,
     getDetalle,
-    getDetalleX,
-   
+
+    getDetalleX
 } from '@/services/cartelera'
+import {
+    getTraduction
+} from '@/services/traduction'
 import {
     existeSlug,
     existeSlugActividades,
     getExposicion,
     getExposiciones
 } from '@/services/exposiciones_api'
-import {
-    getTraduction
-} from '@/services/traduction_api'
 import {
     getSalas,
     getEjemplo
@@ -36,7 +35,6 @@ const state = {
 
     //state correspondientes a la vista de la Cartelera
     categorias: [],
-
 
     estado: false,
 
@@ -57,18 +55,21 @@ const state = {
     evento: [],
     primera_carga: true,
 
+    translate: [],
+    estado_traduccion: false,
+
     //state correspondiente a la vista de la Visita Guiada
     existe_slug: false,
     expo: [],
 
-    translate: [],
+
+
 
     salas: [],
     ejemplo: [],
 
     exposiciones: [],
 
-    estado_traduccion: false,
 
     detalle: [],
     detallex: []
@@ -103,33 +104,31 @@ const actions = {
         context.commit('updateEstadoTrue')
     },
 
-
-
-
-
-    //load viejo trae segmento de actividades ya cargadas
-    /*loadCartelera(context) {
-        context.commit('updateCartelera');
-    },*/
-   
-    /*loadActividades(context) {
-        return getSegmentoActividades(state.cartelera_tamaño, state.cartelera_inicio)
-        .then(cartelera => context.commit('updateActividades', cartelera))
-    },*/
-
-
-
-
-
-
-
-
-
     //actions correspondiente a la vista Evento
     loadEvento(context, slug) {
         return getEvento(slug)
             .then(evento => context.commit('updateEvento', evento));
     },
+
+    loadDetalle(context, id) {
+        return getDetalle(id)
+            .then(detalle => context.commit('updateDetalle', detalle));
+    },
+
+    loadTranslate(context, id) {
+        return getTraduction(id)
+            .then(translate => context.commit('updateTranslate', translate));
+    },
+
+    loadTrue(context) {
+        context.commit('updateTrue')
+    },
+
+    loadFalse(context) {
+        context.commit('updateFalse')
+    },
+
+
 
     //actions correspondiente a la vista de la Visita Guiada
     loadExisteSlug(context, slug) {
@@ -151,10 +150,8 @@ const actions = {
             .then(expo => context.commit('updateExpo', expo));
     },
 
-    loadTranslate(context, id) {
-        return getTraduction(id)
-            .then(translate => context.commit('updateTranslate', translate));
-    },
+
+
 
     loadSalas(context) {
         return getSalas()
@@ -170,18 +167,9 @@ const actions = {
             .then(exposiciones => context.commit('updateExposiciones', exposiciones));
     },
 
-    loadTrue(context) {
-        context.commit('updateTrue')
-    },
 
-    loadFalse(context) {
-        context.commit('updateFalse')
-    },
 
-    loadDetalle(context, id) {
-        return getDetalle(id)
-            .then(detalle => context.commit('updateDetalle', detalle));
-    },
+
     loadDetalleX(context, {a, b}) {
         return getDetalleX(a, b)
             .then(detallex => context.commit('updateDetalleX', detallex));
@@ -319,125 +307,27 @@ const mutations = {
         state.estado = true;
     },
 
-
-
-
-    //update viejo trae segmento de actividades ya cargadas
-    /*updateCartelera(state) {
-        //state.estado = false;
-        var extracto = state.data_cartelera.cartelera.slice(state.cartelera_inicio, state.cartelera_inicio+state.cartelera_tamaño);
-        if(state.cartelera_inicio !== 0){
-            extracto.forEach(function (value, key) {
-                state.cartelera.push(value);
-            });
-            // la suma del inicio y el tamaño, supera al total desabilita boton
-            if(state.cartelera_inicio + state.cartelera_tamaño >= state.data_cartelera.cartelera_total){
-                state.cartelera_inicio = state.data_cartelera.cartelera_total;
-                state.cartelera_boton = false;
-            }else{
-                state.cartelera_inicio = state.cartelera_inicio + state.cartelera_tamaño;
-                state.cartelera_boton = true;
-            }
-        }
-    },*/
-
-
-
-    /*updateActividades(state, actividades) {
-        state.totalActividades = actividades.total;
-        if(state.contadorActividades === 0){
-            state.actividades = actividades.resultados;
-            state.contadorActividades = state.contadorActividades + 10;
-        }else{
-            actividades.resultados.forEach(function (value, key) {
-                state.actividades.push(value);
-            });
-            state.contadorActividades = state.contadorActividades + 10;
-        }
-    },*/
-
-
-
-    /*updatePorCategoria(state, area) {
-        state.estado = true;
-        if(state.por_categoria_inicio === 0){
-            state.por_categoria = state.categorias[area].eventos.slice(state.por_categoria_inicio, state.por_categoria_tamaño);
-           
-            
-            state.por_categoria_total = state.categorias[area].ocurrence;
-            // la suma del inicio y el tamaño, supera al total desabilita boton
-            if(state.por_categoria_tamaño >= state.por_categoria_total){
-                state.por_categoria_inicio = state.por_categoria_total;
-                state.por_categoria_boton = false;
-            }else{
-                state.por_categoria_inicio = state.por_categoria_inicio + state.por_categoria_tamaño;
-                state.por_categoria_boton = true;
-            }
-        }else if(state.por_categoria_inicio !== 0 && area === state.por_categoria[0].area){    
-            state.estado = true;
-        }else if(state.por_categoria_inicio !== 0 && area !== state.por_categoria[0].area){
-            //reset por_categoria
-            state.por_categoria = []
-            state.por_categoria_total = 0
-            state.por_categoria_inicio = 0
-            state.por_categoria_boton = false
-
-            state.por_categoria = state.categorias[area].eventos.slice(state.por_categoria_inicio, state.por_categoria_tamaño);
-            state.por_categoria_total = state.categorias[area].ocurrence;
-            // la suma del inicio y el tamaño, supera al total desabilita boton
-            if(state.por_categoria_tamaño >= state.por_categoria_total){
-                state.por_categoria_inicio = state.por_categoria_total;
-                state.por_categoria_boton = false;
-            }else{
-                state.por_categoria_inicio = state.por_categoria_inicio + state.por_categoria_tamaño;
-                state.por_categoria_boton = true;
-            }
-        }
-    },*/
-
-
-    /*updateMasPorCategoria(state, area) {
-        //state.estado = true;
-        //state.por_categoria_area = por_categoria[0].area;
-        //var extracto = state.categorias[area].eventos.slice(state.por_categoria_inicio, state.por_categoria_inicio+state.por_categoria_tamaño);
-        
-        if(state.por_categoria_inicio !== 0){
-            area.forEach(function (value, key) {
-
-
-
-
-
-                //value.hola = "nose"
-                
-                state.por_categoria.push(value);
-            });
-            // la suma del inicio y el tamaño, supera al total desabilita boton
-            if(state.por_categoria_inicio + state.por_categoria_tamaño >= state.por_categoria_total){
-                state.por_categoria_inicio = state.por_categoria_total;
-                state.por_categoria_boton = false;
-            }else{
-                state.por_categoria_inicio = state.por_categoria_inicio + state.por_categoria_tamaño;
-                state.por_categoria_boton = true;
-            }
-        }
-    },*/
-
-
-
-
-
-
-
-
-
-
-  
-
     //mutations correspondiente a la vista Evento
     updateEvento(state, evento) {
         state.evento = evento;
     },
+
+    updateDetalle(state, detalle) {
+        state.detalle = detalle;
+    },
+
+    updateTranslate(state, translate) {
+        state.translate = translate;
+    },
+
+    updateTrue(state) {
+        state.estado_traduccion = true;
+    },
+
+    updateFalse(state) {
+        state.estado_traduccion = false;
+    },
+
 
     //mutations correspondiente a la vista de la Visita Guiada
     updateExisteSlug(state, existe_slug) {
@@ -456,9 +346,7 @@ const mutations = {
         state.expo = expo;
     },
 
-    updateTranslate(state, translate) {
-        state.translate = translate;
-    },
+
 
     updateSalas(state, salas) {
         state.salas = salas;
@@ -471,17 +359,9 @@ const mutations = {
         state.exposiciones = exposiciones;
     },
 
-    updateTrue(state) {
-        state.estado_traduccion = true;
-    },
 
-    updateFalse(state) {
-        state.estado_traduccion = false;
-    },
 
-    updateDetalle(state, detalle) {
-        state.detalle = detalle;
-    },
+
     updateDetalleX(state, detallex) {
         state.detallex = detallex;
     },
