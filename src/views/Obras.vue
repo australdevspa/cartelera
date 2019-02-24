@@ -8,7 +8,7 @@
       </div>
       <div v-else>
         <ul class="uk-breadcrumb">
-            <a href="javascript:window.history.back();" class="uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
+          <a href="javascript:window.history.back();" class="uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
         </ul>
         <form class="uk-form-stacked ">
           <div class="uk-margin">
