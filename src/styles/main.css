@@ -724,3 +724,68 @@
     font-size: 16px !important;
   }
 }
+
+/*Css Evento.vue*/
+.evento-ribbon {
+  margin: 0;
+  padding: 0;
+  background: #19b868;
+  color:white;
+  padding:5px;
+  position: absolute;
+  top:0;
+  right:0;
+  transform: translateX(30%) translateY(0%) rotate(45deg);
+  transform-origin: top left;
+  font-weight: bold;
+  text-align: center;
+}
+.evento-ribbon:before,
+.evento-ribbon:after {
+  content: '';
+  position: absolute;
+  top:0;
+  margin: 0 -1px;
+  width: 150%;
+  height: 100%;
+  background: #19b868;
+}
+.evento-ribbon:before {
+  right:100%;
+}
+.evento-ribbon:after {
+  left:100%; 
+}
+@media only screen and (max-width: 500px) {
+  .evento-ribbon {
+    font-size: 16px !important;
+  }
+}
+.pad-evento {
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
+}
+.data-html >>> iframe {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+.data-html >>> p {
+  text-align: justify !important;
+}
+.data-html >>> em {
+  color: #666 !important;
+}
+.evento-titulo {
+  padding-right: 30%;
+}
+.evento-card {
+  color: #333 !important;
+}
+.bold-icon {
+  color: #fafafa !important;
+}
+.boton-pequeño {
+  font-size: 10px !important;
+}

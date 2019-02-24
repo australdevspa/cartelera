@@ -90,7 +90,6 @@
 <script>
 const moment = require('moment');
 require('moment/locale/es');
-moment.locale('es');
 
 export default {
   name: 'CardLeft',
@@ -113,9 +112,11 @@ export default {
   },
   computed: {
     dia() {
+      moment.locale('es');
       return moment().format('dddd');
     },
     fechahoy() {
+      moment.locale('es');
       return moment().format('DD/MM/YYYY');
     },
   },
