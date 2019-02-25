@@ -54,7 +54,6 @@ function getProgrmacion(){
     var flags = []
     var categorias = {}
     for(var i = 0; i < response.data.length; i++){
-
         if(flags[response.data[i].sala_id]) continue
         flags[response.data[i].sala_id] = true
 
@@ -108,20 +107,16 @@ function getProgrmacion(){
                             eventos.push(response.data[i]) 
                         }
                     }
-                    
                 }
             }
             return eventos
         }
     }
 
-
-
     //actividades proximas
     var flags1 = []
     var categorias1 = {}
     for(var i = 0; i < response.data.length; i++){
-
         if(flags1[response.data[i].sala_id]) continue
         flags1[response.data[i].sala_id] = true
 
@@ -163,11 +158,10 @@ function getProgrmacion(){
                         }
                     }
                 }
-
             }
             return nro
         }
-    //proximo
+
         function cartelera_ocurrencias1(value){
             var eventos = []
             for(var i = 0; i < response.data.length; i++){
@@ -190,102 +184,18 @@ function getProgrmacion(){
                             }
                         }
                     }
-                }
-                    
+                }     
             }
             return eventos
         }
     }
 
-
-    //sinactividades
-    var flags2 = []
-    var categorias2 = {}
-    for(var i = 0; i < response.data.length; i++){
-
-        if(flags2[response.data[i].sala_id]) continue
-        flags2[response.data[i].sala_id] = true
-
-        //si es que no posee ningun color asignado, le entregamos uno por defecto
-        if(response.data[i].area_color == null){
-            response.data[i].area_color = "#734525"
-        }
-
-        if(nro_ocurrencias2(response.data[i].sala_id) == 0){
-        categorias2[response.data[i].sala_id] = {
-                area: response.data[i].sala_id,  
-                ocurrence : nro_ocurrencias2(response.data[i].sala_id),
-                eventos: cartelera_ocurrencias2(response.data[i].sala_id)
-            }
-        }
-
-        function nro_ocurrencias2(value){
-            var nro = 0
-            for(var i = 0; i < response.data.length; i++){
-                if(response.data[i].sala_id === value){
-                    var fecha_actual = moment().format('YYYY-MM-DD')
-                    var fecha_inicio = moment(response.data[i].fecha_ini).format('YYYY-MM-DD')
-                    var fecha_fin = moment(response.data[i].fecha_fin).format('YYYY-MM-DD')
-
-                    var dos_semanas = moment(fecha_actual, "YYYY-MM-DD").add('days', 28);
-
-                    if(fecha_actual === fecha_inicio){
-                        nro+=1 
-                    }else{
-                        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-                            nro+=1 
-                        }else{
-                            if(moment(fecha_inicio).isBetween(fecha_actual, dos_semanas) === true){
-                                nro+=1
-                            }else{
-                                nro+=0
-                            }
-                        }
-                    }
+    var final = {
+                    hoy: categorias,
+                    proximo: categorias1
                 }
 
-            }
-            return nro
-        }
-
-        function cartelera_ocurrencias2(value){
-            var eventos = []
-            for(var i = 0; i < response.data.length; i++){
-                if(response.data[i].sala_id === value){
-                    var fecha_actual = moment().format('YYYY-MM-DD')
-                    var fecha_inicio = moment(response.data[i].fecha_ini).format('YYYY-MM-DD')
-                    var fecha_fin = moment(response.data[i].fecha_fin).format('YYYY-MM-DD')
-
-                    var dos_semanas = moment(fecha_actual, "YYYY-MM-DD").add('days', 28);
-
-                    if(fecha_actual === fecha_inicio){
-                        
-                    }else{
-                        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-                            
-                        }else{
-                            if(moment(fecha_inicio).isBetween(fecha_actual, dos_semanas) === true){
-                                
-                            }else{
-                                eventos.push(response.data[i]) 
-                            }
-                        }
-                    }
-                }
-            }
-            return eventos
-        }
-    }
-
-
-
-        var final = {
-                        hoy: categorias,
-                        proximo: categorias1,
-                        cero: categorias2
-                    }
-
-        return final;
+    return final;
     })
     .catch(function (error) {
         return 'An error occured..' + error;
