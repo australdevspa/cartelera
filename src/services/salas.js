@@ -1,21 +1,21 @@
 import axios from 'axios';
-import moment from 'moment';
-moment.locale('es')
 import { Endpoint } from '@/services/endpoints'
 import { setParametros } from '@/services/parametros'
+const moment = require('moment');
+require('moment/locale/es');
+moment.locale('es');
 
 function getSalas(){
     return axios.get(`${Endpoint}/salas`)
     .then(function (response) {
-        var expo = []
+        var salas = []
         for (var i = 0; i < response.data.length ; i++) {
             if (getSalaActividades(response.data[i].lugar) == true){
                 response.data[i].numero_de_actividades = '3'
             }
-            expo.push(response.data[i]);
+            salas.push(response.data[i]);
         }
-        return expo;
-        //return response.data;
+        return salas;
     })
     .catch(function (error) {
         return 'An error occured..' + error;
@@ -32,29 +32,13 @@ function getSalaActividades(sala_id){
         while(x < cartelera_total){
             if(response.data[x].lugar == sala_id){
                 response.data[x].date_i = moment(response.data[x].fecha_ini).format('DD/MM/YYYY')
-
                 if(response.data[x].date_i == moment().format('DD/MM/YYYY')){
                     return true
                 }
             }
-
-            //setParametros(response.data[x])
-            /*setAttachments(response.data[x], response.data[x].id)*/
-            //cartelera.push(response.data[x])
             x++
         }
-
         return false
-
-        /*var final = {
-                        cartelera: cartelera,
-                        cartelera_total: cartelera_total,
-                        categorias: categorias,
-                        categorias_total: categorias_total
-
-                    }
-
-        return final;*///#1e87f0
     })
     .catch(function (error) {
         return 'An error occured..' + error;
@@ -62,7 +46,7 @@ function getSalaActividades(sala_id){
 }
 
 //metodo que obtiene todos los datos correspondientes a la cartelera
-function getEjemplo(){
+function getProgrmacion(){
     return axios.get(`${Endpoint}/actividades`)
     .then(function (response) {
 
@@ -310,5 +294,5 @@ function getEjemplo(){
 
 export {
     getSalas,
-    getEjemplo
+    getProgrmacion
 }

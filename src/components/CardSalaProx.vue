@@ -66,17 +66,17 @@ export default {
   },
   computed: {
     cargar_actividades_hoy(){
-      for (var propiedad in this.$store.state.ejemplo.hoy) {
+      for (var propiedad in this.$store.state.programacion.hoy) {
         if(propiedad === this.sala.id){
-          return this.$store.state.ejemplo.hoy[this.sala.id].eventos
+          return this.$store.state.programacion.hoy[this.sala.id].eventos
         }
       }
       return null
     },
     cargar_actividades_prox(){
-      for (var propiedad in this.$store.state.ejemplo.proximo) {
+      for (var propiedad in this.$store.state.programacion.proximo) {
         if(propiedad === this.sala.id){
-          return this.$store.state.ejemplo.proximo[this.sala.id].eventos
+          return this.$store.state.programacion.proximo[this.sala.id].eventos
         }
       }
       return null

@@ -6,9 +6,7 @@ import {
     getSegmentoActividades,
     getEvento,
     getDetalle,
-
     getDetalleX,
-
     existeSlugActividades,
 } from '@/services/cartelera'
 import {
@@ -16,7 +14,7 @@ import {
 } from '@/services/traduction'
 import {
     getSalas,
-    getEjemplo
+    getProgrmacion
 } from '@/services/salas'
 
 Vue.use(Vuex);
@@ -60,9 +58,9 @@ const state = {
     //state correspondiente a la vista de la Camara
     existe_slug: false,
 
-
+    //state correspondiente a la vista de la VisitaGuiada
     salas: [],
-    ejemplo: [],
+    programacion: [],
 };
 
 const actions = {
@@ -105,6 +103,11 @@ const actions = {
             .then(detalle => context.commit('updateDetalle', detalle));
     },
 
+    loadDetalleX(context, {a, b}) {
+        return getDetalleX(a, b)
+            .then(detallex => context.commit('updateDetalleX', detallex));
+    },
+
     loadTranslate(context, id) {
         return getTraduction(id)
             .then(translate => context.commit('updateTranslate', translate));
@@ -136,26 +139,16 @@ const actions = {
         context.commit('updateResetExisteSlug')
     },
 
-
-
+    //actions correspondiente a la vista VisitaGuiada
     loadSalas(context) {
         return getSalas()
             .then(salas => context.commit('updateSalas', salas));
     },
-    loadEjemplo(context) {
-        return getEjemplo()
-            .then(ejemplo => context.commit('updateEjemplo', ejemplo));
-    },
 
-
-    loadDetalleX(context, {a, b}) {
-        return getDetalleX(a, b)
-            .then(detallex => context.commit('updateDetalleX', detallex));
-    },
-
-
-
-
+    loadProgramacion(context) {
+        return getProgrmacion()
+            .then(programacion => context.commit('updateProgramacion', programacion));
+    }
 };
 
 const mutations = {
@@ -290,6 +283,10 @@ const mutations = {
         state.detalle = detalle;
     },
 
+    updateDetalleX(state, detallex) {
+        state.detallex = detallex;
+    },
+
     updateTranslate(state, translate) {
         state.translate = translate;
     },
@@ -319,23 +316,14 @@ const mutations = {
         state.existe_slug = false;
     },
 
-
-
-
+    //mutations correspondiente a la vista VisitaGuiada
     updateSalas(state, salas) {
         state.salas = salas;
     },
-    updateEjemplo(state, ejemplo) {
-        state.ejemplo = ejemplo;
-    },
 
-    updateDetalleX(state, detallex) {
-        state.detallex = detallex;
-    },
-
-
-
- 
+    updateProgramacion(state, programacion) {
+        state.programacion = programacion;
+    }
 }
 
 const getters = {

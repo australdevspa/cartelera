@@ -27,7 +27,7 @@
               <div>
                 <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                   <div class="uk-width-1@m"
-                    v-for="(itemm, indexx) in ejemplo.hoy"
+                    v-for="(itemm, indexx) in programacion.hoy"
                     :key="indexx">
                     <div v-for="(item, index) in salas"
                       :key="index">
@@ -40,7 +40,7 @@
               <div>
                 <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid> 
                   <div class="uk-width-1@m"
-                    v-for="(itemm, indexx) in ejemplo.proximo"
+                    v-for="(itemm, indexx) in programacion.proximo"
                     :key="indexx">
                     <div v-for="(item, index) in salas"
                       :key="index">
@@ -57,7 +57,7 @@
               <div>
                 <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                   <div class="uk-width-1@m"
-                    v-for="(itemm, indexx) in ejemplo.hoy"
+                    v-for="(itemm, indexx) in programacion.hoy"
                     :key="indexx">
                     <div v-for="(item, index) in salas"
                       :key="index">
@@ -66,7 +66,7 @@
                     </div>
                   </div> 
                   <div class="uk-width-1@m"
-                    v-for="(itemm, indexx) in ejemplo.proximo"
+                    v-for="(itemm, indexx) in programacion.proximo"
                     :key="indexx">
                     <div v-for="(item, index) in salas"
                       :key="index">
@@ -78,9 +78,9 @@
             </div>
           </div>
 
-          <div class="padCamaraButton">
+          <!--<div class="padCamaraButton">
             <button @click.prevent="readBeacon" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner Beacon</button>
-          </div>
+          </div>-->
 
           <div class="padCamaraButton">
             <div v-if="show">
@@ -93,7 +93,6 @@
           </div>
 
         </div>
-
         <div id="abajo"></div>
       </div>
     </div>
@@ -103,10 +102,9 @@
 <script>
 import CardSala from '@/components/CardSala'
 import CardSalaProx from '@/components/CardSalaProx'
-import moment from 'moment';
-//import { onButtonClick }  from '@/services/main_ble'
-//import { notificar }  from '@/services/notifications'
-import push from 'push.js'
+const moment = require('moment');
+require('moment/locale/es');
+//import push from 'push.js'
 
 export default {
   name: 'VisitaGuiadaView',
@@ -122,20 +120,19 @@ export default {
   },
   created () {
     this.$store.dispatch('loadSalas')
-    this.$store.dispatch('loadEjemplo')
-    //this.$store.dispatch('loadExposiciones')
-          .then(response => {
+    this.$store.dispatch('loadProgramacion')
+      .then(response => {
         this.loading = false
       })
       .catch(error => {
         this.loading = true
       })
   },
-  mounted(){
+  /*mounted(){
     document.addEventListener("DOMContentLoaded", function(){
       push.Permission.request();
     });
-  },
+  },*/
   computed: {
     fecha() {
       moment.locale('es')
@@ -147,15 +144,9 @@ export default {
     salas() {
       return this.$store.state.salas;
     },
-        ejemplo() {
-      return this.$store.state.ejemplo;
+    programacion() {
+      return this.$store.state.programacion;
     },
-    filtro() {
-        return this.$store.state.salas.filter((item) => item.id.includes("360"));
-    },
-    /*exposiciones() {
-      return this.$store.state.exposiciones;
-    },*/
     mitad() {
       var x = this.$store.state.salas.length%2;
       if(x == 0){
@@ -173,73 +164,40 @@ export default {
     estadoFalse () {
       this.show = false;
     },
-    find(id){
-        
-        for(var i = 0; i < salas.length; i++){
-            if(salas.id === id){
-       
-                      return salas[i]    
-               
-            }
+    /*readBeacon(){
+      let options = {};
+      options.acceptAllDevices = true
+
+      console.log('Requesting Bluetooth Device...');
+      console.log('with ' + JSON.stringify(options));
+      navigator.bluetooth.requestDevice(options)
+      .then(device => {
+        console.log('> Name:             ' + device.name);
+        console.log('> Id:               ' + device.id);
+        console.log('> Connected:        ' + device.gatt.connected);
+
+        for(var i = 0; i < this.salas.length; i++){
+          if(device.name == salas[i].ble_id){
+            this.notificacionName(device.name, device.id, salas[i].sala)
+          }
         }
+      })
+      .catch(error => {
+        console.log('Argh! ' + error);
+      });
     },
-    //onButtonClick,
-    //notificar,
-            readBeacon(){
-let options = {};
-options.acceptAllDevices = true
-
-  console.log('Requesting Bluetooth Device...');
-  console.log('with ' + JSON.stringify(options));
-  navigator.bluetooth.requestDevice(options)
-  .then(device => {
-    console.log('> Name:             ' + device.name);
-    console.log('> Id:               ' + device.id);
-    console.log('> Connected:        ' + device.gatt.connected);
-
-
-for(var i = 0; i < this.salas.length; i++){
-if(device.name == salas[i].ble_id){
-      this.notificacionName(device.name, device.id, salas[i].sala)
-    }
-    /*if(device.name == "Xperia E5"){
-      this.notificacionName(device.name, device.id)
+    notificacionName(x,y,z){
+      push.create("Titulo de la Notificación",
+      {
+        body: "El dispositivo "+x+", con id "+y+" pertenece a la sala "+z,
+        icon: "",
+        timeout: 15000,//5 segundos
+        vibrate: [100, 100, 100],
+        onClick: function(){
+          alert('click en la notification');
+        }
+      });
     }*/
-}
-
-  })
-  .catch(error => {
-    console.log('Argh! ' + error);
-  });
-
-
-            },
-
-                notificacionName(x,y,z){
-                push.create("Titulo de la Notificación",
-                        {
-                            body: "El dispositivo "+x+", con id "+y+" pertenece a la sala "+z,
-                            icon: "",
-                            timeout: 15000,//5 segundos
-                            vibrate: [100, 100, 100],
-                            onClick: function(){
-                                alert('click en la notification');
-                            }
-                        });
-            },
-
-    notificarPush(){
-                push.create("Titulo de la Notificación",
-                        {
-                            body: "descripcion",
-                            icon: "",
-                            timeout: 5000,//5 segundos
-                            vibrate: [100, 100, 100],
-                            onClick: function(){
-                                alert('click en la notification');
-                            }
-                        });
-            }
   }
 }
 </script>
