@@ -823,3 +823,50 @@
   margin-bottom: 5px !important;
   color: #333 !important;
 }
+
+/*Css VisitaGuiada.vue*/
+.simbologia {
+  display: inline-block;
+  margin: 0 5px 0 5px;
+  color: #999;
+}
+.simbologia>.color-hoy {
+  width: 16px;
+  height: 16px;
+  border-radius: 500px;
+  background: #19b868;
+  display: inline-block;
+  margin: 0 5px 0 5px;
+}
+.simbologia>.color-prox {
+  width: 16px;
+  height: 16px;
+  border-radius: 500px;
+  background: rebeccapurple;
+  display: inline-block;
+  margin: 0 5px 0 5px;
+}
+.espacios-oculto-note {
+  display: none;
+  visibility: hidden;
+}
+.espacios-visible-movil {
+  display: block;
+  visibility: visible;
+}
+@media only screen and (min-width: 800px) {
+  .espacios-visible-note {
+    display: block;
+    visibility: visible;
+  }
+  .espacios-oculto-movil {
+    display: none;
+    visibility: hidden;
+  }
+}
+.espacios-pad-boton{
+  margin-top: 50px;
+}
+.espacios-pad {
+  padding: 0px 0px !important;
+}

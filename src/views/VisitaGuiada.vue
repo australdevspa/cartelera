@@ -1,9 +1,9 @@
 <template>
   <section>
-    <div class="uk-section pad-nuevo">
+    <div class="uk-section espacios-pad">
       <div class="uk-container uk-container-center uk-text-center pad-evento">
         <ul class="uk-breadcrumb">
-          <a href="javascript:window.history.back();" class="uk-button-x uk-button-secondary uk-button-large"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
+          <a href="javascript:window.history.back();" class="uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
         </ul>
             
         <form class="uk-form-stacked ">
@@ -11,8 +11,8 @@
             <label class="uk-form-label uk-text-large">
               Programación para hoy, {{fecha}} y las próximas 4 semanas.
             </label>
-            <div class="ayuda"><div class="pintura-hoy"/>Actividades para hoy</div>
-            <div class="ayuda"><div class="pintura-prox"/>Actividades próximas</div>
+            <div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
+            <div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
           </div>
         </form>
 
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div v-else>
-          <div class="visible-note oculto-note">
+          <div class="espacios-visible-note espacios-oculto-note">
             <div class="uk-child-width-expand@s uk-text-center" uk-grid >
               <div>
                 <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
@@ -52,7 +52,7 @@
             </div>
           </div>
 
-          <div class="visible-movil oculto-movil">   
+          <div class="espacios-visible-movil espacios-oculto-movil">   
             <div class="uk-child-width-expand@s uk-text-center" uk-grid >
               <div>
                 <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
@@ -78,17 +78,17 @@
             </div>
           </div>
 
-          <!--<div class="padCamaraButton">
-            <button @click.prevent="readBeacon" id="btn-search-devices" class="uk-button uk-button-secondary uk-button-large">Activar Scanner Beacon</button>
+          <!--<div class="espacios-pad-boton">
+            <button @click.prevent="readBeacon" id="btn-search-devices" class="uk-button boton-secundario">Activar Scanner Beacon</button>
           </div>-->
 
-          <div class="padCamaraButton">
+          <div class="espacios-pad-boton">
             <div v-if="show">
-              <router-link :to="{ path: '/espacios'}" @click.native="estadoFalse" class="uk-button uk-button-secondary uk-button-large">Desactivar Scanner QR</router-link>
+              <router-link :to="{ path: '/espacios'}" @click.native="estadoFalse" class="uk-button boton-secundario">Desactivar Scanner QR</router-link>
               <router-view></router-view>
             </div>
             <div v-else>
-              <router-link v-scroll-to="'#abajo'" :to="{ path: '/espacios/camara'}" @click.native="estadoTrue" class="uk-button uk-button-secondary uk-button-large">Activar Scanner QR</router-link>
+              <router-link v-scroll-to="'#abajo'" :to="{ path: '/espacios/camara'}" @click.native="estadoTrue" class="uk-button boton-secundario">Activar Scanner QR</router-link>
             </div>
           </div>
 
@@ -201,117 +201,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.ayuda {
-    display: inline-block;
-     margin: 0 5px 0 5px;
-     color: #999;
-}
-.pintura-hoy {
-  width: 16px;
-    height: 16px;
-    border-radius: 500px;
-    background: #19b868;
-    display: inline-block;
-    margin: 0 5px 0 5px;
-}
-.pintura-prox {
-   width: 16px;
-    height: 16px;
-    border-radius: 500px;
-    background: rebeccapurple;
-    display: inline-block;
-    margin: 0 5px 0 5px;
-}
-.pintura-sin {
-   width: 16px;
-    height: 16px;
-    border-radius: 500px;
-    background: #faa05a;
-    display: inline-block;
-    margin: 0 5px 0 5px;
-}
-.pad-nuevo {
-  padding: 0px 0px !important;
-}
-.padCamaraButton{
-  margin-top: 50px;
-}
-.uk-button-primary {
-    background-color: #19b868;
-    color: #fff !important;
-    border: 1px solid transparent;
-    background-image: linear-gradient(100deg,#A8DB5B 0,#19b868 35%,#4EC1B2 100%);
-}
-.uk-button {
-    padding: 0 20px;
-    font-size: 14px;
-    line-height: 42px;
-    border-radius: 500px;
-    letter-spacing: 1px !important;
-}
-.uk-button-secondary {
-    background: #a0a0a0 !important;
-    color: #fafafa !important;
-
-}
-.uk-button-secondary:hover {
-      background: #333 !important;
-    color: #fafafa !important;
-}
-.uk-button-primary:hover {
-    background-color: #A8DB5B;
-    color: #fff;
-    border-color: transparent;
-    background-image: linear-gradient(100deg,#76C602 0,#19b868 35%,#00A28E 100%);
-    box-shadow: 0 8px 50px -6px rgba(84,84,120,.26);
-}
-
-.uk-button-x {
-  margin: 0;
-    border: none;
-    overflow: visible;
-    font: inherit;
-    color: inherit;
-    text-transform: none;
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    vertical-align: middle;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    -webkit-transition: .1s ease-in-out;
-    transition: .1s ease-in-out;
-    -webkit-transition-property: color,background-color,border-color;
-    transition-property: color,background-color,border-color;
-    padding: 0 10px;
-    font-size: 10px;
-    line-height: 42px;
-    border-radius: 500px;
-    letter-spacing: 1px !important;
-}
-.bold-icon {
-    color: #fafafa !important;
-}
-
-.oculto-note {
-  display: none;
-  visibility: hidden;
-}
-.visible-movil {
-  display: block;
-  visibility: visible;
-}
-@media only screen and (min-width: 1000px) {
-  .visible-note {
-    display: block;
-    visibility: visible;
-  }
-  .oculto-movil {
-    display: none;
-    visibility: hidden;
-  }
-}
-</style>
