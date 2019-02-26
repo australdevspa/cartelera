@@ -765,22 +765,12 @@
   padding-top: 30px !important;
   padding-bottom: 30px !important;
 }
-.data-html >>> iframe {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  display: block !important;
-  margin: 0 auto !important;
-}
-.data-html >>> p {
-  text-align: justify !important;
-}
-.data-html >>> em {
-  color: #666 !important;
-}
 .evento-titulo {
   padding-right: 30%;
 }
 .evento-card {
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
   color: #333 !important;
 }
 .bold-icon {
@@ -901,4 +891,9 @@
 }
 .sala-pad-act {
   padding: 2px !important; 
+}
+
+/*Extra*/
+.uk-card-header {
+  border-bottom: 1px solid #e5e5e5;
 }

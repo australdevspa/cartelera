@@ -247,3 +247,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.data-html >>> iframe {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+.data-html >>> p {
+  text-align: justify !important;
+}
+.data-html >>> em {
+  color: #666 !important;
+}
+</style>
