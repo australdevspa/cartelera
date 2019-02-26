@@ -22,62 +22,6 @@
           </div>
         </div>
         <div v-else>
-          <!--<div class="espacios-visible-note espacios-oculto-note">
-            <div class="uk-child-width-expand@s uk-text-center" uk-grid >
-              <div>
-                <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                  <div class="uk-width-1@m"
-                    v-for="(itemm, indexx) in programacion.hoy"
-                    :key="indexx">
-                    <div v-for="(item, index) in salas"
-                      :key="index">
-                      <CardSala v-if="item.id === indexx"
-                        :sala="item" class="uk-box-shadow-medium"></CardSala>
-                    </div>
-                  </div> 
-                </div>
-              </div>
-              <div>
-                <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid> 
-                  <div class="uk-width-1@m"
-                    v-for="(itemm, indexx) in programacion.proximo"
-                    :key="indexx">
-                    <div v-for="(item, index) in salas"
-                      :key="index">
-                      <CardSalaProx v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSalaProx>
-                    </div>
-                  </div> 
-                </div>
-              </div>
-            </div>
-          </div>-->
-
-          <!--<div class="espacios-visible-movil espacios-oculto-movil">   
-            <div class="uk-child-width-expand@s uk-text-center" uk-grid >
-              <div>
-                <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                  <div class="uk-width-1@m"
-                    v-for="(itemm, indexx) in programacion.hoy"
-                    :key="indexx">
-                    <div v-for="(item, index) in salas"
-                      :key="index">
-                      <CardSala v-if="item.id === indexx"
-                        :sala="item" class="uk-box-shadow-medium"></CardSala>
-                    </div>
-                  </div> 
-                  <div class="uk-width-1@m"
-                    v-for="(itemm, indexx) in programacion.proximo"
-                    :key="indexx">
-                    <div v-for="(item, index) in salas"
-                      :key="index">
-                      <CardSalaProx v-if="item.id === indexx" :sala="item" class="uk-box-shadow-medium"></CardSalaProx>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>-->
-
           <div class="espacios-visible-note espacios-oculto-note">
             <div class="uk-child-width-expand@s uk-text-center" uk-grid >
               <div>
@@ -111,43 +55,6 @@
             </div> 
           </div>
 
-
-         
-
-<!--<div class="visible-note oculto-note">
- <div class="pad-top">
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1-2@m" v-for="(item, index) in programacion.programa" :key="index">
-                  <div v-for="(item_s, index_s) in salas" :key="index_s">
-                    <Sala v-if="item_s.id === index" :sala="item_s" :programacion="item" class="uk-box-shadow-medium"></Sala>
-                  </div>
-                </div>
-              </div>
-            </div>
-      </div>
-
-      <div class="visible-movil oculto-movil">
-            <div class="pad-top">
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1-2@m" v-for="(item, index) in programacion.programa" :key="index">
-                  <div v-for="(item_s, index_s) in salas" :key="index_s">
-                    <Sala v-if="item_s.id === index" :sala="item_s" :programacion="item" class="uk-box-shadow-medium"></Sala>
-                  </div>
-                </div>
-              </div>
-            </div>
-      </div>-->
-
-           <!-- <div class="pad-top">
-              <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
-                <div class="uk-width-1-2@m" v-for="(item, index) in programacion.programa" :key="index">
-                  <div v-for="(item_s, index_s) in salas" :key="index_s">
-                    <Sala v-if="item_s.id === index" :sala="item_s" :programacion="item" class="uk-box-shadow-medium"></Sala>
-                  </div>
-                </div>
-              </div>
-            </div>-->
-
           <!--<div class="espacios-pad-boton">
             <button @click.prevent="readBeacon" id="btn-search-devices" class="uk-button boton-secundario">Activar Scanner Beacon</button>
           </div>-->
@@ -171,8 +78,6 @@
 
 <script>
 import Sala from '@/components/Sala'
-//import CardSala from '@/components/CardSala'
-//import CardSalaProx from '@/components/CardSalaProx'
 const moment = require('moment');
 require('moment/locale/es');
 //import push from 'push.js'
@@ -180,9 +85,7 @@ require('moment/locale/es');
 export default {
   name: 'VisitaGuiadaView',
   components: {
-    Sala,
-    //CardSala,
-    //CardSalaProx
+    Sala
   },
   data() {
     return {

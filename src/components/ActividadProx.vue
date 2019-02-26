@@ -25,10 +25,11 @@
 </template>
 
 <script>
-import moment from 'moment';
+  const moment = require('moment');
+  require('moment/locale/es');
 
-export default {
-  name: 'CardProx',
+  export default {
+  name: 'ActividadProx',
   props: {
     carta: {
       type: Object,

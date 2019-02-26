@@ -870,3 +870,35 @@
 .espacios-pad {
   padding: 0px 0px !important;
 }
+
+/*Css Sala.vue*/
+.sala-border {
+  border-bottom-color: black !important;
+}
+.sala-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px; 
+  z-index: 1;
+}
+.sala-head {
+  margin: 25px !important;
+}
+.sala-head>h3 {
+  font-size: 24px !important;
+  color: white !important;
+  margin: 10px !important;
+  margin-bottom: 0!important;
+}
+.sala-head>p {
+  color: white !important;
+  margin: 10px !important;
+  margin-top: 0!important;
+}
+.sala-body {
+  background: black;
+  padding: 10px !important;
+}
+.sala-pad-act {
+  padding: 2px !important; 
+}
