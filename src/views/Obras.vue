@@ -21,10 +21,10 @@
           <div  class="uk-width-1-3@m"
             v-for="(item, index) in evento" :key="index">
             <div class="uk-alert-success uk-text-center" uk-alert>
+              <img class="uk-border-circle" width="100" height="100" :src="item.RutaImgLow" :alt="item.titulo">
               <h3 class="obra-titulo cursor" @click.prevent="goToObra(item)">{{item.titulo}}</h3>
               <p>{{item.descripcion}}</p>
-              <img class="uk-border-circle" width="100" height="100" :src="item.RutaImgLow" :alt="item.titulo">
-              <h3>{{item.autor}}</h3>
+              <h6>Autor: {{item.autor}}</h6>
             </div>                
           </div>
         </div>
