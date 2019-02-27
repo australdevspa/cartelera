@@ -27,7 +27,7 @@
           <div class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
             <div>
               <a class="uk-inline" :href="evento.RutaImgLow">
-                <img :src="evento.RutaImgLow" alt="">
+                <img :src="evento.RutaImgLow" :alt="evento.titulo">
               </a>
             </div>
           </div>
