@@ -1,6 +1,6 @@
 {
   "name": "Cartelera CCPM",
-  "short_name": "Cartelera CCPM",
+  "short_name": "CCPM",
   "icons": [
     {
       "src": "../static/img/icons_ccpm/android-chrome-192x192.png",
