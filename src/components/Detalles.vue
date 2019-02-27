@@ -5,12 +5,6 @@
         <li>
           <a href="" @click.prevent="espanol" class="boton-principal-pequeño">Original Text</a>
         </li>
-        <li>
-          <a v-if="detalle.length !== 0" @click.prevent="goToObras(actividad, detalle)" class="boton-principal-pequeño">Artworks</a>
-        </li>
-        <li>
-          <a v-if="detalle.length !== 0 && actividad_translate.video !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
-        </li>
       </ul>
       <div class="mar-div-detalles">
         <p class="mar-p-detalles">{{ actividad.fecha_inicio_formato }}</p>
@@ -24,18 +18,20 @@
                             src: ''+actividad_translate.tts_en,
                             pic: '../static/img/default/cover.jpg'}"/>
       </div>
+      <ul class="barra-botones">
+        <li>
+          <a v-if="detalle.length !== 0" @click.prevent="goToObras(actividad, detalle)" class="boton-principal-pequeño">Artworks</a>
+        </li>
+        <li>
+          <a v-if="detalle.length !== 0 && actividad_translate.video !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
+        </li>
+      </ul>
     </div>
         
     <div v-else>
       <ul class="barra-botones">
         <li>
           <a href="" :detalle="detalle" @click.prevent="ingles" class="boton-principal-pequeño">English Version</a>
-        </li>
-        <li>
-          <a v-if="detalle.length !== 0" @click.prevent="goToObras(actividad, detalle)" class="boton-principal-pequeño">Obras</a>
-        </li>
-        <li>
-          <a v-if="detalle.length !== 0 && actividad_translate.video !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
         </li>
       </ul>
       <div class="mar-div-detalles">
@@ -49,6 +45,14 @@
                               src: ''+actividad_translate.tts_es,
                               pic: '../static/img/default/cover.jpg'}"/>
       </div>
+      <ul class="barra-botones">
+        <li>
+          <a v-if="detalle.length !== 0" @click.prevent="goToObras(actividad, detalle)" class="boton-principal-pequeño">Obras</a>
+        </li>
+        <li>
+          <a v-if="detalle.length !== 0 && actividad_translate.video !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
+        </li>
+      </ul>
     </div>
 
     <div id="modal-media-video" class="uk-flex-top" uk-modal>
