@@ -5,7 +5,7 @@
               background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_opuesto+') !important',
               background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.color_opuesto+') !important' }">
     <div class="uk-card-media-left uk-cover-container">
-      <img :src="actividad.thumbnail" alt=""
+      <img :src="actividad.thumbnail"  :alt="actividad.nombre"
             style=" max-width: none;
                     position: absolute;
                     left: 53%;

@@ -26,7 +26,7 @@
       <div v-else>
         <h4 class="card-left-ribbon">{{ actividad.cuanto_moment }}<br>{{actividad.horario}}</h4>
       </div>
-      <img :src="actividad.thumbnail" alt="" class="cartelera-card-img"
+      <img :src="actividad.thumbnail" :alt="actividad.nombre" class="cartelera-card-img"
         style="
           max-width: none;
           position: absolute;
