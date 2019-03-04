@@ -14,7 +14,8 @@ import {
 } from '@/services/traduction'
 import {
     getSalas,
-    getProgrmacion
+    getProgrmacion,
+    getSalaEspecifica
 } from '@/services/salas'
 
 Vue.use(Vuex);
@@ -61,6 +62,10 @@ const state = {
     //state correspondiente a la vista de la VisitaGuiada
     salas: [],
     programacion: [],
+
+    //DiegoRivera Pisos
+    piso: 0,
+    sala_especifica: []
 };
 
 const actions = {
@@ -148,7 +153,17 @@ const actions = {
     loadProgramacion(context) {
         return getProgrmacion()
             .then(programacion => context.commit('updateProgramacion', programacion));
-    }
+    },
+
+    //action cambiar piso
+    loadPiso(context, piso_elegido) {
+        context.commit('updatePiso', piso_elegido)
+    },
+
+    loadSalaEspecifica(context, id) {
+        return getSalaEspecifica(id)
+            .then(sala_especifica => context.commit('updateSalaEspecifica', sala_especifica));
+    },
 };
 
 const mutations = {
@@ -323,7 +338,16 @@ const mutations = {
 
     updateProgramacion(state, programacion) {
         state.programacion = programacion;
-    }
+    },
+
+    //mutation cambio de piso
+    updatePiso(state, piso_elegido) {
+        state.piso = piso_elegido;
+    },
+
+    updateSalaEspecifica(state, sala_especifica) {
+        state.sala_especifica = sala_especifica;
+    },
 }
 
 const getters = {

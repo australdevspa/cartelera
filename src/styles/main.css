@@ -447,6 +447,14 @@
 }
 
 /*Css CardHoy.vue*/
+.card-vacio {
+  background-color: orange;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: 900;
+}
 .card-hoy {
   background-color: #19b868;
   padding: 10px;
@@ -873,6 +881,7 @@
 }
 .sala-head {
   margin: 25px !important;
+  text-align: center;
 }
 .sala-head>h3 {
   font-size: 24px !important;

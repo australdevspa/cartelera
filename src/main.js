@@ -15,6 +15,8 @@ UIkit.use(Icons);
 Vue.config.productionTip = false
 //UIkit que se utiliza en Camara.vue para llamar a modal
 window.UIkit = UIkit;
+// Importamos JQuery
+//window.$ = window.jQuery = require('jquery')
 
 /* eslint-disable no-new */
 new Vue({

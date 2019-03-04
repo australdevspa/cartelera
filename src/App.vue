@@ -17,7 +17,7 @@
               </div>  
               <div class="uk-navbar-right">  
                 <div class="uk-navbar-item">
-                  <router-link to="/espacios" class="tamaño-boton-principal boton-principal uk-button-large">Espacios</router-link>
+                  <router-link to="/espacios/camara" class="tamaño-boton-principal boton-principal uk-button-large">Espacios</router-link>
                 </div>
               </div>  
             </nav>

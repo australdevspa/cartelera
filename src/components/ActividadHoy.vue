@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="uk-width-expand">
-        <div class="cursor card-hoy-titulo" @click.prevent="goToActividad(carta)">{{carta.nombre}}</div>
+        <div class="cursor card-hoy-titulo uk-modal-close" @click.prevent="goToActividad(carta)">{{carta.nombre}}</div>
       </div>
     </div>
   </div>
