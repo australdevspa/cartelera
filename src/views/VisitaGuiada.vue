@@ -115,7 +115,7 @@ export default {
 }
 @media only screen and (max-width: 480px) {
   .tamaño-botones-espacios {
-    padding: 0 calc(4px + 2vw) !important;
+    padding: 0 calc(-4px + 2vw) !important;
   }
 }
 @media only screen and (max-width: 375px) {
