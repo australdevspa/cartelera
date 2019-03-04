@@ -13254,4 +13254,7 @@ export default {
 	-webkit-transition: 200ms;
 	-webkit-transition-timing-function: ease-in-out;
 }
+.uk-card-body {
+    padding: 0px !important;
+}
 </style>

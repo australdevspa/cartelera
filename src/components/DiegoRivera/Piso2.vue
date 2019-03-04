@@ -54,4 +54,10 @@ export default {
     padding-right: 300px !important;
 	}
 }
+.uk-modal-body {
+	padding: 30px 6px 6px 6px !important;
+}
+.uk-card-body {
+    padding: 0px !important;
+}
 </style>

@@ -37,7 +37,7 @@ export default new Router({
       component: VisitaGuiadaView,
       children: [
         {
-          path: ':camara',
+          path: ':visitaguiada',
           components: {
             default: CamaraView,
             helper0: MenuView,
