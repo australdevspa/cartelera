@@ -20,8 +20,9 @@ function setParametros(x){
 
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
         x.entrada = precio(x.valor);
-        x.donde = donde(x.lugar);
-
+        x.donde = x.lugar + " - " + x.centro;
+        //x.donde = donde(x.lugar);
+        
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
         x.horario = horario(x.fecha_ini, x.fecha_fin)
@@ -44,7 +45,8 @@ function setParametros(x){
         
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
         x.entrada = precio(x.valor);
-        x.donde = donde(x.lugar);
+        x.donde = x.lugar + " - " + x.centro;
+        //x.donde = donde(x.lugar);
 
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);

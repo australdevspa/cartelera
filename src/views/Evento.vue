@@ -261,4 +261,7 @@ export default {
 .data-html >>> em {
   color: #666 !important;
 }
+.data-html >>> li {
+  list-style: none !important;
+}
 </style>
