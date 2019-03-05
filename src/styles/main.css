@@ -130,6 +130,9 @@
 .sin-padding>* {
   padding-left: 0px !important; 
 }
+.sin-margin>ul {
+  margin-left: 0px !important; 
+}
 .main-slider {
   position: relative;
   background: #333;

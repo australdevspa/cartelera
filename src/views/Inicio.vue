@@ -2,7 +2,7 @@
   <section class="main-slider">
     <div class="cuadro-slider">
       <div uk-slider="center: true; animation: fade; autoplay: true;">
-        <div class="uk-position-relative uk-visible-toggle uk-light " tabindex="-1">
+        <div class="uk-position-relative uk-visible-toggle uk-light sin-margin" tabindex="-1">
           <ul class="uk-slider-items uk-child-width-1@s uk-grid sin-padding">
             <li v-for="(item, index) in actividades" :key="index">
               <slider :actividad="item"></slider>

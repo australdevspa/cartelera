@@ -21,7 +21,6 @@ function setParametros(x){
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
         x.entrada = precio(x.valor);
         x.donde = x.lugar + " - " + x.centro;
-        //x.donde = donde(x.lugar);
         
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
@@ -35,6 +34,8 @@ function setParametros(x){
         x.color_opuesto = colorOpuesto(x.color_claro);
 
         x.w = w(x.fecha_ini);
+
+        x.dim_mayor = dimension_mayor(x.thumbnail);
     }else{
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
         x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
@@ -46,7 +47,6 @@ function setParametros(x){
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
         x.entrada = precio(x.valor);
         x.donde = x.lugar + " - " + x.centro;
-        //x.donde = donde(x.lugar);
 
         x.cuanto_moment = cuantoMoment(x.fecha_ini);
         x.cuanto_moment_en = cuantoMomentEn(x.fecha_ini);
@@ -60,6 +60,8 @@ function setParametros(x){
         x.color_opuesto = colorOpuesto(x.color_claro);
 
         x.w = w(x.fecha_ini);
+
+        x.dim_mayor = dimension_mayor(x.thumbnail);
     }
 }
 
@@ -112,23 +114,17 @@ function precio(valor) {
     }
 }
 
-/*se utiliza en los cards*/
-/*function donde(lugar) {
-    if(lugar == "Arena Puerto Montt"){
-        var centro = "Arena"
-        return lugar + " - " + centro;
-    }else if(lugar == "Casona Cultural Ex Banco Llanquihuet" || lugar == "2° piso"){
-        var centro = "Casona"
-        return lugar + " - " + centro;
+/*detectar la mayor dimension de una img*/
+function dimension_mayor(foto){
+    var mi_imagen = new Image();
+    mi_imagen.src= foto;
+
+    if(mi_imagen.width > mi_imagen.height){
+        return "ancho"
     }else{
-        var centro = "Casa del Arte Diego Rivera"
-        if(lugar == "Sala Teatro Diego Rivera"){
-            return "Sala Teatro - " + centro;
-        }else{
-            return lugar + " - " + centro;
-        }
+        return "alto"
     }
-}*/
+}
 
 /*se utiliza en el ribbon*/
 function cuantoMoment(date) {

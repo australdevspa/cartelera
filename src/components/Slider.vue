@@ -5,14 +5,28 @@
               background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_opuesto+') !important',
               background: 'linear-gradient(to bottom,' +actividad.color_claro+', '+actividad.color_opuesto+') !important' }">
     <div class="uk-card-media-left uk-cover-container">
-      <img :src="actividad.thumbnail"  :alt="actividad.nombre"
-            style=" max-width: none;
+      <img v-if="actividad.dim_mayor === 'alto'" :src="actividad.thumbnail"  :alt="actividad.nombre"
+            style=" 
+                    max-height: 100%;
+                    object-fit: scale-down;
+                    z-index: 6;
                     position: absolute;
-                    left: 53%;
+                    left: 50%;
                     top: 50%;
                     -webkit-transform: translate(-50%,-50%);
                     transform: translate(-50%,-50%);
-                    z-index: 6;" >
+            ">
+      <img v-if="actividad.dim_mayor === 'ancho'" :src="actividad.thumbnail"  :alt="actividad.nombre"
+            style=" 
+                    max-width: 100%;
+                    object-fit: scale-down;
+                    z-index: 6;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    -webkit-transform: translate(-50%,-50%);
+                    transform: translate(-50%,-50%);
+            ">
       <canvas width="600" height="650" class="canvas-height"></canvas>
     </div>
       
