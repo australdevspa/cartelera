@@ -113,7 +113,7 @@ function precio(valor) {
 }
 
 /*se utiliza en los cards*/
-function donde(lugar) {
+/*function donde(lugar) {
     if(lugar == "Arena Puerto Montt"){
         var centro = "Arena"
         return lugar + " - " + centro;
@@ -128,7 +128,7 @@ function donde(lugar) {
             return lugar + " - " + centro;
         }
     }
-}
+}*/
 
 /*se utiliza en el ribbon*/
 function cuantoMoment(date) {
