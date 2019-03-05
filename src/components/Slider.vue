@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-hover parent" uk-grid
+  <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin parent" uk-grid
     :style="{ background: actividad.color_oscuro + '!important', 
               background: '-webkit-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_opuesto+') !important',
               background: '-moz-linear-gradient(top,' +actividad.color_claro+', '+actividad.color_opuesto+') !important',
