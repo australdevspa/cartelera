@@ -174,9 +174,11 @@
   border-top-color: rgba(255,255,255,.5);
 }
 .slider-titulo-1 {
+  font-size: 38px;
   font-weight: 900;
   color: #333;
-  margin: 20px 0px 0px 0px !important;
+  margin: 0px 0px 0px 0px !important;
+  /*margin: 20px 0px 0px 0px !important;*/
 }
 .slider-titulo-2 {
   font-weight:lighter;
@@ -184,9 +186,11 @@
   margin: 0 !important;
 }
 .slider-titulo-3 {
+  font-size: 38px;
   font-weight:700;
   color: white;
-  margin: 30px 0px 30px 0px !important;
+  margin: 22px 0px 22px 0px !important;
+  /*margin: 30px 0px 30px 0px !important;*/
 }
 .slider-titulo-3:hover {
   color: yellow;
@@ -229,15 +233,19 @@
 }
 @media only screen and (max-width: 1199px) {
   .slider-titulo-1 {
-    font-size: calc(24px + 1.5vw);
+    font-size: calc(20px + 1.5vw);
+    /*font-size: calc(24px + 1.5vw);*/
   }
   .slider-titulo-2 {
     font-size: calc(14px + 1.5vw);
   }
   .slider-titulo-3 {
-    font-size: calc(24px + 1.5vw);
+    font-size: calc(20px + 1.5vw);
+    margin-top: calc(10px + 1vw) !important;
+    margin-bottom: calc(10px + 1vw) !important;
+    /*font-size: calc(24px + 1.5vw);
     margin-top: calc(18px + 1vw) !important;
-    margin-bottom: calc(18px + 1vw) !important;
+    margin-bottom: calc(18px + 1vw) !important;*/
   }
   .slider-titulo-4 {
     font-size: calc(14px + 1.5vw);
@@ -252,15 +260,20 @@
 }
 @media only screen and (max-width: 639px) {
   .slider-titulo-1m {
-    font-size: calc(20px + 1vw);
+    font-size: calc(18px + 1vw);
+    /*font-size: calc(20px + 1vw);*/
   }
   .slider-titulo-2m {
-    font-size: calc(20px + 1vw);
+    font-size: calc(10px + 1vw);
+    /*font-size: calc(20px + 1vw);*/
   }
   .slider-titulo-3m {
-    font-size: calc(20px + 1vw);
+    font-size: calc(18px + 1vw);
+    margin-top: calc(5px + 1vw) !important;
+    margin-bottom: calc(5px + 1vw) !important;
+    /*font-size: calc(20px + 1vw);
     margin-top: calc(18px + 1vw) !important;
-    margin-bottom: calc(18px + 1vw) !important;
+    margin-bottom: calc(18px + 1vw) !important;*/
   }
   .slider-titulo-4m {
     font-size: calc(10px + 1vw);

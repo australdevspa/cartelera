@@ -61,17 +61,17 @@
             <h2 class="slider-titulo-1m">{{actividad.area}}</h2>
             <div v-if="actividad.horario === 'horario indefinido'">
               <div v-if="dia === 'sabado'">
-                <h2 class="slider-titulo-2m">Hoy - 11:00 a 19:00 hrs</h2>
+                <h3 class="slider-titulo-2m">Hoy - 11:00 a 19:00 hrs</h3>
               </div>
               <div v-else-if="dia === 'domingo'">
-                <h2 class="slider-titulo-2m">Mañana Lunes - 10:00 a 20:00 hrs</h2>
+                <h3 class="slider-titulo-2m">Mañana Lunes - 10:00 a 20:00 hrs</h3>
               </div>
               <div v-else>
-                <h2 class="slider-titulo-2m">Hoy - 10:00 a 20:00 hrs</h2>
+                <h3 class="slider-titulo-2m">Hoy - 10:00 a 20:00 hrs</h3>
               </div>
             </div>
             <div v-else>
-              <h2 class="slider-titulo-2m">{{ actividad.cuanto_moment }} - {{actividad.horario}}</h2>
+              <h3 class="slider-titulo-2m">{{ actividad.cuanto_moment }} - {{actividad.horario}}</h3>
             </div>
             <hr class="slider-hr">
             <h2 @click.prevent="goToActividad(actividad)" class="slider-titulo-3m cursor"> {{ actividad.nombre }}</h2>
@@ -147,5 +147,8 @@ canvas {
   .uk-grid-small>* {
     padding-left: 0px; 
   }
+}
+.uk-grid-small {
+  margin-left: -40px;
 }
 </style>
