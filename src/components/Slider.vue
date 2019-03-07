@@ -148,4 +148,7 @@ canvas {
     padding-left: 0px; 
   }
 }
+.uk-grid-small {
+  margin-left: -40px;
+}
 </style>
