@@ -7,7 +7,7 @@
             <nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;,&quot;boundary&quot;:&quot;!.uk-navbar-container&quot;,&quot;dropbar&quot;:true,&quot;dropbar-anchor&quot;:&quot;!.uk-navbar-container&quot;,&quot;dropbar-mode&quot;:&quot;slide&quot;}">
               <div class="uk-navbar-left">
                 <router-link class="uk-navbar-item uk-logo" to="/">
-                  <img src="../static/img/icons_ccpm/logo-ccpm-160x81.png" alt="CCPM" class="tamaño-logo uk-margin-small-right">
+                  <img src="../static/img/icons_ccpm/logo-ccpm-160x81.png" class="tamaño-logo uk-margin-small-right">
                 </router-link>
               </div>
               <div class="uk-navbar-center">                               
