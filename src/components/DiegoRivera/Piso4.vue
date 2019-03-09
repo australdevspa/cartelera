@@ -4,7 +4,7 @@
             <div class="uk-card evento-card parent">
                 <div class="uk-card-body uk-text-center">
 
-									<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									<svg id="piso-4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 										viewBox="0 0 332 641" style="enable-background:new 0 0 332 641;" xml:space="preserve">
 
 									<g id="fondo">
@@ -332,7 +332,13 @@
             </div>
         </div>
 
-       <div id="modal-sala4-a" class="uk-flex-top" uk-modal>
+				<div class="barra-simbologia">
+					<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
+					<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
+					<div class="simbologia"><div class="color-sin"/>Sin actividades programadas</div>
+				</div>
+
+       	<div id="modal-sala4-a" class="uk-flex-top" uk-modal>
 					<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 						<button class="uk-modal-close-default" type="button" uk-close></button>
 
@@ -345,10 +351,6 @@
 						<div v-else>
 						
 							<div v-if="tieneActividades(sala_seleccionada[0].id)">
-								<div class="barra-simbologia">
-									<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
-									<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
-								</div>
 								<div class="uk-width-1@m" v-for="(item, index) in programacion" :key="index">
 									<Sala v-if="item.area === sala_seleccionada[0].id" :sala="sala_seleccionada[0]" :programacion="item" class="uk-box-shadow-medium"></Sala>
 								</div>
@@ -356,7 +358,11 @@
 							<div v-else>
 								<SalaVacia :sala="sala_seleccionada[0]" class="uk-box-shadow-medium"></SalaVacia>
 							</div>
-
+							<div class="barra-simbologia">
+								<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
+								<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
+								<div class="simbologia"><div class="color-sin"/>Sin actividades programadas</div>
+							</div>
 						</div>
     		
 					</div>
@@ -380,7 +386,84 @@ export default {
 			loading_sala: true,
 			data_programa: []
     }
-  },
+	},
+	mounted () {
+		var svg = document.getElementById('piso-4')
+		var salas = svg.querySelectorAll('.sala');
+
+		for(var i=0; i<salas.length; ++i) {
+			var estado = false;
+			for(var z = 0; z < this.programacion.length; z++){
+				if(this.programacion[z].area === salas[i].id){
+					estado = true
+					if(this.programacion[z].actualmente.ocurrence !== 0 && this.programacion[z].proximamente.ocurrence !== 0){
+						var rects = salas[i].querySelectorAll('rect');
+						var x = rects[0].getBBox().x
+						var y = rects[0].getBBox().y
+
+						var circle1 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+						circle1.setAttribute("fill", "#19b868");
+						circle1.setAttribute("stroke", "#f5f8ed");
+						circle1.setAttribute("stroke-width", "1")
+						circle1.setAttribute("cx", x + 7 + 5);
+						circle1.setAttribute("cy", y + 7 + 5);
+						circle1.setAttribute("r", "7");
+						salas[i].appendChild(circle1);
+
+						var circle2 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+						circle2.setAttribute("fill", "rebeccapurple");
+						circle2.setAttribute("stroke", "#f5f8ed");
+						circle2.setAttribute("stroke-width", "1")
+						circle2.setAttribute("cx", x + 7 + 5);
+						circle2.setAttribute("cy", y + 7 + 5 + 14 + 3);
+						circle2.setAttribute("r", "7");
+						salas[i].appendChild(circle2);
+
+					}else if(this.programacion[z].actualmente.ocurrence !== 0){
+						var rects = salas[i].querySelectorAll('rect');
+						var x = rects[0].getBBox().x
+						var y = rects[0].getBBox().y
+
+						var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+						circle.setAttribute("fill", "#19b868");
+						circle.setAttribute("stroke", "#f5f8ed");
+						circle.setAttribute("stroke-width", "1")
+						circle.setAttribute("cx", x + 7 + 5);
+						circle.setAttribute("cy", y + 7 + 5);
+						circle.setAttribute("r", "7");
+						salas[i].appendChild(circle);
+					}else if(this.programacion[z].proximamente.ocurrence !== 0){
+						var rects = salas[i].querySelectorAll('rect');
+						var x = rects[0].getBBox().x
+						var y = rects[0].getBBox().y
+
+						var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+						circle.setAttribute("fill", "rebeccapurple");
+						circle.setAttribute("stroke", "#f5f8ed");
+						circle.setAttribute("stroke-width", "1")
+						circle.setAttribute("cx", x + 7 + 5);
+						circle.setAttribute("cy", y + 7 + 5);
+						circle.setAttribute("r", "7");
+						salas[i].appendChild(circle);
+					}
+				}
+			}
+			if(estado === false){
+					var rects = salas[i].querySelectorAll('rect');
+					var x = rects[0].getBBox().x
+					var y = rects[0].getBBox().y
+
+					var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+					circle.setAttribute("fill", "orange");
+					circle.setAttribute("stroke", "#f5f8ed");
+					circle.setAttribute("stroke-width", "1")
+					circle.setAttribute("cx", x + 7 + 5);
+					circle.setAttribute("cy", y + 7 + 5);
+					circle.setAttribute("r", "7");
+					salas[i].appendChild(circle);
+			}
+		}
+	},
   computed: {
     salas() {
       return this.$store.state.salas;
@@ -460,7 +543,7 @@ export default {
 .st4{fill:none;stroke:#C2D183;stroke-miterlimit:10;}
 .st5{fill:#FFFFFF;}
 .sala:hover>rect {
-	fill: #19b868 !important;
+	opacity:0.5;fill:#C2D183;
 }
 .sala>rect  { 
   transition: 200ms;

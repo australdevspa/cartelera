@@ -31,7 +31,7 @@
           <form class="uk-form-stacked ">
             <div class="uk-margin">
               <label class="uk-form-label uk-text-large">
-                Explora nuestra Casa del Arte Diego Rivera
+                Explora Nuestra Casa del Arte Diego Rivera
               </label>
             </div>
           </form>
@@ -42,7 +42,8 @@
             </div>
           </div>
           <div v-else>
-
+            <div id="arriba"></div>
+            
             <div v-if="this.floor === 0">
               <router-view name="helper0"></router-view>
             </div>

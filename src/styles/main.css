@@ -166,6 +166,14 @@
     visibility: hidden;
   }
 }
+@media only screen and (max-width: 639px) {
+  html {
+    font-size: 14px;
+  }
+  .uk-card-title {
+    font-size: 19px;
+}
+}
 .cursor {
   cursor:pointer;
 }
@@ -835,7 +843,7 @@
 .simbologia {
   display: inline-block;
   margin: 0 5px 0 5px;
-  color: #999;
+  color: #333;
 }
 .simbologia>.color-hoy {
   width: 16px;
@@ -850,6 +858,14 @@
   height: 16px;
   border-radius: 500px;
   background: rebeccapurple;
+  display: inline-block;
+  margin: 0 5px 0 5px;
+}
+.simbologia>.color-sin {
+  width: 16px;
+  height: 16px;
+  border-radius: 500px;
+  background: orange;
   display: inline-block;
   margin: 0 5px 0 5px;
 }
@@ -914,4 +930,73 @@
 /*Extra*/
 .uk-card-header {
   border-bottom: 1px solid #e5e5e5;
+}
+.date-min {
+  display: block;
+  width: 65px;
+	/*width: 100px;
+	height: 120px;*/
+  margin: 5px 0px 5px 0px;
+	background: #fff;
+	text-align: center;
+	font-family: 'Helvetica', sans-serif;
+	position: relative;
+}
+.date-min .binds {
+	position: absolute;
+	height: 15px;
+	width: 60px;
+	background: transparent;
+	border: 2px solid #999;
+	border-width: 0 5px;
+	top: -6px;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.date-min .month {
+	background: #333;
+	display: block;
+	padding: 2px 0;
+	color: #fff;
+  /*font-size: 12px;*/
+  font-size: 10px;
+	font-weight: bold;
+}
+.date-min .day {
+	display: block;
+	margin: 0;
+	/*padding: 10px 0;
+  font-size: 48px;*/
+  font-size: 30px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+	position: relative;
+}
+.date-min .day::after {
+	content: '';
+	display: block;
+	height: 100%;
+	width: 96%;
+	position: absolute;
+	top: 3px;
+	left: 2%;
+	z-index: -1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+}
+.date-min .day::before {
+	content: '';
+	display: block;
+	height: 100%;
+	width: 90%;
+	position: absolute;
+	top: 6px;
+	left: 5%;
+	z-index: -1;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
 }

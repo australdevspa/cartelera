@@ -12529,7 +12529,7 @@
 			z"/>
 	</g>
 </g>
-<g id="piso-1" class="cursor" @click.prevent="cargarPiso($event)">
+<g id="piso-1" class="cursor" @click.prevent="cargarPiso($event)" v-scroll-to="'#arriba'">
 	<rect x="-4.1" y="505" class="st1" width="106.1" height="134.8"/>
 	<g class="piso">
 		<rect x="101.4" y="535" class="st5" width="4.7" height="74.9"/>
@@ -12680,7 +12680,7 @@
 		</g>
 	</g>
 </g>
-<g id="piso-4" class="piso cursor" @click.prevent="cargarPiso($event)">
+<g id="piso-4" class="piso cursor" @click.prevent="cargarPiso($event)" v-scroll-to="'#arriba'">
 	<rect x="101.9" y="97" class="st1" width="230.1" height="136"/>
 	<g class="piso">
 		<g class="piso">
@@ -12819,7 +12819,7 @@
 			c0-3.8,0.1-7.7,0.3-11.5h-0.3c-2.3,4.3-4.1,7.5-6.1,10.9l-18,25v0.2H65.9z"/>
 	</g>
 </g>
-<g id="piso-3" class="piso cursor" @click.prevent="cargarPiso($event)">
+<g id="piso-3" class="piso cursor" @click.prevent="cargarPiso($event)" v-scroll-to="'#arriba'">
 	<rect x="-4.1" y="233" class="st1" width="106.1" height="136"/>
 	<rect x="101.9" y="265.8" class="st8" width="4.7" height="74.9"/>
 	<g class="piso">
@@ -12983,7 +12983,7 @@
 			L41.2,328.7z"/>
 	</g>
 </g>
-<g id="piso-2" class="piso cursor" @click.prevent="cargarPiso($event)">
+<g id="piso-2" class="piso cursor" @click.prevent="cargarPiso($event)" v-scroll-to="'#arriba'">
 	<rect x="101.9" y="369" class="st1" width="230.1" height="136"/>
 	<g class="piso">
 		<rect x="101.9" y="403.2" class="st9" width="4.7" height="74.9"/>
@@ -13248,7 +13248,7 @@ export default {
 .st8{fill:#00A9A1;}
 .st9{fill:#D7765F;}
 .piso:hover path {
-	fill: #19b868 !important;
+	opacity:0.5;
 	transition: 200ms;
 	transition-timing-function: ease-in-out;
 	-webkit-transition: 200ms;
