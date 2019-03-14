@@ -24,7 +24,7 @@
               <img class="uk-border-circle" width="100" height="100" :src="item.RutaImgLow" :alt="item.titulo">
               <h3 class="obra-titulo cursor" @click.prevent="goToObra(item)">{{item.titulo}}</h3>
               <p>{{item.descripcion}}</p>
-              <h6>Autor: {{item.autor}}</h6>
+              <h6 class="autor"><span>Autor:</span> {{item.autor}}</h6>
             </div>                
           </div>
         </div>
@@ -94,11 +94,19 @@ export default {
 <style scoped>
 .uk-alert-success {
   color: #333 !important;
-  background-color: #fafafa !important;
+  background-color: #fff !important;
+  webkit-box-shadow: 0 14px 25px rgba(0,0,0,.16);
+    box-shadow: 0 14px 25px rgba(0,0,0,.16);
   /*text-align: justify !important;*/
   /*box-shadow: 0 2px 10px 0 rgba(30,30,30,.09);*/
 }
 .uk-alert {
-  padding: 15px !important;
+  padding: 20px !important;
+}
+.autor {
+  margin-top: 20px !important;
+}
+.autor span {
+  font-weight: 500;
 }
 </style>
