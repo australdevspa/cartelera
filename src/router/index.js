@@ -50,6 +50,26 @@ export default new Router({
       ]
     },
     {
+      path: '/espacios/visitaguiada/piso1',
+      name: 'Piso1',
+      component: Piso1View
+    },
+    {
+      path: '/espacios/visitaguiada/piso2',
+      name: 'Piso2',
+      component: Piso2View
+    },
+    {
+      path: '/espacios/visitaguiada/piso3',
+      name: 'Piso3',
+      component: Piso3View
+    },
+    {
+      path: '/espacios/visitaguiada/piso4',
+      name: 'Piso4',
+      component: Piso4View
+    },
+    {
       path: '/cartelera/:slug/detalle',
       name: 'Obras',
       component: ObrasView

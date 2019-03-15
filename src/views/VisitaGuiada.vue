@@ -4,12 +4,14 @@
       <div class="uk-container uk-container-center uk-text-center pad-evento">
         <div>
 
-          <div v-if="this.floor !== 0">
+          <a href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
+
+          <!--<div v-if="this.floor !== 0">
             <a href="#" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño" @click.prevent="cargarPiso(0)"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
           </div>
           <div v-else>
             <a href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
-          </div>
+          </div>-->
 
           <div class="uk-align-right">
             <div v-if="camara_encendida">
@@ -28,13 +30,13 @@
             <div id="abajo"></div>
           </div>
 
-          <form class="uk-form-stacked ">
-            <div class="uk-margin">
+          <!--<form class="uk-form-stacked ">
+            <div>
               <label class="uk-form-label uk-text-large">
                 Explora Nuestra Casa del Arte Diego Rivera
               </label>
             </div>
-          </form>
+          </form>-->
 
           <div v-if="loading">
             <div class="pad-spinner-view uk-text-center">
@@ -43,8 +45,9 @@
           </div>
           <div v-else>
             <div id="arriba"></div>
-            
-            <div v-if="this.floor === 0">
+
+            <router-view name="helper0"></router-view>
+            <!--<div v-if="this.floor === 0">
               <router-view name="helper0"></router-view>
             </div>
             <div v-else-if="this.floor === '1'">
@@ -58,7 +61,7 @@
             </div>
             <div v-else-if="this.floor === '4'">
               <router-view name="helper4"></router-view>
-            </div>
+            </div>-->
 
           </div>
 
@@ -88,11 +91,11 @@ export default {
         this.loading = true
       }) 
   },
-  computed: {
+  /*computed: {
     floor() {
       return this.$store.state.piso;
     }
-  },
+  },*/
   methods: {
     encenderCamara() {
       this.camara_encendida = true
@@ -100,9 +103,9 @@ export default {
     apagarCamara() {
       this.camara_encendida = false
     },
-    cargarPiso(x) {
+    /*cargarPiso(x) {
       this.$store.dispatch('loadPiso', x);
-    }
+    }*/
   }
 }
 </script>

@@ -13200,7 +13200,8 @@ export default {
   methods: {
     cargarPiso(x) {
         var numero_piso = x.currentTarget.id.substr(x.currentTarget.id.indexOf("-")+1, x.length);
-        this.$store.dispatch('loadPiso', numero_piso);
+		//this.$store.dispatch('loadPiso', numero_piso);
+		this.$router.push({ path: `/espacios/visitaguiada/piso${numero_piso}` }) 
     }
   }
 }

@@ -1,6 +1,60 @@
 <template>
     <section>
-        <div class="uk-container uk-container-center pad-evento">
+    
+		<div class="uk-section espacios-pad">
+      <div class="uk-container uk-container-center uk-text-center pad-evento">
+        <div>
+
+ 					<a href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
+
+          <!--<div v-if="this.floor !== 0">
+            <a href="#" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño" @click.prevent="cargarPiso(0)"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
+          </div>
+          <div v-else>
+            <a href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
+          </div>-->
+
+          <!--<div class="uk-align-right">
+            <div v-if="camara_encendida">
+              <a href="#" class="tamaño-botones-espacios uk-button boton-secundario" @click.prevent="apagarCamara()">Desactivar Scanner QR</a>
+            </div>
+            <div v-else>
+              <a href="#" v-scroll-to="'#abajo'" class="tamaño-botones-espacios uk-button boton-secundario" @click.prevent="encenderCamara()">Activar Scanner QR</a>
+            </div>
+          </div>-->
+        </div>
+
+        <div class="x">
+
+          <!--<div v-if="camara_encendida">
+            <router-view class="y"></router-view>
+            <div id="abajo"></div>
+          </div>-->
+
+          <form class="uk-form-stacked ">
+            <div>
+             <!-- <label class="uk-form-label uk-text-large">
+                Explora Nuestra Casa del Arte Diego Rivera
+              </label>-->
+
+				<div class="barra-simbologia">
+					<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
+					<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
+					<div class="simbologia"><div class="color-sin"/>Sin actividades programadas</div>
+				</div>
+
+            </div>
+          </form>
+
+         <!-- <div v-if="loading">
+            <div class="pad-spinner-view uk-text-center">
+              <div uk-spinner="ratio: 4"/>
+            </div>
+          </div>
+          <div v-else>-->
+            <div id="arriba"></div>
+            
+   <div class="uk-container uk-container-center pad-evento">
             <div class="uk-card evento-card parent">
                 <div class="uk-card-body uk-text-center">
 
@@ -332,11 +386,16 @@
             </div>
         </div>
 
-				<div class="barra-simbologia">
-					<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
-					<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
-					<div class="simbologia"><div class="color-sin"/>Sin actividades programadas</div>
-				</div>
+
+          <!--</div>-->
+
+        </div>
+
+      </div>
+    </div>
+		
+			
+
 
        	<div id="modal-sala4-a" class="uk-flex-top" uk-modal>
 					<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
@@ -387,8 +446,19 @@ export default {
 			data_programa: []
     }
 	},
+	created () {
+    
+		  
+		
+	},
 	mounted () {
-		var svg = document.getElementById('piso-4')
+			if(this.salas.length === 0){
+    this.$store.dispatch('loadSalas')
+		this.$store.dispatch('loadProgramacion')
+		      .then(response => {
+				
+				
+				var svg = document.getElementById('piso-4')
 		var salas = svg.querySelectorAll('.sala');
 
 		for(var i=0; i<salas.length; ++i) {
@@ -463,6 +533,92 @@ export default {
 					salas[i].appendChild(circle);
 			}
 		}
+			
+			
+      })
+      .catch(error => {
+
+      }) 
+		
+
+			}else{
+var svg = document.getElementById('piso-4')
+		var salas = svg.querySelectorAll('.sala');
+
+		for(var i=0; i<salas.length; ++i) {
+			var estado = false;
+			for(var z = 0; z < this.programacion.length; z++){
+				if(this.programacion[z].area === salas[i].id){
+					estado = true
+					if(this.programacion[z].actualmente.ocurrence !== 0 && this.programacion[z].proximamente.ocurrence !== 0){
+						var rects = salas[i].querySelectorAll('rect');
+						var x = rects[0].getBBox().x
+						var y = rects[0].getBBox().y
+
+						var circle1 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+						circle1.setAttribute("fill", "#19b868");
+						circle1.setAttribute("stroke", "#f5f8ed");
+						circle1.setAttribute("stroke-width", "1")
+						circle1.setAttribute("cx", x + 7 + 5);
+						circle1.setAttribute("cy", y + 7 + 5);
+						circle1.setAttribute("r", "7");
+						salas[i].appendChild(circle1);
+
+						var circle2 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+						circle2.setAttribute("fill", "rebeccapurple");
+						circle2.setAttribute("stroke", "#f5f8ed");
+						circle2.setAttribute("stroke-width", "1")
+						circle2.setAttribute("cx", x + 7 + 5);
+						circle2.setAttribute("cy", y + 7 + 5 + 14 + 3);
+						circle2.setAttribute("r", "7");
+						salas[i].appendChild(circle2);
+
+					}else if(this.programacion[z].actualmente.ocurrence !== 0){
+						var rects = salas[i].querySelectorAll('rect');
+						var x = rects[0].getBBox().x
+						var y = rects[0].getBBox().y
+
+						var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+						circle.setAttribute("fill", "#19b868");
+						circle.setAttribute("stroke", "#f5f8ed");
+						circle.setAttribute("stroke-width", "1")
+						circle.setAttribute("cx", x + 7 + 5);
+						circle.setAttribute("cy", y + 7 + 5);
+						circle.setAttribute("r", "7");
+						salas[i].appendChild(circle);
+					}else if(this.programacion[z].proximamente.ocurrence !== 0){
+						var rects = salas[i].querySelectorAll('rect');
+						var x = rects[0].getBBox().x
+						var y = rects[0].getBBox().y
+
+						var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+						circle.setAttribute("fill", "rebeccapurple");
+						circle.setAttribute("stroke", "#f5f8ed");
+						circle.setAttribute("stroke-width", "1")
+						circle.setAttribute("cx", x + 7 + 5);
+						circle.setAttribute("cy", y + 7 + 5);
+						circle.setAttribute("r", "7");
+						salas[i].appendChild(circle);
+					}
+				}
+			}
+			if(estado === false){
+					var rects = salas[i].querySelectorAll('rect');
+					var x = rects[0].getBBox().x
+					var y = rects[0].getBBox().y
+
+					var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+					circle.setAttribute("fill", "orange");
+					circle.setAttribute("stroke", "#f5f8ed");
+					circle.setAttribute("stroke-width", "1")
+					circle.setAttribute("cx", x + 7 + 5);
+					circle.setAttribute("cy", y + 7 + 5);
+					circle.setAttribute("r", "7");
+					salas[i].appendChild(circle);
+			}
+		}
+			}
+		
 	},
   computed: {
     salas() {
@@ -560,5 +716,28 @@ export default {
 }
 .uk-card-body {
     padding: 0px !important;
+}
+
+.x {
+  padding-top: 80px !important;
+}
+.y {
+  padding-bottom: 80px !important;
+}
+@media only screen and (max-width: 480px) {
+  .tamaño-botones-espacios {
+    padding: 0 calc(-4px + 2vw) !important;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .tamaño-botones-espacios{
+    font-size: calc(5px + 2vw) !important;
+  }
+}
+.uk-align-right {
+    margin-left: 0px !important;
+}
+.uk-align-left {
+  margin-right: 0px !important;
 }
 </style>
