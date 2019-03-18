@@ -31,12 +31,7 @@
                 installingWorker.onstatechange = function() {
                   switch (installingWorker.state) {
                     case 'installed':
-                    window.location.reload();
-                   /* if(confirm('Successful Message')){
-                      window.location.reload();  
-                  }*/
-                    //location.reload();
-                    console.log('Install complete. Triggering update prompt.');
+                      window.location.reload();
                       // At this point, the old content will have been purged and the
                       // fresh content will have been added to the cache.
                       // It's the perfect time to display a "New content is

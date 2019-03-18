@@ -402,8 +402,8 @@
 /*Css Banner.vue*/
 .banner {
   padding: 30px 0;
-  /*background: #28B9A1;*/
-  background: peru;
+  background: #28B9A1;
+  /*background: peru;*/
 }
 .banner-titulo {
   font-weight: 900;
