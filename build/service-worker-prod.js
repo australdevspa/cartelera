@@ -31,6 +31,7 @@
                 installingWorker.onstatechange = function() {
                   switch (installingWorker.state) {
                     case 'installed':
+                    console.log('Install complete. Triggering update prompt.');
                       // At this point, the old content will have been purged and the
                       // fresh content will have been added to the cache.
                       // It's the perfect time to display a "New content is
