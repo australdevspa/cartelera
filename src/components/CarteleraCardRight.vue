@@ -26,6 +26,14 @@
       <div v-else>
         <h4 class="card-right-ribbon">{{ actividad.cuanto_moment }}<br>{{actividad.horario}}</h4>
       </div>
+      <!--<img :src="actividad.thumbnail" :alt="actividad.nombre" class="cartelera-card-img"
+        style="
+          max-width: none;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);" >-->
       <img :src="actividad.thumbnail" :alt="actividad.nombre" class="cartelera-card-img"
         style="
           max-width: none;
@@ -33,7 +41,35 @@
           left: 50%;
           top: 50%;
           -webkit-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);" >
+          transform: translate(-50%,-50%);
+          -webkit-filter: blur(4px);
+          filter: blur(4px);
+          opacity: 0.8;
+        " >
+            <img v-if="actividad.dim_mayor === 'alto'" :src="actividad.thumbnail" :alt="actividad.nombre"
+        style="
+            max-height: 100%;
+            object-fit: scale-down;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            -webkit-filter: drop-shadow(0 0 40px #000000);
+            filter: drop-shadow(0 0 40px #000000);
+        ">
+      <img v-if="actividad.dim_mayor === 'ancho'" :src="actividad.thumbnail" :alt="actividad.nombre" class="cartelera-card-img"
+        style="
+            max-width: 100%;
+            object-fit: scale-down;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            -webkit-filter: drop-shadow(0 0 40px #000000);
+            filter: drop-shadow(0 0 40px #000000);
+        ">
       <canvas width="600" height="300"></canvas>
     </div>
     <div>

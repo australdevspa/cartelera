@@ -30,13 +30,13 @@
             <div id="abajo"></div>
           </div>
 
-          <!--<form class="uk-form-stacked ">
+          <form class="uk-form-stacked ">
             <div>
               <label class="uk-form-label uk-text-large">
                 Explora Nuestra Casa del Arte Diego Rivera
               </label>
             </div>
-          </form>-->
+          </form>
 
           <div v-if="loading">
             <div class="pad-spinner-view uk-text-center">
