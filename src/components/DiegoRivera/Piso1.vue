@@ -514,7 +514,11 @@
 						</div>
 
 						<div v-else>
-						
+							<div class="barra-simbologia">
+								<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
+								<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
+								<div class="simbologia"><div class="color-sin"/>Sin actividades programadas</div>
+							</div>
 							<div v-if="tieneActividades(sala_seleccionada[0].id)">
 								<div class="uk-width-1@m" v-for="(item, index) in programacion" :key="index">
 									<Sala v-if="item.area === sala_seleccionada[0].id" :sala="sala_seleccionada[0]" :programacion="item" class="uk-box-shadow-medium"></Sala>
@@ -523,11 +527,7 @@
 							<div v-else>
 								<SalaVacia :sala="sala_seleccionada[0]" class="uk-box-shadow-medium"></SalaVacia>
 							</div>
-							<div class="barra-simbologia">
-								<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
-								<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
-								<div class="simbologia"><div class="color-sin"/>Sin actividades programadas</div>
-							</div>
+
 						</div>
     		
 					</div>
@@ -544,7 +544,11 @@
 						</div>
 
 						<div v-else>
-						
+							<div class="barra-simbologia">
+								<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
+								<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
+								<div class="simbologia"><div class="color-sin"/>Sin actividades programadas</div>
+							</div>
 							<div v-if="tieneActividades(sala_seleccionada[0].id)">
 								<div class="uk-width-1@m" v-for="(item, index) in programacion" :key="index">
 									<Sala v-if="item.area === sala_seleccionada[0].id" :sala="sala_seleccionada[0]" :programacion="item" class="uk-box-shadow-medium"></Sala>
@@ -553,11 +557,7 @@
 							<div v-else>
 								<SalaVacia :sala="sala_seleccionada[0]" class="uk-box-shadow-medium"></SalaVacia>
 							</div>
-							<div class="barra-simbologia">
-								<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
-								<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
-								<div class="simbologia"><div class="color-sin"/>Sin actividades programadas</div>
-							</div>
+
 						</div>
     		
 					</div>
