@@ -65,7 +65,10 @@ const state = {
 
     //DiegoRivera Pisos
     piso: 0,
-    sala_especifica: []
+    sala_especifica: [],
+
+    //Obra
+    estado_traduccion_obra: false
 };
 
 const actions = {
@@ -163,6 +166,15 @@ const actions = {
     loadSalaEspecifica(context, id) {
         return getSalaEspecifica(id)
             .then(sala_especifica => context.commit('updateSalaEspecifica', sala_especifica));
+    },
+
+    //Obra
+    loadObraTrue(context) {
+        context.commit('updateObraTrue')
+    },
+
+    loadObraFalse(context) {
+        context.commit('updateObraFalse')
     },
 };
 
@@ -347,6 +359,15 @@ const mutations = {
 
     updateSalaEspecifica(state, sala_especifica) {
         state.sala_especifica = sala_especifica;
+    },
+
+    //mutation estado traduccion Obra
+    updateObraTrue(state) {
+        state.estado_traduccion_obra = true;
+    },
+
+    updateObraFalse(state) {
+        state.estado_traduccion_obra = false;
     },
 }
 

@@ -9,45 +9,117 @@
       <ul class="uk-breadcrumb">
         <a href="javascript:window.history.back();" class="uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
       </ul>
-      <div class="uk-card uk-card-default parent">
-        <div class="uk-card-header">
-          <div class="uk-text-left" uk-grid>
-            <div class="uk-width-expand@m">
-              <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.titulo }}</h3>
-              <ul class="barra-botones">
-                <li>
-                  <a v-if="evento.video_url !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
-                </li>
-              </ul>
+      
+      <div v-if="estado_traduccion_obra === false">
+        <div class="uk-card uk-card-default parent">
+          <div class="uk-card-header">
+            <div class="uk-text-left" uk-grid>
+              <div class="uk-width-expand@m">
+                <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.titulo }}</h3>
+                
+                <ul class="barra-botones">
+                  <li>
+                    <a v-if="evento.detalle_en !== null" href="" @click.prevent="ingles" class="boton-principal-pequeño">English Version</a>
+                  </li>
+                </ul>
+                <div class="mar-div-detalles" v-if="evento.tts_es !== null">
+                    <aplayer :music="{  title: 'Audio',
+                                        artist: 'Español',
+                                        src: ''+evento.tts_es,
+                                        pic: '../static/img/default/cover.jpg'}"/>
+                </div>
+
+                <ul class="barra-botones">
+                  <li>
+                    <a v-if="evento.video_url !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="uk-card-body uk-text-center data">{{evento.descripcion}}</div>
-        <div class="uk-card-body uk-text-center">
-          <div class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
-            <div>
-              <a class="uk-inline" :href="evento.RutaImgLow">
-                <img :src="evento.RutaImgLow" :alt="evento.titulo">
-              </a>
+          <div class="uk-card-body uk-text-center data">{{evento.descripcion}}</div>
+          <div class="uk-card-body uk-text-center">
+            <div v-if="evento.RutaImgLow !== null" class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
+              <div>
+                <a class="uk-inline" :href="evento.RutaImgLow">
+                  <img :src="evento.RutaImgLow" :alt="evento.titulo">
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="modal-media-video" class="uk-flex-top" uk-modal>
-          <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
-            <button class="uk-modal-close-outside" type="button" uk-close></button>
-            <video width="720" height="576" controls playsinline uk-video>
-              <source :src="evento.video_url" type="video/mp4">
-            </video>
+          <div id="modal-media-video" class="uk-flex-top" uk-modal>
+            <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+              <button class="uk-modal-close-outside" type="button" uk-close></button>
+              <video width="720" height="576" controls playsinline uk-video>
+                <source :src="evento.video_url" type="video/mp4">
+              </video>
+            </div>
           </div>
         </div>
       </div>
+
+
+      <div v-if="estado_traduccion_obra === true">
+        <div class="uk-card uk-card-default parent">
+          <div class="uk-card-header">
+            <div class="uk-text-left" uk-grid>
+              <div class="uk-width-expand@m">
+                <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.title_en }}</h3>
+                
+                <ul class="barra-botones">
+                  <li>
+                    <a href="" @click.prevent="espanol" class="boton-principal-pequeño">Original Text</a>
+                  </li>
+                </ul>
+                <div class="mar-div-detalles" v-if="evento.tts_en !== null">
+                  <aplayer :music="{  title: 'Audio',
+                                      artist: 'English',
+                                      src: ''+evento.tts_en,
+                                      pic: '../static/img/default/cover.jpg'}"/>
+                </div>
+
+                <ul class="barra-botones">
+                  <li>
+                    <a v-if="evento.video_url !== null" class="boton-principal-pequeño" href="#modal-media-video" uk-toggle>Video</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="uk-card-body uk-text-center data">{{evento.detalle_en}}</div>
+          <div class="uk-card-body uk-text-center">
+            <div v-if="evento.RutaImgLow !== null" class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
+              <div>
+                <a class="uk-inline" :href="evento.RutaImgLow">
+                  <img :src="evento.RutaImgLow" :alt="evento.titulo">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div id="modal-media-video" class="uk-flex-top" uk-modal>
+            <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+              <button class="uk-modal-close-outside" type="button" uk-close></button>
+              <video width="720" height="576" controls playsinline uk-video>
+                <source :src="evento.video_url" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </section>
 </template>
 
 <script>
+import Aplayer from 'vue-aplayer'
+
 export default {
   name: 'ObrasView',
+  components: {
+    Aplayer
+  },
   data() {
     return {
       loading_evento: true,
@@ -55,6 +127,7 @@ export default {
     }
   },
   created () {
+    this.$store.dispatch('loadObraFalse')
     //this.$store.dispatch('loadFalse')
     if(this.$route.params.evento === undefined){
         /*cuando se recarga la url*/
@@ -112,6 +185,9 @@ export default {
             })*/
     }
   },
+  mounted () {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  },
   computed: {
     evento() {
       if(this.$route.params.evento === undefined){
@@ -120,11 +196,20 @@ export default {
         return this.item;
       }
     },
+    estado_traduccion_obra() {
+      return this.$store.state.estado_traduccion_obra;
+    }
         /*node() {
         return this.$store.state.detallex;
     }*/
   },
   methods: {
+    ingles () {
+      this.$store.dispatch('loadObraTrue')
+    },
+    espanol () {
+      this.$store.dispatch('loadObraFalse')
+    },
     goToObra (actividad) {
       this.$router.push({
         params: {

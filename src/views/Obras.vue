@@ -68,6 +68,9 @@ export default {
         this.loading_detalles = false;
     }
   },
+  mounted () {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  },
   computed: {
     evento() {
       if(this.$route.params.detalle === undefined){
