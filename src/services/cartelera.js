@@ -183,13 +183,33 @@ function getEvento(id){
 function getDetalle(id){
     return axios.get(`${Endpoint}/detalle-actividad?id=`+id)
     .then(function (response) {
-        return response.data;
+        var evento = []
+        for (var i = 0; i < response.data.length ; i++) {
+            response.data[i].dim_mayor = dimension_mayor(response.data[i].RutaImgLow);
+            evento.push(response.data[i]);
+        }
+        return evento;
     })
     .catch(function (error) {
         return 'An error occured..' + error;
     })
 }
 
+/*detectar la mayor dimension de una img*/
+function dimension_mayor(foto){
+    var mi_imagen = new Image();
+    mi_imagen.src= foto;
+
+    if(foto === null){
+        return "sin imagen"
+    }else{
+        if(mi_imagen.width > mi_imagen.height){
+            return "ancho"
+        }else{
+            return "alto"
+        }
+    }
+}
 
 /*oobtener detalles de las actividades*/
 function getDetalleX(id, x){

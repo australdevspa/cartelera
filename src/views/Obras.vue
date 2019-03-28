@@ -21,9 +21,18 @@
           <div  class="uk-width-1-3@m"
             v-for="(item, index) in evento" :key="index">
             <div class="uk-alert-success uk-text-center" uk-alert>
-              <img class="uk-border-circle" width="100" height="100" :src="item.RutaImgLow" :alt="item.titulo">
+
+              <div v-if="item.dim_mayor === 'ancho'" class="circular--landscape">
+                <img :src="item.RutaImgLow" :alt="item.titulo" />
+              </div>
+
+              <div v-if="item.dim_mayor === 'alto'" class="circular--portrait">
+                <img :src="item.RutaImgLow" :alt="item.titulo" />
+              </div>
+
               <h3 class="obra-titulo cursor" @click.prevent="goToObra(item)">{{item.titulo}}</h3>
-              <p>{{item.descripcion}}</p>
+              <!--<p>{{item.descripcion}}</p>-->
+              <p>{{acortar(item.descripcion)}}</p>
               <h6 class="autor"><span>Autor:</span> {{item.autor}}</h6>
             </div>                
           </div>
@@ -90,6 +99,16 @@ export default {
         name: 'Obra'
       })
     },
+    acortar(titulo) {
+      if(titulo.length > 500){
+          var extracto = titulo.substring(0, 500);
+          var n = extracto.lastIndexOf(" ");
+          var nuevoExtracto = titulo.substring(0, n);
+          return nuevoExtracto + " ...";
+      }else{
+          return titulo;
+      }
+    }
   }
 }
 </script>
@@ -111,5 +130,35 @@ export default {
 }
 .autor span {
   font-weight: 500;
+}
+.circular--landscape {
+  /*display: inline-block;*/
+  position: relative;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.circular--landscape img {
+  width: auto !important;
+  height: 100% !important;
+  margin-left: -25% !important;
+  max-width: none !important;
+}
+.circular--portrait {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.circular--portrait img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: none !important;
 }
 </style>
