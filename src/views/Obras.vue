@@ -100,8 +100,8 @@ export default {
       })
     },
     acortar(titulo) {
-      if(titulo.length > 500){
-          var extracto = titulo.substring(0, 500);
+      if(titulo.length > 250){
+          var extracto = titulo.substring(0, 250);
           var n = extracto.lastIndexOf(" ");
           var nuevoExtracto = titulo.substring(0, n);
           return nuevoExtracto + " ...";
