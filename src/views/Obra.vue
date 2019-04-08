@@ -37,8 +37,20 @@
               </div>
             </div>
           </div>
+
+          <div class="uk-flex uk-flex-center" uk-grid style="margin-top: 30px;">
+            <div class="uk-width-1-2@m uk-flex-first">
+              <div v-if="evento.RutaImgLow !== null" uk-grid uk-lightbox="animation: slide">
+                <a class="uk-inline" :href="evento.RutaImgLow">
+                  <img :src="evento.RutaImgLow" :alt="evento.titulo">
+                </a>
+              </div>
+            </div>
+          </div>
+
           <div class="uk-card-body uk-text-center data">{{evento.descripcion}}</div>
-          <div class="uk-card-body uk-text-center">
+          
+          <!--<div class="uk-card-body uk-text-center">
             <div v-if="evento.RutaImgLow !== null" class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
               <div>
                 <a class="uk-inline" :href="evento.RutaImgLow">
@@ -46,7 +58,8 @@
                 </a>
               </div>
             </div>
-          </div>
+          </div>-->
+
           <div id="modal-media-video" class="uk-flex-top" uk-modal>
             <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
               <button class="uk-modal-close-outside" type="button" uk-close></button>
@@ -86,8 +99,20 @@
               </div>
             </div>
           </div>
+
+          <div class="uk-flex uk-flex-center" uk-grid style="margin-top: 30px;">
+            <div class="uk-width-1-2@m uk-flex-first">
+              <div v-if="evento.RutaImgLow !== null" uk-grid uk-lightbox="animation: slide">
+                <a class="uk-inline" :href="evento.RutaImgLow">
+                  <img :src="evento.RutaImgLow" :alt="evento.titulo">
+                </a>
+              </div>
+            </div>
+          </div>
+
           <div class="uk-card-body uk-text-center data">{{evento.detalle_en}}</div>
-          <div class="uk-card-body uk-text-center">
+          
+          <!--<div class="uk-card-body uk-text-center">
             <div v-if="evento.RutaImgLow !== null" class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
               <div>
                 <a class="uk-inline" :href="evento.RutaImgLow">
@@ -95,7 +120,8 @@
                 </a>
               </div>
             </div>
-          </div>
+          </div>-->
+          
           <div id="modal-media-video" class="uk-flex-top" uk-modal>
             <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
               <button class="uk-modal-close-outside" type="button" uk-close></button>
@@ -250,5 +276,9 @@ video{
 }
 .uk-card-default {
   color: #333 !important;
+}
+.img-pad {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>
