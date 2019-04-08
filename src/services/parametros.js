@@ -12,11 +12,19 @@ function setParametros(x){
         x.thumbnail = "../static/img/default/evento_default.jpg"
 
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
-        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
-        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
-        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
-        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
         x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
+
+        x.fecha_rango_xxx = moment(x.fecha_rango).format('YYYY-DD-MM')
+
+        x.fecha_inicio_formato_day = moment(x.fecha_rango_xxx).format('DD')
+        x.fecha_inicio_formato_month = moment(x.fecha_rango_xxx).format('MMMM')
+        x.fecha_inicio_formato_year = moment(x.fecha_rango_xxx).format('YYYY')
+
+        //x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
+        //x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
+        //x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
+        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
+        //x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
 
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
         x.entrada = precio(x.valor);
@@ -38,11 +46,19 @@ function setParametros(x){
         x.dim_mayor = dimension_mayor(x.thumbnail);
     }else{
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
-        x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
-        x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
-        x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
-        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
         x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
+
+        x.fecha_rango_xxx = moment(x.fecha_rango).format('YYYY-DD-MM')
+
+        x.fecha_inicio_formato_day = moment(x.fecha_rango_xxx).format('DD')
+        x.fecha_inicio_formato_month = moment(x.fecha_rango_xxx).format('MMMM')
+        x.fecha_inicio_formato_year = moment(x.fecha_rango_xxx).format('YYYY')
+        
+        //x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
+        //x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
+        //x.fecha_inicio_formato_year = moment(x.fecha_ini).format('YYYY')
+        x.fecha_fin_formato = moment(x.fecha_fin).format('DD/MM/YYYY')
+        //x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
         
         x.dia_semana = diaSemana(x.fecha_ini, x.fecha_fin);
         x.entrada = precio(x.valor);
@@ -93,7 +109,30 @@ function fecha_rango(inicio, fin) {
 /*se utiliza en el calendario de los cards */
 function diaSemana(inicio, fin) {
     moment.locale('es')
-    var fecha_actual = moment()
+
+    var fecha_actual = moment().format('YYYY-MM-DD')
+    var fecha_inicio = moment(inicio).format('YYYY-MM-DD')
+    var fecha_fin = moment(fin).format('YYYY-MM-DD')
+    
+    if(fecha_inicio === fecha_fin){
+        return moment(inicio).format('dddd');
+    }else{
+        if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
+            return moment(fecha_actual).format('dddd');
+        }else{
+            if(fecha_fin === fecha_actual){
+                return moment(fecha_actual).format('dddd');
+            }else{
+                if(fecha_inicio === fecha_actual){
+                    return moment(fecha_actual).format('dddd');
+                }else{
+                    return moment(inicio).format('dddd');
+                }
+            }
+        }
+    }
+
+    /*var fecha_actual = moment()
     var fecha_inicio = moment(inicio).format('DD/MM/YYYY')
     var fecha_fin = moment(fin).format('DD/MM/YYYY')
     if(fecha_inicio == fecha_fin){
@@ -104,7 +143,7 @@ function diaSemana(inicio, fin) {
         }else{
             return moment(inicio).format('dddd');
         }
-    }
+    }*/
 }
 
 /*se utiliza en los cards*/
