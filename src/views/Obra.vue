@@ -15,7 +15,7 @@
           <div class="uk-card-header">
             <div class="uk-text-left" uk-grid>
               <div class="uk-width-expand@m">
-                <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.titulo }}</h3>
+                <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.titulo }}</h3>
                 
                 <ul class="barra-botones">
                   <li>
@@ -42,7 +42,7 @@
             <div class="uk-width-1-2@m uk-flex-first">
               <div v-if="evento.RutaImgLow !== null" uk-grid uk-lightbox="animation: slide">
                 <a class="uk-inline" :href="evento.RutaImgLow">
-                  <img :src="evento.RutaImgLow" :alt="evento.titulo">
+                  <img :src="evento.RutaImgLow" :alt="evento.titulo" style="padding: 10px 30px 10px 30px;">
                 </a>
               </div>
             </div>
@@ -77,7 +77,7 @@
           <div class="uk-card-header">
             <div class="uk-text-left" uk-grid>
               <div class="uk-width-expand@m">
-                <h3 class="uk-card-title uk-margin-remove-bottom pad-derecha">{{ evento.title_en }}</h3>
+                <h3 class="uk-card-title uk-margin-remove-bottom">{{ evento.title_en }}</h3>
                 
                 <ul class="barra-botones">
                   <li>
@@ -104,7 +104,7 @@
             <div class="uk-width-1-2@m uk-flex-first">
               <div v-if="evento.RutaImgLow !== null" uk-grid uk-lightbox="animation: slide">
                 <a class="uk-inline" :href="evento.RutaImgLow">
-                  <img :src="evento.RutaImgLow" :alt="evento.titulo">
+                  <img :src="evento.RutaImgLow" :alt="evento.titulo" style="padding: 10px 30px 10px 30px;">
                 </a>
               </div>
             </div>
