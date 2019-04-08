@@ -22,12 +22,12 @@
             v-for="(item, index) in evento" :key="index">
             <div class="uk-alert-success uk-text-center" uk-alert>
 
-              <div v-if="item.dim_mayor === 'ancho'" class="circular--landscape">
-                <img :src="item.RutaImgLow" :alt="item.titulo" />
+              <div v-if="item.dim_mayor === 'ancho'" class="circular--landscape cursor">
+                <img :src="item.RutaImgLow" :alt="item.titulo" @click.prevent="goToObra(item)"/>
               </div>
 
-              <div v-if="item.dim_mayor === 'alto'" class="circular--portrait">
-                <img :src="item.RutaImgLow" :alt="item.titulo" />
+              <div v-if="item.dim_mayor === 'alto'" class="circular--portrait cursor">
+                <img :src="item.RutaImgLow" :alt="item.titulo" @click.prevent="goToObra(item)"/>
               </div>
 
               <h3 class="obra-titulo cursor" @click.prevent="goToObra(item)">{{item.titulo}}</h3>
