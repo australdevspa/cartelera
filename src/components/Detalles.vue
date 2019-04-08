@@ -7,7 +7,8 @@
         </li>
       </ul>
       <div class="mar-div-detalles">
-        <p class="mar-p-detalles">{{ actividad.fecha_inicio_formato }}</p>
+        <!--<p class="mar-p-detalles">{{ actividad.fecha_inicio_formato }}</p>-->
+        <p class="mar-p-detalles">{{ actividad.fecha_rango }}</p>
         <p class="mar-p-detalles">{{ actividad.donde }}.</p>
         <p v-if="actividad.entrada ==='liberada' " class="mar-p-detalles">Free pass</p>
         <p v-else class="mar-p-detalles">Ticket {{actividad.entrada}}</p>
@@ -35,7 +36,8 @@
         </li>
       </ul>
       <div class="mar-div-detalles">
-        <p class="mar-p-detalles">{{ actividad.fecha_inicio_formato }}</p>
+        <!--<p class="mar-p-detalles">{{ actividad.fecha_inicio_formato }}</p>-->
+        <p class="mar-p-detalles">{{ actividad.fecha_rango }}</p>
         <p class="mar-p-detalles">{{ actividad.donde }}</p>
         <p class="mar-p-detalles">Entrada {{ actividad.entrada }}</p>
       </div>
