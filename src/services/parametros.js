@@ -77,7 +77,15 @@ function fecha_rango(inicio, fin) {
         if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
             return moment(fecha_actual).format('DD/MM/YYYY');
         }else{
-            return moment(inicio).format('DD/MM/YYYY');
+            if(fecha_fin === fecha_actual){
+                return moment(fecha_actual).format('DD/MM/YYYY');
+            }else{
+                if(fecha_inicio === fecha_actual){
+                    return moment(fecha_actual).format('DD/MM/YYYY');
+                }else{
+                    return moment(inicio).format('DD/MM/YYYY');
+                }
+            }
         }
     }
 }

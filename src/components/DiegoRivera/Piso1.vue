@@ -31,11 +31,11 @@
             <div id="abajo"></div>
           </div>-->
 
-          <form class="uk-form-stacked ">
+          <!--<form class="uk-form-stacked ">
             <div>
-             <!-- <label class="uk-form-label uk-text-large">
+             	<label class="uk-form-label uk-text-large">
                 Explora Nuestra Casa del Arte Diego Rivera
-              </label>-->
+              </label>
 
 				<div class="barra-simbologia">
 					<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
@@ -44,7 +44,7 @@
 				</div>
 
             </div>
-          </form>
+          </form>-->
 
          <!-- <div v-if="loading">
             <div class="pad-spinner-view uk-text-center">
@@ -483,6 +483,24 @@
 		<rect x="49.4" y="239.6" class="st2" width="84.5" height="67.9"/>
 	</g>
 </g>
+
+  <g id="svg_205">
+   <g id="svg_203">
+    <ellipse ry="6" rx="6" id="svg_199" cy="178.365284" cx="131.376243" stroke-width="0" stroke="#000" fill="#fea600"/>
+    <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10" id="svg_200" y="181.883733" x="138.876098" stroke-width="0" stroke="#000" fill="#41463b">Sin actividades</text>
+   </g>
+   <g id="svg_204">
+    <g id="svg_201">
+     <ellipse ry="6" rx="6" id="svg_183" cy="159.86565" cx="59.266861" stroke-width="0" stroke="#000" fill="#06b819"/>
+     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10" id="svg_184" y="163.384099" x="66.766716" stroke-width="0" stroke="#000" fill="#41463b">Actividades para hoy</text>
+    </g>
+    <g id="svg_202">
+     <ellipse ry="6" rx="6" id="svg_197" cy="159.865645" cx="176.264568" stroke-width="0" stroke="#000" fill="#75009a"/>
+     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10" id="svg_198" y="163.384095" x="183.764423" stroke-width="0" stroke="#000" fill="#41463b">Actividades próximas</text>
+    </g>
+   </g>
+	</g>
+
 </svg>
 
 
