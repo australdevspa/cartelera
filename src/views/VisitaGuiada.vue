@@ -63,6 +63,10 @@
               <router-view name="helper4"></router-view>
             </div>-->
 
+            <div class="pad-top">
+              <a class="uk-button boton-secundario" href="https://kuula.co/profile/DiegoRivera/collections" target="_blank">Recorre nuestras salas</a>
+            </div>
+
           </div>
 
         </div>
