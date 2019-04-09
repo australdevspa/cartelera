@@ -150,7 +150,7 @@
                 <iframe class="tour" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;" frameborder="0" allow="vr,gyroscope,accelerometer,fullscreen" scrolling="no" allowfullscreen="true" :src="evento.video_url_tour"></iframe>
               </div>
             </div>
-          </div>
+          </div>                                                                                                                                                                                                                                                                                                                            
 
           <!--<div class="uk-card-body uk-text-center">
             <div v-if="evento.RutaImgLow !== null" class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
