@@ -50,12 +50,20 @@
 
           <div class="uk-card-body uk-text-center data">{{evento.descripcion}}</div>
 
-          <div v-if="evento.video_url_yt !== null" style="padding: 30px 10px;">
-            <iframe width="560" height="315" :src="evento.video_url_yt" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div v-if="evento.video_url_yt !== null">
+            <div v-if="evento.video_url_yt !== ''">
+              <div style="padding: 30px 10px;">
+                <iframe width="560" height="315" :src="evento.video_url_yt" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
           </div>
 
-          <div v-if="evento.video_url_tour !== null" style="padding: 30px 10px;">
-            <iframe class="tour" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;" frameborder="0" allow="vr,gyroscope,accelerometer,fullscreen" scrolling="no" allowfullscreen="true" :src="evento.video_url_tour"></iframe>
+          <div v-if="evento.video_url_tour !== null">
+            <div v-if="evento.video_url_tour !== ''">
+              <div style="padding: 30px 10px;">
+                <iframe class="tour" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;" frameborder="0" allow="vr,gyroscope,accelerometer,fullscreen" scrolling="no" allowfullscreen="true" :src="evento.video_url_tour"></iframe>
+              </div>
+            </div>
           </div>
 
           <!--<div v-if="evento.video_url_yt !== null" style="padding: 30px 10px;">
@@ -128,12 +136,20 @@
 
           <div class="uk-card-body uk-text-center data">{{evento.detalle_en}}</div>
           
-          <div v-if="evento.video_url_yt !== null" style="padding: 30px 10px;">
-            <iframe width="560" height="315" :src="evento.video_url_yt" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div v-if="evento.video_url_yt !== null">
+            <div v-if="evento.video_url_yt !== ''">
+              <div style="padding: 30px 10px;">
+                <iframe width="560" height="315" :src="evento.video_url_yt" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
           </div>
 
-          <div v-if="evento.video_url_tour !== null" style="padding: 30px 10px;">
-            <iframe class="tour" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;" frameborder="0" allow="vr,gyroscope,accelerometer,fullscreen" scrolling="no" allowfullscreen="true" :src="evento.video_url_tour"></iframe>
+          <div v-if="evento.video_url_tour !== null">
+            <div v-if="evento.video_url_tour !== ''">
+              <div style="padding: 30px 10px;">
+                <iframe class="tour" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;" frameborder="0" allow="vr,gyroscope,accelerometer,fullscreen" scrolling="no" allowfullscreen="true" :src="evento.video_url_tour"></iframe>
+              </div>
+            </div>
           </div>
 
           <!--<div class="uk-card-body uk-text-center">
