@@ -14,11 +14,16 @@ function setParametros(x){
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
         x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
 
-        x.fecha_rango_xxx = moment(x.fecha_rango).format('YYYY-DD-MM')
+        x.fecha_inicio_formato_day = moment(x.fecha_rango).format('DD')
+        x.fecha_inicio_formato_month = moment(x.fecha_rango).format('MMMM')
+        x.fecha_inicio_formato_year = moment(x.fecha_rango).format('YYYY')
 
-        x.fecha_inicio_formato_day = moment(x.fecha_rango_xxx).format('DD')
-        x.fecha_inicio_formato_month = moment(x.fecha_rango_xxx).format('MMMM')
-        x.fecha_inicio_formato_year = moment(x.fecha_rango_xxx).format('YYYY')
+
+        //x.fecha_rango_xxx = moment(x.fecha_rango).format('YYYY-DD-MM')
+
+        //x.fecha_inicio_formato_day = moment(x.fecha_rango_xxx).format('DD')
+        //x.fecha_inicio_formato_month = moment(x.fecha_rango_xxx).format('MMMM')
+        //x.fecha_inicio_formato_year = moment(x.fecha_rango_xxx).format('YYYY')
 
         //x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
         //x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
@@ -48,11 +53,18 @@ function setParametros(x){
         x.fecha_inicio_formato = moment(x.fecha_ini).format('DD/MM/YYYY')
         x.fecha_rango = fecha_rango(x.fecha_ini, x.fecha_fin)
 
-        x.fecha_rango_xxx = moment(x.fecha_rango).format('YYYY-DD-MM')
+        x.fecha_inicio_formato_day = moment(x.fecha_rango).format('DD')
+        x.fecha_inicio_formato_month = moment(x.fecha_rango).format('MMMM')
+        x.fecha_inicio_formato_year = moment(x.fecha_rango).format('YYYY')
 
-        x.fecha_inicio_formato_day = moment(x.fecha_rango_xxx).format('DD')
-        x.fecha_inicio_formato_month = moment(x.fecha_rango_xxx).format('MMMM')
-        x.fecha_inicio_formato_year = moment(x.fecha_rango_xxx).format('YYYY')
+
+        //x.fecha_rango_xxx = moment(x.fecha_rango).format('YYYY-DD-MM')
+
+        //x.fecha_rango_xxx2 = moment(x.fecha_rango).format('DD')
+
+        //x.fecha_inicio_formato_day = moment(x.fecha_rango_xxx).format('DD')
+        //x.fecha_inicio_formato_month = moment(x.fecha_rango_xxx).format('MMMM')
+        //x.fecha_inicio_formato_year = moment(x.fecha_rango_xxx).format('YYYY')
         
         //x.fecha_inicio_formato_day = moment(x.fecha_ini).format('DD')
         //x.fecha_inicio_formato_month = moment(x.fecha_ini).format('MMMM')
@@ -88,18 +100,23 @@ function fecha_rango(inicio, fin) {
     var fecha_fin = moment(fin).format('YYYY-MM-DD')
     
     if(fecha_inicio === fecha_fin){
-        return moment(inicio).format('DD/MM/YYYY');
+        //return moment(inicio).format('DD/MM/YYYY');
+        return moment(inicio).format('MM/DD/YYYY');
     }else{
         if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-            return moment(fecha_actual).format('DD/MM/YYYY');
+            //return moment(fecha_actual).format('DD/MM/YYYY');
+            return moment(fecha_actual).format('MM/DD/YYYY');
         }else{
             if(fecha_fin === fecha_actual){
-                return moment(fecha_actual).format('DD/MM/YYYY');
+                //return moment(fecha_actual).format('DD/MM/YYYY');
+                return moment(fecha_actual).format('MM/DD/YYYY');
             }else{
                 if(fecha_inicio === fecha_actual){
-                    return moment(fecha_actual).format('DD/MM/YYYY');
+                    //return moment(fecha_actual).format('DD/MM/YYYY');
+                    return moment(fecha_actual).format('MM/DD/YYYY');
                 }else{
-                    return moment(inicio).format('DD/MM/YYYY');
+                    //return moment(inicio).format('DD/MM/YYYY');
+                    return moment(inicio).format('MM/DD/YYYY');
                 }
             }
         }

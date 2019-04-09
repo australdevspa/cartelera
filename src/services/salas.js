@@ -225,6 +225,11 @@ function getProgrmacion(){
                     }else{
                         if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
                             nro+=1 
+                        }else{
+                            //solucion error between solo detecta lo que esta entre medio
+                            if(fecha_fin === fecha_actual){
+                                nro+=1
+                            }
                         }
                     }
                 }
@@ -247,6 +252,12 @@ function getProgrmacion(){
                         if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
                             setParametros(response.data[i])
                             eventos.push(response.data[i]) 
+                        }else{
+                            //solucion error between solo detecta lo que esta entre medio
+                            if(fecha_fin === fecha_actual){
+                                setParametros(response.data[i])
+                                eventos.push(response.data[i]) 
+                            }
                         }
                     }
                 }

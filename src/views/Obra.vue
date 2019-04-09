@@ -51,12 +51,20 @@
           <div class="uk-card-body uk-text-center data">{{evento.descripcion}}</div>
 
           <div v-if="evento.video_url_yt !== null" style="padding: 30px 10px;">
+            <iframe width="560" height="315" :src="evento.video_url_yt" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <div v-if="evento.video_url_tour !== null" style="padding: 30px 10px;">
+            <iframe class="tour" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;" frameborder="0" allow="vr,gyroscope,accelerometer,fullscreen" scrolling="no" allowfullscreen="true" :src="evento.video_url_tour"></iframe>
+          </div>
+
+          <!--<div v-if="evento.video_url_yt !== null" style="padding: 30px 10px;">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/1roy4o4tqQM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
 
           <div v-if="evento.video_url_tour !== null" style="padding: 30px 10px;">
             <iframe class="tour" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;" frameborder="0" allow="vr,gyroscope,accelerometer,fullscreen" scrolling="no" allowfullscreen="true" src="https://kuula.co/share/collection/7l5Fk?fs=1&vr=0&thumbs=1&chromeless=0&logo=0"></iframe>
-          </div>
+          </div>-->
 
           <!--<div class="uk-card-body uk-text-center">
             <div v-if="evento.RutaImgLow !== null" class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
@@ -120,6 +128,14 @@
 
           <div class="uk-card-body uk-text-center data">{{evento.detalle_en}}</div>
           
+          <div v-if="evento.video_url_yt !== null" style="padding: 30px 10px;">
+            <iframe width="560" height="315" :src="evento.video_url_yt" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          <div v-if="evento.video_url_tour !== null" style="padding: 30px 10px;">
+            <iframe class="tour" width="100%" height="640" style="width: 100%; height: 640px; border: none; max-width: 100%;" frameborder="0" allow="vr,gyroscope,accelerometer,fullscreen" scrolling="no" allowfullscreen="true" :src="evento.video_url_tour"></iframe>
+          </div>
+
           <!--<div class="uk-card-body uk-text-center">
             <div v-if="evento.RutaImgLow !== null" class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
               <div>

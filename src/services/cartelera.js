@@ -40,9 +40,18 @@ function getDataCartelera(){
                         var fecha_inicio = moment(response.data[i].fecha_ini).format('YYYY-MM-DD')
                         var fecha_fin = moment(response.data[i].fecha_fin).format('YYYY-MM-DD')
 
+                        console.log(fecha_actual)
+                        console.log(fecha_inicio)
+                        console.log(fecha_fin)
+
                         if(fecha_actual !== fecha_inicio){
                             if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
                                 nro+=1
+                            }else{
+                                //solucion error between solo detecta lo que esta entre medio
+                                if(fecha_fin === fecha_actual){
+                                    nro+=1
+                                }
                             }
                         }
                     }
@@ -60,10 +69,16 @@ function getDataCartelera(){
 
                         if(fecha_actual !== fecha_inicio){
                             if(moment(fecha_actual).isBetween(fecha_inicio, fecha_fin) === true){
-                            setParametros(response.data[i])
+                                setParametros(response.data[i])
                                 eventos.push(response.data[i]) 
                                 expos1.push(response.data[i])
-                            
+                            }else{
+                                //solucion error between solo detecta lo que esta entre medio
+                                if(fecha_fin === fecha_actual){
+                                    setParametros(response.data[i])
+                                    eventos.push(response.data[i]) 
+                                    expos1.push(response.data[i])
+                                }
                             }
                         }
                         

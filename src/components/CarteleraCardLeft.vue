@@ -145,7 +145,8 @@ export default {
     },
     fechahoy() {
       moment.locale('es');
-      return moment().format('DD/MM/YYYY');
+      //return moment().format('DD/MM/YYYY');
+      return moment().format('MM/DD/YYYY');
     },
   },
 }
