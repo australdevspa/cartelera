@@ -188,17 +188,17 @@ const mutations = {
         }
         
         //slider con exposiciones
-        /*var ex = data_cartelera.expo.slice(0, 6);
+        var ex = data_cartelera.expo.slice(0, 6);
         if(ex.length == 6){
             state.carousel = ex;
         }else{
             var ac = data_cartelera.cartelera.slice(0, 6 - ex.length);
             state.carousel = ex.concat(ac);
-        }*/
+        }
 
         //slider sin exposiciones, solo las primeros 5 actividades
-        var ac = data_cartelera.cartelera.slice(0, state.carousel_tamaño);
-        state.carousel = ac;
+        //var ac = data_cartelera.cartelera.slice(0, state.carousel_tamaño);
+        //state.carousel = ac;
 
         state.categorias = data_cartelera.categorias;
         //state.estado = false;
