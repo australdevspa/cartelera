@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <section slot="contenido">
-      <div uk-sticky="" show-on-up="" animation="uk-animation-slide-top" cls-active="uk-navbar-sticky" sel-target=".uk-navbar-container" class="uk-sticky uk-sticky-fixed" style="position: fixed; top: 0px; width: 1066px;">
+      <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
         <div class="uk-navbar-container uk-navbar-sticky">
           <div class="uk-container uk-container-expand">
             <nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;,&quot;boundary&quot;:&quot;!.uk-navbar-container&quot;,&quot;dropbar&quot;:true,&quot;dropbar-anchor&quot;:&quot;!.uk-navbar-container&quot;,&quot;dropbar-mode&quot;:&quot;slide&quot;}">
