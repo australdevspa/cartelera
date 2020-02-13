@@ -48,9 +48,10 @@
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
                 v-for="(item, index) in cartelera"
-                :key="index">
-                  <card-right v-if="(index % 2) === 0" :actividad="item"></card-right>
-                  <card-left v-else :actividad="item"></card-left>
+                :key="index"
+                @click.prevent="goToActividad(item)">
+                  <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
+                  <card-left v-else :actividad="item" class="cursor"></card-left>
                 </div>
               </div>
               <div class="pad-top">
@@ -67,9 +68,10 @@
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
                 v-for="(item, index) in filtered_busqueda"
-                :key="index">
-                  <card-right v-if="(index % 2) === 0" :actividad="item"></card-right>
-                  <card-left v-else :actividad="item"></card-left>
+                :key="index"
+                @click.prevent="goToActividad(item)">
+                  <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
+                  <card-left v-else :actividad="item" class="cursor"></card-left>
                 </div>
               </div> 
               <div class="pad-top">
@@ -88,9 +90,10 @@
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
                 v-for="(item, index) in por_categoria"
-                :key="index">
-                  <card-right v-if="(index % 2) === 0" :actividad="item"></card-right>
-                  <card-left v-else :actividad="item"></card-left>
+                :key="index"
+                @click.prevent="goToActividad(item)">
+                  <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
+                  <card-left v-else :actividad="item" class="cursor"></card-left>
                 </div>
               </div>
               <div class="pad-top">
@@ -107,9 +110,10 @@
               <div class="uk-grid-match uk-grid-small uk-text-center" uk-grid>  
                 <div class="uk-width-1-2@m"
                 v-for="(item, index) in filtered_busqueda_porcategoria"
-                :key="index">
-                  <card-right v-if="(index % 2) === 0" :actividad="item"></card-right>
-                  <card-left v-else :actividad="item"></card-left>
+                :key="index"
+                @click.prevent="goToActividad(item)">
+                  <card-right v-if="(index % 2) === 0" :actividad="item" class="cursor"></card-right>
+                  <card-left v-else :actividad="item" class="cursor"></card-left>
                 </div>
               </div>
               <div class="pad-top">

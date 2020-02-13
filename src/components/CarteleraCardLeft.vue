@@ -76,7 +76,7 @@
               <h1 class="day">{{actividad.fecha_inicio_formato_day}}</h1>
               <span class="month">{{actividad.fecha_inicio_formato_month}}</span>
           </div>
-          <h3 @click.prevent="goToActividad(actividad)" class="uk-card-title card-titulo cursor"> {{ actividad.nombre }}</h3>
+          <h3 class="uk-card-title card-titulo cursor"> {{ actividad.nombre }}</h3>
           <div class="card-info" :style="{ 'border-right': '10px solid' + actividad.area_color }">
             <div class="uk-label" :style="{ background: '#333 !important', fontWeight: 900 }">
               Entrada {{actividad.entrada}}
@@ -90,7 +90,7 @@
         <div class="visible-movil oculto-movil">
           <div class="uk-grid-small uk-flex-middle" uk-grid>
             <div class="uk-width-expand">
-              <h3 @click.prevent="goToActividad(actividad)" class="uk-card-title card-titulo-movil card-titulo cursor"> {{ actividad.nombre }}</h3>
+              <h3 class="uk-card-title card-titulo-movil card-titulo cursor"> {{ actividad.nombre }}</h3>
             </div>
             <div class="uk-width-auto">
               <div class="date">

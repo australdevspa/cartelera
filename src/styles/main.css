@@ -602,9 +602,6 @@
 .card-titulo {
   margin-top: 0px !important;
 }
-.card-titulo:hover {
-  color: #19b868;
-}
 .card-titulo-movil {
   font-size: 1.25rem !important;
 }
