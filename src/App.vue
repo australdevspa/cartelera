@@ -1,29 +1,141 @@
 <template>
   <div id="app">
-    <section slot="contenido">
-      <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
-        <div class="uk-navbar-container uk-navbar-sticky">
-          <div class="uk-container uk-container-expand">
-            <nav class="uk-navbar" uk-navbar="{&quot;align&quot;:&quot;left&quot;,&quot;boundary&quot;:&quot;!.uk-navbar-container&quot;,&quot;dropbar&quot;:true,&quot;dropbar-anchor&quot;:&quot;!.uk-navbar-container&quot;,&quot;dropbar-mode&quot;:&quot;slide&quot;}">
-              <div class="uk-navbar-left">
-                <router-link class="uk-navbar-item uk-logo" to="/">
-                  <img src="../static/img/icons_ccpm/logo-ccpm-160x81.png" alt="CCPM" class="tamaño-logo uk-margin-small-right">
-                </router-link>
-              </div>
-              <div class="uk-navbar-center">                               
-                <div class="uk-navbar-item">
-                  <router-link to="/cartelera" class="tamaño-boton-principal boton-principal uk-button-large">Cartelera</router-link>
-                </div>
-              </div>  
-              <div class="uk-navbar-right">  
-                <div class="uk-navbar-item">
-                  <router-link to="/espacios/visitaguiada" class="tamaño-boton-principal boton-principal uk-button-large">Espacios</router-link>
-                </div>
-              </div>  
-            </nav>
-          </div>
-        </div>
+    <section>
+      <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+    
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1066 90">
+          <defs>
+            <linearGradient id="Degradado_sin_nombre_20" x1="355.23" y1="45" x2="858.59" y2="45" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#fff"/>
+              <stop offset="0.02" stop-color="#d6d6d6"/>
+              <stop offset="0.05" stop-color="#b2b2b2"/>
+              <stop offset="0.08" stop-color="#929292"/>
+              <stop offset="0.11" stop-color="#767676"/>
+              <stop offset="0.14" stop-color="#606060"/>
+              <stop offset="0.18" stop-color="#4f4f4f"/>
+              <stop offset="0.23" stop-color="#444"/>
+              <stop offset="0.3" stop-color="#3d3d3d"/>
+              <stop offset="0.5" stop-color="#3b3b3b"/>
+              <stop offset="0.69" stop-color="#3d3d3d"/>
+              <stop offset="0.76" stop-color="#444"/>
+              <stop offset="0.81" stop-color="#4f4f4f"/>
+              <stop offset="0.85" stop-color="#606060"/>
+              <stop offset="0.89" stop-color="#767676"/>
+              <stop offset="0.92" stop-color="#929292"/>
+              <stop offset="0.94" stop-color="#b2b2b2"/>
+              <stop offset="0.97" stop-color="#d6d6d6"/>
+              <stop offset="0.99" stop-color="#fff"/>
+            </linearGradient>
+            <clipPath id="clip-path">
+              <circle class="cls-1" cx="990.98" cy="45" r="23.4"/>
+            </clipPath>
+          </defs>
+          <title>botonera</title>
+          <g class="cls-2">
+            <g id="Capa_1" data-name="Capa 1">
+              <rect class="cls-3" width="1066" height="90"/>
+              <rect class="cls-4" x="355.23" width="503.37" height="90"/>
+              <path class="cls-5" d="M42.2,65.61a1.39,1.39,0,0,0-.87-.32A1.32,1.32,0,0,0,40,66.63,1.3,1.3,0,0,0,41.32,68a1.33,1.33,0,0,0,.88-.34v.49a1.91,1.91,0,0,1-.86.23,1.7,1.7,0,0,1-1.71-1.7,1.72,1.72,0,0,1,1.74-1.72,1.61,1.61,0,0,1,.83.22Z"/>
+              <path class="cls-5" d="M46.12,66.63a1.72,1.72,0,0,1-3.44,0,1.72,1.72,0,0,1,3.44,0Zm-.41,0A1.31,1.31,0,1,0,44.4,68,1.3,1.3,0,0,0,45.71,66.63Z"/>
+              <path class="cls-5" d="M48.94,68.27h-.49l-1-1.39h-.17v1.39H46.9V65h.5a1.69,1.69,0,0,1,.86.15.93.93,0,0,1-.35,1.7Zm-1.63-1.73h.13c.42,0,.87-.08.87-.6s-.49-.59-.89-.59h-.11Z"/>
+              <path class="cls-5" d="M50,68.27H49.6V65h.47c1,0,1.32.35,1.32,1s-.52,1-1.15,1H50Zm0-1.74h.13c.42,0,.87-.08.87-.6s-.49-.58-.89-.58H50Z"/>
+              <path class="cls-5" d="M55.36,66.63a1.72,1.72,0,0,1-3.43,0,1.72,1.72,0,0,1,3.43,0Zm-.41,0A1.31,1.31,0,1,0,53.64,68,1.3,1.3,0,0,0,55,66.63Z"/>
+              <path class="cls-5" d="M58.19,68.27h-.5l-1-1.39h-.17v1.39h-.41V65h.49a1.73,1.73,0,0,1,.87.15.91.91,0,0,1,.43.78.89.89,0,0,1-.79.92Zm-1.63-1.73h.13c.41,0,.87-.08.87-.6s-.49-.59-.9-.59h-.1Z"/>
+              <path class="cls-5" d="M59.49,67.44l-.37.83h-.44l1.56-3.42,1.57,3.42h-.44L61,67.44Zm.75-1.7-.58,1.33h1.17Z"/>
+              <path class="cls-5" d="M64.66,65.61a1.39,1.39,0,0,0-.87-.32,1.32,1.32,0,0,0-1.29,1.34A1.3,1.3,0,0,0,63.78,68a1.33,1.33,0,0,0,.88-.34v.49a1.91,1.91,0,0,1-.86.23,1.7,1.7,0,0,1-1.71-1.7,1.72,1.72,0,0,1,1.74-1.72,1.61,1.61,0,0,1,.83.22Z"/>
+              <path class="cls-5" d="M65.83,68.27h-.4V65h.4Z"/>
+              <path class="cls-5" d="M70.05,66.63a1.72,1.72,0,0,1-3.44,0,1.72,1.72,0,0,1,3.44,0Zm-.41,0A1.31,1.31,0,1,0,68.33,68,1.3,1.3,0,0,0,69.64,66.63Z"/>
+              <path class="cls-5" d="M70.81,64.83l2.46,2.58V65h.41V68.4l-2.46-2.58v2.45h-.41Z"/>
+              <path class="cls-5" d="M78.78,65.61a1.39,1.39,0,0,0-.87-.32,1.32,1.32,0,0,0-1.29,1.34A1.3,1.3,0,0,0,77.9,68a1.33,1.33,0,0,0,.88-.34v.49a1.91,1.91,0,0,1-.86.23,1.7,1.7,0,0,1-1.71-1.7A1.72,1.72,0,0,1,78,64.92a1.61,1.61,0,0,1,.83.22Z"/>
+              <path class="cls-5" d="M79.9,65v1.93c0,.54.16,1,.79,1s.79-.49.79-1V65h.41v2.07a1.2,1.2,0,1,1-2.4,0V65Z"/>
+              <path class="cls-5" d="M83.24,67.89h1v.38H82.83V65h.41Z"/>
+              <path class="cls-5" d="M85.51,68.27H85.1V65.36h-.78V65h2v.37h-.78Z"/>
+              <path class="cls-5" d="M87.33,65v1.93c0,.54.16,1,.79,1s.79-.49.79-1V65h.41v2.07a1.2,1.2,0,1,1-2.4,0V65Z"/>
+              <path class="cls-5" d="M92.3,68.27h-.49l-1-1.39h-.17v1.39h-.41V65h.5a1.75,1.75,0,0,1,.87.15.91.91,0,0,1,.43.78.9.9,0,0,1-.79.92Zm-1.63-1.73h.13c.42,0,.87-.08.87-.6s-.48-.59-.89-.59h-.11Z"/>
+              <path class="cls-5" d="M93.61,67.44l-.38.83H92.8l1.56-3.42,1.57,3.42h-.44l-.38-.83Zm.75-1.7-.58,1.33h1.16Z"/>
+              <path class="cls-5" d="M97,67.89h1v.38h-1.4V65H97Z"/>
+              <path class="cls-5" d="M100.77,68.27h-.4V65h.47c1,0,1.32.35,1.32,1s-.53,1-1.15,1h-.24Zm0-1.74h.13c.42,0,.87-.08.87-.6s-.48-.58-.89-.58h-.11Z"/>
+              <path class="cls-5" d="M103.22,65v1.93c0,.54.16,1,.79,1s.79-.49.79-1V65h.41v2.07a1.2,1.2,0,1,1-2.4,0V65Z"/>
+              <path class="cls-5" d="M106.15,65h1.76v.37h-1.35v.92h1.31v.37h-1.31v1.24h1.35v.38h-1.76Z"/>
+              <path class="cls-5" d="M110.77,68.27h-.5l-1-1.39h-.17v1.39h-.41V65h.49a1.71,1.71,0,0,1,.87.15.91.91,0,0,1,.43.78.89.89,0,0,1-.79.92Zm-1.63-1.73h.13c.42,0,.87-.08.87-.6s-.49-.59-.89-.59h-.11Z"/>
+              <path class="cls-5" d="M112.26,68.27h-.4V65.36h-.78V65h2v.37h-.78Z"/>
+              <path class="cls-5" d="M116.76,66.63a1.72,1.72,0,0,1-3.43,0,1.72,1.72,0,0,1,3.43,0Zm-.4,0A1.31,1.31,0,1,0,115.05,68,1.3,1.3,0,0,0,116.36,66.63Z"/>
+              <path class="cls-5" d="M119.84,66.1h0l-.38,2.17H119l.67-3.42,1.12,2.58L122,64.85l.67,3.42h-.42l-.39-2.17h0l-1,2.24Z"/>
+              <path class="cls-5" d="M126.54,66.63a1.72,1.72,0,0,1-3.43,0,1.72,1.72,0,0,1,3.43,0Zm-.4,0A1.31,1.31,0,1,0,124.83,68,1.32,1.32,0,0,0,126.14,66.63Z"/>
+              <path class="cls-5" d="M127.31,64.83l2.46,2.58V65h.41V68.4l-2.46-2.58v2.45h-.41Z"/>
+              <path class="cls-5" d="M132,68.27h-.41V65.36h-.78V65h2v.37H132Z"/>
+              <path class="cls-5" d="M134.48,68.27h-.4V65.36h-.78V65h2v.37h-.78Z"/>
+              <path class="cls-5" d="M98.17,46.51v7.6H105V43.56A11.93,11.93,0,0,1,98.17,46.51Z"/>
+              <path class="cls-5" d="M118.35,24.3,117,25c-3-2.63-7.73-3.13-12.7-1.17l.47.45a14.44,14.44,0,0,1,3.24,5c3.71-.82,5.34.83,5.34,6.11V54.11h6.77V32.75a13.07,13.07,0,0,0-.21-2.4l1-.44c5.29-2,7.57-.8,7.57,5.44V47.3a6.77,6.77,0,0,0,6.76,6.77V32.75C135.26,23.68,127,20.29,118.35,24.3Z"/>
+              <path class="cls-5" d="M61.45,50.59a19.23,19.23,0,0,1-2.35-3,12.64,12.64,0,0,1-3.39.42,9.8,9.8,0,0,1-7.08-2.62,9,9,0,0,1-2.71-6.76,9.43,9.43,0,0,1,2.18-6.3q.3-.34.63-.66A10.07,10.07,0,0,1,55.89,29a3.11,3.11,0,0,0,2.52-1.33h0a18.34,18.34,0,0,1,3.79-3.93,18.47,18.47,0,0,0-6.19-1,18.18,18.18,0,0,0-8.72,2.09,15.75,15.75,0,0,0-4.5,3.59,15.09,15.09,0,0,0-1.54,2.16,15.75,15.75,0,0,0,2.29,19c3,3.1,7.11,4.67,12.36,4.67a18.41,18.41,0,0,0,7.83-1.6A15.8,15.8,0,0,1,61.45,50.59Z"/>
+              <path class="cls-5" d="M74.58,48a9.8,9.8,0,0,1-7.08-2.62,9,9,0,0,1-2.72-6.76,9.31,9.31,0,0,1,2.82-7,9.17,9.17,0,0,1,2.5-1.73,11.19,11.19,0,0,1,4.82-1h.53a3.15,3.15,0,0,0,2.66-1.47h0a19.38,19.38,0,0,1,3.06-3.75,18.55,18.55,0,0,0-6.3-1,18.79,18.79,0,0,0-6.39,1.06,17.93,17.93,0,0,0-2.33,1,15.37,15.37,0,0,0-6,5.75,15.78,15.78,0,0,0,2.3,19c3,3.1,7.11,4.67,12.35,4.67a20.89,20.89,0,0,0,3.88-.35c-.46-2.09-.84-4.12-1.13-6.11A12.49,12.49,0,0,1,74.58,48Z"/>
+              <path class="cls-6" d="M105.1,27.19h0l.12.18L105,27A12.9,12.9,0,0,0,94.47,21.6,16.21,16.21,0,0,0,78.29,37.83a61.65,61.65,0,0,0,.35,6.37s0-.07,0-.14,0,.1,0,.12c.25,2.42.62,4.81,1.07,7.12,0-.67-.06-1.36-.08-2.06a45.3,45.3,0,0,1,.76-10,17.8,17.8,0,0,1,4.24-8.9,13.37,13.37,0,0,1,11-4.09h0a8.65,8.65,0,0,1,8.64,8.66,6.92,6.92,0,0,1-6.91,6.94,5.55,5.55,0,0,1-5.53-5.55,4.42,4.42,0,0,1,4.42-4.43,3.53,3.53,0,0,1,3.54,3.54.41.41,0,0,0,.37.44c.41,0,.55-.2.55-.54,0-.1,0-.2,0-.29s0-.07,0-.1a1.5,1.5,0,0,0,0-.2s0-.07,0-.1l0-.19a.36.36,0,0,0,0-.1l0-.19,0-.09a1.46,1.46,0,0,0,0-.2s0,0,0-.08a2.25,2.25,0,0,0-.08-.24v0a3.25,3.25,0,0,0-.23-.54v0l-.12-.23,0,0a2.53,2.53,0,0,0-.13-.22l0,0-.15-.21v0l-.24-.32-.1-.1a1.57,1.57,0,0,0-.18-.19,1.14,1.14,0,0,0-.11-.11l-.18-.17-.12-.1-.07-.06h0L98.49,31h0c-.07-.06-.15-.1-.22-.15h0L98,30.69l-.09-.05-.09-.05,0,0-.15-.07h0l0,0-.15-.06,0,0h0l-.14-.06h0l-.07,0h0l-.26-.08h0l-.1,0-.09,0h0l-.12,0-.09,0h0l-.13,0h-.1l-.15,0H95.4a6.63,6.63,0,0,0-6.62,6.65V37a1.41,1.41,0,0,0,0,.2h0v0a9.1,9.1,0,0,0,.11.93v0l.06.29v0a7.44,7.44,0,0,0,.36,1.16l0,.05a2,2,0,0,0,.11.26v0c.13.27.26.54.41.8l0,0,.14.23,0,0a5.88,5.88,0,0,0,.51.72h0A8.25,8.25,0,0,0,97.06,45a10.37,10.37,0,0,0,10.36-10.39A12.89,12.89,0,0,0,105.1,27.19Z"/>
+              <path class="cls-7" d="M82,60.51S74.58,26.25,95.63,26.27c0,0-11.22.18-10.73,12.73.32,8.14,7.81,21.51,7.81,21.51Z"/>
+              <path class="cls-7" d="M95.63,26.27a8.65,8.65,0,0,1,8.64,8.66,6.92,6.92,0,0,1-6.91,6.94,5.55,5.55,0,0,1-5.53-5.55,4.42,4.42,0,0,1,4.42-4.43h-.08c-.85-.06-7.46-.21-5.56,10A8.25,8.25,0,0,0,97.06,45a10.32,10.32,0,0,0,8.77-4.87C107.6,25.82,95.63,26.27,95.63,26.27Z"/>
+              <path class="cls-6" d="M97.19,30.32l.15.06Z"/>
+              <path class="cls-6" d="M96.4,30.11l.11,0Z"/>
+              <path class="cls-6" d="M96.85,30.21l.27.09Z"/>
+              <path class="cls-6" d="M96.64,30.16l.11,0Z"/>
+              <path class="cls-6" d="M96.16,30.07h0Z"/>
+              <path class="cls-6" d="M88.8,37.21c0-.08,0-.17,0-.25C88.79,37,88.79,37.13,88.8,37.21Z"/>
+              <path class="cls-6" d="M95.91,30h0Z"/>
+              <path class="cls-6" d="M95.66,30h0Z"/>
+              <path class="cls-6" d="M97.81,30.59a5.66,5.66,0,0,1,.89.58A5.66,5.66,0,0,0,97.81,30.59Z"/>
+              <path class="cls-6" d="M97.61,30.5l.16.07Z"/>
+              <path class="cls-6" d="M97.41,30.41l.15.06Z"/>
+              <path class="cls-8" d="M88.78,37v0Z"/>
+              <path class="cls-8" d="M95.4,30h0Z"/>
+              <path class="cls-8" d="M95.74,30h0Z"/>
+              <polygon class="cls-8" points="88.8 37.22 88.8 37.21 88.8 37.21 88.8 37.22"/>
+              <polygon class="cls-8" points="98.7 31.17 98.7 31.16 98.7 31.17 98.7 31.17"/>
+              <path class="cls-8" d="M96.75,30.19l.1,0Z"/>
+              <path class="cls-8" d="M97.34,30.38l.07,0Z"/>
+              <path class="cls-8" d="M96.51,30.13l.13,0Z"/>
+              <path class="cls-8" d="M97.77,30.57l0,0Z"/>
+              <path class="cls-8" d="M97.56,30.47l0,0Z"/>
+              <path class="cls-8" d="M97.12,30.3l.07,0Z"/>
+              <path class="cls-8" d="M96,30.05l.15,0Z"/>
+              <path class="cls-8" d="M96.26,30.08l.14,0Z"/>
+              <path class="cls-5" d="M82,60.45a1.37,1.37,0,0,1,0-.2v0c-.57-2.88-4.63-25.44,6.41-32.1h0l.3-.18h0l.3-.16,0,0,.3-.15,0,0,.3-.14.06,0a2.71,2.71,0,0,1,.3-.13l.06,0,.29-.12.08,0,.29-.1.09,0,.29-.09.1,0,.28-.08.12,0,.28-.07.13,0,.27-.06.15,0,.27,0,.15,0,.28,0,.16,0,.27,0,.18,0,.27,0h.19l.26,0,.2,0h1a13.37,13.37,0,0,0-11,4.09,17.8,17.8,0,0,0-4.24,8.9,45.3,45.3,0,0,0-.76,10c0,.7.05,1.39.08,2.06.64,3.28,1.44,6.41,2.26,9.21h0Z"/>
+
+              <router-link to="/">
+                <g class="cls-9">
+                  <polyline v-bind:style="[styles_hover_btn_inicio_1]" @mouseover="mouseOver_btn_inicio_1" @mouseleave="mouseLeave_btn_inicio_1" class="cls-10 cursor" points="990.97 26.9 970.76 39.6 976.31 43.02 973.37 75.42 990.97 84.69"/>
+                  <polygon v-bind:style="[styles_hover_btn_inicio_1_1]" @mouseover="mouseOver_btn_inicio_1" @mouseleave="mouseLeave_btn_inicio_1" class="cls-11 cursor" points="990.97 34.22 976.31 43.02 973.37 75.42 990.97 84.69 990.97 34.22"/>
+                  <polyline v-bind:style="[styles_hover_btn_inicio_1]" @mouseover="mouseOver_btn_inicio_1" @mouseleave="mouseLeave_btn_inicio_1" class="cls-10 cursor" points="990.97 26.9 1011.17 39.6 1005.63 43.02 1008.57 75.42 990.97 84.69"/>
+                  <polygon v-bind:style="[styles_hover_btn_inicio_1]" @mouseover="mouseOver_btn_inicio_1" @mouseleave="mouseLeave_btn_inicio_1" class="cls-10 cursor" points="980.52 40.48 980.52 43.29 985.42 40.48 985.42 37.55 980.52 40.48"/>
+                  <polygon v-bind:style="[styles_hover_btn_inicio_1_1]" @mouseover="mouseOver_btn_inicio_1" @mouseleave="mouseLeave_btn_inicio_1" class="cls-11 cursor" points="1002.1 40.48 1002.1 43.29 997.2 40.48 997.2 37.55 1002.1 40.48"/>
+                </g>
+                <circle v-bind:style="[styles_hover_btn_inicio_1_2]" @mouseover="mouseOver_btn_inicio_1" @mouseleave="mouseLeave_btn_inicio_1" class="cls-12 cursor" cx="990.98" cy="45" r="23.4"/>
+                <text v-bind:style="[styles_hover_btn_inicio_1]" @mouseover="mouseOver_btn_inicio_1" @mouseleave="mouseLeave_btn_inicio_1" class="cls-13 cursor" transform="translate(918.14 49.7)">inicio</text>
+              </router-link>
+
+              <router-link to="/espacios/visitaguiada">
+                <rect v-bind:style="[styles_hover_btn_espacios]" class="cls-3 btn_navbar_espacios" x="610.59" width="226.16" height="90"/>
+                <text v-bind:style="[styles_hover_btn_espacios_titulo]" @mouseover="mouseOver_btn_espacios" @mouseleave="mouseLeave_btn_espacios" class="cls-14 cursor text_espacios" transform="translate(649.67 54.38)">
+                  ES<tspan class="cls-15" x="37.78" y="0">P</tspan>
+                  <tspan class="cls-16" x="54.02" y="0">A</tspan>
+                  <tspan x="74.08" y="0">CIOS</tspan>
+                </text>
+              </router-link>
+
+              <router-link to="/cartelera">
+                <rect v-bind:style="[styles_hover_btn_cartelera]" class="cls-3 btn_navbar_cartelera" x="377.07" width="226.16" height="90"/>
+                <text v-bind:style="[styles_hover_btn_cartelera_titulo]" @mouseover="mouseOver_btn_cartelera" @mouseleave="mouseLeave_btn_cartelera" class="cls-14 cursor text_cartelera" transform="translate(402.08 54.38)">
+                  <tspan class="cls-17">C</tspan>
+                  <tspan x="22.11" y="0">A</tspan>
+                  <tspan class="cls-18" x="43.46" y="0">R</tspan>
+                  <tspan  x="62.73" y="0">TELERA</tspan>
+                </text>
+              </router-link>
+            </g>
+          </g>
+        </svg>
+  
       </div>
+    </section>
+
+    <section slot="contenido" v-bind:style="[styles]">
       <div v-if="loading">
         <div class="pad-spinner-view uk-text-center">
           <div uk-spinner="ratio: 4"/>
@@ -45,7 +157,14 @@ export default {
   },
   data() {
     return {
-      loading: false
+      loading: false,
+      window: {
+        width: 0,
+        height: 0
+      },
+      hover_btn_cartelera: false,
+      hover_btn_espacios: false,
+      hover_btn_inicio_1: false,
     }
   },
   created () {
@@ -57,11 +176,189 @@ export default {
       .catch(error => {
         this.loading = true
       })
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
   },
   computed: {
     data_cartelera() {
       return this.$store.state.data_cartelera;
+    },
+    styles: function() {
+      var porcentaje = 0.083333333
+      var porcentaje_menos = 0.085555555
+      var resta_default = 991
+      var altura_detault = 90
+      var iteracion = 0
+      var resultado = 0
+      if(this.window.width >= 1081){
+        iteracion = (this.window.width - resta_default) - altura_detault
+        resultado = altura_detault + (porcentaje * iteracion)
+
+      }
+      if(this.window.width < 1081){
+        iteracion = (1081 - this.window.width)
+        resultado = altura_detault - (porcentaje_menos * iteracion)
+
+      }
+      return {
+        'padding-top': resultado + 'px'
+    	};
+    },
+    styles_hover_btn_cartelera: function() {
+      if(this.hover_btn_cartelera == true){
+        return {
+          'fill':'#00BB9D',
+          'color': '#000000',
+        };
+      }
+    },
+    styles_hover_btn_cartelera_titulo: function() {
+      if(this.hover_btn_cartelera == true){
+        return {
+          'fill':'#333333',
+        };
+      }
+    },
+    styles_hover_btn_espacios: function() {
+      if(this.hover_btn_espacios == true){
+        return {
+          'fill':'#00BB9D',
+          'color': '#000000',
+        };
+      }
+    },
+    styles_hover_btn_espacios_titulo: function() {
+      if(this.hover_btn_espacios == true){
+        return {
+          'fill':'#333333',
+        };
+      }
+    },
+    styles_hover_btn_inicio_1: function() {
+      if(this.hover_btn_inicio_1 == true){
+        return {
+          'fill':'#009E85',
+        };
+      }
+      if(this.$route.name == "Inicio"){
+        return {
+          'fill':'#009E85',
+        };
+      }
+    },
+    styles_hover_btn_inicio_1_1: function() {
+      if(this.hover_btn_inicio_1 == true){
+        return {
+          'fill':'#44C5AF',
+        };
+      }
+      if(this.$route.name == "Inicio"){
+        return {
+          'fill':'#44C5AF',
+        };
+      }
+    },
+    styles_hover_btn_inicio_1_2: function() {
+      if(this.hover_btn_inicio_1 == true){
+        return {
+          'stroke':'#44C5AF',
+        };
+      }
+      if(this.$route.name == "Inicio"){
+        return {
+          'stroke':'#44C5AF',
+        };
+      }
+    },
+  },
+  methods: {
+  	cargarModalSala(x) {
+			this.loading_sala = true
+			var number = x.currentTarget.id;
+			this.$store.dispatch('loadSalaEspecifica', x.currentTarget.id)
+				.then(response => {
+						this.loading_sala = false;
+				})
+				.catch(error => {
+						this.loading_sala= true;
+				})
+			this.data_programa = []
+			for(var i = 0; i < this.programacion.length; i++){
+				if(this.programacion[i].area === number){
+					this.data_programa = this.programacion[i]
+				} 
+			}
+    },
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    },
+    mouseOver_btn_cartelera: function(){
+      this.hover_btn_cartelera = true;   
+    },
+    mouseLeave_btn_cartelera: function() {
+      this.hover_btn_cartelera = false; 
+    },
+    mouseOver_btn_espacios: function(){
+      this.hover_btn_espacios = true;   
+    },
+    mouseLeave_btn_espacios: function() {
+      this.hover_btn_espacios = false; 
+    },
+    mouseOver_btn_inicio_1: function(){
+      this.hover_btn_inicio_1 = true;   
+    },
+    mouseLeave_btn_inicio_1: function() {
+      this.hover_btn_inicio_1 = false; 
     }
-  }
+	}
 }
 </script>
+
+<style scoped>
+  .cls-1,.cls-12{fill:none;}
+  .cls-2{isolation:isolate;}
+  .cls-3{fill:#333;}
+  .cls-4{opacity:0.71;mix-blend-mode:multiply;fill:url(#Degradado_sin_nombre_20);}
+  .cls-5{fill:#fff;}
+  .cls-6{fill:#8cb51d;}
+  .cls-7{fill:#009cb4;}
+  .cls-8{fill:#bdd17f;}
+  .cls-9{clip-path:url(#clip-path);}
+  .cls-10,.cls-13{fill:#706f6f;}
+  .cls-11{fill:#878787;}
+  .cls-12{stroke:#706f6f;stroke-miterlimit:10;stroke-width:1.47px;}
+  .cls-13{font-size:16.54px;}
+  .cls-13,.cls-14{font-family:ProximaNova-Light, Proxima Nova;font-weight:300;}
+  .cls-14{font-size:33px;fill:#706F6F;}
+  .cls-15{letter-spacing:-0.08em;}
+  .cls-16{letter-spacing:-0.04em;}
+  .cls-17{letter-spacing:0em;}
+  .cls-18{letter-spacing:-0.01em;}
+
+  .btn_navbar_cartelera:hover {
+    fill:#00BB9D;
+    cursor:pointer;
+  }
+  .btn_navbar_cartelera:hover ~ .text_cartelera {
+    fill:#333333;
+  }
+
+  .btn_navbar_espacios:hover {
+    fill:#00BB9D;
+    cursor:pointer;
+  }
+  .btn_navbar_espacios:hover ~ .text_espacios {
+    fill:#333333;
+  }
+
+  a.router-link-active rect{
+    fill: #00BB9D !important;
+  }
+  a.router-link-active text.cls-14{
+    fill: #333333 !important;
+  }
+</style>

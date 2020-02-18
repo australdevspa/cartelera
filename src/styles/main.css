@@ -7,10 +7,8 @@
 .uk-navbar-sticky {
   box-shadow: 0 2px 5px 0 rgba(30,30,30,.09);
 }
-/*colores boton navbar cuando esta activo*/
-.uk-navbar-item>a.router-link-active {
-  background: #19b868 !important;
-  color: white !important;
+.uk-sticky-placeholder {
+  height: 0px !important;
 }
 
 /*mi css*/
