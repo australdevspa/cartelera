@@ -454,7 +454,7 @@
 </g>
 <g id="mafalda">
 	<g id="362" class="sala cursor" data-sala-id="362" @click.prevent="cargarModalSala($event)" href="#modal-sala4-a" uk-toggle>
-		<rect x="51.4" y="216.3" class="st2" width="133.8" height="84.5"/>
+		<rect v-bind:style="[styles_blink_mafalda]" x="51.4" y="216.3" class="st2" width="133.8" height="84.5"/>
 	</g>
 </g>
 
@@ -539,7 +539,9 @@ export default {
   data () {
     return {
 			loading_sala: true,
-			data_programa: []
+			data_programa: [],
+			blink_sala_mafalda_prox: false,
+			blink_sala_mafalda_act: false,
     }
 	},
 	created () {
@@ -585,6 +587,11 @@ export default {
 						circle2.setAttribute("r", "7");
 						salas[i].appendChild(circle2);
 
+						if(this.programacion[z].area == "362"){
+							this.blink_sala_mafalda_prox = true
+							this.blink_sala_mafalda_act = true
+						}
+
 					}else if(this.programacion[z].actualmente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -598,6 +605,11 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "362"){
+							this.blink_sala_mafalda_act = true
+						}
+
 					}else if(this.programacion[z].proximamente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -611,6 +623,11 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "362"){
+							this.blink_sala_mafalda_prox = true
+						}
+
 					}
 				}
 			}
@@ -669,6 +686,11 @@ var svg = document.getElementById('piso-4')
 						circle2.setAttribute("r", "7");
 						salas[i].appendChild(circle2);
 
+						if(this.programacion[z].area == "362"){
+							this.blink_sala_mafalda_prox = true
+							this.blink_sala_mafalda_act = true
+						}
+
 					}else if(this.programacion[z].actualmente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -682,6 +704,11 @@ var svg = document.getElementById('piso-4')
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "362"){
+							this.blink_sala_mafalda_act = true
+						}
+
 					}else if(this.programacion[z].proximamente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -695,6 +722,11 @@ var svg = document.getElementById('piso-4')
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "362"){
+							this.blink_sala_mafalda_prox = true
+						}
+
 					}
 				}
 			}
@@ -725,7 +757,38 @@ var svg = document.getElementById('piso-4')
 		},
 		sala_seleccionada() {
       return this.$store.state.sala_especifica;
-    },
+	},
+	styles_blink_mafalda: function() {
+			if(this.blink_sala_mafalda_prox == true && this.blink_sala_mafalda_act == true){
+				return {
+					'animation': 'blinker 2s linear infinite',
+					'fill': '#19b868'
+
+				};
+			}else{
+				if(this.blink_sala_mafalda_act == true){
+					return {
+						'animation': 'blinker 2s linear infinite',
+						'fill': '#19b868'
+
+					};
+				}else{
+					if(this.blink_sala_mafalda_prox == true){
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'rebeccapurple'
+
+						};
+					}else{
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'orange'
+
+						};
+					}
+				}
+			}
+		},	
   },
   methods: {
   	cargarModalSala(x) {

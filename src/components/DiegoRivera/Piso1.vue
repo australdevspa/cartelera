@@ -475,12 +475,12 @@
 </g>
 <g id="sala_mexicana">
 	<g id="366" class="sala cursor" data-sala-id="366" @click.prevent="cargarModalSala($event)" href="#modal-sala1-a" uk-toggle>
-		<rect x="80.5" y="360.2" class="st2" width="53.1" height="65.8"/>
+		<rect v-bind:style="[styles_blink_mexicana]" x="80.5" y="360.2" class="st2" width="53.1" height="65.8"/>
 	</g>
 </g>
 <g id="sala_teatro">
 	<g id="363"  class="sala cursor" data-sala-id="363" @click.prevent="cargarModalSala($event)" href="#modal-sala1-b" uk-toggle>
-		<rect x="49.4" y="239.6" class="st2" width="84.5" height="67.9"/>
+		<rect v-bind:style="[styles_blink_teatro]" x="49.4" y="239.6" class="st2" width="84.5" height="67.9"/>
 	</g>
 </g>
 
@@ -597,7 +597,11 @@ export default {
 	data () {
 		return {
 			loading_sala: true,
-			data_programa: []
+			data_programa: [],
+			blink_sala_mexicana_prox: false,
+			blink_sala_mexicana_act: false,
+			blink_sala_teatro_prox: false,
+			blink_sala_teatro_act: false,
 		}
 	},
 
@@ -638,6 +642,16 @@ export default {
 						circle2.setAttribute("cy", y + 7 + 5 + 14 + 3);
 						circle2.setAttribute("r", "7");
 						salas[i].appendChild(circle2);
+						
+						if(this.programacion[z].area == "363"){
+							this.blink_sala_teatro_prox = true
+							this.blink_sala_teatro_act = true
+						}else{
+							if(this.programacion[z].area == "366"){
+								this.blink_sala_mexicana_prox = true
+								this.blink_sala_mexicana_act = true
+							}
+						}
 
 					}else if(this.programacion[z].actualmente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
@@ -652,6 +666,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "363"){
+							this.blink_sala_teatro_act = true
+						}else{
+							if(this.programacion[z].area == "366"){
+								this.blink_sala_mexicana_act = true
+							}
+						}
+
 					}else if(this.programacion[z].proximamente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -665,6 +688,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "363"){
+							this.blink_sala_teatro_prox = true
+						}else{
+							if(this.programacion[z].area == "366"){
+								this.blink_sala_mexicana_prox = true
+							}
+						}
+
 					}
 				}
 			}
@@ -723,6 +755,16 @@ export default {
 						circle2.setAttribute("r", "7");
 						salas[i].appendChild(circle2);
 
+						if(this.programacion[z].area == "363"){
+							this.blink_sala_teatro_prox = true
+							this.blink_sala_teatro_act = true
+						}else{
+							if(this.programacion[z].area == "366"){
+								this.blink_sala_mexicana_prox = true
+								this.blink_sala_mexicana_act = true
+							}
+						}
+
 					}else if(this.programacion[z].actualmente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -736,6 +778,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "363"){
+							this.blink_sala_teatro_act = true
+						}else{
+							if(this.programacion[z].area == "366"){
+								this.blink_sala_mexicana_act = true
+							}
+						}
+
 					}else if(this.programacion[z].proximamente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -749,6 +800,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "363"){
+							this.blink_sala_teatro_prox = true
+						}else{
+							if(this.programacion[z].area == "366"){
+								this.blink_sala_mexicana_prox = true
+							}
+						}
+
 					}
 				}
 			}
@@ -856,7 +916,69 @@ export default {
 		},
 		sala_seleccionada() {
       return this.$store.state.sala_especifica;
-    },
+	},
+		styles_blink_teatro: function() {
+			if(this.blink_sala_teatro_prox == true && this.blink_sala_teatro_act == true){
+				return {
+					'animation': 'blinker 2s linear infinite',
+					'fill': '#19b868'
+
+				};
+			}else{
+				if(this.blink_sala_teatro_act == true){
+					return {
+						'animation': 'blinker 2s linear infinite',
+						'fill': '#19b868'
+
+					};
+				}else{
+					if(this.blink_sala_teatro_prox == true){
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'rebeccapurple'
+
+						};
+					}else{
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'orange'
+
+						};
+					}
+				}
+			}
+		},	
+		styles_blink_mexicana: function() {
+			if(this.blink_sala_mexicana_prox == true && this.blink_sala_mexicana_act == true){
+				return {
+					'animation': 'blinker 2s linear infinite',
+					'fill': '#19b868'
+
+				};
+			}else{
+				if(this.blink_sala_mexicana_act == true){
+					return {
+						'animation': 'blinker 2s linear infinite',
+						'fill': '#19b868'
+
+					};
+				}else{
+					if(this.blink_sala_mexicana_prox == true){
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'rebeccapurple'
+
+						};
+					}else{
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'orange'
+
+						};
+					}
+				}
+			}
+		},	
 	},
  	methods: {
   	cargarModalSala(x) {

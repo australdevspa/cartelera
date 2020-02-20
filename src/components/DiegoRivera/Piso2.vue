@@ -585,12 +585,12 @@
 </g>
 <g id="multiuso">
 	<g id="364" class="sala cursor" data-sala-id="364" @click.prevent="cargarModalSala($event)" href="#modal-sala2-a" uk-toggle>
-		<rect x="194.9" y="360.2" class="st2" width="53.1" height="65.8"/>
+		<rect v-bind:style="[styles_blink_multiuso]" x="194.9" y="360.2" class="st2" width="53.1" height="65.8"/>
 	</g>
 </g>
 <g id="hardy_wistuba">
 	<g id="367" class="sala cursor" data-sala-id="367" @click.prevent="cargarModalSala($event)" href="#modal-sala2-b" uk-toggle>
-		<rect x="49.4" y="245" class="st2" width="84.5" height="67.9"/>
+		<rect v-bind:style="[styles_blink_hardy]" x="49.4" y="245" class="st2" width="84.5" height="67.9"/>
 	</g>
 </g>
 
@@ -704,7 +704,11 @@ export default {
   data () {
     return {
 			loading_sala: true,
-			data_programa: []
+			data_programa: [],
+			blink_sala_multiuso_prox: false,
+			blink_sala_multiuso_act: false,
+			blink_sala_hardy_prox: false,
+			blink_sala_hardy_act: false,
     }
 	},
 		mounted () {
@@ -745,6 +749,16 @@ export default {
 						circle2.setAttribute("r", "7");
 						salas[i].appendChild(circle2);
 
+						if(this.programacion[z].area == "364"){
+							this.blink_sala_multiuso_prox = true
+							this.blink_sala_multiuso_act = true
+						}else{
+							if(this.programacion[z].area == "367"){
+								this.blink_sala_hardy_prox = true
+								this.blink_sala_hardy_act = true
+							}
+						}
+
 					}else if(this.programacion[z].actualmente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -758,6 +772,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "364"){
+							this.blink_sala_multiuso_act = true
+						}else{
+							if(this.programacion[z].area == "367"){
+								this.blink_sala_hardy_act = true
+							}
+						}
+
 					}else if(this.programacion[z].proximamente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -771,6 +794,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "364"){
+							this.blink_sala_multiuso_prox = true
+						}else{
+							if(this.programacion[z].area == "367"){
+								this.blink_sala_hardy_prox = true
+							}
+						}
+
 					}
 				}
 			}
@@ -829,6 +861,16 @@ export default {
 						circle2.setAttribute("r", "7");
 						salas[i].appendChild(circle2);
 
+						if(this.programacion[z].area == "364"){
+							this.blink_sala_multiuso_prox = true
+							this.blink_sala_multiuso_act = true
+						}else{
+							if(this.programacion[z].area == "367"){
+								this.blink_sala_hardy_prox = true
+								this.blink_sala_hardy_act = true
+							}
+						}
+
 					}else if(this.programacion[z].actualmente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -842,6 +884,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+					
+						if(this.programacion[z].area == "364"){
+							this.blink_sala_multiuso_act = true
+						}else{
+							if(this.programacion[z].area == "367"){
+								this.blink_sala_hardy_act = true
+							}
+						}
+
 					}else if(this.programacion[z].proximamente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -855,6 +906,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+					
+						if(this.programacion[z].area == "364"){
+							this.blink_sala_multiuso_prox = true
+						}else{
+							if(this.programacion[z].area == "367"){
+								this.blink_sala_hardy_prox = true
+							}
+						}
+
 					}
 				}
 			}
@@ -962,7 +1022,69 @@ export default {
 		},
 		sala_seleccionada() {
       return this.$store.state.sala_especifica;
-    },
+	},
+		styles_blink_multiuso: function() {
+			if(this.blink_sala_multiuso_prox == true && this.blink_sala_multiuso_act == true){
+				return {
+					'animation': 'blinker 2s linear infinite',
+					'fill': '#19b868'
+
+				};
+			}else{
+				if(this.blink_sala_multiuso_act == true){
+					return {
+						'animation': 'blinker 2s linear infinite',
+						'fill': '#19b868'
+
+					};
+				}else{
+					if(this.blink_sala_multiuso_prox == true){
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'rebeccapurple'
+
+						};
+					}else{
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'orange'
+
+						};
+					}
+				}
+			}
+		},
+		styles_blink_hardy: function() {
+			if(this.blink_sala_hardy_prox == true && this.blink_sala_hardy_act == true){
+				return {
+					'animation': 'blinker 2s linear infinite',
+					'fill': '#19b868'
+
+				};
+			}else{
+				if(this.blink_sala_hardy_act == true){
+					return {
+						'animation': 'blinker 2s linear infinite',
+						'fill': '#19b868'
+
+					};
+				}else{
+					if(this.blink_sala_hardy_prox == true){
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'rebeccapurple'
+
+						};
+					}else{
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'orange'
+
+						};
+					}
+				}
+			}
+		},
   },
   methods: {
   	cargarModalSala(x) {

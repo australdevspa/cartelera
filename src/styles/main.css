@@ -996,3 +996,10 @@
   border-width: 1px;
   border-color: #ccc;
 }
+
+/* Blink */
+@keyframes blinker {
+  50% {
+    opacity: 0.4;
+  }
+}

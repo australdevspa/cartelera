@@ -506,7 +506,7 @@
 		<rect x="223.4" y="275.8" class="st3" width="25.4" height="30.6"/>
 	</g>
 	<g id="369" class="sala cursor" data-sala-id="369" @click.prevent="cargarModalSala($event)" href="#modal-sala3-b" uk-toggle>
-		<rect x="86.6" y="213.6" class="st3" width="47.3" height="41"/>
+		<rect v-bind:style="[styles_blink_reuniones]" x="86.6" y="213.6" class="st3" width="47.3" height="41"/>
 	</g>
 	<g id="Oficinas_administrativas">
 		<rect x="49.4" y="259.1" class="st3" width="84.5" height="67.9"/>
@@ -514,7 +514,7 @@
 </g>
 <g id="pinacoteca">
 	<g id="368" class="sala cursor" data-sala-id="368" @click.prevent="cargarModalSala($event)" href="#modal-sala3-a" uk-toggle>
-		<rect x="224.7" y="364" class="st3" width="59.8" height="84.5"/>
+		<rect v-bind:style="[styles_blink_pinacoteca]" x="224.7" y="364" class="st3" width="59.8" height="84.5"/>
 	</g>
 </g>
 
@@ -623,7 +623,11 @@ export default {
 	data () {
 		return {
 			loading_sala: true,
-			data_programa: []
+			data_programa: [],
+			blink_sala_reuniones_prox: false,
+			blink_sala_reuniones_act: false,
+			blink_sala_pinacoteca_prox: false,
+			blink_sala_pinacoteca_act: false,
 		}
 	},
 	/*mounted () {
@@ -741,6 +745,16 @@ export default {
 						circle2.setAttribute("r", "7");
 						salas[i].appendChild(circle2);
 
+						if(this.programacion[z].area == "369"){
+							this.blink_sala_reuniones_prox = true
+							this.blink_sala_reuniones_act = true
+						}else{
+							if(this.programacion[z].area == "368"){
+								this.blink_sala_pinacoteca_prox = true
+								this.blink_sala_pinacoteca_act = true
+							}
+						}
+
 					}else if(this.programacion[z].actualmente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -754,6 +768,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "369"){
+							this.blink_sala_reuniones_act = true
+						}else{
+							if(this.programacion[z].area == "368"){
+								this.blink_sala_pinacoteca_act = true
+							}
+						}
+
 					}else if(this.programacion[z].proximamente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -767,6 +790,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "369"){
+							this.blink_sala_reuniones_prox = true
+						}else{
+							if(this.programacion[z].area == "368"){
+								this.blink_sala_pinacoteca_prox = true
+							}
+						}
+
 					}
 				}
 			}
@@ -825,6 +857,16 @@ export default {
 						circle2.setAttribute("r", "7");
 						salas[i].appendChild(circle2);
 
+						if(this.programacion[z].area == "369"){
+							this.blink_sala_reuniones_prox = true
+							this.blink_sala_reuniones_act = true
+						}else{
+							if(this.programacion[z].area == "368"){
+								this.blink_sala_pinacoteca_prox = true
+								this.blink_sala_pinacoteca_act = true
+							}
+						}
+
 					}else if(this.programacion[z].actualmente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -838,6 +880,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+
+						if(this.programacion[z].area == "369"){
+							this.blink_sala_reuniones_act = true
+						}else{
+							if(this.programacion[z].area == "368"){
+								this.blink_sala_pinacoteca_act = true
+							}
+						}
+
 					}else if(this.programacion[z].proximamente.ocurrence !== 0){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
@@ -851,6 +902,15 @@ export default {
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
+					
+						if(this.programacion[z].area == "369"){
+							this.blink_sala_reuniones_prox = true
+						}else{
+							if(this.programacion[z].area == "368"){
+								this.blink_sala_pinacoteca_prox = true
+							}
+						}
+
 					}
 				}
 			}
@@ -881,7 +941,69 @@ export default {
 		},
 		sala_seleccionada() {
       		return this.$store.state.sala_especifica;
-    	},
+		},
+		styles_blink_reuniones: function() {
+			if(this.blink_sala_reuniones_prox == true && this.blink_sala_reuniones_act == true){
+				return {
+					'animation': 'blinker 2s linear infinite',
+					'fill': '#19b868'
+
+				};
+			}else{
+				if(this.blink_sala_reuniones_act == true){
+					return {
+						'animation': 'blinker 2s linear infinite',
+						'fill': '#19b868'
+
+					};
+				}else{
+					if(this.blink_sala_reuniones_prox == true){
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'rebeccapurple'
+
+						};
+					}else{
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'orange'
+
+						};
+					}
+				}
+			}
+		},	
+		styles_blink_pinacoteca: function() {
+			if(this.blink_sala_pinacoteca_prox == true && this.blink_sala_pinacoteca_act == true){
+				return {
+					'animation': 'blinker 2s linear infinite',
+					'fill': '#19b868'
+
+				};
+			}else{
+				if(this.blink_sala_pinacoteca_act == true){
+					return {
+						'animation': 'blinker 2s linear infinite',
+						'fill': '#19b868'
+
+					};
+				}else{
+					if(this.blink_sala_pinacoteca_prox == true){
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'rebeccapurple'
+
+						};
+					}else{
+						return {
+							'animation': 'blinker 2s linear infinite',
+							'fill': 'orange'
+
+						};
+					}
+				}
+			}
+		},	
 	},
   	methods: {
  		cargarModalSala(x) {
