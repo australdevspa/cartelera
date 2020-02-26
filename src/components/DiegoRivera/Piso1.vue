@@ -2,16 +2,16 @@
     <section>
 		<div class="uk-section espacios-pad">
       		<div class="uk-container uk-container-center uk-text-center pad-evento">
-        	<div>
- 				<a v-if="is_not_totem" href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
-        	</div>
+				<div>
+					<a v-if="is_not_totem" href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
+				</div>
 
-        	<div class="x">
-            	<div id="arriba"></div>
+				<div class="x">
+					<div id="arriba"></div>
 
-				<div class="uk-container uk-container-center pad-evento">
-					<div class="uk-card evento-card parent">
-						<div class="uk-card-body uk-text-center">
+					<div class="uk-container uk-container-center pad-evento">
+						<div class="uk-card evento-card parent">
+							<div class="uk-card-body uk-text-center">
 
 
 <svg id="piso-1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -461,15 +461,12 @@
 	</g>
 </svg>
 
-
-                </div>
-            </div>
-        </div>
-
-        </div>
-
-      </div>
-    </div>
+                			</div>
+            			</div>
+        			</div>
+        		</div>
+      		</div>
+    	</div>
 
 
 		    <div id="modal-sala1-a" class="uk-flex-top" uk-modal>
@@ -659,18 +656,18 @@ export default {
 						}
 					}
 					if(estado === false){
-							var rects = salas[i].querySelectorAll('rect');
-							var x = rects[0].getBBox().x
-							var y = rects[0].getBBox().y
+						var rects = salas[i].querySelectorAll('rect');
+						var x = rects[0].getBBox().x
+						var y = rects[0].getBBox().y
 
-							var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-							circle.setAttribute("fill", "orange");
-							circle.setAttribute("stroke", "#f5f8ed");
-							circle.setAttribute("stroke-width", "1")
-							circle.setAttribute("cx", x + 7 + 5);
-							circle.setAttribute("cy", y + 7 + 5);
-							circle.setAttribute("r", "7");
-							salas[i].appendChild(circle);
+						var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+						circle.setAttribute("fill", "orange");
+						circle.setAttribute("stroke", "#f5f8ed");
+						circle.setAttribute("stroke-width", "1")
+						circle.setAttribute("cx", x + 7 + 5);
+						circle.setAttribute("cy", y + 7 + 5);
+						circle.setAttribute("r", "7");
+						salas[i].appendChild(circle);
 					}
 				}
 			
@@ -920,15 +917,12 @@ export default {
     padding-right: 300px !important;
 	}
 }
-
-
-	.st0{fill:#F5F8ED;}
-	.st1{opacity:0.13;fill:#C2D183;enable-background:new    ;}
-	.st2{fill:#0C646D;}
-	.st3{fill:#41463B;}
-	.st4{fill:none;stroke:#0C646D;stroke-miterlimit:10;}
-	.st5{fill:#FFFFFF;}
-
+.st0{fill:#F5F8ED;}
+.st1{opacity:0.13;fill:#C2D183;enable-background:new    ;}
+.st2{fill:#0C646D;}
+.st3{fill:#41463B;}
+.st4{fill:none;stroke:#0C646D;stroke-miterlimit:10;}
+.st5{fill:rgb(223, 199, 199);}
 .sala:hover>rect {
 	opacity:0.5;fill:#0C646D;
 }
@@ -948,11 +942,8 @@ export default {
 .uk-card-body {
     padding: 0px !important;
 }
-
-
-
 .y {
-  padding-bottom: 80px !important;
+  	padding-bottom: 80px !important;
 }
 @media only screen and (max-width: 480px) {
   .tamaño-botones-espacios {

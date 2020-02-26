@@ -1,62 +1,17 @@
 <template>
     <section>
-    
 		<div class="uk-section espacios-pad">
-      <div class="uk-container uk-container-center uk-text-center pad-evento">
-        <div>
+      		<div class="uk-container uk-container-center uk-text-center pad-evento">
+        		<div>
+ 					<a v-if="is_not_totem" href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
+        		</div>
 
- 					<a href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
-
-          <!--<div v-if="this.floor !== 0">
-            <a href="#" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño" @click.prevent="cargarPiso(0)"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
-          </div>
-          <div v-else>
-            <a href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
-          </div>-->
-
-          <!--<div class="uk-align-right">
-            <div v-if="camara_encendida">
-              <a href="#" class="tamaño-botones-espacios uk-button boton-secundario" @click.prevent="apagarCamara()">Desactivar Scanner QR</a>
-            </div>
-            <div v-else>
-              <a href="#" v-scroll-to="'#abajo'" class="tamaño-botones-espacios uk-button boton-secundario" @click.prevent="encenderCamara()">Activar Scanner QR</a>
-            </div>
-          </div>-->
-        </div>
-
-        <div class="x">
-
-          <!--<div v-if="camara_encendida">
-            <router-view class="y"></router-view>
-            <div id="abajo"></div>
-          </div>-->
-
-          <!--<form class="uk-form-stacked ">
-            <div>
-             	<label class="uk-form-label uk-text-large">
-                Explora Nuestra Casa del Arte Diego Rivera
-              </label>
-
-				<div class="barra-simbologia">
-					<div class="simbologia"><div class="color-hoy"/>Actividades para hoy</div>
-					<div class="simbologia"><div class="color-prox"/>Actividades próximas</div>
-					<div class="simbologia"><div class="color-sin"/>Sin actividades programadas</div>
-				</div>
-
-            </div>
-          </form>-->
-
-         <!-- <div v-if="loading">
-            <div class="pad-spinner-view uk-text-center">
-              <div uk-spinner="ratio: 4"/>
-            </div>
-          </div>
-          <div v-else>-->
-            <div id="arriba"></div>
+        		<div class="x">
+            		<div id="arriba"></div>
             
-   <div class="uk-container uk-container-center pad-evento">
-            <div class="uk-card evento-card parent">
-                <div class="uk-card-body uk-text-center">
+   					<div class="uk-container uk-container-center pad-evento">
+            			<div class="uk-card evento-card parent">
+               	 			<div class="uk-card-body uk-text-center">
 
 
 <svg id="piso-4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -473,23 +428,23 @@
      <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10" id="svg_198" y="163.384095" x="183.764423" stroke-width="0" stroke="#000" fill="#41463b">Actividades próximas</text>
     </g>
    </g>
+	
+		<a v-if="!is_not_totem" href="javascript:window.history.back();">
+			<rect id="svg_167" height="60" width="167" y="547" x="166" stroke-width="0" stroke="#000" fill="#D4D9C5" class="cursor blink_back_1"/>
+  			<rect id="svg_168" height="30" width="5" y="562" x="165" stroke-width="0" stroke="#000" fill="#c2d183"/>
+  			<text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_169" y="585" x="177" stroke-width="0" stroke="#000" fill="#41463b">Volver Atrás</text>
+		</a>	
+	
 	</g>
-
 </svg>
 
 
-									
-
-               </div>
-            </div>
-        </div>
-
-
-
-        </div>
-
-      </div>
-    </div>
+							</div>
+						</div>
+					</div>
+        		</div>
+      		</div>
+    	</div>
 		
 			
 
@@ -531,107 +486,205 @@ import Sala from '@/components/Sala'
 import SalaVacia from '@/components/SalaVacia'
 
 export default {
-  name: 'Piso4',
-  components: {
+	name: 'Piso4',
+	components: {
 		Sala,
 		SalaVacia
-  },
-  data () {
-    return {
+	},
+	data () {
+		return {
 			loading_sala: true,
 			data_programa: [],
 			blink_sala_mafalda_prox: false,
 			blink_sala_mafalda_act: false,
-    }
+			window: {
+				width: 0,
+				height: 0
+			}
+    	}
 	},
-	created () {
-    
-		  
-		
+	created () { 
+    	window.addEventListener('resize', this.handleResize)
+    	this.handleResize();
 	},
+	destroyed() {
+    	window.removeEventListener('resize', this.handleResize)
+  	},
 	mounted () {
-			if(this.salas.length === 0){
-    this.$store.dispatch('loadSalas')
-		this.$store.dispatch('loadProgramacion')
-		      .then(response => {
-				
-				
+		if(this.salas.length === 0){
+    		this.$store.dispatch('loadSalas')
+			this.$store.dispatch('loadProgramacion').then(response => {
 				var svg = document.getElementById('piso-4')
-		var salas = svg.querySelectorAll('.sala');
+				var salas = svg.querySelectorAll('.sala');
 
-		for(var i=0; i<salas.length; ++i) {
-			var estado = false;
-			for(var z = 0; z < this.programacion.length; z++){
-				if(this.programacion[z].area === salas[i].id){
-					estado = true
-					if(this.programacion[z].actualmente.ocurrence !== 0 && this.programacion[z].proximamente.ocurrence !== 0){
-						var rects = salas[i].querySelectorAll('rect');
-						var x = rects[0].getBBox().x
-						var y = rects[0].getBBox().y
+				for(var i=0; i<salas.length; ++i) {
+					var estado = false;
+					for(var z = 0; z < this.programacion.length; z++){
+						if(this.programacion[z].area === salas[i].id){
+							estado = true
+							if(this.programacion[z].actualmente.ocurrence !== 0 && this.programacion[z].proximamente.ocurrence !== 0){
+								var rects = salas[i].querySelectorAll('rect');
+								var x = rects[0].getBBox().x
+								var y = rects[0].getBBox().y
 
-						var circle1 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-						circle1.setAttribute("fill", "#19b868");
-						circle1.setAttribute("stroke", "#f5f8ed");
-						circle1.setAttribute("stroke-width", "1")
-						circle1.setAttribute("cx", x + 7 + 5);
-						circle1.setAttribute("cy", y + 7 + 5);
-						circle1.setAttribute("r", "7");
-						salas[i].appendChild(circle1);
+								var circle1 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+								circle1.setAttribute("fill", "#19b868");
+								circle1.setAttribute("stroke", "#f5f8ed");
+								circle1.setAttribute("stroke-width", "1")
+								circle1.setAttribute("cx", x + 7 + 5);
+								circle1.setAttribute("cy", y + 7 + 5);
+								circle1.setAttribute("r", "7");
+								salas[i].appendChild(circle1);
 
-						var circle2 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-						circle2.setAttribute("fill", "rebeccapurple");
-						circle2.setAttribute("stroke", "#f5f8ed");
-						circle2.setAttribute("stroke-width", "1")
-						circle2.setAttribute("cx", x + 7 + 5);
-						circle2.setAttribute("cy", y + 7 + 5 + 14 + 3);
-						circle2.setAttribute("r", "7");
-						salas[i].appendChild(circle2);
+								var circle2 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+								circle2.setAttribute("fill", "rebeccapurple");
+								circle2.setAttribute("stroke", "#f5f8ed");
+								circle2.setAttribute("stroke-width", "1")
+								circle2.setAttribute("cx", x + 7 + 5);
+								circle2.setAttribute("cy", y + 7 + 5 + 14 + 3);
+								circle2.setAttribute("r", "7");
+								salas[i].appendChild(circle2);
 
-						if(this.programacion[z].area == "362"){
-							this.blink_sala_mafalda_prox = true
-							this.blink_sala_mafalda_act = true
+								if(this.programacion[z].area == "362"){
+									this.blink_sala_mafalda_prox = true
+									this.blink_sala_mafalda_act = true
+								}
+
+							}else if(this.programacion[z].actualmente.ocurrence !== 0){
+								var rects = salas[i].querySelectorAll('rect');
+								var x = rects[0].getBBox().x
+								var y = rects[0].getBBox().y
+
+								var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+								circle.setAttribute("fill", "#19b868");
+								circle.setAttribute("stroke", "#f5f8ed");
+								circle.setAttribute("stroke-width", "1")
+								circle.setAttribute("cx", x + 7 + 5);
+								circle.setAttribute("cy", y + 7 + 5);
+								circle.setAttribute("r", "7");
+								salas[i].appendChild(circle);
+
+								if(this.programacion[z].area == "362"){
+									this.blink_sala_mafalda_act = true
+								}
+
+							}else if(this.programacion[z].proximamente.ocurrence !== 0){
+								var rects = salas[i].querySelectorAll('rect');
+								var x = rects[0].getBBox().x
+								var y = rects[0].getBBox().y
+
+								var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+								circle.setAttribute("fill", "rebeccapurple");
+								circle.setAttribute("stroke", "#f5f8ed");
+								circle.setAttribute("stroke-width", "1")
+								circle.setAttribute("cx", x + 7 + 5);
+								circle.setAttribute("cy", y + 7 + 5);
+								circle.setAttribute("r", "7");
+								salas[i].appendChild(circle);
+
+								if(this.programacion[z].area == "362"){
+									this.blink_sala_mafalda_prox = true
+								}
+
+							}
 						}
-
-					}else if(this.programacion[z].actualmente.ocurrence !== 0){
+					}
+					if(estado === false){
 						var rects = salas[i].querySelectorAll('rect');
 						var x = rects[0].getBBox().x
 						var y = rects[0].getBBox().y
 
 						var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-						circle.setAttribute("fill", "#19b868");
+						circle.setAttribute("fill", "orange");
 						circle.setAttribute("stroke", "#f5f8ed");
 						circle.setAttribute("stroke-width", "1")
 						circle.setAttribute("cx", x + 7 + 5);
 						circle.setAttribute("cy", y + 7 + 5);
 						circle.setAttribute("r", "7");
 						salas[i].appendChild(circle);
-
-						if(this.programacion[z].area == "362"){
-							this.blink_sala_mafalda_act = true
-						}
-
-					}else if(this.programacion[z].proximamente.ocurrence !== 0){
-						var rects = salas[i].querySelectorAll('rect');
-						var x = rects[0].getBBox().x
-						var y = rects[0].getBBox().y
-
-						var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-						circle.setAttribute("fill", "rebeccapurple");
-						circle.setAttribute("stroke", "#f5f8ed");
-						circle.setAttribute("stroke-width", "1")
-						circle.setAttribute("cx", x + 7 + 5);
-						circle.setAttribute("cy", y + 7 + 5);
-						circle.setAttribute("r", "7");
-						salas[i].appendChild(circle);
-
-						if(this.programacion[z].area == "362"){
-							this.blink_sala_mafalda_prox = true
-						}
-
 					}
 				}
-			}
-			if(estado === false){
+			})
+			.catch(error => {
+
+			}) 
+		}else{
+			var svg = document.getElementById('piso-4')
+			var salas = svg.querySelectorAll('.sala');
+
+			for(var i=0; i<salas.length; ++i) {
+				var estado = false;
+				for(var z = 0; z < this.programacion.length; z++){
+					if(this.programacion[z].area === salas[i].id){
+						estado = true
+						if(this.programacion[z].actualmente.ocurrence !== 0 && this.programacion[z].proximamente.ocurrence !== 0){
+							var rects = salas[i].querySelectorAll('rect');
+							var x = rects[0].getBBox().x
+							var y = rects[0].getBBox().y
+
+							var circle1 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+							circle1.setAttribute("fill", "#19b868");
+							circle1.setAttribute("stroke", "#f5f8ed");
+							circle1.setAttribute("stroke-width", "1")
+							circle1.setAttribute("cx", x + 7 + 5);
+							circle1.setAttribute("cy", y + 7 + 5);
+							circle1.setAttribute("r", "7");
+							salas[i].appendChild(circle1);
+
+							var circle2 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+							circle2.setAttribute("fill", "rebeccapurple");
+							circle2.setAttribute("stroke", "#f5f8ed");
+							circle2.setAttribute("stroke-width", "1")
+							circle2.setAttribute("cx", x + 7 + 5);
+							circle2.setAttribute("cy", y + 7 + 5 + 14 + 3);
+							circle2.setAttribute("r", "7");
+							salas[i].appendChild(circle2);
+
+							if(this.programacion[z].area == "362"){
+								this.blink_sala_mafalda_prox = true
+								this.blink_sala_mafalda_act = true
+							}
+
+						}else if(this.programacion[z].actualmente.ocurrence !== 0){
+							var rects = salas[i].querySelectorAll('rect');
+							var x = rects[0].getBBox().x
+							var y = rects[0].getBBox().y
+
+							var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+							circle.setAttribute("fill", "#19b868");
+							circle.setAttribute("stroke", "#f5f8ed");
+							circle.setAttribute("stroke-width", "1")
+							circle.setAttribute("cx", x + 7 + 5);
+							circle.setAttribute("cy", y + 7 + 5);
+							circle.setAttribute("r", "7");
+							salas[i].appendChild(circle);
+
+							if(this.programacion[z].area == "362"){
+								this.blink_sala_mafalda_act = true
+							}
+
+						}else if(this.programacion[z].proximamente.ocurrence !== 0){
+							var rects = salas[i].querySelectorAll('rect');
+							var x = rects[0].getBBox().x
+							var y = rects[0].getBBox().y
+
+							var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+							circle.setAttribute("fill", "rebeccapurple");
+							circle.setAttribute("stroke", "#f5f8ed");
+							circle.setAttribute("stroke-width", "1")
+							circle.setAttribute("cx", x + 7 + 5);
+							circle.setAttribute("cy", y + 7 + 5);
+							circle.setAttribute("r", "7");
+							salas[i].appendChild(circle);
+
+							if(this.programacion[z].area == "362"){
+								this.blink_sala_mafalda_prox = true
+							}
+
+						}
+					}
+				}
+				if(estado === false){
 					var rects = salas[i].querySelectorAll('rect');
 					var x = rects[0].getBBox().x
 					var y = rects[0].getBBox().y
@@ -644,154 +697,61 @@ export default {
 					circle.setAttribute("cy", y + 7 + 5);
 					circle.setAttribute("r", "7");
 					salas[i].appendChild(circle);
+				}
 			}
 		}
-			
-			
-      })
-      .catch(error => {
-
-      }) 
-		
-
+	},
+  	computed: {
+		is_not_totem() {
+			if(this.window.width >= 720 && this.window.height >= 1112){
+				return false
 			}else{
-var svg = document.getElementById('piso-4')
-		var salas = svg.querySelectorAll('.sala');
-
-		for(var i=0; i<salas.length; ++i) {
-			var estado = false;
-			for(var z = 0; z < this.programacion.length; z++){
-				if(this.programacion[z].area === salas[i].id){
-					estado = true
-					if(this.programacion[z].actualmente.ocurrence !== 0 && this.programacion[z].proximamente.ocurrence !== 0){
-						var rects = salas[i].querySelectorAll('rect');
-						var x = rects[0].getBBox().x
-						var y = rects[0].getBBox().y
-
-						var circle1 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-						circle1.setAttribute("fill", "#19b868");
-						circle1.setAttribute("stroke", "#f5f8ed");
-						circle1.setAttribute("stroke-width", "1")
-						circle1.setAttribute("cx", x + 7 + 5);
-						circle1.setAttribute("cy", y + 7 + 5);
-						circle1.setAttribute("r", "7");
-						salas[i].appendChild(circle1);
-
-						var circle2 = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-						circle2.setAttribute("fill", "rebeccapurple");
-						circle2.setAttribute("stroke", "#f5f8ed");
-						circle2.setAttribute("stroke-width", "1")
-						circle2.setAttribute("cx", x + 7 + 5);
-						circle2.setAttribute("cy", y + 7 + 5 + 14 + 3);
-						circle2.setAttribute("r", "7");
-						salas[i].appendChild(circle2);
-
-						if(this.programacion[z].area == "362"){
-							this.blink_sala_mafalda_prox = true
-							this.blink_sala_mafalda_act = true
-						}
-
-					}else if(this.programacion[z].actualmente.ocurrence !== 0){
-						var rects = salas[i].querySelectorAll('rect');
-						var x = rects[0].getBBox().x
-						var y = rects[0].getBBox().y
-
-						var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-						circle.setAttribute("fill", "#19b868");
-						circle.setAttribute("stroke", "#f5f8ed");
-						circle.setAttribute("stroke-width", "1")
-						circle.setAttribute("cx", x + 7 + 5);
-						circle.setAttribute("cy", y + 7 + 5);
-						circle.setAttribute("r", "7");
-						salas[i].appendChild(circle);
-
-						if(this.programacion[z].area == "362"){
-							this.blink_sala_mafalda_act = true
-						}
-
-					}else if(this.programacion[z].proximamente.ocurrence !== 0){
-						var rects = salas[i].querySelectorAll('rect');
-						var x = rects[0].getBBox().x
-						var y = rects[0].getBBox().y
-
-						var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-						circle.setAttribute("fill", "rebeccapurple");
-						circle.setAttribute("stroke", "#f5f8ed");
-						circle.setAttribute("stroke-width", "1")
-						circle.setAttribute("cx", x + 7 + 5);
-						circle.setAttribute("cy", y + 7 + 5);
-						circle.setAttribute("r", "7");
-						salas[i].appendChild(circle);
-
-						if(this.programacion[z].area == "362"){
-							this.blink_sala_mafalda_prox = true
-						}
-
-					}
-				}
+				return true
 			}
-			if(estado === false){
-					var rects = salas[i].querySelectorAll('rect');
-					var x = rects[0].getBBox().x
-					var y = rects[0].getBBox().y
-
-					var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-					circle.setAttribute("fill", "orange");
-					circle.setAttribute("stroke", "#f5f8ed");
-					circle.setAttribute("stroke-width", "1")
-					circle.setAttribute("cx", x + 7 + 5);
-					circle.setAttribute("cy", y + 7 + 5);
-					circle.setAttribute("r", "7");
-					salas[i].appendChild(circle);
-			}
-		}
-			}
-		
-	},
-  computed: {
-    salas() {
-      return this.$store.state.salas;
-    },
-    programacion() {
-      return this.$store.state.programacion;
 		},
-		sala_seleccionada() {
-      return this.$store.state.sala_especifica;
-	},
-	styles_blink_mafalda: function() {
+		salas() {
+		return this.$store.state.salas;
+		},
+		programacion() {
+		return this.$store.state.programacion;
+			},
+			sala_seleccionada() {
+		return this.$store.state.sala_especifica;
+		},
+		styles_blink_mafalda: function() {
 			if(this.blink_sala_mafalda_prox == true && this.blink_sala_mafalda_act == true){
 				return {
 					'animation': 'blinker 2s linear infinite',
 					'fill': '#19b868'
-
 				};
 			}else{
 				if(this.blink_sala_mafalda_act == true){
 					return {
 						'animation': 'blinker 2s linear infinite',
 						'fill': '#19b868'
-
 					};
 				}else{
 					if(this.blink_sala_mafalda_prox == true){
 						return {
 							'animation': 'blinker 2s linear infinite',
 							'fill': 'rebeccapurple'
-
 						};
 					}else{
 						return {
 							'animation': 'blinker 2s linear infinite',
 							'fill': 'orange'
-
 						};
 					}
 				}
 			}
 		},	
-  },
-  methods: {
-  	cargarModalSala(x) {
+  	},
+  	methods: {
+		handleResize() {
+			this.window.width = window.innerWidth;
+			this.window.height = window.innerHeight;
+		},
+  		cargarModalSala(x) {
 			this.loading_sala = true
 			var number = x.currentTarget.id;
 			this.$store.dispatch('loadSalaEspecifica', x.currentTarget.id)
@@ -816,7 +776,7 @@ var svg = document.getElementById('piso-4')
 				return true
 			}
 		}	
-  }
+  	}
 }
 </script>
 
@@ -851,15 +811,13 @@ var svg = document.getElementById('piso-4')
     padding-right: 300px !important;
 	}
 }
-	.st0{fill:#F5F8ED;}
-	.st1{opacity:0.13;fill:#C2D183;enable-background:new    ;}
-	.st2{fill:#C2D183;}
-	.st3{fill:#41463B;}
-	.st4{fill:none;stroke:#C2D183;stroke-miterlimit:10;}
-	.st5{fill:#FFFFFF;}
-	.st6{enable-background:new    ;}
-
-
+.st0{fill:#F5F8ED;}
+.st1{opacity:0.13;fill:#C2D183;enable-background:new    ;}
+.st2{fill:#C2D183;}
+.st3{fill:#41463B;}
+.st4{fill:none;stroke:#C2D183;stroke-miterlimit:10;}
+.st5{fill:#FFFFFF;}
+.st6{enable-background:new    ;}
 .sala:hover>rect {
 	opacity:0.5;fill:#C2D183;
 }
@@ -879,10 +837,6 @@ var svg = document.getElementById('piso-4')
 .uk-card-body {
     padding: 0px !important;
 }
-
-.x {
-  padding-top: 80px !important;
-}
 .y {
   padding-bottom: 80px !important;
 }
@@ -901,5 +855,13 @@ var svg = document.getElementById('piso-4')
 }
 .uk-align-left {
   margin-right: 0px !important;
+}
+.blink_back_1 {
+  animation: blinkerback 4s linear infinite;
+}
+@media only screen and (max-width: 719px) and (max-height: 1111px) {
+	.x {
+		padding-top: 80px !important;
+	}
 }
 </style>
