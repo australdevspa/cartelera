@@ -1002,6 +1002,11 @@
     opacity: 0.4;
   }
 }
+@keyframes blinkerback {
+  50% {
+    opacity: 0.2;
+  }
+}
 
 /*Css Suscripcion*/
 .suscripcion {

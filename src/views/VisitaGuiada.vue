@@ -6,14 +6,7 @@
 
           <a href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
 
-          <!--<div v-if="this.floor !== 0">
-            <a href="#" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño" @click.prevent="cargarPiso(0)"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
-          </div>
-          <div v-else>
-            <a href="javascript:window.history.back();" class="tamaño-botones-espacios uk-align-left uk-button boton-secundario boton-pequeño"><span uk-icon="chevron-left" class="bold-icon"></span> Volver atrás</a>
-          </div>-->
-
-          <div class="uk-align-right">
+          <div v-if="is_not_totem" class="uk-align-right">
             <div v-if="camara_encendida">
               <a href="#" class="tamaño-botones-espacios uk-button boton-secundario" @click.prevent="apagarCamara()">Desactivar Scanner QR</a>
             </div>
@@ -47,21 +40,6 @@
             <div id="arriba"></div>
 
             <router-view name="helper0"></router-view>
-            <!--<div v-if="this.floor === 0">
-              <router-view name="helper0"></router-view>
-            </div>
-            <div v-else-if="this.floor === '1'">
-              <router-view name="helper1"></router-view>
-            </div>
-            <div v-else-if="this.floor === '2'">
-              <router-view name="helper2"></router-view>
-            </div>
-            <div v-else-if="this.floor === '3'">
-              <router-view name="helper3"></router-view>
-            </div>
-            <div v-else-if="this.floor === '4'">
-              <router-view name="helper4"></router-view>
-            </div>-->
 
             <div class="pad-top">
               <a class="uk-button boton-secundario" href="https://kuula.co/profile/DiegoRivera/collections" target="_blank">Recorre nuestras salas</a>
@@ -83,6 +61,10 @@ export default {
     return {
       camara_encendida: false,
       loading: true,
+      window: {
+        width: 0,
+        height: 0
+      }
     }
   },
   created () {
@@ -94,12 +76,21 @@ export default {
       .catch(error => {
         this.loading = true
       }) 
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize();
   },
-  /*computed: {
-    floor() {
-      return this.$store.state.piso;
-    }
-  },*/
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
+  },
+  computed: {
+    is_not_totem() {
+      if(this.window.width >= 720 && this.window.height >= 1112){
+        return false
+      }else{
+        return true
+      }
+    },
+  },
   methods: {
     encenderCamara() {
       this.camara_encendida = true
@@ -107,9 +98,10 @@ export default {
     apagarCamara() {
       this.camara_encendida = false
     },
-    /*cargarPiso(x) {
-      this.$store.dispatch('loadPiso', x);
-    }*/
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    },
   }
 }
 </script>
