@@ -453,10 +453,10 @@
     </g>
    </g>
 
-		<a href="javascript:window.history.back();">
-			<rect v-if="!is_not_totem" id="svg_181" height="60" width="167" y="547" x="165.5" stroke-width="0" stroke="#000" fill="#D4D9C5" class="cursor blink_back_1"/>
-			<rect v-if="!is_not_totem" id="svg_182" height="30" width="5" y="562.250029" x="165.499986" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#0c646d"/>
-			<text v-if="!is_not_totem" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_183" y="584.500015" x="176.999907" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#41463b">Volver Atrás</text>
+		<a v-if="!is_not_totem" href="javascript:window.history.back();">
+			<rect id="svg_181" height="60" width="167" y="547" x="165.5" stroke-width="0" stroke="#000" fill="#D4D9C5" class="cursor blink_back_1"/>
+			<rect id="svg_182" height="30" width="5" y="562.250029" x="165.499986" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#0c646d"/>
+			<text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_183" y="584.500015" x="176.999907" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#41463b">Volver Atrás</text>
 		</a>
 	</g>
 </svg>
