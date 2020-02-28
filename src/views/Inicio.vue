@@ -23,14 +23,12 @@
           <input type="hidden" name="nlang" value="">
           <input type="hidden" name="nr" value="page">
           <div class="uk-margin">
-            <input class="uk-input uk-width-1-2" type="text" placeholder="Nombre y apellidos" name="nn" v-model="nameSus">
+            <input class="uk-input uk-width-1-2" type="text" placeholder="Nombre" name="nn" v-model="nameSus">
           </div>
           <div class="uk-margin">
-            <input class="uk-input uk-width-1-2" type="email" placeholder="Correo electrónico" name="ne" v-model="emailSus">
+            <input class="uk-input uk-width-1-2" type="text" placeholder="Correo Electrónico" name="ne" v-model="emailSus">
           </div>
-          <div class="tnp-field tnp-field-button"><input class="tnp-submit" type="submit" value="Suscríbete" href="#modal-sus" uk-toggle></div>
-          <!--<div class="tnp-field tnp-field-button"><input class="tnp-submit" type="submit" value="Suscríbete" href="#modal-sus" uk-toggle></div>-->
-          <!--<button class="boton-suscripcion" aria-label="Suscripción" type="submit" value="Suscríbete" href="#modal-sus" uk-toggle>Suscríbete</button>-->
+          <div class="tnp-field tnp-field-button"><input class="boton-suscripcion" type="submit" value="Suscríbete" href="#modal-sus" uk-toggle></div>
         </form>
 
       </div>
@@ -39,18 +37,25 @@
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
           <button class="uk-modal-close-default" type="button" uk-close></button>
 
-          <p v-if="errors.length">
-            <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+          <div v-if="errors.length">
+            <h2 class="suscripcion-titulo-modal">Suscripción a Boletines</h2>
+            <p class="suscripcion-txt"><b>Por favor, corrija los siguientes errores:</b></p>
             <ul>
-              <li v-for="error in errors">{{ error }}</li>
+              <li class="error" v-for="error in errors">{{ error }}</li>
             </ul>
-          </p>
+          </div>
 
-          <iframe src="" name="iframeSuscribcion"></iframe>
+          <div v-if="this.errors.length == 0" >
+            <h2 class="suscripcion-titulo-modal">Suscripción a Boletines</h2>
+            <p v-if="!aprobado" class="suscripcion-txt loading"><b>Enviando solicitud de Suscripción</b></p>
+            <p v-if="aprobado" class="suscripcion-txt"><b>Solicitud de suscripción enviada, revisa tu correo electrónico para confirmar tu suscripción.</b></p>
+          </div>
+
         </div>
       </div>
     </div>
 
+    <iframe src="" name="iframeSuscribcion" @load="iframeLoad"></iframe>
   </section>
 </template>
 
@@ -68,7 +73,8 @@ export default {
     return {
       errors: [],
       nameSus: null,
-      emailSus: null
+      emailSus: null,
+      aprobado: false
     }
   },
   computed: {
@@ -77,7 +83,15 @@ export default {
     }
   },
   methods: {
+    iframeLoad(e) {
+      if (e.timeStamp < 150000) {
+        this.aprobado = true;
+        this.nameSus = null;
+        this.emailSus = null;
+      }
+    },
     checkForm: function (e) {
+      this.aprobado = false;
       this.errors = [];
       if (this.nameSus && this.emailSus) {
         return true;
@@ -89,11 +103,52 @@ export default {
         this.errors.push('El nombre es obligatorio.');
       }
       if (!this.emailSus) {
-        this.errors.push('La edad es obligatoria.');
+        this.errors.push('El Correo Electrónico es obligatorio.');
       }
-
       e.preventDefault();
     }
   }
 }
 </script>
+
+<style scoped>
+iframe {
+  height: 0;
+  width: 0;
+}
+.suscripcion-titulo-modal {
+  font-weight: 900;
+  color: #333333;
+  margin: 0px 0px 0px 0px !important;
+  display: inline !important;
+}
+.error {
+  color: red;
+}
+.suscripcion-txt {
+  font-size: 20px;
+}
+.loading:after {
+  content: ' .';
+  animation: dots 1s steps(5, end) infinite;}
+
+@keyframes dots {
+  0%, 20% {
+    color: white;
+    text-shadow:
+      .25em 0 0 white,
+      .5em 0 0 white;}
+  40% {
+    color: black;
+    text-shadow:
+      .25em 0 0 white,
+      .5em 0 0 white;}
+  60% {
+    text-shadow:
+      .25em 0 0 black,
+      .5em 0 0 white;}
+  80%, 100% {
+    text-shadow:
+      .25em 0 0 black,
+      .5em 0 0 black;}}
+</style>
