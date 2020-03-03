@@ -80,12 +80,8 @@
                 </svg>
               </div>
               <div class="uk-navbar-right"> 
-                <div class="uk-navbar-item">
-                  <router-link to="/cartelera" class="tamaño-boton-principal boton-principal uk-button-large">Cartelera</router-link>
-                </div> 
-                <div class="uk-navbar-item">
-                  <router-link to="/espacios/visitaguiada" class="tamaño-boton-principal boton-principal uk-button-large">Espacios</router-link>
-                </div>
+                <router-link to="/cartelera" class="uk-navbar-item item-izq boton-principal-movil">Cartelera</router-link>
+                <router-link to="/espacios/visitaguiada" class="uk-navbar-item item-der boton-principal-movil">Espacios</router-link>
               </div>
             </nav>
           </div>
@@ -642,5 +638,54 @@ export default {
     background: #00BB9D !important;
     color: #333333 !important;
     text-decoration:none;
+  }
+  .uk-navbar-right {
+    background-image: linear-gradient(90deg,#333333 0,#000000 13%,#000000 87%,#333333 100%);
+  }
+  .boton-principal-movil {
+    margin: 0;
+    -webkit-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+    -webkit-transition-property: color,background-color,border-color;
+    transition-property: color,background-color,border-color;
+    font-size: 18px;
+    color: #706F6F !important;
+    text-transform: uppercase;
+    font-family:ProximaNova-Light, Proxima Nova;
+  }
+  .item-izq {
+    padding: 0 10px !important;
+    background-color: #333333;
+    margin: 0 3px 0 18px;
+  }
+  .item-der {
+    padding: 0 10px !important;
+    background-color: #333333;
+    margin: 0 18px 0 3px;
+  }
+  .uk-navbar-item:hover {
+    background: #00BB9D !important;
+    color: #333333 !important;
+    text-decoration:none;
+  }
+  @media only screen and (max-width: 430px) {
+    .item-izq {
+      padding: 0 calc(0px + 1vw) !important;
+      margin: 0 1px 0 5px !important;
+    }
+    .item-der {
+      padding: 0 calc(0px + 1vw) !important;
+      margin: 0 5px 0 1px !important;
+    }
+  }
+  @media only screen and (max-width: 405px) {
+    .boton-principal-movil {
+      font-size: calc(8px + 2vw) !important;
+    }
+  }
+  @media only screen and (max-width: 328px) {
+    .boton-principal-movil {
+      text-transform: none !important;
+    }
   }
 </style>
