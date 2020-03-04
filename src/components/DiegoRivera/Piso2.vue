@@ -564,9 +564,9 @@
    </g>
 	
 		<a v-if="!is_not_totem" href="javascript:window.history.back();">
-			<rect id="svg_223" height="60" width="167" y="547" x="166" stroke-width="0" stroke="#000" fill="#D4D9C5" class="cursor blink_back_1"/>
-  			<rect id="svg_224" height="30" width="5" y="562" x="165" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#d7765f"/>
-  			<text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_225" y="585" x="177" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#41463b">Volver Atrás</text>
+			<rect id="svg_223" height="30" width="167" y="562.250029" x="200.5" stroke-width="0" stroke="#000" fill="#D4D9C5" class="cursor blink_back_1"/>
+  			<rect id="svg_224" height="30" width="5" y="562.250029" x="200.5" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#d7765f"/>
+  			<text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="14" id="svg_225" y="583" x="211.999907" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#41463b">Volver Atrás</text>
 		</a>
 
 	</g>
