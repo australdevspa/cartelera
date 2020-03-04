@@ -19,7 +19,7 @@
         <h2 class="suscripcion-titulo">Boletines</h2>
         <p>Anótate para recibir de forma oportuna la información de nuestra programación semanal de actividades culturales (un mensaje a la semana).</p>
         
-        <form style="padding-top: 20px" @submit="checkForm" method="post" action="https://www.culturapuertomontt.cl/inicio/?na=s" onsubmit="return newsletter_check(this)" target="iframeSuscribcion">
+        <form style="padding-top: 20px" @submit="checkForm" method="post" action="https://www.culturapuertomontt.cl/inicio/?na=s" target="iframeSuscribcion">
           <input type="hidden" name="nlang" value="">
           <input type="hidden" name="nr" value="page">
           <div class="uk-margin">
@@ -33,7 +33,7 @@
 
       </div>
 
-      <div id="modal-sus" class="uk-flex-top" uk-modal>
+      <div id="modal-sus" class="uk-flex-top" uk-modal="bg-close: false;">
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
           <button class="uk-modal-close-default" type="button" uk-close></button>
 
@@ -47,8 +47,53 @@
 
           <div v-if="this.errors.length == 0" >
             <h2 class="suscripcion-titulo-modal">Suscripción a Boletines</h2>
-            <p v-if="!aprobado" class="suscripcion-txt loading"><b>Enviando solicitud de Suscripción</b></p>
-            <p v-if="aprobado" class="suscripcion-txt"><b>Solicitud de suscripción enviada, revisa tu correo electrónico para confirmar tu suscripción.</b></p>
+            <div v-if="!aprobado">
+              <p class="suscripcion-txt loading"><b>Enviando solicitud de Suscripción</b></p>
+              
+              <div uk-slider="center: true; autoplay: true;">
+                <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+                  <ul class="uk-slider-items uk-child-width-1@s uk-grid">
+                    <li>
+                      <div class="uk-card uk-card-secondary" style="height: 100%; background-color: #706F6F !important;">
+                        <div class="uk-card-body">
+                          <h1 class="uk-heading-bullet">Mantente Informado</h1>
+                          <p>Recibe de forma oportuna la información de nuestra programación semanal de actividades culturales (un mensaje a la semana).</p>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="uk-card uk-card-secondary" style="height: 100%; background-color: #706F6F !important;">
+                        <div class="uk-card-body">
+                          <h1 class="uk-heading-bullet">Datos Confidenciales</h1>
+                          <p>Los datos que se sistematicen por esta vía, NO serán compartidos a terceros ni utilizados con otro fin.</p>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="uk-card uk-card-secondary" style="height: 100%; background-color: #706F6F !important;">
+                        <div class="uk-card-body">
+                          <h1 class="uk-heading-bullet">Información Detallada</h1>
+                          <p>El boletín trae información detallada de cada evento (fecha, horario, título, protagonista, link al sitio web, precio, sala e imagen).</p>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="uk-card uk-card-secondary" style="height: 100%; background-color: #706F6F !important;">
+                        <div class="uk-card-body">
+                          <h1 class="uk-heading-bullet">Cancelar Suscripción</h1>
+                          <p>Podrás borrarte en cualquier momento desde un enlace en el mismo boletín o escribiendo a audiencias@culturapuertomontt.cl.</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                  <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                </div>
+                <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+              </div>
+
+            </div>
+            <p v-if="aprobado" class="suscripcion-txt-success"><b>Te has suscrito con éxito al boletín. Recibirás un correo electrónico de confirmación en unos minutos. Por favor, haz clic en el enlace para confirmar tu suscripción. Si el correo electrónico tarda más de 15 minutos en aparecer, revisa tu carpeta de spam.</b></p>
           </div>
 
         </div>
@@ -74,7 +119,8 @@ export default {
       errors: [],
       nameSus: null,
       emailSus: null,
-      aprobado: false
+      aprobado: false,
+      time: 0
     }
   },
   computed: {
@@ -84,10 +130,14 @@ export default {
   },
   methods: {
     iframeLoad(e) {
-      if (e.timeStamp < 150000) {
+      this.time = e.timeStamp
+      if (e.timeStamp < 500000) {
         this.aprobado = true;
         this.nameSus = null;
         this.emailSus = null;
+      }else{
+        this.errors = [];
+        this.errors.push('Se ha sobrepasado el tiempo de envío de la solicitud de Suscripción. Por favor intente nuevamente.');
       }
     },
     checkForm: function (e) {
@@ -127,6 +177,12 @@ iframe {
 }
 .suscripcion-txt {
   font-size: 20px;
+  margin: 20px 0 20px 0;
+}
+.suscripcion-txt-success {
+  font-size: 20px;
+  color: green;
+  margin: 20px 0 20px 0;
 }
 .loading:after {
   content: ' .';
