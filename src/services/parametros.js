@@ -168,7 +168,7 @@ function precio(valor) {
     if(valor == null){
         return "indefinido";
     }else{
-        if(valor == "0.-" || valor == "0"){
+        if(valor == "0.-" || valor == "0" || valor==""){
             return "liberada";
         }else if(valor.indexOf(".-") != -1){
             return "$" + valor.substr(0, valor.indexOf(".-"))
